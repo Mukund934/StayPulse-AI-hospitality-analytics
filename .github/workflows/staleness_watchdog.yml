@@ -1,0 +1,56 @@
+name: Staleness watchdog
+
+# A monitor that watches the monitor.
+#
+# Every free scheduler silently disables or delays itself: GitHub disables
+# scheduled workflows after 60 days of repository inactivity, Power BI pauses a
+# refresh schedule after two months unviewed, Apps Script randomises its trigger
+# time within the hour. So the interesting failure is not "the pipeline errored" --
+# it is "the pipeline stopped running and nobody noticed".
+#
+# This reads the freshness stamp the brief writes and fails loudly if the data is
+# more than 26 hours old. 26 rather than 24, to absorb the scheduling jitter above
+# without crying wolf.
+#
+# The 60-day auto-disable does not bite here, because the brief commits an artifact
+# every day and that commit IS repository activity.
+
+on:
+  schedule:
+    - cron: '13 6 * * *'      # 11:43 IST, ~4h after the brief should have run
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify data freshness
+        run: |
+          python - <<'PY'
+          import datetime as dt, json, sys
+          from pathlib import Path
+
+          stamp = Path("reports/_freshness.json")
+          if not stamp.exists():
+              sys.exit("STALE: reports/_freshness.json is missing - the brief has never run")
+
+          data = json.loads(stamp.read_text())
+          generated = dt.datetime.fromisoformat(data["generated_at_utc"])
+          if generated.tzinfo is None:
+              generated = generated.replace(tzinfo=dt.timezone.utc)
+          age_h = (dt.datetime.now(dt.timezone.utc) - generated).total_seconds() / 3600
+
+          print(f"last brief   : {data['generated_at_utc']}")
+          print(f"as of        : {data.get('as_of')}")
+          print(f"age          : {age_h:.1f}h")
+          print(f"quality score: {data.get('quality_score')}")
+          print(f"alerts       : {data.get('alerts_today')}")
+
+          if age_h > 26:
+              sys.exit(f"STALE: the brief is {age_h:.1f}h old (threshold 26h). "
+                       "The schedule is not firing, or the job is failing silently.")
+          print("FRESH")
+          PY

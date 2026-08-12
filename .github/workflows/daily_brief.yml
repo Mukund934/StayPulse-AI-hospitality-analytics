@@ -1,0 +1,55 @@
+name: Daily operations brief
+
+# Deliberately at :37 rather than the top of the hour. GitHub's own documentation
+# names the start of every hour as a high-load window where scheduled jobs can be
+# delayed or dropped. 02:07 UTC is 07:37 IST.
+#
+# The SLA claimed in the README is "before 08:00 IST", not "at 07:37:00" -- every
+# free scheduler on earth is approximate, and a report that carries its own
+# generated_at stamp is honest about that instead of pretending otherwise.
+on:
+  schedule:
+    - cron: '37 2 * * *'
+  workflow_dispatch: {}      # so a reviewer can run it themselves
+
+permissions:
+  contents: write            # required to commit the generated brief back
+
+concurrency:
+  group: daily-brief
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Generate brief
+        env:
+          PGHOST: ${{ secrets.PGHOST }}
+          PGPORT: ${{ secrets.PGPORT }}
+          PGDATABASE: ${{ secrets.PGDATABASE }}
+          PGUSER: ${{ secrets.PGUSER }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/daily_brief.py
+
+      - name: Commit the brief
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(brief): daily operations brief'
+          file_pattern: 'reports/briefings/** reports/LATEST_BRIEF.md reports/_freshness.json'
+          # GITHUB_TOKEN commits cannot trigger another workflow, which is why this
+          # cannot loop. The resulting run of dated commits is the verifiable
+          # evidence that the schedule actually fires.

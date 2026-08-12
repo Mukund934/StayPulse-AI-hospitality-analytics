@@ -30,14 +30,18 @@ from staypulse.ai.client import GeminiExtractor  # noqa: E402
 BATCH = 6
 
 
-def pending_reviews(limit: int | None) -> list[dict]:
-    sql = """
+def pending_reviews(limit: int | None, *, recent_first: bool = False) -> list[dict]:
+    # recent_first matters operationally: the daily brief reports guest issues over
+    # a trailing 30-day window, so extracting oldest-first leaves the brief blank
+    # however many reviews have been processed.
+    order = "r.review_date DESC, r.review_key DESC" if recent_first else "r.review_key"
+    sql = f"""
         SELECT r.review_id, r.review_key, r.property_key, r.review_date, r.review_text
         FROM mart.fact_review r
         WHERE r.review_text IS NOT NULL
           AND NOT EXISTS (SELECT 1 FROM mart.fact_review_aspect a
                           WHERE a.review_key = r.review_key)
-        ORDER BY r.review_key
+        ORDER BY {order}
     """
     if limit:
         sql += f" LIMIT {int(limit)}"
@@ -80,9 +84,12 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=300)
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--baseline-only", action="store_true")
+    ap.add_argument("--recent-first", action="store_true",
+                    help="process newest reviews first (what the daily brief needs)")
     args = ap.parse_args()
 
-    reviews = pending_reviews(None if args.all else args.limit)
+    reviews = pending_reviews(None if args.all else args.limit,
+                             recent_first=args.recent_first)
     print("=" * 80)
     print("  StayPulse - aspect-based guest feedback extraction")
     print(f"  {len(reviews)} unprocessed reviews (cached results are never re-sent)")
