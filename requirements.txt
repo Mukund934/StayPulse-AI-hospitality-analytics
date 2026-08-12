@@ -22,3 +22,7 @@ Jinja2>=3.1
 
 # --- Testing ---
 pytest>=8.2
+
+# --- API (FastAPI backend served on Render) ---
+fastapi>=0.115
+uvicorn[standard]>=0.32

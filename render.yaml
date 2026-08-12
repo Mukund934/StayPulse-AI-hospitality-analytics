@@ -1,0 +1,51 @@
+# Render blueprint for the StayPulse analytics API.
+#
+# Deploy via Render -> New -> Blueprint, pointed at this repository. Render reads
+# this file and creates the service with the right build and start commands, so the
+# only manual step left is pasting the secret values.
+#
+# NO DATABASE IS DEFINED HERE, deliberately. Supabase PostgreSQL remains the single
+# source of truth. Render's free Postgres expires 30 days after creation, so adding
+# one would introduce a second database that silently dies mid-application-cycle.
+
+services:
+  - type: web
+    name: staypulse-api
+    runtime: python
+    plan: free
+    region: singapore          # closest region to the Supabase ap-northeast pooler
+    branch: main
+
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.app.main:app --host 0.0.0.0 --port $PORT
+
+    # /health does no I/O, so a slow database can never get the instance restarted.
+    # Database reachability is a separate probe at /health/readiness.
+    healthCheckPath: /health
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+
+      # sync:false means Render prompts for the value and never stores it in git.
+      # These are the same discrete parameters the local .env uses - DATABASE_URL is
+      # deliberately not used, because a password containing ? or # silently
+      # truncates inside a URI unless hand-escaped.
+      - key: PGHOST
+        sync: false
+      - key: PGPORT
+        sync: false
+      - key: PGDATABASE
+        sync: false
+      - key: PGUSER
+        sync: false
+      - key: PGPASSWORD
+        sync: false
+
+      # Present for parity with the batch pipeline. The API does NOT call either on
+      # the request path: AI results are read from storage where the batch job
+      # already validated them, so a page load costs no quota and cannot vary.
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENWEATHER_API_KEY
+        sync: false
