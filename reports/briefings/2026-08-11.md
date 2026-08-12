@@ -1,6 +1,6 @@
 # StayPulse — Daily Operations Brief
 
-**As of 2026-08-11**  ·  generated 2026-08-12 22:07
+**As of 2026-08-11**  ·  generated 2026-08-12 22:18
 ·  *synthetic data*
 
 ## Performance — versus the same weekday last week
@@ -36,9 +36,11 @@ None. All monitored metrics within their day-of-week baseline.
 
 | Issue | Mentions | Moderate/severe | Route to |
 |---|---|---|---|
-| — | — | — | — |
+| `noise` | 4 | 4 | front_office |
+| `maintenance` | 4 | 4 | maintenance |
+| `other` | 4 | 3 | maintenance |
 
-**0 negative aspects sat inside reviews rated 4.0 or higher.** Document-level
+**22 negative aspects sat inside reviews rated 4.0 or higher.** Document-level
 sentiment would have surfaced none of them.
 
 ## Recommended action
