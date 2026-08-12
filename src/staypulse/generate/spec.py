@@ -283,4 +283,5 @@ DEFECT_RATES: dict[str, float] = {
     "missing_contact":         0.061,   # no phone or no email on the guest record
     "impossible_stay_dates":   0.0025,  # checkout on or before checkin
     "invalid_rating":          0.004,   # rating outside 1-5 or null on a reviewed stay
+    "inventory_balance_error": 0.009,   # physical count disagrees with the computed balance
 }

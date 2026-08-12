@@ -710,6 +710,14 @@ class Generator:
                     received = int(self.rng.integers(80, 200))
                 closing = opening + received - consumed - wastage
                 stock[key] = max(closing, 0)
+
+                # DEFECT: the physical stock count disagrees with the computed
+                # balance. This is the most common real inventory defect -- an
+                # unrecorded issue, a miscount, or breakage nobody logged -- and it
+                # is what makes an inventory balance check worth running at all.
+                if self.rng.random() < spec.DEFECT_RATES["inventory_balance_error"]:
+                    closing = closing + int(self.rng.choice([-9, -5, -3, 4, 7, 11]))
+
                 rows.append({
                     "property_code": r.property_code,
                     "movement_date": r.stay_date,

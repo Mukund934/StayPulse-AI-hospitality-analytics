@@ -1,0 +1,443 @@
+{
+  "checked_at": "2026-08-12T19:45:56",
+  "quality_score": 69.14,
+  "total_rules": 29,
+  "passed": 20,
+  "failed": 9,
+  "rows_affected": 645,
+  "defect_recall": [
+    {
+      "defect_class": "business_date_drift",
+      "rules": [
+        "DQ040_booking_business_date_agrees",
+        "DQ041_request_business_date_agrees"
+      ],
+      "rows_detected": 57,
+      "detected": true
+    },
+    {
+      "defect_class": "duplicate_booking",
+      "rules": [
+        "DQ010_duplicate_bookings"
+      ],
+      "rows_detected": 56,
+      "detected": true
+    },
+    {
+      "defect_class": "duplicate_guest",
+      "rules": [
+        "DQ011_duplicate_guest_identity"
+      ],
+      "rows_detected": 100,
+      "detected": true
+    },
+    {
+      "defect_class": "impossible_stay_dates",
+      "rules": [
+        "DQ020_impossible_stay_dates"
+      ],
+      "rows_detected": 12,
+      "detected": true
+    },
+    {
+      "defect_class": "invalid_rating",
+      "rules": [
+        "DQ003_review_rating_present",
+        "DQ021_rating_in_range"
+      ],
+      "rows_detected": 1,
+      "detected": true
+    },
+    {
+      "defect_class": "inventory_anomaly",
+      "rules": [
+        "DQ025_inventory_balance",
+        "DQ026_inventory_non_negative"
+      ],
+      "rows_detected": 60,
+      "detected": true
+    },
+    {
+      "defect_class": "missing_contact",
+      "rules": [
+        "DQ001_guest_contact_present"
+      ],
+      "rows_detected": 164,
+      "detected": true
+    },
+    {
+      "defect_class": "orphan_payment_ref",
+      "rules": [
+        "DQ030_orphan_payment_reference"
+      ],
+      "rows_detected": 37,
+      "detected": true
+    },
+    {
+      "defect_class": "payment_amount_mismatch",
+      "rules": [
+        "DQ031_payment_amount_matches_folio"
+      ],
+      "rows_detected": 111,
+      "detected": true
+    },
+    {
+      "defect_class": "silent_integration_gap",
+      "rules": [
+        "DQ051_no_silent_channel_gap"
+      ],
+      "rows_detected": 10,
+      "detected": true
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "DQ001_guest_contact_present",
+      "dimension": "completeness",
+      "severity": "warning",
+      "description": "Every guest should be reachable on at least one channel.",
+      "expectation": "phone IS NOT NULL OR email IS NOT NULL",
+      "rows_checked": 2704,
+      "rows_failed": 164,
+      "failure_pct": 6.0651,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ002_booking_channel_present",
+      "dimension": "completeness",
+      "severity": "error",
+      "description": "Revenue cannot be attributed without a channel.",
+      "expectation": "channel_key IS NOT NULL",
+      "rows_checked": 5236,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ003_review_rating_present",
+      "dimension": "completeness",
+      "severity": "warning",
+      "description": "A review without a rating cannot contribute to CSAT.",
+      "expectation": "rating IS NOT NULL",
+      "rows_checked": 946,
+      "rows_failed": 1,
+      "failure_pct": 0.1057,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ004_unit_night_has_property",
+      "dimension": "completeness",
+      "severity": "error",
+      "description": "Every unit-night must roll up to a property.",
+      "expectation": "property_key IS NOT NULL",
+      "rows_checked": 18350,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ010_duplicate_bookings",
+      "dimension": "uniqueness",
+      "severity": "error",
+      "description": "The same guest, unit and arrival date appearing more than once is an OTA sync double-submit, not two reservations.",
+      "expectation": "one booking per (guest, unit, check_in_date)",
+      "rows_checked": 5236,
+      "rows_failed": 56,
+      "failure_pct": 1.0695,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ011_duplicate_guest_identity",
+      "dimension": "uniqueness",
+      "severity": "warning",
+      "description": "Two guest records sharing a normalised phone number are the same person. Repeat-guest rate is understated until they are resolved.",
+      "expectation": "one guest record per normalised phone",
+      "rows_checked": 2704,
+      "rows_failed": 100,
+      "failure_pct": 3.6982,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ012_unit_night_grain_unique",
+      "dimension": "uniqueness",
+      "severity": "error",
+      "description": "One row per unit per night. A breach invalidates every rate metric.",
+      "expectation": "unique (unit_key, stay_date)",
+      "rows_checked": 18350,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ020_impossible_stay_dates",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "A nightly stay must depart after it arrives.",
+      "expectation": "check_out_date > check_in_date for stay_type = 'nightly'",
+      "rows_checked": 4769,
+      "rows_failed": 12,
+      "failure_pct": 0.2516,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ021_rating_in_range",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "Ratings outside 1-5 are unusable.",
+      "expectation": "rating BETWEEN 1 AND 5",
+      "rows_checked": 945,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ022_negative_amounts",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "Negative or zero room revenue on a live booking is invalid.",
+      "expectation": "net_room_amount_inr > 0 for non-cancelled bookings",
+      "rows_checked": 4397,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ023_los_plausible",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "A serviced-apartment stay beyond 60 nights is a data error, not a guest.",
+      "expectation": "nights BETWEEN 0 AND 60",
+      "rows_checked": 4769,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ024_lead_time_non_negative",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "A booking cannot be made after the guest arrives.",
+      "expectation": "lead_time_days >= 0",
+      "rows_checked": 5236,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ025_inventory_balance",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "Closing stock must equal opening + received - consumed - wastage.",
+      "expectation": "closing_qty = opening_qty + received_qty - consumed_qty - wastage_qty",
+      "rows_checked": 6370,
+      "rows_failed": 60,
+      "failure_pct": 0.9419,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ026_inventory_non_negative",
+      "dimension": "validity",
+      "severity": "warning",
+      "description": "Stock cannot go negative.",
+      "expectation": "closing_qty >= 0",
+      "rows_checked": 6370,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ030_orphan_payment_reference",
+      "dimension": "consistency",
+      "severity": "error",
+      "description": "A gateway payment whose booking reference does not resolve. Left joined rather than dropped so the money is visible, not silently lost.",
+      "expectation": "booking_key IS NOT NULL",
+      "rows_checked": 4460,
+      "rows_failed": 37,
+      "failure_pct": 0.8296,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ031_payment_amount_matches_folio",
+      "dimension": "accuracy",
+      "severity": "error",
+      "description": "Gateway gross should equal the folio net room amount. A mismatch is either a partial payment or a reconciliation break.",
+      "expectation": "abs(payment.gross - booking.net_room) <= 1.00",
+      "rows_checked": 4423,
+      "rows_failed": 111,
+      "failure_pct": 2.5096,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ032_cancellation_state_coherent",
+      "dimension": "consistency",
+      "severity": "error",
+      "description": "A cancelled booking must carry a cancellation timestamp, and vice versa. This rule is a REGRESSION GUARD, not a detector: the mart CHECK constraint ck_booking_cancel makes the incoherent state unloadable, so the correct expected result is zero. The defect can only exist upstream of the mart, which is where the constraint earns its place -- a rule that can never fire because a constraint already prevents the state is a stronger control than a rule that reports it.",
+      "expectation": "status = 'cancelled' XOR cancelled_at IS NULL (enforced by CHECK)",
+      "rows_checked": 5236,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ033_cancelled_holds_no_inventory",
+      "dimension": "consistency",
+      "severity": "error",
+      "description": "A cancelled booking must not occupy any unit-night.",
+      "expectation": "no occupied unit-night references a cancelled booking",
+      "rows_checked": 14202,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ034_departure_night_not_charged",
+      "dimension": "consistency",
+      "severity": "error",
+      "description": "The half-open interval: a unit-night on or after the departure date means room-nights are inflated by roughly 1/ALOS.",
+      "expectation": "no unit-night on or after check_out_date",
+      "rows_checked": 14202,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ035_revenue_only_on_occupied",
+      "dimension": "consistency",
+      "severity": "error",
+      "description": "A vacant night cannot carry room revenue.",
+      "expectation": "room_revenue_net_inr = 0 when not occupied",
+      "rows_checked": 4148,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ036_ooo_not_sellable",
+      "dimension": "consistency",
+      "severity": "error",
+      "description": "An out-of-order unit must be removed from availability.",
+      "expectation": "NOT (is_out_of_order AND is_sellable)",
+      "rows_checked": 18350,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ037_sla_breach_flag_agrees",
+      "dimension": "accuracy",
+      "severity": "error",
+      "description": "The stored breach flag must agree with resolution time vs SLA target.",
+      "expectation": "is_sla_breached = (resolution_minutes > sla_minutes)",
+      "rows_checked": 1969,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ038_resolution_after_creation",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "A request cannot be resolved before it was raised.",
+      "expectation": "resolved_at >= created_at",
+      "rows_checked": 1969,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ040_booking_business_date_agrees",
+      "dimension": "accuracy",
+      "severity": "error",
+      "description": "The stored reporting date must equal the IST business date derived from the event timestamp. Disagreement means a feed wrote a UTC date, which silently moves late-night activity to the previous day.",
+      "expectation": "booking_date = meta.business_date(booked_at)",
+      "rows_checked": 5236,
+      "rows_failed": 57,
+      "failure_pct": 1.0886,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ041_request_business_date_agrees",
+      "dimension": "accuracy",
+      "severity": "warning",
+      "description": "Service-request reporting date must match the IST business date.",
+      "expectation": "request_date = meta.business_date(created_at)",
+      "rows_checked": 1969,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ050_booking_feed_fresh",
+      "dimension": "timeliness",
+      "severity": "error",
+      "description": "The booking feed should have delivered data recently. Measured against the dataset's own horizon, since this is a fixed synthetic period.",
+      "expectation": "max(ingested_at) within 26 hours of now()",
+      "rows_checked": 5236,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ051_no_silent_channel_gap",
+      "dimension": "timeliness",
+      "severity": "error",
+      "description": "A source channel that normally delivers volume and suddenly delivers nothing is a broken integration. The table is not wrong, it is EMPTY -- so a null check passes and only a volume band catches it.",
+      "expectation": "no channel has a run of >=3 consecutive zero-volume days against a healthy baseline",
+      "rows_checked": 2785,
+      "rows_failed": 10,
+      "failure_pct": 0.3591,
+      "passed": false,
+      "error": null
+    },
+    {
+      "rule_id": "DQ060_booking_payment_reconciliation",
+      "dimension": "accuracy",
+      "severity": "warning",
+      "description": "Every non-cancelled booking should have a payment. A reconciliation is clean when UNEXPLAINED variance is zero, not when variance is zero.",
+      "expectation": "every live booking has at least one payment row",
+      "rows_checked": 4460,
+      "rows_failed": 37,
+      "failure_pct": 0.8296,
+      "passed": true,
+      "error": null
+    },
+    {
+      "rule_id": "DQ061_occupancy_within_capacity",
+      "dimension": "validity",
+      "severity": "error",
+      "description": "Rooms sold can never exceed rooms available on any night.",
+      "expectation": "occupancy <= 100% for every property-night",
+      "rows_checked": 1278,
+      "rows_failed": 0,
+      "failure_pct": 0.0,
+      "passed": true,
+      "error": null
+    }
+  ]
+}
