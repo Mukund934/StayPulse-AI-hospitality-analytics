@@ -27,7 +27,7 @@ from staypulse.generate.load import load, truncate_mart  # noqa: E402
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seed", type=int, default=spec.RANDOM_SEED)
-    ap.add_argument("--guests", type=int, default=2600)
+    ap.add_argument("--guests", type=int, default=spec.GUEST_POOL)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 

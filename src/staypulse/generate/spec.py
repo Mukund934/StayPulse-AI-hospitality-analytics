@@ -189,6 +189,29 @@ REQUESTS_PER_OCCUPIED_NIGHT = 0.14
 CSAT_RESPONSE_RATE = 0.34
 REVIEW_RATE = 0.22               # share of completed stays leaving a review
 
+# ---------------------------------------------------------------------------
+# Guest loyalty shape
+# ---------------------------------------------------------------------------
+# Repeat behaviour is long-tailed, not uniform: most guests stay once and a small
+# cohort returns repeatedly. Drawing guests uniformly from a small pool produced a
+# 61% repeat rate -- roughly triple what a serviced-apartment operator sees -- and
+# repeat rate is a headline KPI, so an implausible value discredits the dashboard.
+# GUEST_POOL is sized against expected completed stays so the modal guest appears
+# once.
+# The pool must be substantially LARGER than the number of stays, or the modal
+# guest appears twice by arithmetic alone. Sizing: with ~4,400 completed stays and
+# a 9,000-guest pool, the non-loyal arrival rate is ~0.34 stays/guest, so most
+# guests who appear at all appear exactly once. The loyal cohort is small and
+# heavily weighted, which reproduces the real shape -- a long single-stay tail
+# plus a minority of frequent returners.
+#
+# The result lands near 25-30% repeat. That is higher than a transient city hotel
+# and appropriate here: corporate project stays and relocation guests genuinely
+# return to the same serviced apartment.
+GUEST_POOL = 9000
+LOYAL_GUEST_SHARE = 0.04     # share of the pool that books repeatedly
+LOYAL_GUEST_WEIGHT = 12.0    # relative selection weight for that cohort
+
 
 # ---------------------------------------------------------------------------
 # Planted findings.

@@ -1,10 +1,10 @@
 {
-  "checked_at": "2026-08-12T19:45:56",
+  "checked_at": "2026-08-12T20:01:42",
   "quality_score": 69.14,
   "total_rules": 29,
   "passed": 20,
   "failed": 9,
-  "rows_affected": 645,
+  "rows_affected": 1275,
   "defect_recall": [
     {
       "defect_class": "business_date_drift",
@@ -12,7 +12,7 @@
         "DQ040_booking_business_date_agrees",
         "DQ041_request_business_date_agrees"
       ],
-      "rows_detected": 57,
+      "rows_detected": 42,
       "detected": true
     },
     {
@@ -28,7 +28,7 @@
       "rules": [
         "DQ011_duplicate_guest_identity"
       ],
-      "rows_detected": 100,
+      "rows_detected": 337,
       "detected": true
     },
     {
@@ -36,7 +36,7 @@
       "rules": [
         "DQ020_impossible_stay_dates"
       ],
-      "rows_detected": 12,
+      "rows_detected": 13,
       "detected": true
     },
     {
@@ -45,7 +45,7 @@
         "DQ003_review_rating_present",
         "DQ021_rating_in_range"
       ],
-      "rows_detected": 1,
+      "rows_detected": 5,
       "detected": true
     },
     {
@@ -54,7 +54,7 @@
         "DQ025_inventory_balance",
         "DQ026_inventory_non_negative"
       ],
-      "rows_detected": 60,
+      "rows_detected": 67,
       "detected": true
     },
     {
@@ -62,7 +62,7 @@
       "rules": [
         "DQ001_guest_contact_present"
       ],
-      "rows_detected": 164,
+      "rows_detected": 570,
       "detected": true
     },
     {
@@ -78,7 +78,7 @@
       "rules": [
         "DQ031_payment_amount_matches_folio"
       ],
-      "rows_detected": 111,
+      "rows_detected": 92,
       "detected": true
     },
     {
@@ -86,7 +86,7 @@
       "rules": [
         "DQ051_no_silent_channel_gap"
       ],
-      "rows_detected": 10,
+      "rows_detected": 19,
       "detected": true
     }
   ],
@@ -97,9 +97,9 @@
       "severity": "warning",
       "description": "Every guest should be reachable on at least one channel.",
       "expectation": "phone IS NOT NULL OR email IS NOT NULL",
-      "rows_checked": 2704,
-      "rows_failed": 164,
-      "failure_pct": 6.0651,
+      "rows_checked": 9360,
+      "rows_failed": 570,
+      "failure_pct": 6.0897,
       "passed": false,
       "error": null
     },
@@ -109,7 +109,7 @@
       "severity": "error",
       "description": "Revenue cannot be attributed without a channel.",
       "expectation": "channel_key IS NOT NULL",
-      "rows_checked": 5236,
+      "rows_checked": 5228,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -121,9 +121,9 @@
       "severity": "warning",
       "description": "A review without a rating cannot contribute to CSAT.",
       "expectation": "rating IS NOT NULL",
-      "rows_checked": 946,
-      "rows_failed": 1,
-      "failure_pct": 0.1057,
+      "rows_checked": 951,
+      "rows_failed": 5,
+      "failure_pct": 0.5258,
       "passed": true,
       "error": null
     },
@@ -145,9 +145,9 @@
       "severity": "error",
       "description": "The same guest, unit and arrival date appearing more than once is an OTA sync double-submit, not two reservations.",
       "expectation": "one booking per (guest, unit, check_in_date)",
-      "rows_checked": 5236,
+      "rows_checked": 5228,
       "rows_failed": 56,
-      "failure_pct": 1.0695,
+      "failure_pct": 1.0712,
       "passed": false,
       "error": null
     },
@@ -157,9 +157,9 @@
       "severity": "warning",
       "description": "Two guest records sharing a normalised phone number are the same person. Repeat-guest rate is understated until they are resolved.",
       "expectation": "one guest record per normalised phone",
-      "rows_checked": 2704,
-      "rows_failed": 100,
-      "failure_pct": 3.6982,
+      "rows_checked": 9360,
+      "rows_failed": 337,
+      "failure_pct": 3.6004,
       "passed": false,
       "error": null
     },
@@ -181,9 +181,9 @@
       "severity": "error",
       "description": "A nightly stay must depart after it arrives.",
       "expectation": "check_out_date > check_in_date for stay_type = 'nightly'",
-      "rows_checked": 4769,
-      "rows_failed": 12,
-      "failure_pct": 0.2516,
+      "rows_checked": 4784,
+      "rows_failed": 13,
+      "failure_pct": 0.2717,
       "passed": false,
       "error": null
     },
@@ -193,7 +193,7 @@
       "severity": "error",
       "description": "Ratings outside 1-5 are unusable.",
       "expectation": "rating BETWEEN 1 AND 5",
-      "rows_checked": 945,
+      "rows_checked": 946,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -205,7 +205,7 @@
       "severity": "error",
       "description": "Negative or zero room revenue on a live booking is invalid.",
       "expectation": "net_room_amount_inr > 0 for non-cancelled bookings",
-      "rows_checked": 4397,
+      "rows_checked": 4423,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -217,7 +217,7 @@
       "severity": "error",
       "description": "A serviced-apartment stay beyond 60 nights is a data error, not a guest.",
       "expectation": "nights BETWEEN 0 AND 60",
-      "rows_checked": 4769,
+      "rows_checked": 4784,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -229,7 +229,7 @@
       "severity": "error",
       "description": "A booking cannot be made after the guest arrives.",
       "expectation": "lead_time_days >= 0",
-      "rows_checked": 5236,
+      "rows_checked": 5228,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -241,9 +241,9 @@
       "severity": "error",
       "description": "Closing stock must equal opening + received - consumed - wastage.",
       "expectation": "closing_qty = opening_qty + received_qty - consumed_qty - wastage_qty",
-      "rows_checked": 6370,
-      "rows_failed": 60,
-      "failure_pct": 0.9419,
+      "rows_checked": 6385,
+      "rows_failed": 67,
+      "failure_pct": 1.0493,
       "passed": false,
       "error": null
     },
@@ -253,7 +253,7 @@
       "severity": "warning",
       "description": "Stock cannot go negative.",
       "expectation": "closing_qty >= 0",
-      "rows_checked": 6370,
+      "rows_checked": 6385,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -265,9 +265,9 @@
       "severity": "error",
       "description": "A gateway payment whose booking reference does not resolve. Left joined rather than dropped so the money is visible, not silently lost.",
       "expectation": "booking_key IS NOT NULL",
-      "rows_checked": 4460,
+      "rows_checked": 4498,
       "rows_failed": 37,
-      "failure_pct": 0.8296,
+      "failure_pct": 0.8226,
       "passed": false,
       "error": null
     },
@@ -277,9 +277,9 @@
       "severity": "error",
       "description": "Gateway gross should equal the folio net room amount. A mismatch is either a partial payment or a reconciliation break.",
       "expectation": "abs(payment.gross - booking.net_room) <= 1.00",
-      "rows_checked": 4423,
-      "rows_failed": 111,
-      "failure_pct": 2.5096,
+      "rows_checked": 4461,
+      "rows_failed": 92,
+      "failure_pct": 2.0623,
       "passed": false,
       "error": null
     },
@@ -289,7 +289,7 @@
       "severity": "error",
       "description": "A cancelled booking must carry a cancellation timestamp, and vice versa. This rule is a REGRESSION GUARD, not a detector: the mart CHECK constraint ck_booking_cancel makes the incoherent state unloadable, so the correct expected result is zero. The defect can only exist upstream of the mart, which is where the constraint earns its place -- a rule that can never fire because a constraint already prevents the state is a stronger control than a rule that reports it.",
       "expectation": "status = 'cancelled' XOR cancelled_at IS NULL (enforced by CHECK)",
-      "rows_checked": 5236,
+      "rows_checked": 5228,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -301,7 +301,7 @@
       "severity": "error",
       "description": "A cancelled booking must not occupy any unit-night.",
       "expectation": "no occupied unit-night references a cancelled booking",
-      "rows_checked": 14202,
+      "rows_checked": 13610,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -313,7 +313,7 @@
       "severity": "error",
       "description": "The half-open interval: a unit-night on or after the departure date means room-nights are inflated by roughly 1/ALOS.",
       "expectation": "no unit-night on or after check_out_date",
-      "rows_checked": 14202,
+      "rows_checked": 13610,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -325,7 +325,7 @@
       "severity": "error",
       "description": "A vacant night cannot carry room revenue.",
       "expectation": "room_revenue_net_inr = 0 when not occupied",
-      "rows_checked": 4148,
+      "rows_checked": 4740,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -349,7 +349,7 @@
       "severity": "error",
       "description": "The stored breach flag must agree with resolution time vs SLA target.",
       "expectation": "is_sla_breached = (resolution_minutes > sla_minutes)",
-      "rows_checked": 1969,
+      "rows_checked": 1900,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -361,7 +361,7 @@
       "severity": "error",
       "description": "A request cannot be resolved before it was raised.",
       "expectation": "resolved_at >= created_at",
-      "rows_checked": 1969,
+      "rows_checked": 1900,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -373,9 +373,9 @@
       "severity": "error",
       "description": "The stored reporting date must equal the IST business date derived from the event timestamp. Disagreement means a feed wrote a UTC date, which silently moves late-night activity to the previous day.",
       "expectation": "booking_date = meta.business_date(booked_at)",
-      "rows_checked": 5236,
-      "rows_failed": 57,
-      "failure_pct": 1.0886,
+      "rows_checked": 5228,
+      "rows_failed": 42,
+      "failure_pct": 0.8034,
       "passed": false,
       "error": null
     },
@@ -385,7 +385,7 @@
       "severity": "warning",
       "description": "Service-request reporting date must match the IST business date.",
       "expectation": "request_date = meta.business_date(created_at)",
-      "rows_checked": 1969,
+      "rows_checked": 1900,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -397,7 +397,7 @@
       "severity": "error",
       "description": "The booking feed should have delivered data recently. Measured against the dataset's own horizon, since this is a fixed synthetic period.",
       "expectation": "max(ingested_at) within 26 hours of now()",
-      "rows_checked": 5236,
+      "rows_checked": 5228,
       "rows_failed": 0,
       "failure_pct": 0.0,
       "passed": true,
@@ -410,8 +410,8 @@
       "description": "A source channel that normally delivers volume and suddenly delivers nothing is a broken integration. The table is not wrong, it is EMPTY -- so a null check passes and only a volume band catches it.",
       "expectation": "no channel has a run of >=3 consecutive zero-volume days against a healthy baseline",
       "rows_checked": 2785,
-      "rows_failed": 10,
-      "failure_pct": 0.3591,
+      "rows_failed": 19,
+      "failure_pct": 0.6822,
       "passed": false,
       "error": null
     },
@@ -421,9 +421,9 @@
       "severity": "warning",
       "description": "Every non-cancelled booking should have a payment. A reconciliation is clean when UNEXPLAINED variance is zero, not when variance is zero.",
       "expectation": "every live booking has at least one payment row",
-      "rows_checked": 4460,
+      "rows_checked": 4498,
       "rows_failed": 37,
-      "failure_pct": 0.8296,
+      "failure_pct": 0.8226,
       "passed": true,
       "error": null
     },

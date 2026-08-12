@@ -257,7 +257,19 @@ class Generator:
         hour_weights = np.array(spec.BOOKING_HOUR_WEIGHTS_IST, dtype=float)
         hour_weights = hour_weights / hour_weights.sum()
 
+        # Guest selection is deliberately NOT uniform. Uniform draws from a small
+        # pool make almost everyone look like a returning guest -- it produced a
+        # 61% repeat rate, roughly triple what a serviced-apartment operator
+        # actually sees. Real loyalty is long-tailed: most guests stay once, a
+        # small cohort returns often. A weighted pool reproduces that shape.
         guest_ids = guests["guest_id"].tolist()
+        n_guests = len(guest_ids)
+        guest_weights = np.ones(n_guests)
+        loyal_idx = self.rng.choice(
+            n_guests, size=max(1, int(n_guests * spec.LOYAL_GUEST_SHARE)), replace=False)
+        guest_weights[loyal_idx] = spec.LOYAL_GUEST_WEIGHT
+        guest_weights = guest_weights / guest_weights.sum()
+
         rows = []
         denied = 0
         seq = 0
@@ -380,7 +392,7 @@ class Generator:
 
                     rows.append({
                         "booking_id": f"BK{seq:07d}",
-                        "guest_id": str(self.rng.choice(guest_ids)),
+                        "guest_id": str(self.rng.choice(guest_ids, p=guest_weights)),
                         "property_code": p.code,
                         "unit_code": unit.unit_code,
                         "channel_code": ch.code,
@@ -733,7 +745,7 @@ class Generator:
         return pd.DataFrame(rows)
 
     # -- orchestration ------------------------------------------------------
-    def generate(self, n_guests: int = 2600) -> GeneratedData:
+    def generate(self, n_guests: int = spec.GUEST_POOL) -> GeneratedData:
         properties = self.build_properties()
         units = self.build_units()
         channels = self.build_channels()
