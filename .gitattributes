@@ -1,0 +1,17 @@
+# Normalise line endings so diffs stay clean across Windows and the Linux
+# runners that execute the scheduled pipeline.
+* text=auto eol=lf
+
+# Windows-native tooling expects CRLF.
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# Binary: never touch.
+*.pbix  binary
+*.xlsx  binary
+*.xlsm  binary
+*.png   binary
+*.jpg   binary
+*.parquet binary
+*.duckdb  binary

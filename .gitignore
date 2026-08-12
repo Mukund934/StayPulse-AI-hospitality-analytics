@@ -1,0 +1,45 @@
+# --- Secrets: never commit ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials.json
+
+# --- Private development workspace: never publish ---
+# Internal roadmap, decision log, research notes, verification records and
+# implementation journal. Local working copy only.
+# Public-facing images live in assets/img/, NOT here.
+/docs/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Data: generated artifacts are reproducible from the seeded generator ---
+data/raw/*
+data/staging/*
+!data/**/.gitkeep
+*.duckdb
+*.duckdb.wal
+
+# --- Power BI ---
+*.pbix
+.pbi/localSettings.json
+*.pbix.bak
+
+# --- Excel temp ---
+~$*.xlsx
+~$*.xlsm
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+.idea/
