@@ -1,0 +1,4 @@
+property_key,property_code,property_name,area,city,state,unit_count,opened_on,closed_on,is_active,has_restaurant
+1,BLR-BTM,StayPulse Residences BTM Layout,BTM Layout,Bengaluru,Karnataka,16,2023-06-01,,True,False
+2,BLR-KOR,StayPulse Residences Koramangala,Koramangala,Bengaluru,Karnataka,14,2024-09-01,,True,False
+3,BLR-HSR,StayPulse Residences HSR Layout,HSR Layout,Bengaluru,Karnataka,10,2026-03-01,,True,False

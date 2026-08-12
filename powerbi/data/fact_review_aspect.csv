@@ -1,0 +1,1117 @@
+aspect_key,review_key,property_key,review_date,category,polarity,severity,confidence,actionable_by,evidence_span,model,rating,language
+1,1,2,2025-02-06,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+2,1,2,2025-02-06,maintenance,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+3,2,1,2025-02-04,room_quality,positive,not_applicable,high,none,Room spacious tha aur well maintained,gemini-3.1-flash-lite,5.0,en
+4,2,1,2025-02-04,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+5,3,1,2025-02-07,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,4.5,en
+6,3,1,2025-02-07,maintenance,positive,not_applicable,high,none,everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+7,3,1,2025-02-07,noise,negative,moderate,high,maintenance,could hear everything from the corridor,gemini-3.1-flash-lite,4.5,en
+8,4,2,2025-02-06,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+9,4,2,2025-02-06,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+10,5,2,2025-02-13,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.0,en
+11,5,2,2025-02-13,wifi,negative,severe,high,tech,internet was too slow to work on,gemini-3.1-flash-lite,4.0,en
+12,6,2,2025-02-17,maintenance,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,5.0,en
+13,7,2,2025-02-07,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.0,en
+14,7,2,2025-02-07,cleanliness,positive,not_applicable,high,none,ekdum clean tha,gemini-3.1-flash-lite,4.0,en
+15,7,2,2025-02-07,check_in,negative,severe,high,tech,the access code did not work and we waited outside,gemini-3.1-flash-lite,4.0,en
+16,8,2,2025-02-13,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,5.0,en
+17,8,2,2025-02-13,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+18,9,1,2025-02-23,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+19,9,1,2025-02-23,room_quality,positive,not_applicable,high,none,room spacious tha aur well maintained,gemini-3.1-flash-lite,5.0,en
+20,10,2,2025-02-10,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+21,11,2,2025-02-20,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+22,11,2,2025-02-20,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+23,11,2,2025-02-20,other,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,5.0,en
+24,12,1,2025-02-28,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+25,12,1,2025-02-28,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+26,13,1,2025-03-10,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+27,13,1,2025-03-10,amenities,positive,not_applicable,high,none,kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+28,14,1,2025-02-13,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,5.0,en
+29,14,1,2025-02-13,room_quality,positive,not_applicable,high,none,apartment is well furnished and spacious,gemini-3.1-flash-lite,5.0,en
+30,15,1,2025-02-20,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+31,15,1,2025-02-20,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+32,16,1,2025-02-16,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,3.5,en
+33,16,1,2025-02-16,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,3.5,en
+34,17,2,2025-02-16,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,4.0,en
+35,17,2,2025-02-16,wifi,negative,moderate,high,tech,WiFi kept dropping during calls,gemini-3.1-flash-lite,4.0,en
+36,18,2,2025-02-18,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,5.0,en
+37,18,2,2025-02-18,noise,positive,not_applicable,high,none,very peaceful,gemini-3.1-flash-lite,5.0,en
+38,19,2,2025-03-06,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.5,en
+39,19,2,2025-03-06,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,en
+40,20,1,2025-02-19,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+41,20,1,2025-02-19,housekeeping_response,negative,moderate,high,housekeeping,we asked for cleaning three times before anyone came,gemini-3.1-flash-lite,4.5,en
+42,21,2,2025-02-25,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,3.5,en
+43,21,2,2025-02-25,amenities,negative,moderate,high,maintenance,gym equipment was out of order,gemini-3.1-flash-lite,3.5,en
+44,22,1,2025-02-18,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+45,22,1,2025-02-18,food,negative,minor,high,none,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,5.0,en
+46,23,1,2025-02-23,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+47,23,1,2025-02-23,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+48,24,1,2025-02-23,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.0,en
+49,25,2,2025-02-19,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+50,26,1,2025-03-13,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,3.5,en
+51,26,1,2025-03-13,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,3.5,en
+52,26,1,2025-03-13,location,negative,moderate,high,front_office,the approach road is badly lit at night,gemini-3.1-flash-lite,3.5,en
+53,27,2,2025-02-26,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+54,28,1,2025-02-21,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious.,gemini-3.1-flash-lite,5.0,en
+55,29,2,2025-02-24,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night.",gemini-3.1-flash-lite,4.5,en
+56,29,2,2025-02-24,noise,negative,moderate,high,front_office,construction noise started early every morning.,gemini-3.1-flash-lite,4.5,en
+57,30,2,2025-02-23,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+58,31,1,2025-02-22,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+59,31,1,2025-02-22,amenities,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+60,32,1,2025-03-02,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,3.5,en
+61,33,2,2025-03-03,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+62,33,2,2025-03-03,value,positive,not_applicable,high,none,cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+63,33,2,2025-03-03,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+64,34,2,2025-03-04,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+65,34,2,2025-03-04,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+66,34,2,2025-03-04,room_quality,positive,not_applicable,high,none,bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+67,35,2,2025-03-04,cleanliness,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.0,en
+68,35,2,2025-03-04,room_quality,positive,not_applicable,high,none,room spacious tha aur well maintained,gemini-3.1-flash-lite,4.0,en
+69,36,1,2025-03-26,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+70,36,1,2025-03-26,value,positive,not_applicable,high,none,"paisa vasool, definitely worth it",gemini-3.1-flash-lite,5.0,en
+71,37,2,2025-03-05,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,5.0,en
+72,37,2,2025-03-05,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+73,37,2,2025-03-05,check_in,negative,moderate,high,tech,access code did not work and we waited outside,gemini-3.1-flash-lite,5.0,en
+74,38,2,2025-03-02,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+75,39,2,2025-03-05,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+76,40,1,2025-03-07,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,4.5,en
+77,40,1,2025-03-07,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+78,41,1,2025-03-10,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+79,41,1,2025-03-10,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+80,42,1,2025-03-05,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+81,42,1,2025-03-05,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+82,43,1,2025-03-28,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+83,43,1,2025-03-28,room_quality,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+84,44,1,2025-04-02,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+85,44,1,2025-04-02,noise,positive,not_applicable,high,none,very peaceful,gemini-3.1-flash-lite,5.0,en
+86,45,1,2025-03-10,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+87,45,1,2025-03-10,amenities,positive,not_applicable,high,none,kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+88,45,1,2025-03-10,room_quality,negative,minor,high,front_office,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,5.0,en
+89,46,1,2025-03-15,location,positive,not_applicable,high,none,Great location,gemini-3.1-flash-lite,4.5,en
+90,46,1,2025-03-15,amenities,positive,not_applicable,high,none,free parking,gemini-3.1-flash-lite,4.5,en
+91,47,2,2025-03-08,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+92,47,2,2025-03-08,wifi,positive,not_applicable,high,none,wiFi was fast and stable,gemini-3.1-flash-lite,5.0,en
+93,48,2,2025-03-23,other,negative,moderate,high,front_office,Grocery delivery service was handy Hope they fix it.,gemini-3.1-flash-lite,4.5,en
+94,49,2,2025-03-17,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.0,en
+95,50,1,2025-03-17,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+96,51,1,2025-03-15,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+97,51,1,2025-03-15,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+98,52,1,2025-03-23,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+99,52,1,2025-03-23,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+100,52,1,2025-03-23,staff,negative,moderate,high,front_office,the front desk was unhelpful when we raised an issue,gemini-3.1-flash-lite,4.5,en
+101,53,2,2025-03-14,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+102,53,2,2025-03-14,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+103,54,1,2025-03-17,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+104,54,1,2025-03-17,room_quality,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+105,55,2,2025-03-16,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+106,56,1,2025-03-30,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+107,57,2,2025-03-24,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+108,57,2,2025-03-24,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,5.0,en
+109,58,1,2025-03-20,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+110,58,1,2025-03-20,other,negative,moderate,high,front_office,the approach road is badly lit at night,gemini-3.1-flash-lite,5.0,en
+111,59,2,2025-03-23,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.0,en
+112,59,2,2025-03-23,amenities,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,4.0,en
+113,59,2,2025-03-23,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,4.0,en
+114,60,2,2025-03-22,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.0,en
+115,60,2,2025-03-22,housekeeping_response,negative,moderate,high,housekeeping,housekeeping took nearly two hours to respond,gemini-3.1-flash-lite,4.0,en
+116,61,1,2025-03-31,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,3.0,en
+117,61,1,2025-03-31,maintenance,negative,moderate,high,maintenance,gym equipment was out of order,gemini-3.1-flash-lite,3.0,en
+118,62,1,2025-03-21,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+119,63,1,2025-03-23,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,4.5,en
+120,64,1,2025-03-21,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+121,64,1,2025-03-21,housekeeping_response,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,4.5,en
+122,65,2,2025-03-29,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+123,65,2,2025-03-29,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+124,66,2,2025-03-25,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+125,67,1,2025-03-27,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,hinglish
+126,67,1,2025-03-27,wifi,negative,moderate,high,tech,wifi bar bar disconnect ho raha tha,gemini-3.1-flash-lite,5.0,hinglish
+127,68,2,2025-03-30,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+128,68,2,2025-03-30,staff,positive,not_applicable,high,none,staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.5,en
+129,69,1,2025-03-31,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+130,70,1,2025-03-27,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+131,71,2,2025-03-31,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+132,71,2,2025-03-31,staff,positive,not_applicable,high,none,staff bahut helpful the,gemini-3.1-flash-lite,5.0,en
+133,72,2,2025-03-29,cleanliness,positive,not_applicable,high,none,The apartment was spotless when we arrived,gemini-3.1-flash-lite,4.0,en
+134,72,2,2025-03-29,housekeeping_response,negative,moderate,high,housekeeping,housekeeping took nearly two hours to respond,gemini-3.1-flash-lite,4.0,en
+135,73,2,2025-03-30,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+136,73,2,2025-03-30,value,positive,not_applicable,high,none,"paisa vasool, definitely worth it",gemini-3.1-flash-lite,5.0,en
+137,74,1,2025-04-04,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,4.5,en
+138,74,1,2025-04-04,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+139,75,1,2025-04-06,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,4.0,en
+140,75,1,2025-04-06,room_quality,positive,not_applicable,high,none,room spacious tha aur well maintained,gemini-3.1-flash-lite,4.0,en
+141,76,1,2025-04-02,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+142,77,2,2025-04-09,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+143,77,2,2025-04-09,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+144,77,2,2025-04-09,other,negative,moderate,high,none,approach road is badly lit at night,gemini-3.1-flash-lite,5.0,en
+145,78,1,2025-04-16,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,3.5,en
+146,78,1,2025-04-16,check_in,positive,not_applicable,high,none,self check-in worked perfectly at midnight,gemini-3.1-flash-lite,3.5,en
+147,78,1,2025-04-16,housekeeping_response,negative,moderate,high,housekeeping,we asked for cleaning three times before anyone came,gemini-3.1-flash-lite,3.5,en
+148,79,1,2025-04-11,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+149,80,2,2025-04-07,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+150,81,2,2025-04-10,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,4.5,en
+151,82,2,2025-04-12,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+152,83,2,2025-04-04,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+153,83,2,2025-04-04,housekeeping_response,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,5.0,en
+154,84,1,2025-04-05,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,en
+155,84,1,2025-04-05,housekeeping_response,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+156,84,1,2025-04-05,other,negative,moderate,high,front_office,the approach road is badly lit at night,gemini-3.1-flash-lite,4.5,en
+157,85,1,2025-04-08,room_quality,positive,not_applicable,high,none,Room spacious tha aur well maintained,gemini-3.1-flash-lite,5.0,en
+158,85,1,2025-04-08,staff,positive,not_applicable,high,none,staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+159,86,2,2025-04-07,cleanliness,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+160,86,2,2025-04-07,check_in,positive,not_applicable,high,none,self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.5,en
+161,87,2,2025-04-13,cleanliness,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+162,87,2,2025-04-13,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+163,87,2,2025-04-13,check_in,negative,severe,high,front_office,the access code did not work and we waited outside,gemini-3.1-flash-lite,5.0,en
+164,88,1,2025-04-10,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+165,89,1,2025-04-15,cleanliness,positive,not_applicable,high,none,The apartment was spotless when we arrived,gemini-3.1-flash-lite,5.0,en
+166,89,1,2025-04-15,housekeeping_response,positive,not_applicable,high,none,housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+167,90,1,2025-04-19,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,5.0,en
+168,91,1,2025-04-16,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+169,92,2,2025-04-10,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+170,93,1,2025-04-16,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+171,94,2,2025-04-13,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+172,94,2,2025-04-13,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+173,95,1,2025-04-13,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+174,95,1,2025-04-13,check_in,negative,severe,high,front_office,access code did not work and we waited outside,gemini-3.1-flash-lite,4.5,en
+175,96,2,2025-04-21,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+176,97,1,2025-04-19,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+177,98,1,2025-04-20,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+178,99,1,2025-04-17,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,4.0,en
+179,99,1,2025-04-17,maintenance,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.0,en
+180,100,2,2025-04-28,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+181,101,1,2025-04-18,value,positive,not_applicable,high,none,Cheaper than a hotel and far more space,gemini-3.1-flash-lite,4.5,en
+182,101,1,2025-04-18,maintenance,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+183,102,1,2025-04-22,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,5.0,en
+184,103,2,2025-04-19,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+185,103,2,2025-04-19,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+186,104,2,2025-04-22,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+187,105,1,2025-04-19,room_quality,positive,not_applicable,high,none,Room spacious tha aur well maintained,gemini-3.1-flash-lite,5.0,en
+188,105,1,2025-04-19,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+189,106,2,2025-04-22,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+190,106,2,2025-04-22,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+191,107,1,2025-05-06,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,hinglish
+192,107,1,2025-05-06,housekeeping_response,negative,moderate,high,housekeeping,"towels maange the, do ghante lag gaye",gemini-3.1-flash-lite,5.0,hinglish
+193,108,1,2025-04-24,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.0,en
+194,108,1,2025-04-24,value,positive,not_applicable,high,none,paisa vasool,gemini-3.1-flash-lite,4.0,en
+195,109,1,2025-04-25,value,positive,not_applicable,high,none,Paisa vasool,gemini-3.1-flash-lite,5.0,en
+196,110,2,2025-04-28,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+197,111,1,2025-04-21,cleanliness,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+198,111,1,2025-04-21,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+199,111,1,2025-04-21,other,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+200,112,1,2025-04-26,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+201,112,1,2025-04-26,other,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+202,113,1,2025-04-24,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+203,114,2,2025-04-24,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,4.5,en
+204,115,2,2025-05-05,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.5,en
+205,115,2,2025-05-05,room_quality,negative,minor,high,none,apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,4.5,en
+206,116,1,2025-04-26,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.5,en
+207,116,1,2025-04-26,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+208,117,1,2025-04-25,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+209,118,2,2025-04-29,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+210,118,2,2025-04-29,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+211,118,2,2025-04-29,cleanliness,negative,moderate,high,housekeeping,the bathroom had not been cleaned properly,gemini-3.1-flash-lite,4.5,en
+212,119,2,2025-04-27,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+213,120,1,2025-04-28,maintenance,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+214,120,1,2025-04-28,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+215,120,1,2025-04-28,noise,negative,moderate,high,none,construction noise started early every morning,gemini-3.1-flash-lite,4.5,en
+216,121,1,2025-04-29,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,en
+217,121,1,2025-04-29,noise,positive,not_applicable,high,none,very peaceful,gemini-3.1-flash-lite,4.0,en
+218,122,1,2025-05-02,cleanliness,positive,not_applicable,high,none,The apartment was spotless,gemini-3.1-flash-lite,4.5,en
+219,122,1,2025-05-02,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+220,123,1,2025-05-03,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.0,en
+221,124,2,2025-05-04,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.0,en
+222,124,2,2025-05-04,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,4.0,en
+223,125,1,2025-05-04,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,5.0,en
+224,125,1,2025-05-04,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+225,126,2,2025-05-07,maintenance,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+226,126,2,2025-05-07,staff,negative,moderate,high,front_office,the front desk was unhelpful when we raised an issue,gemini-3.1-flash-lite,5.0,en
+227,127,1,2025-05-08,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+228,128,1,2025-05-02,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.0,en
+229,128,1,2025-05-02,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+230,128,1,2025-05-02,food,negative,moderate,high,revenue,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,4.0,en
+231,129,1,2025-05-05,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+232,130,1,2025-05-06,maintenance,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,5.0,en
+233,130,1,2025-05-06,maintenance,negative,minor,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,5.0,en
+234,131,1,2025-05-10,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+235,132,2,2025-05-07,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+236,132,2,2025-05-07,maintenance,positive,not_applicable,high,none,everything worked exactly as it should,gemini-3.1-flash-lite,5.0,en
+237,132,2,2025-05-07,maintenance,negative,minor,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,5.0,en
+238,133,1,2025-05-07,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+239,133,1,2025-05-07,amenities,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+240,134,1,2025-05-06,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+241,134,1,2025-05-06,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+242,134,1,2025-05-06,cleanliness,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+243,135,2,2025-05-04,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+244,135,2,2025-05-04,amenities,positive,not_applicable,high,none,kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+245,135,2,2025-05-04,maintenance,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,5.0,en
+246,136,2,2025-05-17,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+247,136,2,2025-05-17,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+248,137,2,2025-05-12,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+249,137,2,2025-05-12,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+250,137,2,2025-05-12,maintenance,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,5.0,en
+251,138,1,2025-05-09,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+252,138,1,2025-05-09,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+253,138,1,2025-05-09,room_quality,negative,minor,high,front_office,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,4.5,en
+254,139,2,2025-05-06,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+255,139,2,2025-05-06,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+256,140,1,2025-05-12,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,3.0,hinglish
+257,140,1,2025-05-12,room_quality,positive,not_applicable,high,none,room spacious tha aur well maintained,gemini-3.1-flash-lite,3.0,hinglish
+258,140,1,2025-05-12,maintenance,negative,moderate,high,maintenance,AC theek se kaam nahi kar raha tha,gemini-3.1-flash-lite,3.0,hinglish
+259,141,2,2025-05-13,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+260,142,1,2025-05-12,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,4.5,en
+261,142,1,2025-05-12,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+262,143,2,2025-05-11,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,5.0,en
+263,143,2,2025-05-11,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+264,143,2,2025-05-11,other,negative,moderate,high,none,the approach road is badly lit at night,gemini-3.1-flash-lite,5.0,en
+265,144,2,2025-05-18,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+266,144,2,2025-05-18,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+267,144,2,2025-05-18,amenities,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,5.0,en
+268,145,1,2025-05-17,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+269,145,1,2025-05-17,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+270,145,1,2025-05-17,maintenance,negative,moderate,high,maintenance,gym equipment was out of order,gemini-3.1-flash-lite,5.0,en
+271,146,2,2025-05-22,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,,en
+272,146,2,2025-05-22,cleanliness,positive,not_applicable,high,none,the apartment was spotless when we arrived,gemini-3.1-flash-lite,,en
+273,146,2,2025-05-22,cleanliness,negative,minor,high,housekeeping,there was dust on the shelves and under the bed,gemini-3.1-flash-lite,,en
+274,147,1,2025-05-21,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+275,147,1,2025-05-21,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+276,147,1,2025-05-21,amenities,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+277,148,1,2025-05-17,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+278,149,1,2025-05-23,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+279,150,2,2025-05-20,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+280,151,1,2025-05-18,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+281,152,2,2025-05-22,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+282,153,1,2025-05-25,cleanliness,positive,not_applicable,high,none,The apartment was spotless when we arrived,gemini-3.1-flash-lite,5.0,en
+283,154,2,2025-05-17,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,4.5,en
+284,154,2,2025-05-17,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+285,155,1,2025-05-24,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.0,hinglish
+286,155,1,2025-05-24,check_in,negative,moderate,high,front_office,check-in mein bahut time laga,gemini-3.1-flash-lite,4.0,hinglish
+287,156,2,2025-05-23,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+288,157,2,2025-06-03,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.0,en
+289,157,2,2025-06-03,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,4.0,en
+290,158,1,2025-05-26,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+291,158,1,2025-05-26,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+292,159,2,2025-06-03,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+293,160,2,2025-05-26,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+294,160,2,2025-05-26,amenities,negative,moderate,high,maintenance,gym equipment was out of order,gemini-3.1-flash-lite,4.5,en
+295,161,1,2025-05-25,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,5.0,en
+296,162,2,2025-05-30,cleanliness,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+297,162,2,2025-05-30,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+298,163,2,2025-05-29,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.5,en
+299,163,2,2025-05-29,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+300,163,2,2025-05-29,check_in,negative,severe,high,front_office,the access code did not work and we waited outside,gemini-3.1-flash-lite,4.5,en
+301,164,2,2025-06-06,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,en
+302,164,2,2025-06-06,cleanliness,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.0,en
+303,165,1,2025-05-27,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,en
+304,165,1,2025-05-27,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+305,166,1,2025-05-28,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+306,166,1,2025-05-28,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+307,166,1,2025-05-28,room_quality,negative,moderate,high,maintenance,the sofa was worn and the chair was broken,gemini-3.1-flash-lite,5.0,en
+308,167,1,2025-06-06,other,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.0,en
+309,167,1,2025-06-06,wifi,negative,severe,high,tech,WiFi kept dropping during calls,gemini-3.1-flash-lite,4.0,en
+310,168,2,2025-05-28,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+311,169,2,2025-05-26,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.0,en
+312,169,2,2025-05-26,maintenance,negative,moderate,high,maintenance,the gym equipment was out of order,gemini-3.1-flash-lite,4.0,en
+313,170,1,2025-05-28,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,4.5,en
+314,170,1,2025-05-28,housekeeping_response,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+315,171,1,2025-06-02,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,4.5,en
+316,172,1,2025-06-05,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+317,172,1,2025-06-05,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+318,172,1,2025-06-05,room_quality,negative,minor,high,none,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,5.0,en
+319,173,1,2025-06-01,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+320,173,1,2025-06-01,check_in,positive,not_applicable,high,none,self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.0,en
+321,173,1,2025-06-01,wifi,negative,severe,high,tech,internet was too slow to work on,gemini-3.1-flash-lite,4.0,en
+322,174,1,2025-06-04,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+323,175,2,2025-05-29,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+324,176,1,2025-06-01,wifi,negative,moderate,high,tech,internet was too slow to work on,gemini-3.1-flash-lite,4.0,en
+325,177,1,2025-05-31,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+326,177,1,2025-05-31,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,5.0,en
+327,178,1,2025-06-06,value,negative,minor,medium,revenue,for this price I expected more,gemini-3.1-flash-lite,4.0,en
+328,179,1,2025-06-03,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,4.5,en
+329,180,2,2025-06-04,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,5.0,en
+330,181,1,2025-06-10,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.0,en
+331,182,2,2025-06-06,room_quality,positive,not_applicable,high,none,Room spacious tha,gemini-3.1-flash-lite,5.0,en
+332,182,2,2025-06-06,room_quality,positive,not_applicable,high,none,well maintained,gemini-3.1-flash-lite,5.0,en
+333,183,2,2025-06-09,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,hinglish
+334,183,2,2025-06-09,maintenance,negative,moderate,high,maintenance,AC theek se kaam nahi kar raha tha,gemini-3.1-flash-lite,5.0,hinglish
+335,184,2,2025-06-10,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+336,184,2,2025-06-10,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+337,184,2,2025-06-10,check_in,negative,moderate,high,front_office,check-in took over forty minutes,gemini-3.1-flash-lite,4.5,en
+338,185,2,2025-06-11,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,4.0,en
+339,185,2,2025-06-11,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+340,185,2,2025-06-11,value,negative,minor,medium,revenue,for this price I expected more,gemini-3.1-flash-lite,4.0,en
+341,186,2,2025-06-11,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+342,187,1,2025-06-13,wifi,positive,not_applicable,high,none,WiFi was fast and stable,gemini-3.1-flash-lite,5.0,en
+343,187,1,2025-06-13,room_quality,negative,moderate,high,maintenance,sofa was worn,gemini-3.1-flash-lite,5.0,en
+344,187,1,2025-06-13,room_quality,negative,severe,high,maintenance,chair was broken,gemini-3.1-flash-lite,5.0,en
+345,188,1,2025-06-08,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+346,189,1,2025-06-15,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+347,190,2,2025-06-19,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,4.5,en
+348,190,2,2025-06-19,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+349,191,2,2025-06-08,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+350,191,2,2025-06-08,value,positive,not_applicable,high,none,cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+351,191,2,2025-06-08,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+352,192,2,2025-06-08,check_in,positive,not_applicable,high,none,Self check-in worked perfectly,gemini-3.1-flash-lite,5.0,en
+353,192,2,2025-06-08,wifi,positive,not_applicable,high,none,wiFi was fast and stable,gemini-3.1-flash-lite,5.0,en
+354,193,1,2025-06-15,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,4.0,en
+355,194,1,2025-06-16,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+356,194,1,2025-06-16,amenities,positive,not_applicable,high,none,kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+357,195,2,2025-06-12,cleanliness,positive,not_applicable,high,none,The apartment was spotless,gemini-3.1-flash-lite,5.0,en
+358,196,1,2025-06-15,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+359,196,1,2025-06-15,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+360,197,2,2025-06-23,maintenance,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+361,197,2,2025-06-23,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+362,198,1,2025-06-19,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+363,198,1,2025-06-19,wifi,negative,moderate,high,tech,internet was too slow to work on,gemini-3.1-flash-lite,5.0,en
+364,199,1,2025-06-21,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+365,200,2,2025-06-23,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,4.0,en
+366,200,2,2025-06-23,staff,negative,moderate,high,front_office,the front desk was unhelpful when we raised an issue,gemini-3.1-flash-lite,4.0,en
+367,201,2,2025-06-18,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+368,201,2,2025-06-18,staff,positive,not_applicable,high,none,staff bahut helpful the,gemini-3.1-flash-lite,5.0,en
+369,201,2,2025-06-18,staff,negative,moderate,high,front_office,the front desk was unhelpful when we raised an issue,gemini-3.1-flash-lite,5.0,en
+370,202,2,2025-06-17,wifi,positive,not_applicable,high,none,Internet held up fine,gemini-3.1-flash-lite,5.0,en
+371,202,2,2025-06-17,housekeeping_response,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+372,203,1,2025-06-20,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,4.5,en
+373,204,2,2025-06-24,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,en
+374,204,2,2025-06-24,cleanliness,positive,not_applicable,high,none,bathroom was sparkling clean,gemini-3.1-flash-lite,4.5,en
+375,205,1,2025-06-20,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,5.0,en
+376,205,1,2025-06-20,room_quality,positive,not_applicable,high,none,bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+377,206,1,2025-06-20,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,5.0,en
+378,206,1,2025-06-20,location,positive,not_applicable,high,none,great location,gemini-3.1-flash-lite,5.0,en
+379,206,1,2025-06-20,housekeeping_response,negative,moderate,high,housekeeping,we asked for cleaning three times before anyone came,gemini-3.1-flash-lite,5.0,en
+380,207,1,2025-06-24,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+381,207,1,2025-06-24,wifi,positive,not_applicable,high,none,wiFi was fast and stable,gemini-3.1-flash-lite,4.5,en
+382,208,2,2025-06-30,check_in,positive,not_applicable,high,none,Self check-in worked perfectly,gemini-3.1-flash-lite,4.5,en
+383,209,2,2025-06-27,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,5.0,en
+384,209,2,2025-06-27,check_in,negative,severe,high,front_office,the access code did not work and we waited outside,gemini-3.1-flash-lite,5.0,en
+385,210,1,2025-07-03,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,3.5,en
+386,210,1,2025-07-03,cleanliness,negative,moderate,high,housekeeping,the bathroom had not been cleaned properly,gemini-3.1-flash-lite,3.5,en
+387,211,1,2025-06-27,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,4.0,hinglish
+388,211,1,2025-06-27,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.0,hinglish
+389,211,1,2025-06-27,housekeeping_response,negative,moderate,high,housekeeping,"towels maange the, do ghante lag gaye",gemini-3.1-flash-lite,4.0,hinglish
+390,212,1,2025-07-01,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.0,hinglish
+391,212,1,2025-07-01,check_in,negative,moderate,high,front_office,check-in mein bahut time laga,gemini-3.1-flash-lite,4.0,hinglish
+392,213,1,2025-07-03,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+393,213,1,2025-07-03,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+394,213,1,2025-07-03,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+395,214,2,2025-06-26,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.0,en
+396,214,2,2025-06-26,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.0,en
+397,214,2,2025-06-26,maintenance,negative,moderate,high,maintenance,the geyser was not working properly,gemini-3.1-flash-lite,4.0,en
+398,215,1,2025-07-08,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+399,215,1,2025-07-08,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+400,216,2,2025-06-30,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+401,216,2,2025-06-30,room_quality,positive,not_applicable,high,none,everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+402,217,2,2025-07-05,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+403,218,1,2025-07-03,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+404,218,1,2025-07-03,housekeeping_response,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+405,219,2,2025-07-01,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,5.0,hinglish
+406,219,2,2025-07-01,wifi,negative,moderate,high,tech,wifi bar bar disconnect ho raha tha,gemini-3.1-flash-lite,5.0,hinglish
+407,220,1,2025-06-30,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+408,220,1,2025-06-30,value,positive,not_applicable,high,none,cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+409,220,1,2025-06-30,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+410,221,1,2025-06-30,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+411,221,1,2025-06-30,wifi,negative,minor,medium,tech,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+412,222,1,2025-07-03,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+413,222,1,2025-07-03,cleanliness,positive,not_applicable,high,none,bathroom was sparkling clean,gemini-3.1-flash-lite,5.0,en
+414,223,1,2025-07-02,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+415,223,1,2025-07-02,maintenance,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+416,224,1,2025-07-04,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+417,224,1,2025-07-04,room_quality,negative,minor,high,none,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,5.0,en
+418,225,2,2025-06-29,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+419,226,1,2025-07-06,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+420,227,1,2025-07-05,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+421,227,1,2025-07-05,maintenance,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+422,228,1,2025-07-02,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.0,en
+423,228,1,2025-07-02,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,4.0,en
+424,229,1,2025-07-03,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.0,en
+425,229,1,2025-07-03,amenities,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,4.0,en
+426,230,2,2025-07-08,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+427,230,2,2025-07-08,maintenance,negative,moderate,high,maintenance,geyser was not working properly,gemini-3.1-flash-lite,4.5,en
+428,231,2,2025-07-09,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+429,232,1,2025-07-04,wifi,positive,not_applicable,high,none,Internet held up fine,gemini-3.1-flash-lite,4.5,en
+430,233,2,2025-07-06,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+431,234,2,2025-07-05,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+432,234,2,2025-07-05,value,positive,not_applicable,high,none,"paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,en
+433,234,2,2025-07-05,other,negative,minor,low,none,Hope they fix it.,gemini-3.1-flash-lite,4.5,en
+434,235,1,2025-07-10,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.5,en
+435,235,1,2025-07-10,cleanliness,positive,not_applicable,high,none,the apartment was spotless when we arrived,gemini-3.1-flash-lite,4.5,en
+436,236,1,2025-07-12,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+437,236,1,2025-07-12,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+438,237,2,2025-07-06,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.0,en
+439,237,2,2025-07-06,maintenance,negative,severe,high,maintenance,hot water stopped working on the second morning,gemini-3.1-flash-lite,4.0,en
+440,238,1,2025-07-20,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.0,en
+441,238,1,2025-07-20,check_in,negative,severe,high,front_office,the access code did not work and we waited outside,gemini-3.1-flash-lite,4.0,en
+442,239,1,2025-07-15,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+443,239,1,2025-07-15,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+444,239,1,2025-07-15,other,negative,moderate,high,none,the approach road is badly lit at night,gemini-3.1-flash-lite,4.5,en
+445,240,2,2025-07-17,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+446,241,2,2025-07-10,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.5,en
+447,241,2,2025-07-10,room_quality,positive,not_applicable,high,none,everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+448,242,1,2025-07-10,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.5,en
+449,242,1,2025-07-10,housekeeping_response,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+450,242,1,2025-07-10,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,4.5,en
+451,243,1,2025-07-17,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+452,243,1,2025-07-17,cleanliness,positive,not_applicable,high,none,bathroom was sparkling clean,gemini-3.1-flash-lite,4.5,en
+453,244,1,2025-07-12,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+454,244,1,2025-07-12,value,positive,not_applicable,high,none,cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+455,244,1,2025-07-12,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+456,245,1,2025-07-18,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+457,246,1,2025-07-19,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+458,246,1,2025-07-19,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+459,246,1,2025-07-19,room_quality,negative,minor,high,none,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,4.5,en
+460,247,1,2025-07-15,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.0,en
+461,248,1,2025-07-18,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,3.5,en
+462,248,1,2025-07-18,room_quality,positive,not_applicable,high,none,room spacious tha aur well maintained,gemini-3.1-flash-lite,3.5,en
+463,248,1,2025-07-18,value,negative,minor,medium,revenue,for this price I expected more,gemini-3.1-flash-lite,3.5,en
+464,249,1,2025-07-19,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+465,250,1,2025-07-27,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,4.0,en
+466,250,1,2025-07-27,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,4.0,en
+467,250,1,2025-07-27,check_in,negative,severe,high,tech,the access code did not work and we waited outside,gemini-3.1-flash-lite,4.0,en
+468,251,2,2025-07-26,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+469,251,2,2025-07-26,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+470,252,2,2025-07-18,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+471,252,2,2025-07-18,value,positive,not_applicable,high,none,"paisa vasool, definitely worth it",gemini-3.1-flash-lite,5.0,en
+472,253,1,2025-07-17,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+473,254,1,2025-07-23,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+474,254,1,2025-07-23,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+475,254,1,2025-07-23,food,negative,moderate,high,revenue,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,5.0,en
+476,255,1,2025-07-26,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.5,en
+477,255,1,2025-07-26,cleanliness,positive,not_applicable,high,none,the apartment was spotless when we arrived,gemini-3.1-flash-lite,4.5,en
+478,256,2,2025-07-20,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+479,257,1,2025-07-25,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.0,hinglish
+480,257,1,2025-07-25,maintenance,negative,moderate,high,maintenance,AC theek se kaam nahi kar raha tha,gemini-3.1-flash-lite,4.0,hinglish
+481,258,2,2025-07-27,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,5.0,en
+482,258,2,2025-07-27,housekeeping_response,positive,not_applicable,high,none,housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+483,259,2,2025-07-28,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,en
+484,259,2,2025-07-28,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,4.0,en
+485,259,2,2025-07-28,check_in,negative,moderate,high,tech,the access code did not work and we waited outside,gemini-3.1-flash-lite,4.0,en
+486,260,1,2025-08-11,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+487,260,1,2025-08-11,cleanliness,negative,moderate,high,housekeeping,the bathroom had not been cleaned properly,gemini-3.1-flash-lite,4.5,en
+488,261,1,2025-07-31,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.5,en
+489,261,1,2025-07-31,location,negative,minor,high,front_office,the approach road is badly lit at night,gemini-3.1-flash-lite,4.5,en
+490,262,2,2025-08-04,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+491,262,2,2025-08-04,noise,positive,not_applicable,high,none,quiet residential street,gemini-3.1-flash-lite,5.0,en
+492,263,1,2025-07-29,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+493,264,2,2025-07-29,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+494,264,2,2025-07-29,cleanliness,positive,not_applicable,high,none,the apartment was spotless when we arrived,gemini-3.1-flash-lite,4.5,en
+495,265,1,2025-07-29,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+496,265,1,2025-07-29,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+497,266,1,2025-07-31,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.0,en
+498,266,1,2025-07-31,location,negative,moderate,high,front_office,the approach road is badly lit at night,gemini-3.1-flash-lite,4.0,en
+499,267,2,2025-08-02,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+500,267,2,2025-08-02,food,negative,minor,high,none,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,5.0,en
+501,268,1,2025-08-04,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+502,268,1,2025-08-04,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+503,268,1,2025-08-04,housekeeping_response,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,4.5,en
+504,269,1,2025-08-12,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+505,269,1,2025-08-12,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+506,270,2,2025-08-07,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.0,en
+507,270,2,2025-08-07,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,4.0,en
+508,270,2,2025-08-07,value,negative,moderate,medium,revenue,for this price I expected more,gemini-3.1-flash-lite,4.0,en
+509,271,1,2025-08-09,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,en
+510,272,1,2025-08-04,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,4.5,en
+511,272,1,2025-08-04,maintenance,negative,moderate,high,maintenance,geyser was not working properly,gemini-3.1-flash-lite,4.5,en
+512,273,1,2025-07-31,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+513,274,2,2025-07-31,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+514,275,2,2025-08-01,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.0,en
+515,275,2,2025-08-01,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.0,en
+516,275,2,2025-08-01,cleanliness,negative,moderate,high,housekeeping,room thoda dirty tha,gemini-3.1-flash-lite,4.0,en
+517,276,1,2025-08-08,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+518,276,1,2025-08-08,amenities,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+519,277,2,2025-08-10,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+520,278,1,2025-08-14,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+521,278,1,2025-08-14,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+522,279,2,2025-08-15,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+523,279,2,2025-08-15,food,negative,moderate,high,revenue,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,5.0,en
+524,280,1,2025-08-15,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+525,281,1,2025-08-16,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+526,282,1,2025-08-23,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+527,282,1,2025-08-23,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+528,283,1,2025-08-15,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,en
+529,283,1,2025-08-15,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,5.0,en
+530,283,1,2025-08-15,amenities,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,5.0,en
+531,284,1,2025-08-12,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.0,hinglish
+532,284,1,2025-08-12,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.0,hinglish
+533,284,1,2025-08-12,maintenance,negative,moderate,high,maintenance,AC theek se kaam nahi kar raha tha,gemini-3.1-flash-lite,4.0,hinglish
+534,285,1,2025-08-22,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+535,286,2,2025-08-14,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+536,286,2,2025-08-14,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+537,287,1,2025-08-15,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,5.0,en
+538,287,1,2025-08-15,cleanliness,positive,not_applicable,high,none,ekdum clean tha,gemini-3.1-flash-lite,5.0,en
+539,288,1,2025-08-15,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.0,en
+540,289,2,2025-08-15,amenities,positive,not_applicable,high,none,Free parking,gemini-3.1-flash-lite,4.5,en
+541,289,2,2025-08-15,location,negative,moderate,high,maintenance,approach road is badly lit at night,gemini-3.1-flash-lite,4.5,en
+542,290,2,2025-08-20,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+543,291,2,2025-08-17,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,4.0,en
+544,291,2,2025-08-17,check_in,positive,not_applicable,high,none,self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.0,en
+545,292,1,2025-08-19,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+546,292,1,2025-08-19,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+547,293,2,2025-08-23,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,4.5,en
+548,294,2,2025-08-20,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+549,294,2,2025-08-20,room_quality,positive,not_applicable,high,none,apartment is well furnished and spacious,gemini-3.1-flash-lite,5.0,en
+550,295,1,2025-08-23,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable.,gemini-3.1-flash-lite,5.0,en
+551,296,1,2025-08-31,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+552,296,1,2025-08-31,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+553,297,1,2025-08-24,amenities,positive,not_applicable,high,none,Free parking,gemini-3.1-flash-lite,5.0,en
+554,297,1,2025-08-24,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+555,298,2,2025-08-24,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,5.0,en
+556,299,2,2025-08-23,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.5,en
+557,299,2,2025-08-23,other,negative,moderate,medium,maintenance,Hope they fix it.,gemini-3.1-flash-lite,4.5,en
+558,300,2,2025-08-22,location,positive,not_applicable,high,none,Great location,gemini-3.1-flash-lite,5.0,en
+559,300,2,2025-08-22,room_quality,positive,not_applicable,high,none,bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+560,300,2,2025-08-22,staff,negative,moderate,high,front_office,the front desk was unhelpful when we raised an issue,gemini-3.1-flash-lite,5.0,en
+561,301,1,2025-08-29,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+562,301,1,2025-08-29,staff,positive,not_applicable,high,none,staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+563,302,1,2025-08-26,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,hinglish
+564,302,1,2025-08-26,wifi,negative,moderate,high,tech,wifi bar bar disconnect ho raha tha,gemini-3.1-flash-lite,5.0,hinglish
+565,303,2,2025-08-28,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+566,304,1,2025-08-29,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.5,hinglish
+567,304,1,2025-08-29,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,hinglish
+568,304,1,2025-08-29,wifi,negative,moderate,high,tech,wifi bar bar disconnect ho raha tha,gemini-3.1-flash-lite,4.5,hinglish
+569,305,2,2025-08-27,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+570,305,2,2025-08-27,staff,positive,not_applicable,high,none,staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.5,en
+571,306,1,2025-08-28,noise,negative,moderate,high,maintenance,could hear everything from the corridor,gemini-3.1-flash-lite,4.0,en
+572,307,2,2025-08-29,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+573,307,2,2025-08-29,check_in,negative,moderate,high,front_office,the access code did not work and we waited outside,gemini-3.1-flash-lite,5.0,en
+574,308,1,2025-08-29,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,5.0,en
+575,308,1,2025-08-29,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+576,309,1,2025-09-04,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+577,310,1,2025-08-27,noise,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+578,311,2,2025-08-28,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+579,311,2,2025-08-28,housekeeping_response,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+580,311,2,2025-08-28,cleanliness,negative,severe,high,housekeeping,bedsheets had stains when we checked in,gemini-3.1-flash-lite,5.0,en
+581,312,1,2025-09-01,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,4.0,en
+582,312,1,2025-09-01,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,4.0,en
+583,313,1,2025-09-04,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+584,314,1,2025-09-03,housekeeping_response,negative,moderate,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,5.0,en
+585,315,1,2025-09-04,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+586,316,1,2025-09-08,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+587,316,1,2025-09-08,staff,positive,not_applicable,high,none,staff bahut helpful the,gemini-3.1-flash-lite,4.5,en
+588,317,1,2025-09-08,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.0,en
+589,317,1,2025-09-08,wifi,negative,severe,high,tech,internet was too slow to work on,gemini-3.1-flash-lite,4.0,en
+590,318,1,2025-08-31,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+591,319,1,2025-09-07,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.0,hinglish
+592,319,1,2025-09-07,check_in,negative,moderate,high,front_office,check-in mein bahut time laga,gemini-3.1-flash-lite,4.0,hinglish
+593,320,1,2025-09-09,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,5.0,en
+594,320,1,2025-09-09,value,positive,not_applicable,high,none,cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+595,320,1,2025-09-09,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+596,321,2,2025-09-05,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,4.0,en
+597,321,2,2025-09-05,noise,negative,moderate,high,maintenance,could hear everything from the corridor,gemini-3.1-flash-lite,4.0,en
+598,322,1,2025-09-04,value,positive,not_applicable,high,none,Paisa vasool,gemini-3.1-flash-lite,5.0,en
+599,323,2,2025-09-07,housekeeping_response,positive,not_applicable,high,none,they arrived immediately,gemini-3.1-flash-lite,5.0,en
+600,324,1,2025-09-08,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+601,324,1,2025-09-08,location,positive,not_applicable,high,none,very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+602,325,1,2025-09-11,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+603,325,1,2025-09-11,room_quality,positive,not_applicable,high,none,bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+604,325,1,2025-09-11,other,negative,moderate,low,none,Hope they fix it.,gemini-3.1-flash-lite,4.5,en
+605,326,1,2025-09-17,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+606,326,1,2025-09-17,housekeeping_response,positive,not_applicable,high,none,housekeeping came within minutes of asking,gemini-3.1-flash-lite,4.0,en
+607,327,2,2025-09-07,cleanliness,positive,not_applicable,high,none,The apartment was spotless when we arrived,gemini-3.1-flash-lite,5.0,en
+608,327,2,2025-09-07,housekeeping_response,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+609,328,1,2025-09-11,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,5.0,en
+610,328,1,2025-09-11,other,negative,moderate,low,none,Hope they fix it.,gemini-3.1-flash-lite,5.0,en
+611,329,1,2025-09-06,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+612,329,1,2025-09-06,other,negative,moderate,low,none,Hope they fix it.,gemini-3.1-flash-lite,5.0,en
+613,330,2,2025-09-09,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+614,330,2,2025-09-09,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+615,331,2,2025-09-13,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.0,en
+616,331,2,2025-09-13,check_in,negative,moderate,high,front_office,check-in took over forty minutes,gemini-3.1-flash-lite,4.0,en
+617,332,1,2025-09-15,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,4.5,en
+618,332,1,2025-09-15,housekeeping_response,positive,not_applicable,high,none,requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+619,333,1,2025-09-18,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+620,333,1,2025-09-18,value,positive,not_applicable,high,none,cheaper than a hotel and far more space,gemini-3.1-flash-lite,5.0,en
+621,334,2,2025-09-14,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.0,en
+622,334,2,2025-09-14,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,4.0,en
+623,335,2,2025-09-15,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+624,335,2,2025-09-15,room_quality,negative,minor,high,none,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,4.5,en
+625,336,2,2025-09-12,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,en
+626,337,2,2025-09-13,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+627,337,2,2025-09-13,room_quality,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+628,337,2,2025-09-13,staff,negative,moderate,high,front_office,nobody seemed to take ownership of the problem,gemini-3.1-flash-lite,5.0,en
+629,338,1,2025-09-17,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,en
+630,339,1,2025-09-15,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+631,339,1,2025-09-15,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+632,340,1,2025-09-19,staff,positive,not_applicable,high,none,staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.0,en
+633,340,1,2025-09-19,maintenance,negative,moderate,high,maintenance,sofa was worn,gemini-3.1-flash-lite,4.0,en
+634,340,1,2025-09-19,maintenance,negative,moderate,high,maintenance,chair was broken,gemini-3.1-flash-lite,4.0,en
+635,341,2,2025-09-15,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.0,en
+636,341,2,2025-09-15,housekeeping_response,negative,moderate,high,housekeeping,evening housekeeping requests were simply ignored,gemini-3.1-flash-lite,4.0,en
+637,342,1,2025-09-16,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+638,343,1,2025-09-22,cleanliness,positive,not_applicable,high,none,The apartment was spotless when we arrived,gemini-3.1-flash-lite,5.0,en
+639,343,1,2025-09-22,room_quality,negative,moderate,high,maintenance,sofa was worn,gemini-3.1-flash-lite,5.0,en
+640,343,1,2025-09-22,room_quality,negative,moderate,high,maintenance,chair was broken,gemini-3.1-flash-lite,5.0,en
+641,344,1,2025-09-19,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+642,344,1,2025-09-19,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+643,345,1,2025-09-11,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+644,345,1,2025-09-11,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+645,346,1,2025-09-15,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+646,347,2,2025-09-22,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.0,en
+647,347,2,2025-09-22,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,4.0,en
+648,347,2,2025-09-22,maintenance,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.0,en
+649,348,2,2025-09-27,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+650,349,2,2025-09-20,cleanliness,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+651,349,2,2025-09-20,location,positive,not_applicable,high,none,very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+652,349,2,2025-09-20,value,negative,minor,medium,revenue,for this price I expected more,gemini-3.1-flash-lite,5.0,en
+653,350,1,2025-09-20,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,hinglish
+654,350,1,2025-09-20,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,hinglish
+655,350,1,2025-09-20,maintenance,negative,moderate,high,maintenance,AC theek se kaam nahi kar raha tha,gemini-3.1-flash-lite,4.5,hinglish
+656,351,2,2025-09-18,other,positive,not_applicable,medium,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+657,352,2,2025-09-25,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+658,352,2,2025-09-25,location,positive,not_applicable,high,none,very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+659,353,2,2025-09-23,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+660,353,2,2025-09-23,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+661,354,2,2025-09-24,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+662,354,2,2025-09-24,amenities,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+663,355,1,2025-09-25,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+664,355,1,2025-09-25,value,positive,not_applicable,high,none,cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+665,355,1,2025-09-25,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+666,356,2,2025-10-12,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.0,en
+667,356,2,2025-10-12,food,negative,moderate,high,none,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,4.0,en
+668,357,2,2025-09-27,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+669,357,2,2025-09-27,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,4.5,en
+670,358,2,2025-09-29,room_quality,positive,not_applicable,high,none,Room spacious tha,gemini-3.1-flash-lite,5.0,en
+671,358,2,2025-09-29,cleanliness,positive,not_applicable,high,none,well maintained,gemini-3.1-flash-lite,5.0,en
+672,359,2,2025-09-25,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,3.5,en
+673,359,2,2025-09-25,value,positive,not_applicable,high,none,"paisa vasool, definitely worth it",gemini-3.1-flash-lite,3.5,en
+674,359,2,2025-09-25,amenities,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,3.5,en
+675,360,2,2025-09-27,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,3.0,en
+676,360,2,2025-09-27,food,negative,moderate,high,none,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,3.0,en
+677,361,1,2025-10-05,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+678,361,1,2025-10-05,room_quality,positive,not_applicable,high,none,room spacious tha aur well maintained,gemini-3.1-flash-lite,5.0,en
+679,362,2,2025-10-01,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+680,363,1,2025-10-06,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+681,363,1,2025-10-06,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+682,364,1,2025-10-05,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+683,364,1,2025-10-05,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,en
+684,364,1,2025-10-05,other,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+685,365,2,2025-10-07,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,5.0,en
+686,366,2,2025-09-30,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,en
+687,367,2,2025-10-08,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.0,en
+688,367,2,2025-10-08,food,negative,moderate,high,none,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,4.0,en
+689,368,2,2025-10-15,housekeeping_response,negative,moderate,high,housekeeping,we asked for cleaning three times before anyone came,gemini-3.1-flash-lite,5.0,en
+690,369,1,2025-10-07,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,4.0,en
+691,369,1,2025-10-07,staff,positive,not_applicable,high,none,staff bahut helpful the,gemini-3.1-flash-lite,4.0,en
+692,369,1,2025-10-07,maintenance,negative,moderate,high,maintenance,the sofa was worn and the chair was broken,gemini-3.1-flash-lite,4.0,en
+693,370,1,2025-10-04,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+694,371,2,2025-10-08,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+695,371,2,2025-10-08,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,5.0,en
+696,372,2,2025-10-08,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+697,373,1,2025-10-09,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,3.5,en
+698,373,1,2025-10-09,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,3.5,en
+699,373,1,2025-10-09,wifi,negative,moderate,high,tech,internet was too slow to work on,gemini-3.1-flash-lite,3.5,en
+700,374,2,2025-10-07,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+701,374,2,2025-10-07,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+702,375,1,2025-10-11,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,5.0,en
+703,375,1,2025-10-11,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+704,376,1,2025-10-05,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+705,376,1,2025-10-05,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+706,377,2,2025-10-13,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+707,377,2,2025-10-13,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+708,378,2,2025-10-16,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+709,379,1,2025-10-11,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+710,379,1,2025-10-11,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,4.5,en
+711,380,1,2025-10-12,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,5.0,en
+712,381,1,2025-10-08,cleanliness,positive,not_applicable,high,none,The apartment was spotless when we arrived,gemini-3.1-flash-lite,4.0,en
+713,381,1,2025-10-08,maintenance,positive,not_applicable,high,none,everything worked exactly as it should,gemini-3.1-flash-lite,4.0,en
+714,382,1,2025-10-13,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,4.5,en
+715,383,2,2025-10-12,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,4.5,en
+716,383,2,2025-10-12,staff,positive,not_applicable,high,none,the staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.5,en
+717,384,2,2025-10-18,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,3.5,en
+718,384,2,2025-10-18,housekeeping_response,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,3.5,en
+719,385,2,2025-10-12,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+720,385,2,2025-10-12,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+721,386,1,2025-10-19,amenities,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+722,386,1,2025-10-19,location,positive,not_applicable,high,none,very convenient for the tech parks,gemini-3.1-flash-lite,4.5,en
+723,386,1,2025-10-19,room_quality,negative,moderate,high,maintenance,the sofa was worn and the chair was broken,gemini-3.1-flash-lite,4.5,en
+724,387,2,2025-10-20,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.0,en
+725,387,2,2025-10-20,check_in,negative,severe,high,tech,the access code did not work and we waited outside,gemini-3.1-flash-lite,4.0,en
+726,388,2,2025-10-13,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+727,388,2,2025-10-13,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+728,389,1,2025-10-16,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+729,389,1,2025-10-16,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+730,389,1,2025-10-16,staff,negative,moderate,high,front_office,the front desk was unhelpful when we raised an issue,gemini-3.1-flash-lite,5.0,en
+731,390,1,2025-10-23,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+732,390,1,2025-10-23,housekeeping_response,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+733,391,1,2025-10-19,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.0,en
+734,391,1,2025-10-19,location,positive,not_applicable,high,none,quiet residential street but close to the main road,gemini-3.1-flash-lite,4.0,en
+735,391,1,2025-10-19,maintenance,negative,moderate,high,maintenance,the geyser was not working properly,gemini-3.1-flash-lite,4.0,en
+736,392,2,2025-10-22,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+737,392,2,2025-10-22,amenities,positive,not_applicable,high,none,kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+738,393,2,2025-10-22,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,4.0,en
+739,393,2,2025-10-22,housekeeping_response,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,4.0,en
+740,394,1,2025-10-20,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+741,395,1,2025-10-27,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+742,396,1,2025-10-18,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+743,397,2,2025-10-22,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+744,398,2,2025-10-25,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+745,398,2,2025-10-25,housekeeping_response,negative,moderate,high,housekeeping,evening housekeeping requests were simply ignored,gemini-3.1-flash-lite,5.0,en
+746,399,1,2025-10-28,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+747,400,1,2025-10-25,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+748,400,1,2025-10-25,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+749,400,1,2025-10-25,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+750,401,2,2025-10-31,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+751,401,2,2025-10-31,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,5.0,en
+752,402,1,2025-10-27,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+753,403,1,2025-10-26,room_quality,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.0,en
+754,403,1,2025-10-26,staff,negative,moderate,high,front_office,nobody seemed to take ownership of the problem,gemini-3.1-flash-lite,4.0,en
+755,404,1,2025-11-11,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,3.5,en
+756,404,1,2025-11-11,noise,negative,moderate,high,maintenance,could hear everything from the corridor,gemini-3.1-flash-lite,3.5,en
+757,405,1,2025-10-31,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+758,405,1,2025-10-31,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+759,406,2,2025-10-29,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,4.5,en
+760,406,2,2025-10-29,staff,positive,not_applicable,high,none,staff were genuinely warm and helpful,gemini-3.1-flash-lite,4.5,en
+761,406,2,2025-10-29,check_in,negative,moderate,high,front_office,check-in took over forty minutes,gemini-3.1-flash-lite,4.5,en
+762,407,2,2025-11-07,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+763,408,1,2025-11-05,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.5,en
+764,408,1,2025-11-05,cleanliness,positive,not_applicable,high,none,the apartment was spotless when we arrived,gemini-3.1-flash-lite,4.5,en
+765,409,1,2025-10-31,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+766,409,1,2025-10-31,maintenance,positive,not_applicable,high,none,everything worked exactly as it should,gemini-3.1-flash-lite,5.0,en
+767,410,2,2025-10-28,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+768,410,2,2025-10-28,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+769,411,2,2025-11-03,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+770,412,1,2025-11-04,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+771,412,1,2025-11-04,other,negative,moderate,high,front_office,the approach road is badly lit at night,gemini-3.1-flash-lite,5.0,en
+772,413,1,2025-11-04,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+773,413,1,2025-11-04,cleanliness,positive,not_applicable,high,none,bathroom was sparkling clean,gemini-3.1-flash-lite,4.5,en
+774,414,2,2025-11-04,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+775,414,2,2025-11-04,housekeeping_response,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,4.5,en
+776,415,2,2025-11-06,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+777,415,2,2025-11-06,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+778,416,1,2025-11-03,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,5.0,en
+779,417,1,2025-11-02,maintenance,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+780,418,2,2025-11-09,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.5,en
+781,418,2,2025-11-09,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+782,938,1,2026-08-11,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+783,936,1,2026-08-11,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.0,en
+784,932,1,2026-08-11,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+785,932,1,2026-08-11,food,negative,moderate,high,none,"there is no restaurant, which was inconvenient",gemini-3.1-flash-lite,4.5,en
+786,927,3,2026-08-11,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.5,en
+787,935,3,2026-08-10,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+788,934,3,2026-08-10,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+789,934,3,2026-08-10,room_quality,positive,not_applicable,high,none,the apartment is well furnished and spacious,gemini-3.1-flash-lite,4.0,en
+790,934,3,2026-08-10,check_in,negative,moderate,high,front_office,check-in took over forty minutes,gemini-3.1-flash-lite,4.0,en
+791,933,1,2026-08-10,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+792,933,1,2026-08-10,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+793,933,1,2026-08-10,room_quality,negative,moderate,high,maintenance,the sofa was worn and the chair was broken,gemini-3.1-flash-lite,5.0,en
+794,920,1,2026-08-10,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+795,920,1,2026-08-10,value,positive,not_applicable,high,none,"paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,en
+796,926,2,2026-08-09,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+797,926,2,2026-08-09,cleanliness,positive,not_applicable,high,none,ekdum clean tha,gemini-3.1-flash-lite,4.5,en
+798,910,3,2026-08-09,amenities,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,4.0,en
+799,910,3,2026-08-09,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.0,en
+800,910,3,2026-08-09,noise,negative,moderate,high,maintenance,could hear everything from the corridor,gemini-3.1-flash-lite,4.0,en
+801,937,1,2026-08-08,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,5.0,en
+802,928,1,2026-08-08,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+803,925,1,2026-08-08,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+804,925,1,2026-08-08,room_quality,positive,not_applicable,high,none,apartment is well furnished and spacious,gemini-3.1-flash-lite,4.5,en
+805,925,1,2026-08-08,maintenance,negative,moderate,medium,maintenance,Hope they fix it.,gemini-3.1-flash-lite,4.5,en
+806,931,2,2026-08-07,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,4.5,en
+807,931,2,2026-08-07,noise,positive,not_applicable,high,none,very peaceful,gemini-3.1-flash-lite,4.5,en
+808,929,1,2026-08-07,staff,positive,not_applicable,high,none,Front desk went out of their way for us.,gemini-3.1-flash-lite,4.5,en
+809,923,2,2026-08-07,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.5,en
+810,921,1,2026-08-06,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,4.5,en
+811,921,1,2026-08-06,maintenance,negative,moderate,medium,maintenance,Hope they fix it.,gemini-3.1-flash-lite,4.5,en
+812,917,2,2026-08-06,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+813,917,2,2026-08-06,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+814,922,1,2026-08-05,location,positive,not_applicable,high,none,Great location,gemini-3.1-flash-lite,5.0,en
+815,922,1,2026-08-05,housekeeping_response,positive,not_applicable,high,none,requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,en
+816,915,1,2026-08-05,wifi,positive,not_applicable,high,none,Internet held up fine,gemini-3.1-flash-lite,5.0,en
+817,907,1,2026-08-05,check_in,positive,not_applicable,high,none,Self check-in worked perfectly,gemini-3.1-flash-lite,4.5,en
+818,930,1,2026-08-03,value,positive,not_applicable,high,none,Excellent value,gemini-3.1-flash-lite,4.0,en
+819,930,1,2026-08-03,cleanliness,negative,moderate,high,housekeeping,bedsheets had stains,gemini-3.1-flash-lite,4.0,en
+820,919,1,2026-08-03,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+821,919,1,2026-08-03,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+822,913,2,2026-08-03,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+823,913,2,2026-08-03,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+824,924,1,2026-08-02,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+825,924,1,2026-08-02,maintenance,positive,not_applicable,high,none,everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+826,887,1,2026-08-01,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,4.5,en
+827,918,1,2026-07-31,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,5.0,en
+828,918,1,2026-07-31,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+829,914,2,2026-07-31,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,en
+830,914,2,2026-07-31,check_in,positive,not_applicable,high,none,self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.0,en
+831,914,2,2026-07-31,housekeeping_response,negative,moderate,high,housekeeping,housekeeping took nearly two hours to respond,gemini-3.1-flash-lite,4.0,en
+832,903,3,2026-07-30,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+833,903,3,2026-07-30,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+834,940,1,2026-07-29,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,3.5,en
+835,940,1,2026-07-29,cleanliness,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,3.5,en
+836,912,1,2026-07-29,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,3.5,en
+837,912,1,2026-07-29,room_quality,positive,not_applicable,high,none,apartment is well furnished and spacious,gemini-3.1-flash-lite,3.5,en
+838,912,1,2026-07-29,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,3.5,en
+839,911,2,2026-07-29,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+840,911,2,2026-07-29,cleanliness,positive,not_applicable,high,none,apartment was spotless when we arrived,gemini-3.1-flash-lite,4.5,en
+841,916,1,2026-07-28,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+842,916,1,2026-07-28,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+843,916,1,2026-07-28,staff,negative,moderate,medium,front_office,nobody seemed to take ownership of the problem,gemini-3.1-flash-lite,5.0,en
+844,908,2,2026-07-27,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+845,904,1,2026-07-26,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+846,904,1,2026-07-26,room_quality,negative,minor,high,none,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,4.0,en
+847,897,1,2026-07-26,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+848,909,2,2026-07-25,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.0,en
+849,906,1,2026-07-25,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+850,906,1,2026-07-25,location,positive,not_applicable,high,none,very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+851,901,2,2026-07-25,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+852,901,2,2026-07-25,room_quality,positive,not_applicable,high,none,bed was extremely comfortable,gemini-3.1-flash-lite,4.5,en
+853,899,1,2026-07-25,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.0,en
+854,899,1,2026-07-25,cleanliness,positive,not_applicable,high,none,bathroom was sparkling clean,gemini-3.1-flash-lite,4.0,en
+855,891,3,2026-07-25,housekeeping_response,positive,not_applicable,high,none,requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.0,en
+856,891,3,2026-07-25,check_in,negative,moderate,high,front_office,check-in took over forty minutes,gemini-3.1-flash-lite,4.0,en
+857,877,2,2026-07-25,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.0,en
+858,877,2,2026-07-25,room_quality,positive,not_applicable,high,none,apartment is well furnished and spacious,gemini-3.1-flash-lite,4.0,en
+859,877,2,2026-07-25,other,negative,moderate,high,none,approach road is badly lit at night,gemini-3.1-flash-lite,4.0,en
+860,896,3,2026-07-24,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+861,896,3,2026-07-24,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+862,896,3,2026-07-24,maintenance,negative,moderate,medium,maintenance,Hope they fix it.,gemini-3.1-flash-lite,5.0,en
+863,895,2,2026-07-24,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.5,en
+864,894,1,2026-07-24,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+865,894,1,2026-07-24,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,4.5,en
+866,878,2,2026-07-24,amenities,positive,not_applicable,high,none,Kitchenette had everything we needed,gemini-3.1-flash-lite,5.0,en
+867,878,2,2026-07-24,maintenance,negative,moderate,medium,maintenance,Hope they fix it.,gemini-3.1-flash-lite,5.0,en
+868,902,2,2026-07-22,wifi,positive,not_applicable,high,none,WiFi was fast and stable,gemini-3.1-flash-lite,4.0,en
+869,902,2,2026-07-22,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,4.0,en
+870,902,2,2026-07-22,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,4.0,en
+871,852,2,2026-07-22,noise,positive,not_applicable,high,none,Quiet residential street,gemini-3.1-flash-lite,5.0,en
+872,852,2,2026-07-22,location,positive,not_applicable,high,none,close to the main road,gemini-3.1-flash-lite,5.0,en
+873,905,1,2026-07-21,wifi,positive,not_applicable,high,none,WiFi was fast and stable,gemini-3.1-flash-lite,5.0,en
+874,900,1,2026-07-21,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+875,900,1,2026-07-21,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+876,900,1,2026-07-21,staff,negative,moderate,high,front_office,front desk was unhelpful,gemini-3.1-flash-lite,4.5,en
+877,881,1,2026-07-21,value,positive,not_applicable,high,none,Paisa vasool,gemini-3.1-flash-lite,5.0,en
+878,898,1,2026-07-20,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+879,898,1,2026-07-20,other,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+880,892,1,2026-07-20,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+881,892,1,2026-07-20,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+882,888,2,2026-07-19,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+883,888,2,2026-07-19,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+884,890,1,2026-07-17,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.0,en
+885,890,1,2026-07-17,housekeeping_response,negative,moderate,high,housekeeping,housekeeping took nearly two hours to respond,gemini-3.1-flash-lite,4.0,en
+886,893,3,2026-07-16,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+887,893,3,2026-07-16,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,5.0,en
+888,893,3,2026-07-16,housekeeping_response,negative,moderate,high,housekeeping,housekeeping took nearly two hours to respond,gemini-3.1-flash-lite,5.0,en
+889,889,3,2026-07-16,check_in,positive,not_applicable,high,none,Early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+890,875,1,2026-07-16,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+891,882,1,2026-07-15,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+892,880,1,2026-07-15,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.0,en
+893,880,1,2026-07-15,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,4.0,en
+894,880,1,2026-07-15,other,negative,minor,high,none,the approach road is badly lit at night,gemini-3.1-flash-lite,4.0,en
+895,871,1,2026-07-15,location,positive,not_applicable,high,none,Very convenient for the tech parks,gemini-3.1-flash-lite,5.0,en
+896,871,1,2026-07-15,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+897,879,3,2026-07-14,room_quality,positive,not_applicable,high,none,Room spacious tha,gemini-3.1-flash-lite,5.0,en
+898,879,3,2026-07-14,room_quality,positive,not_applicable,high,none,well maintained,gemini-3.1-flash-lite,5.0,en
+899,873,1,2026-07-14,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+900,873,1,2026-07-14,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+901,863,1,2026-07-14,cleanliness,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.0,en
+902,863,1,2026-07-14,room_quality,positive,not_applicable,high,none,bed was extremely comfortable,gemini-3.1-flash-lite,4.0,en
+903,863,1,2026-07-14,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,4.0,en
+904,885,3,2026-07-13,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+905,872,1,2026-07-13,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+906,872,1,2026-07-13,other,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+907,868,3,2026-07-13,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,en
+908,867,2,2026-07-13,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight.,gemini-3.1-flash-lite,5.0,en
+909,866,2,2026-07-13,housekeeping_response,positive,not_applicable,high,none,Requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,en
+910,866,2,2026-07-13,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+911,884,2,2026-07-12,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+912,884,2,2026-07-12,staff,positive,not_applicable,high,none,staff bahut helpful the,gemini-3.1-flash-lite,4.5,en
+913,876,1,2026-07-12,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+914,876,1,2026-07-12,housekeeping_response,positive,not_applicable,high,none,requested extra towels and they arrived immediately,gemini-3.1-flash-lite,4.5,en
+915,941,2,2026-07-11,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,4.5,en
+916,941,2,2026-07-11,check_in,positive,not_applicable,high,none,self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.5,en
+917,886,3,2026-07-11,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,5.0,en
+918,869,3,2026-07-11,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,4.0,en
+919,874,1,2026-07-10,maintenance,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,5.0,en
+920,883,1,2026-07-09,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+921,860,3,2026-07-09,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.5,en
+922,860,3,2026-07-09,other,negative,moderate,medium,none,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+923,853,2,2026-07-09,maintenance,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,3.5,en
+924,853,2,2026-07-09,noise,positive,not_applicable,high,none,very peaceful,gemini-3.1-flash-lite,3.5,en
+925,853,2,2026-07-09,room_quality,negative,moderate,high,maintenance,the sofa was worn,gemini-3.1-flash-lite,3.5,en
+926,853,2,2026-07-09,room_quality,negative,moderate,high,maintenance,the chair was broken,gemini-3.1-flash-lite,3.5,en
+927,870,1,2026-07-08,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,en
+928,870,1,2026-07-08,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+929,870,1,2026-07-08,maintenance,negative,moderate,high,maintenance,geyser was not working properly,gemini-3.1-flash-lite,4.5,en
+930,864,1,2026-07-08,noise,positive,not_applicable,high,none,Quiet even on the weekend.,gemini-3.1-flash-lite,4.5,en
+931,861,3,2026-07-08,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,4.5,en
+932,856,1,2026-07-08,room_quality,positive,not_applicable,high,none,Everything worked exactly as it should,gemini-3.1-flash-lite,4.5,en
+933,856,1,2026-07-08,maintenance,negative,moderate,medium,maintenance,Hope they fix it.,gemini-3.1-flash-lite,4.5,en
+934,865,2,2026-07-07,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+935,865,2,2026-07-07,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+936,862,2,2026-07-07,noise,positive,not_applicable,high,none,Quiet residential street,gemini-3.1-flash-lite,5.0,en
+937,862,2,2026-07-07,location,positive,not_applicable,high,none,close to the main road,gemini-3.1-flash-lite,5.0,en
+938,855,1,2026-07-07,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.0,en
+939,855,1,2026-07-07,check_in,positive,not_applicable,high,none,self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.0,en
+940,855,1,2026-07-07,housekeeping_response,negative,moderate,high,housekeeping,housekeeping took nearly two hours to respond,gemini-3.1-flash-lite,4.0,en
+941,859,2,2026-07-05,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,5.0,en
+942,857,1,2026-07-05,value,positive,not_applicable,high,none,Paisa vasool,gemini-3.1-flash-lite,4.5,en
+943,857,1,2026-07-05,noise,positive,not_applicable,high,none,very peaceful,gemini-3.1-flash-lite,4.5,en
+944,858,1,2026-07-04,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+945,858,1,2026-07-04,cleanliness,positive,not_applicable,high,none,bathroom was sparkling clean,gemini-3.1-flash-lite,4.5,en
+946,854,1,2026-07-04,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+947,849,1,2026-07-04,value,positive,not_applicable,high,none,Paisa vasool,gemini-3.1-flash-lite,5.0,en
+948,849,1,2026-07-04,amenities,positive,not_applicable,high,none,grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+949,848,2,2026-07-01,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,4.5,en
+950,846,1,2026-07-01,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,5.0,en
+951,851,1,2026-06-30,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+952,844,2,2026-06-30,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+953,844,2,2026-06-30,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+954,841,1,2026-06-30,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,hinglish
+955,841,1,2026-06-30,wifi,negative,moderate,high,tech,wifi bar bar disconnect ho raha tha,gemini-3.1-flash-lite,4.0,hinglish
+956,838,1,2026-06-30,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.0,en
+957,838,1,2026-06-30,amenities,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,en
+958,838,1,2026-06-30,cleanliness,negative,moderate,high,housekeeping,room thoda dirty tha,gemini-3.1-flash-lite,4.0,en
+959,850,2,2026-06-29,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+960,850,2,2026-06-29,staff,positive,not_applicable,high,none,staff bahut helpful the,gemini-3.1-flash-lite,4.5,en
+961,847,3,2026-06-28,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+962,845,3,2026-06-28,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+963,845,3,2026-06-28,value,negative,minor,medium,revenue,for this price I expected more,gemini-3.1-flash-lite,4.0,en
+964,840,1,2026-06-28,room_quality,positive,not_applicable,high,none,Bed was extremely comfortable,gemini-3.1-flash-lite,4.0,en
+965,840,1,2026-06-28,maintenance,negative,moderate,high,maintenance,sofa was worn,gemini-3.1-flash-lite,4.0,en
+966,840,1,2026-06-28,maintenance,negative,moderate,high,maintenance,chair was broken,gemini-3.1-flash-lite,4.0,en
+967,825,1,2026-06-28,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+968,836,2,2026-06-27,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.5,en
+969,843,1,2026-06-26,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+970,843,1,2026-06-26,room_quality,positive,not_applicable,high,none,aC cooled the room quickly,gemini-3.1-flash-lite,4.5,en
+971,843,1,2026-06-26,maintenance,negative,minor,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,4.5,en
+972,837,1,2026-06-26,cleanliness,positive,not_applicable,high,none,Bathroom was sparkling clean,gemini-3.1-flash-lite,5.0,en
+973,820,2,2026-06-26,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.0,en
+974,839,2,2026-06-25,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.0,en
+975,834,1,2026-06-25,staff,positive,not_applicable,high,none,Front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+976,834,1,2026-06-25,other,negative,minor,low,none,Hope they fix it,gemini-3.1-flash-lite,5.0,en
+977,813,2,2026-06-25,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,5.0,en
+978,813,2,2026-06-25,cleanliness,positive,not_applicable,high,none,room was very clean and fresh,gemini-3.1-flash-lite,5.0,en
+979,813,2,2026-06-25,room_quality,negative,minor,high,none,the apartment felt smaller than the photos suggested,gemini-3.1-flash-lite,5.0,en
+980,830,2,2026-06-24,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+981,830,2,2026-06-24,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+982,830,2,2026-06-24,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en
+983,826,2,2026-06-24,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.5,hinglish
+984,826,2,2026-06-24,value,positive,not_applicable,high,none,"paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,hinglish
+985,826,2,2026-06-24,cleanliness,negative,moderate,high,housekeeping,room thoda dirty tha,gemini-3.1-flash-lite,4.5,hinglish
+986,842,3,2026-06-23,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+987,842,3,2026-06-23,cleanliness,positive,not_applicable,high,none,apartment was spotless when we arrived,gemini-3.1-flash-lite,5.0,en
+988,822,2,2026-06-22,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+989,822,2,2026-06-22,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,en
+990,833,3,2026-06-20,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.5,en
+991,833,3,2026-06-20,amenities,positive,not_applicable,high,none,kitchenette had everything we needed,gemini-3.1-flash-lite,4.5,en
+992,833,3,2026-06-20,noise,negative,moderate,high,front_office,construction noise started early every morning,gemini-3.1-flash-lite,4.5,en
+993,832,2,2026-06-20,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+994,832,2,2026-06-20,cleanliness,positive,not_applicable,high,none,apartment was spotless when we arrived,gemini-3.1-flash-lite,5.0,en
+995,791,3,2026-06-20,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.0,en
+996,835,3,2026-06-19,amenities,positive,not_applicable,high,none,Free parking,gemini-3.1-flash-lite,4.5,en
+997,829,3,2026-06-19,housekeeping_response,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+998,827,3,2026-06-19,wifi,positive,not_applicable,high,none,Internet held up fine,gemini-3.1-flash-lite,5.0,en
+999,819,1,2026-06-19,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,5.0,en
+1000,816,1,2026-06-19,room_quality,positive,not_applicable,high,none,Room spacious tha,gemini-3.1-flash-lite,5.0,en
+1001,816,1,2026-06-19,maintenance,positive,not_applicable,high,none,well maintained,gemini-3.1-flash-lite,5.0,en
+1002,816,1,2026-06-19,maintenance,negative,moderate,medium,maintenance,Hope they fix it,gemini-3.1-flash-lite,5.0,en
+1003,814,2,2026-06-19,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+1004,814,2,2026-06-19,housekeeping_response,positive,not_applicable,high,none,requested extra towels and they arrived immediately,gemini-3.1-flash-lite,5.0,en
+1005,811,2,2026-06-18,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,5.0,en
+1006,811,2,2026-06-18,location,positive,not_applicable,high,none,"great location, walking distance to everything",gemini-3.1-flash-lite,5.0,en
+1007,810,1,2026-06-18,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.0,en
+1008,810,1,2026-06-18,cleanliness,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.0,en
+1009,810,1,2026-06-18,cleanliness,negative,moderate,high,housekeeping,bedsheets had stains when we checked in,gemini-3.1-flash-lite,4.0,en
+1010,823,2,2026-06-17,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+1011,815,2,2026-06-17,room_quality,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+1012,815,2,2026-06-17,housekeeping_response,positive,not_applicable,high,none,housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+1013,831,3,2026-06-16,location,positive,not_applicable,high,none,"Great location, walking distance to everything",gemini-3.1-flash-lite,4.5,en
+1014,831,3,2026-06-16,wifi,positive,not_applicable,high,none,wiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+1015,828,1,2026-06-16,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,3.5,hinglish
+1016,828,1,2026-06-16,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,3.5,hinglish
+1017,828,1,2026-06-16,wifi,negative,moderate,high,tech,wifi bar bar disconnect ho raha tha,gemini-3.1-flash-lite,3.5,hinglish
+1018,806,3,2026-06-16,amenities,positive,not_applicable,high,none,Free parking,gemini-3.1-flash-lite,5.0,en
+1019,804,3,2026-06-16,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,4.0,en
+1020,824,2,2026-06-15,location,positive,not_applicable,high,none,Quiet residential street but close to the main road,gemini-3.1-flash-lite,4.0,en
+1021,824,2,2026-06-15,staff,negative,moderate,high,front_office,front desk was unhelpful when we raised an issue,gemini-3.1-flash-lite,4.0,en
+1022,818,3,2026-06-15,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,3.5,en
+1023,818,3,2026-06-15,cleanliness,negative,moderate,high,housekeeping,room thoda dirty tha,gemini-3.1-flash-lite,3.5,en
+1024,789,2,2026-06-15,staff,positive,not_applicable,high,none,Staff bahut helpful the,gemini-3.1-flash-lite,4.0,en
+1025,789,2,2026-06-15,check_in,negative,severe,high,front_office,access code did not work and we waited outside,gemini-3.1-flash-lite,4.0,en
+1026,808,3,2026-06-14,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.5,en
+1027,808,3,2026-06-14,housekeeping_response,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.5,en
+1028,821,1,2026-06-13,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+1029,821,1,2026-06-13,housekeeping_response,negative,moderate,high,housekeeping,housekeeping took nearly two hours to respond,gemini-3.1-flash-lite,5.0,en
+1030,807,1,2026-06-13,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+1031,807,1,2026-06-13,noise,positive,not_applicable,high,none,"very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+1032,817,3,2026-06-11,housekeeping_response,positive,not_applicable,high,none,Housekeeping came within minutes of asking,gemini-3.1-flash-lite,5.0,en
+1033,812,1,2026-06-11,maintenance,positive,not_applicable,high,none,AC cooled the room quickly,gemini-3.1-flash-lite,5.0,en
+1034,812,1,2026-06-11,amenities,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,5.0,en
+1035,809,1,2026-06-11,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.0,en
+1036,809,1,2026-06-11,check_in,negative,moderate,high,front_office,check-in took over forty minutes,gemini-3.1-flash-lite,4.0,en
+1037,801,1,2026-06-09,location,positive,not_applicable,high,none,Great location,gemini-3.1-flash-lite,5.0,en
+1038,801,1,2026-06-09,staff,positive,not_applicable,high,none,front desk went out of their way for us,gemini-3.1-flash-lite,5.0,en
+1039,794,2,2026-06-09,cleanliness,positive,not_applicable,high,none,Room was very clean and fresh,gemini-3.1-flash-lite,3.5,hinglish
+1040,794,2,2026-06-09,check_in,negative,moderate,high,front_office,check-in mein bahut time laga,gemini-3.1-flash-lite,3.5,hinglish
+1041,799,3,2026-06-08,check_in,positive,not_applicable,high,none,Check-in was quick and painless,gemini-3.1-flash-lite,5.0,en
+1042,800,1,2026-06-07,amenities,positive,not_applicable,high,none,free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+1043,800,1,2026-06-07,cleanliness,negative,moderate,high,housekeeping,there was dust on the shelves and under the bed,gemini-3.1-flash-lite,5.0,en
+1044,803,1,2026-06-05,room_quality,positive,not_applicable,high,none,Room spacious tha aur well maintained,gemini-3.1-flash-lite,5.0,en
+1045,803,1,2026-06-05,housekeeping_response,negative,moderate,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,5.0,en
+1046,802,1,2026-06-05,value,positive,not_applicable,high,none,"Paisa vasool, definitely worth it",gemini-3.1-flash-lite,4.5,en
+1047,802,1,2026-06-05,wifi,negative,moderate,high,tech,internet was too slow to work on,gemini-3.1-flash-lite,4.5,en
+1048,797,1,2026-06-05,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+1049,797,1,2026-06-05,wifi,negative,moderate,medium,tech,Hope they fix it.,gemini-3.1-flash-lite,5.0,en
+1050,805,2,2026-06-04,cleanliness,positive,not_applicable,high,none,Ekdum clean tha,gemini-3.1-flash-lite,4.0,en
+1051,805,2,2026-06-04,staff,negative,moderate,high,front_office,nobody seemed to take ownership of the problem.,gemini-3.1-flash-lite,4.0,en
+1052,781,1,2026-06-04,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful.,gemini-3.1-flash-lite,4.5,en
+1053,754,1,2026-06-03,noise,positive,not_applicable,high,none,Quiet even on the weekend,gemini-3.1-flash-lite,4.0,en
+1054,754,1,2026-06-03,housekeeping_response,positive,not_applicable,high,none,tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,en
+1055,754,1,2026-06-03,wifi,negative,moderate,high,tech,WiFi kept dropping during calls,gemini-3.1-flash-lite,4.0,en
+1056,798,2,2026-06-01,noise,positive,not_applicable,high,none,Quiet even on the weekend.,gemini-3.1-flash-lite,5.0,en
+1057,798,2,2026-06-01,value,negative,minor,high,revenue,for this price I expected more.,gemini-3.1-flash-lite,5.0,en
+1058,796,3,2026-06-01,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+1059,796,3,2026-06-01,location,positive,not_applicable,high,none,very convenient for the tech parks.,gemini-3.1-flash-lite,5.0,en
+1060,793,1,2026-06-01,noise,positive,not_applicable,high,none,Very peaceful,gemini-3.1-flash-lite,5.0,en
+1061,793,1,2026-06-01,wifi,positive,not_applicable,high,none,internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+1062,779,3,2026-05-31,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,4.5,en
+1063,779,3,2026-05-31,check_in,positive,not_applicable,high,none,check-in was quick and painless,gemini-3.1-flash-lite,4.5,en
+1064,779,3,2026-05-31,room_quality,negative,moderate,high,maintenance,sofa was worn,gemini-3.1-flash-lite,4.5,en
+1065,779,3,2026-05-31,room_quality,negative,moderate,high,maintenance,chair was broken,gemini-3.1-flash-lite,4.5,en
+1066,792,1,2026-05-30,wifi,positive,not_applicable,high,none,Internet held up fine through a full day of meetings,gemini-3.1-flash-lite,5.0,en
+1067,787,1,2026-05-30,cleanliness,positive,not_applicable,high,none,The apartment was spotless,gemini-3.1-flash-lite,4.5,en
+1068,786,1,2026-05-30,amenities,positive,not_applicable,high,none,Free parking,gemini-3.1-flash-lite,5.0,en
+1069,783,2,2026-05-30,amenities,positive,not_applicable,high,none,Free parking,gemini-3.1-flash-lite,5.0,en
+1070,783,2,2026-05-30,cleanliness,positive,not_applicable,high,none,ekdum clean tha,gemini-3.1-flash-lite,5.0,en
+1071,795,2,2026-05-29,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,5.0,en
+1072,795,2,2026-05-29,cleanliness,positive,not_applicable,high,none,daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+1073,784,3,2026-05-29,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.0,en
+1074,784,3,2026-05-29,value,positive,not_applicable,high,none,excellent value for what you get,gemini-3.1-flash-lite,4.0,en
+1075,788,2,2026-05-28,amenities,positive,not_applicable,high,none,Grocery delivery service was handy,gemini-3.1-flash-lite,4.5,en
+1076,788,2,2026-05-28,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+1077,790,3,2026-05-27,amenities,positive,not_applicable,high,none,Tea and coffee supplies were restocked daily,gemini-3.1-flash-lite,4.0,en
+1078,790,3,2026-05-27,maintenance,negative,moderate,high,maintenance,AC was not cooling and took a day to fix,gemini-3.1-flash-lite,4.0,en
+1079,785,3,2026-05-27,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+1080,778,2,2026-05-26,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,5.0,en
+1081,778,2,2026-05-26,noise,negative,moderate,high,maintenance,could hear everything from the corridor,gemini-3.1-flash-lite,5.0,en
+1082,775,1,2026-05-26,cleanliness,positive,not_applicable,high,none,The apartment was spotless,gemini-3.1-flash-lite,3.5,en
+1083,775,1,2026-05-26,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,3.5,en
+1084,776,1,2026-05-25,amenities,positive,not_applicable,high,none,Free parking,gemini-3.1-flash-lite,4.5,en
+1085,774,2,2026-05-25,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+1086,774,2,2026-05-25,room_quality,negative,moderate,high,maintenance,sofa was worn,gemini-3.1-flash-lite,4.5,en
+1087,774,2,2026-05-25,room_quality,negative,moderate,high,maintenance,chair was broken,gemini-3.1-flash-lite,4.5,en
+1088,771,1,2026-05-25,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,5.0,en
+1089,771,1,2026-05-25,check_in,negative,moderate,high,front_office,check-in took over forty minutes,gemini-3.1-flash-lite,5.0,en
+1090,768,1,2026-05-25,value,positive,not_applicable,high,none,Cheaper than a hotel,gemini-3.1-flash-lite,5.0,en
+1091,768,1,2026-05-25,room_quality,positive,not_applicable,high,none,far more space,gemini-3.1-flash-lite,5.0,en
+1092,768,1,2026-05-25,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+1093,777,2,2026-05-24,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+1094,773,2,2026-05-24,location,positive,not_applicable,high,none,Great location,gemini-3.1-flash-lite,5.0,en
+1095,773,2,2026-05-24,amenities,positive,not_applicable,high,none,free parking,gemini-3.1-flash-lite,5.0,en
+1096,769,2,2026-05-24,staff,positive,not_applicable,high,none,The staff were genuinely warm and helpful,gemini-3.1-flash-lite,5.0,en
+1097,759,1,2026-05-24,amenities,positive,not_applicable,high,none,Laundry and gym were a real bonus,gemini-3.1-flash-lite,4.0,en
+1098,759,1,2026-05-24,noise,negative,moderate,high,maintenance,could hear everything from the corridor,gemini-3.1-flash-lite,4.0,en
+1099,767,3,2026-05-23,room_quality,positive,not_applicable,high,none,The apartment is well furnished and spacious,gemini-3.1-flash-lite,4.0,en
+1100,767,3,2026-05-23,other,negative,moderate,high,none,the approach road is badly lit at night,gemini-3.1-flash-lite,4.0,en
+1101,766,1,2026-05-23,value,positive,not_applicable,high,none,Excellent value for what you get,gemini-3.1-flash-lite,4.5,en
+1102,766,1,2026-05-23,housekeeping_response,negative,minor,high,housekeeping,no tea or coffee was restocked after the first day,gemini-3.1-flash-lite,4.5,en
+1103,765,2,2026-05-23,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,4.0,en
+1104,765,2,2026-05-23,other,negative,moderate,high,none,the approach road is badly lit at night,gemini-3.1-flash-lite,4.0,en
+1105,780,1,2026-05-22,noise,positive,not_applicable,high,none,"Very peaceful, slept well every night",gemini-3.1-flash-lite,5.0,en
+1106,780,1,2026-05-22,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,5.0,en
+1107,780,1,2026-05-22,cleanliness,negative,moderate,high,housekeeping,dust on the shelves and under the bed,gemini-3.1-flash-lite,5.0,en
+1108,770,3,2026-05-22,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,4.0,hinglish
+1109,770,3,2026-05-22,housekeeping_response,negative,moderate,high,housekeeping,"towels maange the, do ghante lag gaye",gemini-3.1-flash-lite,4.0,hinglish
+1110,782,2,2026-05-21,wifi,positive,not_applicable,high,none,WiFi was fast and stable for video calls,gemini-3.1-flash-lite,4.5,en
+1111,763,2,2026-05-21,check_in,positive,not_applicable,high,none,Self check-in worked perfectly at midnight,gemini-3.1-flash-lite,4.5,en
+1112,763,2,2026-05-21,amenities,positive,not_applicable,high,none,laundry and gym were a real bonus,gemini-3.1-flash-lite,4.5,en
+1113,758,2,2026-05-21,housekeeping_response,positive,not_applicable,high,none,Daily cleaning was prompt and thorough,gemini-3.1-flash-lite,5.0,en
+1114,758,2,2026-05-21,noise,positive,not_applicable,high,none,quiet even on the weekend,gemini-3.1-flash-lite,5.0,en
+1115,772,1,2026-05-20,other,positive,not_applicable,high,none,Free parking made a big difference,gemini-3.1-flash-lite,5.0,en
+1116,772,1,2026-05-20,check_in,positive,not_applicable,high,none,early check-in was arranged without fuss,gemini-3.1-flash-lite,5.0,en

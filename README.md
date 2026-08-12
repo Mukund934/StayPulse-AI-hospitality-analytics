@@ -8,6 +8,19 @@ This project builds that view end to end: **18 months, 3 properties, 40 units, 4
 
 > **All data here is synthetic and labelled as such.** It is generated from a documented, seeded model of Indian serviced-apartment operations. Rupee figures are arithmetic on stated assumptions, not measured business outcomes. **The method transfers; the numbers do not.**
 
+**Case study page** → [`web/`](web/) · a single static page, no build step, no environment variables. Deploy on Vercel with **Root Directory `web`** and **Framework Preset `Other`** (see [web/README.md](web/README.md)).
+
+| | |
+|---|---|
+| [METRICS.md](METRICS.md) | 16 metrics, generated from the executable registry |
+| [DECISION_LOG.md](DECISION_LOG.md) | 7 decisions from live queries — incl. one no-action and one reversed |
+| [reports/ai_evaluation.md](reports/ai_evaluation.md) | Gemini vs deterministic baseline |
+| [reports/anomalies.md](reports/anomalies.md) | Detection + ground-truth verification |
+| [reports/analyses.md](reports/analyses.md) | 6 curated SQL analyses with results |
+| [reports/LATEST_BRIEF.md](reports/LATEST_BRIEF.md) | The automated daily brief |
+| [powerbi/README.md](powerbi/README.md) | Star schema, relationships, every measure as DAX |
+| [excel/README.md](excel/README.md) | Power Query folder-connector workflow |
+
 ---
 
 ## Headline numbers
@@ -57,7 +70,8 @@ Full write-ups with evidence, confidence and owners: **[DECISION_LOG.md](DECISIO
 | Find gaps, duplicates, mismatches, broken integrations | [`src/staypulse/quality/`](src/staypulse/quality/) — scored on **recall per defect class**, 10/10 caught |
 | Automate recurring reports | [`.github/workflows/daily_brief.yml`](.github/workflows/daily_brief.yml) → [reports/LATEST_BRIEF.md](reports/LATEST_BRIEF.md) |
 | Insight, **confidence level**, recommended action | Every Decision Log entry carries all three, with the reason for the confidence |
-| Excel / Power Query | See *Known gaps* — honestly not yet built |
+| Excel / Power Query | [excel/README.md](excel/README.md) — folder-connector workflow over 45 day-partitioned CSVs; workbook not committed |
+| Power BI | [powerbi/README.md](powerbi/README.md) — star schema exported, ~35 measures as DAX; .pbix needs Desktop assembly |
 
 ---
 
@@ -230,9 +244,9 @@ Paste the password into `PGPASSWORD` **verbatim** — do not percent-encode it. 
 
 ## Known gaps — stated, not hidden
 
-- **Power BI.** The semantic layer, star schema and DAX-ready measures exist, but the `.pbix` is not in the repo. Power BI Desktop authors a binary format, and `Publish to web` requires a tenant setting a student account does not control — so a live Power BI link was never achievable. The honest position is that the *model* is built and the report is not.
-- **Excel / Power Query.** A named must-have in the target role and genuinely not built yet. The folder-connector refresh pattern is the intended next artifact.
-- **Zoho Analytics.** Evaluated. Its free tier caps at 10,000 rows account-wide and stops loading silently at the ceiling, so a curated row-budgeted extract is the only viable shape. Not built; blocked on confirming that "Make Public" yields a working zero-login URL.
+- **Power BI — model prepared, report not authored.** `powerbi/data/` holds the full star schema as CSV (12 tables, 24,043 rows) and [powerbi/README.md](powerbi/README.md) specifies the relationships, all ~35 measures as DAX mirroring the SQL definitions, and the three-page layout. The `.pbix` itself is a binary only Power BI Desktop can write, so it cannot be scripted; `Publish to web` also needs a tenant setting a student account does not control. Assembly is ~30 minutes of clicking and **it is not done**.
+- **Excel / Power Query — workflow specified, workbook not committed.** `python scripts/export_excel_feed.py` writes 45 day-partitioned CSVs to `excel/feed/`, and [excel/README.md](excel/README.md) gives the folder-connector transform step by step, including a step that *independently recomputes RevPAR and compares it to the exported value*. The `.xlsx` is deliberately not committed — a binary workbook is undiffable and grows the repo on every save; the reproducible method is the artifact.
+- **Zoho Analytics — extract prepared, not published.** `powerbi/zoho_extract/` is row-budgeted to **130 rows** against the free tier's 10,000-row account-wide cap, which stops loading *silently* at the ceiling. Not published; blocked on confirming "Make Public" yields a working zero-login URL.
 - **Ground truth is generator-derived, not human-annotated.** The AI benchmark measures whether a method recovers deliberately injected aspects — **not** agreement with human judgement. A hand-labelled set would be stronger evidence. No claim of human agreement is made anywhere.
 - **Review text is template-composed**, so its prose is less varied than real guest writing. Both methods likely score better here than they would on live reviews.
 - **GOPPAR and fully-loaded cost per booking are uncomputable** on this dataset — there is no departmental cost data. `cost_per_booking_inr` is explicitly a *direct* cost (commission + gateway fees + GST on both) and is labelled as such. Publishing a fully-loaded-looking figure built on invented overhead would be worse than omitting it.

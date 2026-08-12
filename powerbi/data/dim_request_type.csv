@@ -1,0 +1,11 @@
+request_type_key,category,subcategory,default_priority,sla_minutes,owning_team
+1,Housekeeping,Room not cleaned,P2,60,housekeeping
+2,Housekeeping,Extra towels/linen,P3,45,housekeeping
+3,Housekeeping,Late checkout clean,P2,90,housekeeping
+4,Maintenance,AC not cooling,P1,120,maintenance
+5,Maintenance,Hot water,P1,90,maintenance
+6,Maintenance,Wi-Fi down,P1,60,maintenance
+7,Maintenance,Plumbing,P2,180,maintenance
+8,Front Desk,Late check-in,P2,30,front_office
+9,Front Desk,Key/access issue,P1,30,front_office
+10,Billing,Incorrect folio,P2,240,front_office

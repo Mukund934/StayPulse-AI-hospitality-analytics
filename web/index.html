@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StayPulse — hospitality analytics case study</title>
+<meta name="description" content="A hospitality analytics warehouse where every number carries its own definition, every AI claim quotes its source, and every finding ends in a decision. Synthetic data, reproducible pipeline.">
+<style>
+:root{
+  --paper:#FBFBFC; --surface:#F1F2F5; --surface2:#E7E9EE;
+  --rule:#DCDEE5; --rule-strong:#C0C4CE;
+  --ink:#15171C; --ink2:#3B404C; --ink3:#666C7A;
+  --accent:#8A2E3C; --accent-wash:#F8EDEF;
+  --ok:#2C6247; --ok-wash:#EAF2ED; --warn:#7E5F14; --warn-wash:#F8F1DE;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#101216; --surface:#171A20; --surface2:#1F232B;
+    --rule:#292E38; --rule-strong:#3B4250;
+    --ink:#ECEEF2; --ink2:#C0C5D0; --ink3:#8A91A0;
+    --accent:#E08795; --accent-wash:#2A1A1E;
+    --ok:#7EC4A0; --ok-wash:#15231C; --warn:#D9B865; --warn-wash:#231F12;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px 90px}
+a{color:var(--accent);text-underline-offset:2px}
+code{font-family:var(--mono);font-size:.87em;background:var(--surface2);
+  padding:1px 5px;border-radius:3px;color:var(--ink2)}
+
+/* header */
+header{border-bottom:1px solid var(--rule);padding:54px 0 30px;margin-bottom:34px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4.6vw,46px);
+  line-height:1.12;letter-spacing:-.01em;margin:0 0 16px;max-width:24ch;text-wrap:balance}
+.stand{font-size:clamp(15.5px,1.9vw,18.5px);color:var(--ink2);max-width:62ch;margin:0 0 22px}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+  text-decoration:none;padding:8px 13px;border-radius:5px;border:1px solid var(--rule-strong);
+  color:var(--ink2);background:var(--surface)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{opacity:.9;color:#fff}
+
+/* sections */
+section{margin:0 0 54px;scroll-margin-top:20px}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(21px,2.7vw,29px);
+  line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);display:block;margin:0 0 11px}
+h3{font-size:15.5px;font-weight:650;margin:26px 0 7px}
+p{margin:0 0 13px;max-width:68ch}
+ul,ol{margin:0 0 13px;padding-left:20px;max-width:68ch}
+li{margin-bottom:6px}li::marker{color:var(--rule-strong)}
+strong{font-weight:650;color:var(--ink)}
+hr{border:0;border-top:1px solid var(--rule);margin:30px 0}
+
+/* kpi strip */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:0 0 18px}
+@media(min-width:700px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--paper);padding:16px 18px}
+.kpi .lab{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink3);margin:0 0 6px}
+.kpi .val{font-family:var(--mono);font-size:clamp(20px,3vw,27px);font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.kpi .sub{font-size:12px;color:var(--ink3);margin-top:4px}
+
+/* cards */
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.card{border:1px solid var(--rule);border-radius:8px;padding:18px 20px;background:var(--surface)}
+.card h3{margin-top:0}
+.card>:last-child{margin-bottom:0}
+.card p,.card ul{font-size:14.5px}
+
+.callout{border:1px solid var(--rule);border-left:3px solid var(--accent);
+  background:var(--accent-wash);border-radius:6px;padding:16px 18px;margin:0 0 18px}
+.callout>:last-child{margin-bottom:0}
+.callout .h{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;display:block;margin:0 0 8px}
+.callout.ok{border-left-color:var(--ok);background:var(--ok-wash)}
+.callout.ok .h{color:var(--ok)}
+.callout.warn{border-left-color:var(--warn);background:var(--warn-wash)}
+.callout.warn .h{color:var(--warn)}
+
+/* tables */
+.scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink3);font-weight:600;padding:11px 15px;
+  border-bottom:1px solid var(--rule-strong);background:var(--surface);white-space:nowrap}
+td{padding:11px 15px;border-bottom:1px solid var(--rule);color:var(--ink2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td strong{color:var(--ink)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.win{color:var(--ok);font-weight:650}
+
+pre{background:var(--surface);border:1px solid var(--rule);border-radius:8px;
+  padding:15px 17px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;
+  line-height:1.55;color:var(--ink2);margin:0 0 18px}
+
+.chip{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;font-weight:600;padding:2px 7px;border-radius:3px;vertical-align:1px}
+.chip.ok{background:var(--ok-wash);color:var(--ok);border:1px solid var(--ok)}
+.chip.no{background:var(--surface2);color:var(--ink3);border:1px solid var(--rule-strong)}
+
+footer{border-top:1px solid var(--rule);padding-top:22px;color:var(--ink3);font-size:13px}
+footer p{max-width:72ch}
+nav.toc{position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--rule);
+  padding:9px 0;margin-bottom:26px;z-index:5;overflow-x:auto}
+nav.toc ol{display:flex;gap:16px;list-style:none;margin:0;padding:0;white-space:nowrap}
+nav.toc a{font-family:var(--mono);font-size:11.5px;color:var(--ink3);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Data analytics · business intelligence · case study</p>
+  <h1>One consolidated view of three serviced-apartment properties, run from 1,200&nbsp;km away</h1>
+  <p class="stand">A hospitality analytics warehouse where every number carries its own definition,
+  every AI claim quotes its source, and every finding ends in a decision.
+  <strong>18 months · 3 properties · 40 units · 46,700 rows.</strong></p>
+  <div class="links">
+    <a class="btn primary" href="https://github.com/Mukund934/StayPulse-AI-hospitality-analytics">GitHub repository</a>
+    <a class="btn" href="https://github.com/Mukund934/StayPulse-AI-hospitality-analytics/blob/main/METRICS.md">Metric dictionary</a>
+    <a class="btn" href="https://github.com/Mukund934/StayPulse-AI-hospitality-analytics/blob/main/DECISION_LOG.md">Decision log</a>
+    <a class="btn" href="https://github.com/Mukund934/StayPulse-AI-hospitality-analytics/blob/main/reports/ai_evaluation.md">AI benchmark</a>
+    <a class="btn" href="https://github.com/Mukund934/StayPulse-AI-hospitality-analytics/blob/main/reports/LATEST_BRIEF.md">Daily brief</a>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Contents"><ol>
+  <li><a href="#problem">Problem</a></li>
+  <li><a href="#kpis">KPIs</a></li>
+  <li><a href="#findings">Findings</a></li>
+  <li><a href="#architecture">Architecture</a></li>
+  <li><a href="#metrics">Metric governance</a></li>
+  <li><a href="#quality">Data quality</a></li>
+  <li><a href="#ai">AI + benchmark</a></li>
+  <li><a href="#anomaly">Anomalies</a></li>
+  <li><a href="#automation">Automation</a></li>
+  <li><a href="#stack">Stack</a></li>
+  <li><a href="#limits">Limitations</a></li>
+</ol></nav>
+
+<div class="callout warn">
+  <span class="h">Read this first</span>
+  <p><strong>All data on this page is synthetic</strong>, generated from a documented,
+  seeded model of Indian serviced-apartment operations. Rupee figures are arithmetic on
+  stated assumptions, not measured business outcomes.
+  <strong>The method transfers; the numbers do not.</strong> Not affiliated with any
+  hospitality company.</p>
+</div>
+
+<section id="problem">
+  <span class="tag">The problem</span>
+  <h2>You cannot walk the floor from 1,200 km away</h2>
+  <p>A serviced-apartment operator running Bengaluru properties from a back office in another
+  state has one structural problem: nobody in the back office can walk into a unit at 7am and
+  see that two apartments are dirty and a guest is angry.</p>
+  <p>The dashboard is not a reporting convenience — it is the operation's <strong>only sense
+  organ</strong>. And a sense organ that reports the same thing two different ways is worse
+  than none. That is the whole reason this project spends as much effort on metric governance
+  and data quality as on the charts.</p>
+</section>
+
+<section id="kpis">
+  <span class="tag">Baseline</span>
+  <h2>What the warehouse reports</h2>
+  <div class="kpis">
+    <div class="kpi"><p class="lab">Occupancy</p><div class="val">75.8%</div>
+      <div class="sub">operational basis</div></div>
+    <div class="kpi"><p class="lab">ADR</p><div class="val">₹4,415</div>
+      <div class="sub">net of GST</div></div>
+    <div class="kpi"><p class="lab">RevPAR</p><div class="val">₹3,347</div>
+      <div class="sub">= ADR × Occupancy</div></div>
+    <div class="kpi"><p class="lab">Net room revenue</p><div class="val">₹6.01cr</div>
+      <div class="sub">18 months</div></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><p class="lab">Bookings</p><div class="val">5,228</div></div>
+    <div class="kpi"><p class="lab">Unit-nights sold / available</p><div class="val">13,610<span style="color:var(--ink3)">/</span>17,949</div></div>
+    <div class="kpi"><p class="lab">Service requests</p><div class="val">1,900</div></div>
+    <div class="kpi"><p class="lab">Tests passing</p><div class="val">51</div></div>
+  </div>
+  <div class="callout ok">
+    <span class="h">The assertion that matters</span>
+    <p><code>RevPAR = ADR × Occupancy</code> reconciles to a residual of
+    <strong>0.000000</strong>. That is only possible because occupancy's denominator and
+    ADR's numerator come from the same table with the same denominator. It is asserted in the
+    test suite, not hoped for.</p>
+  </div>
+</section>
+
+<section id="findings">
+  <span class="tag">Results</span>
+  <h2>Three findings the system discovered — and one deliberate non-finding</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>1 · Evening housekeeping degraded 2.5× at one property</h3>
+      <p>Resolution time in Koramangala's 18:00–23:00 block went from 30 to 76 minutes. The
+      <strong>portfolio average moved 0.9 percentage points</strong> — invisible at the
+      blended level.</p>
+      <p>Visible only when segmented by property <em>and</em> day-part; either dimension alone
+      flattens it back out. Requests that breached SLA carry measurably lower CSAT, so it
+      reached guests, not just the ops sheet.</p>
+    </div>
+    <div class="card">
+      <h3>2 · Nine weeks of reported booking dates were wrong</h3>
+      <p>A feed wrote the <strong>UTC</strong> calendar date instead of the IST business date.
+      Since IST is UTC+5:30, every booking taken after midnight IST moved back one day,
+      producing a phantom dip on a weekly rhythm.</p>
+      <p>Caught by comparing the stored column against its own derivation — not by a
+      statistical detector, because a value contradicting its own derivation is a
+      correctness bug, not an outlier.</p>
+    </div>
+    <div class="card">
+      <h3>3 · An integration stopped for nine days and nothing failed</h3>
+      <p>The table was not <em>wrong</em>, it was <strong>empty</strong>. Null checks passed,
+      referential integrity passed, and total volume merely looked seasonal because guests
+      fell back to phone.</p>
+      <p>Catching an empty table needs a volume band, not a null check.</p>
+    </div>
+    <div class="card" style="border-color:var(--accent)">
+      <h3>4 · A decoy: the answer was “do nothing”</h3>
+      <p>ADR fell across May–June while corporate mix rose 18.6pp. That is <strong>mix, not
+      rate</strong> — RevPAR held. The recommendation was <em>take no pricing action</em>.</p>
+      <p>A dashboard that alarms here sends Operations chasing a decision nobody made. The
+      anomaly detector is explicitly tested <strong>not</strong> to fire on it.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:16px">Full write-ups with evidence, confidence and named owners — including one
+  decision that was <strong>reversed</strong> when identity resolution showed the problem was
+  measurement, not loyalty — are in the
+  <a href="https://github.com/Mukund934/StayPulse-AI-hospitality-analytics/blob/main/DECISION_LOG.md">Decision Log</a>.</p>
+</section>
+
+<section id="architecture">
+  <span class="tag">Architecture</span>
+  <h2>Layered warehouse, one atomic grain</h2>
+<pre>  SOURCE SIMULATION          WAREHOUSE (PostgreSQL 17.6)         CONSUMERS
+  ┌────────────────┐        ┌──────────────────────────┐       ┌──────────────┐
+  │ seeded         │──COPY─▶│  raw → staging → mart    │──────▶│ SQL analyses │
+  │ generator      │        │                          │       │ daily brief  │
+  │  · bookings    │        │  fact_unit_night ◀── the │       │ decision log │
+  │  · payments    │        │  atomic grain            │       │ Power BI     │
+  │  · tickets     │        │                          │       └──────────────┘
+  │  · reviews     │        │  meta.metric_definition  │
+  │  · inventory   │        │  meta.dq_rule / dq_result│       ┌──────────────┐
+  └────────────────┘        │  meta.business_date()    │──────▶│ Gemini ABSA  │
+                            │  meta.gst_rate           │       │  ↓ validate  │
+                            └──────────────────────────┘       │  ↓ quarantine│
+                                                               └──────────────┘</pre>
+  <h3>The load-bearing decision</h3>
+  <p><code>fact_unit_night</code> holds one row per unit per night, occupied or not. Both sides
+  of every rate metric come from it, so the RevPAR identity is testable. The half-open interval
+  <code>[check_in, check_out)</code> is applied <strong>once</strong>, here — re-deriving it per
+  query is how the departure night gets counted and room-nights inflate by roughly 1/ALOS
+  (~33% at a 3-night stay). That is the most common defect in hospitality analytics.</p>
+  <h3>The second</h3>
+  <p><code>meta.business_date()</code> is a single <code>IMMUTABLE</code> function converting UTC
+  instants to IST calendar dates. The server runs UTC and the business runs IST, so casting a
+  timestamp to a date misassigns every late-night event.</p>
+</section>
+
+<section id="metrics">
+  <span class="tag">Metric governance</span>
+  <h2>One number means one thing — enforced, not requested</h2>
+  <p><code>meta.metric_definition</code> is not documentation <em>about</em> the metrics; it is the
+  registry the semantic layer <strong>executes</strong>, and the published dictionary is generated
+  from it, so it cannot drift from what the warehouse computes. <strong>16 metrics</strong>, each
+  with grain, date basis, inclusions, exclusions and caveats.</p>
+  <p><code>date_basis</code> is <code>CHECK</code>-constrained. A metric physically cannot be
+  registered without declaring which date it is measured on.</p>
+  <div class="callout">
+    <span class="h">Why that constraint exists</span>
+    <p><strong>June 2026 revenue has three legitimately correct answers.</strong></p>
+    <div class="scroll" style="margin-top:10px;margin-bottom:0">
+    <table><thead><tr><th>Date basis</th><th>Whose truth</th><th class="num">Revenue</th></tr></thead>
+    <tbody>
+      <tr><td><code>stay_date</code></td><td>what Operations earned</td><td class="num">₹4,385,337</td></tr>
+      <tr><td><code>booking_date</code></td><td>what Marketing sold</td><td class="num">₹4,556,997</td></tr>
+      <tr><td><code>payment_date</code></td><td>what Finance collected</td><td class="num">₹4,567,681</td></tr>
+    </tbody></table></div>
+    <p style="margin-top:10px"><strong>A ₹182,344 spread on the same month.</strong> None is wrong.</p>
+  </div>
+  <h3>Two metrics published two ways on purpose</h3>
+  <ul>
+    <li><strong>Occupancy</strong> — operational basis (out-of-order units removed from
+    availability, 75.8%) and benchmark basis (full physical inventory). The 1.67pp gap
+    <em>is</em> inventory lost to OOO, which is itself actionable.</li>
+    <li><strong>ADR</strong> — including and excluding hourly microstays. A two-hour booking
+    billed at ~28% of a nightly rate destroys ADR if counted as a nightly stay.</li>
+  </ul>
+  <p>GST is resolved per night by <strong>both</strong> stay date and nightly rate, spanning the
+  22 Sep 2025 restructure (12% slab abolished; 5% without ITC at or below ₹7,500, 18% with ITC
+  above). Blended effective rate is <strong>7.92%</strong> — exactly how much ADR would be
+  overstated if computed off gross invoice values, the standard error on Indian folios.</p>
+</section>
+
+<section id="quality">
+  <span class="tag">Data quality</span>
+  <h2>Scored on recall, not on running</h2>
+  <div class="kpis">
+    <div class="kpi"><p class="lab">Rules</p><div class="val">29</div><div class="sub">6 DAMA dimensions</div></div>
+    <div class="kpi"><p class="lab">Defect classes caught</p><div class="val">10/10</div><div class="sub">recall, not counts</div></div>
+    <div class="kpi"><p class="lab">Errored rules</p><div class="val">0</div><div class="sub">a broken check ≠ healthy</div></div>
+    <div class="kpi"><p class="lab">Quality score</p><div class="val">69.1</div><div class="sub">low <em>by design</em></div></div>
+  </div>
+  <p>The score reads 69.1/100 and <strong>that is correct</strong>. The dataset carries deliberate
+  defects; a clean score would mean the checks were decorative. Severity-weighted, because a
+  failing rule about unresolvable money should not be cancelled out by a passing rule about a
+  nullable label.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3><code>DQ051</code> — the silently dead feed</h3>
+      <p>Built with <strong>gaps-and-islands</strong> (the difference of two
+      <code>row_number()</code>s is constant within a consecutive run). Flagging individual
+      zero-days produced <strong>138 alerts for one 9-day incident</strong> — which is how an
+      alerting system teaches its users to ignore it.</p>
+      <p>The 56-day baseline window and ≥4-day minimum run are both set from
+      <em>measurement</em>: at 28 days the baseline wandered across the threshold and fragmented
+      the real outage into 3 days; at ≥3 days precision was 1-of-2. It now fires
+      <strong>once</strong>, on the real incident.</p>
+    </div>
+    <div class="card">
+      <h3><code>DQ032</code> — a rule that can never fire</h3>
+      <p>A regression guard, not a detector. A <code>CHECK</code> constraint makes the incoherent
+      cancellation state unloadable, so the expected result is zero.</p>
+      <p>A rule that cannot fire because a constraint already prevents the state is a
+      <strong>stronger control</strong> than one that reports it — recorded as such rather than
+      left looking like a missed defect.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ai">
+  <span class="tag">AI methodology</span>
+  <h2>The model had to earn its place</h2>
+  <p>Aspect-based extraction over a <strong>closed 13-category taxonomy</strong> — not
+  document-level sentiment, not topic modelling.</p>
+  <ul>
+    <li><strong>Not sentiment.</strong> Ratings in this segment sit at 4.8–4.9. A classifier
+    returns “positive” for ~96% of rows and surfaces nothing. <strong>135 negative operational
+    aspects sit inside reviews rated 4.0 or higher</strong> — a five-star review saying
+    housekeeping took two hours is a work item; a sentiment score throws it away.</li>
+    <li><strong>Not topic modelling.</strong> Unsupervised topics are unstable run-to-run, so no
+    comparable week-over-week trend is possible.</li>
+    <li><strong>The model never emits a number.</strong> Labels and quotes only. Every count,
+    rate and total comes from SQL.</li>
+  </ul>
+
+  <h3>Benchmark — <code>gemini-3.1-flash-lite</code> vs a deterministic keyword baseline</h3>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Method</th><th class="num">Detection F1</th><th class="num">Polarity F1</th>
+      <th class="num">Polarity accuracy</th><th class="num">Hinglish F1</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Gemini</strong></td><td class="num">81.1%</td><td class="num win">79.9%</td>
+        <td class="num win">96.0%</td><td class="num win">97.0%</td></tr>
+      <tr><td>keyword baseline</td><td class="num">80.6%</td><td class="num">62.3%</td>
+        <td class="num">73.7%</td><td class="num">88.9%</td></tr>
+      <tr><td><strong>Δ</strong></td><td class="num">+0.5</td><td class="num win">+17.6</td>
+        <td class="num win">+22.3</td><td class="num win">+8.1</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>The asymmetry is the finding.</strong> Hospitality vocabulary is narrow enough that
+  keyword matching <em>finds</em> aspects about as well as a language model. It fails on
+  <strong>polarity</strong>, because “the AC was not cooling” and “the AC cooled quickly” share
+  their aspect keyword entirely. Polarity is what decides whether a row becomes a work item — so
+  that is where the model earns its cost, and the benchmark says so rather than assuming it.</p>
+
+  <div class="callout ok">
+    <span class="h">Validation is a gate, not a caveat</span>
+    <p>Every extraction carries a <strong>verbatim evidence span</strong>, asserted to be a
+    literal substring of its source review. Anything failing is
+    <strong>quarantined, not flagged</strong> — a quote that does not appear in the source is a
+    fabricated citation. On this corpus <strong>0 rows were quarantined</strong>, so the test
+    suite <em>forces</em> the gate to reject a fabricated span: a validator that has never
+    rejected anything is indistinguishable from one that cannot.</p>
+  </div>
+
+  <div class="callout">
+    <span class="h">The evaluation found a defect in my own taxonomy</span>
+    <p><code>food</code> scores 6.0% F1 against the baseline's 95.2%. That is not a model failure
+    — it is a flaw in <strong>my label set</strong>. Tea, coffee and grocery restocking are
+    describable as either <code>food</code> or <code>amenities</code>; the baseline resolves it by
+    keyword precedence, Gemini by meaning. Both readings are defensible.</p>
+    <p>Reported rather than dropped, because a benchmark that quietly removes its two worst
+    categories is not a benchmark. This is precisely what an evaluation is for.</p>
+  </div>
+  <p>Cost: <strong>113,632 tokens</strong> measured from <code>usage_metadata</code> and stored in
+  <code>meta.llm_run_log</code> — not estimated from a price list. Runs on the free tier.</p>
+</section>
+
+<section id="anomaly">
+  <span class="tag">Anomaly detection</span>
+  <h2>Defensible statistics, and a published false-alert budget</h2>
+  <p>Day-of-week aware trailing baseline, robust scale via <strong>MAD</strong> (one outlier
+  inflates σ and hides the next; MAD is unaffected), <strong>dual thresholds</strong> —
+  statistically unusual <em>and</em> materially large — and a published false-alert budget.</p>
+  <div class="callout">
+    <span class="h">Isolation Forest was deliberately rejected</span>
+    <p>On a weekly-seasonal univariate series it learns that low-occupancy days are unusual and
+    flags <strong>every weekend</strong>, while missing the Tuesday running 40% below its own
+    Tuesday norm — the case Operations actually cares about. It also yields no baseline, no
+    magnitude and no explanation, so its output cannot be acted on.</p>
+  </div>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Planted signal</th><th>Expected</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><strong>F1</strong> evening housekeeping degradation</td><td>detected</td>
+        <td><span class="chip ok">detected</span> |z| &gt; 3 on multiple days</td></tr>
+      <tr><td><strong>F2</strong> business-date drift, 9 weeks</td><td>detected</td>
+        <td><span class="chip ok">detected</span> via rule <code>DQ040</code></td></tr>
+      <tr><td><strong>F3</strong> integration outage, 9 days</td><td>detected</td>
+        <td><span class="chip ok">detected</span> via rule <code>DQ051</code></td></tr>
+      <tr><td><strong>D1</strong> channel-mix decoy</td><td><strong>no alarm</strong></td>
+        <td><span class="chip ok">no alarm</span> ADR +₹21 vs ₹350 gate; RevPAR +₹124</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>The negative test matters most.</strong> Note also that F2 and F3 are caught by
+  <em>deterministic rules</em>, not the statistical detector — a stored date contradicting its
+  derivation is a correctness bug, and a stopped feed is a run-length question. Reaching for a
+  z-score on either would be worse engineering.</p>
+</section>
+
+<section id="automation">
+  <span class="tag">Automation</span>
+  <h2>A recurring brief, and a monitor that watches the monitor</h2>
+  <p>The scheduled job runs the full chain: load → quality gate → KPIs → anomaly scan → guest
+  issues → a brief carrying a recommendation, an owner and an explicit confidence → commit the
+  artifact. <strong>The run of dated commits is the verifiable evidence the schedule fires</strong>
+  — not a screenshot.</p>
+  <ul>
+    <li>Scheduled at <strong>02:07 UTC</strong>, deliberately not on the hour: GitHub names the
+    top of every hour as a high-load window where scheduled jobs can be delayed or dropped. The
+    claimed SLA is <em>“before 08:00 IST”</em>, not <em>“at 07:37:00”</em>.</li>
+    <li>Compared against the <strong>same weekday</strong> last week, not yesterday — corporate
+    demand is weekday-shaped, so Saturday-versus-Friday manufactures a collapse every week.</li>
+    <li>A <strong>staleness watchdog</strong> reads the freshness stamp and fails past 26 hours.
+    Every free scheduler silently disables itself; the interesting failure is not “the job
+    errored” but “the job stopped and nobody noticed”.</li>
+    <li><strong>No language model calculates anything in the brief.</strong> Every figure is
+    computed in SQL or pandas and passed to the template as a fact — the documented failure mode
+    of LLM narration is inventing growth rates that were never computed.</li>
+  </ul>
+</section>
+
+<section id="stack">
+  <span class="tag">Stack &amp; reproducibility</span>
+  <h2>What it is built from, and how to re-run it</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Layer</th><th>Choice</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Warehouse</td><td>PostgreSQL 17.6 (Supabase, session pooler)</td><td>4 schemas · 14 fact &amp; dimension tables · 5 checksum-tracked migrations</td></tr>
+      <tr><td>Pipeline</td><td>Python 3.13 · pandas · SQLAlchemy · psycopg 3</td><td>COPY-based load; seeded and reproducible</td></tr>
+      <tr><td>Semantic layer</td><td>SQL views + executable metric registry</td><td>16 metrics, <code>date_basis</code> CHECK-constrained</td></tr>
+      <tr><td>Analytics</td><td>SQL — CTEs, window functions, Shapley variance split</td><td>6 curated analyses, each answering one business question</td></tr>
+      <tr><td>AI</td><td><code>gemini-3.1-flash-lite</code>, structured output</td><td>Benchmarked against a deterministic baseline</td></tr>
+      <tr><td>Automation</td><td>GitHub Actions</td><td>Daily brief + staleness watchdog, free tier</td></tr>
+      <tr><td>Tests</td><td>pytest — 51 passing</td><td>Invariants, timezone, grain, reconciliation, reproducibility</td></tr>
+      <tr><td>BI</td><td>Power BI model exported as CSV star schema</td><td>See limitations</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Same seed in, same dataset out — asserted in the test suite. A fresh clone plus a
+  <code>.env</code> reproduces every figure on this page:</p>
+<pre>python scripts/verify_env.py        # secrets scrubbed from all output
+python scripts/migrate.py           # schema
+python scripts/generate_data.py     # seeded dataset → PostgreSQL
+python scripts/validate_dataset.py  # assert the planted signals emerged
+python scripts/run_quality.py       # 29 rules + defect recall
+python scripts/run_ai_eval.py       # the benchmark above
+python -m pytest tests/ -v          # 51 tests</pre>
+</section>
+
+<section id="limits">
+  <span class="tag">Honesty</span>
+  <h2>Known gaps — stated, not hidden</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Item</th><th>State</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Power BI report</td><td><span class="chip no">model only</span></td>
+        <td>The star schema, daily KPI table and DAX are exported to <code>powerbi/</code>. The
+        <code>.pbix</code> itself is a binary Power BI Desktop authors — it cannot be generated
+        from a script, and <em>Publish to web</em> needs a tenant setting a student account does
+        not control.</td></tr>
+      <tr><td>Excel / Power Query</td><td><span class="chip no">not built</span></td>
+        <td>A named requirement and genuinely not done. The folder-connector refresh pattern over
+        the exported CSVs is the intended next artifact.</td></tr>
+      <tr><td>Zoho Analytics</td><td><span class="chip no">extract ready</span></td>
+        <td>Free tier caps at 10,000 rows account-wide and stops loading silently at the ceiling,
+        so a row-budgeted extract (130 rows) is prepared rather than discovering the cap after
+        upload.</td></tr>
+      <tr><td>AI ground truth</td><td><span class="chip no">generator-derived</span></td>
+        <td>The benchmark measures whether a method recovers <em>deliberately injected</em>
+        aspects — <strong>not</strong> agreement with human judgement. A hand-labelled set would
+        be stronger evidence. No claim of human agreement is made anywhere.</td></tr>
+      <tr><td>Review text</td><td><span class="chip no">template-composed</span></td>
+        <td>Less varied than real guest writing, so both methods likely score better here than
+        they would on live reviews.</td></tr>
+      <tr><td>GOPPAR / fully-loaded cost</td><td><span class="chip no">uncomputable</span></td>
+        <td>No departmental cost data exists here. <code>cost_per_booking</code> is explicitly a
+        <em>direct</em> cost and labelled as such — publishing a fully-loaded-looking figure built
+        on invented overhead would be worse than omitting it.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <p><strong>StayPulse</strong> — synthetic data throughout, generated from a documented seeded
+  model. Built with Python, PostgreSQL, SQL and the Gemini API on free tiers.
+  Not affiliated with any hospitality company.</p>
+  <p style="margin-top:10px"><a href="https://github.com/Mukund934/StayPulse-AI-hospitality-analytics">Source and full documentation on GitHub</a></p>
+</footer>
+
+</div>
+</body>
+</html>

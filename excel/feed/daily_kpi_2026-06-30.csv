@@ -1,0 +1,4 @@
+stay_date,property_code,rooms_available,rooms_sold,rooms_out_of_order,room_revenue_net_inr,occupancy_pct,adr_inr,revpar_inr
+2026-06-30,BLR-BTM,15,10,1,42707.69,66.67,4270.77,2847.18
+2026-06-30,BLR-HSR,10,6,0,25054.33,60.00,4175.72,2505.43
+2026-06-30,BLR-KOR,14,13,0,59753.74,92.86,4596.44,4268.12

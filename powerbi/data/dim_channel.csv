@@ -1,0 +1,9 @@
+channel_key,channel_code,channel_name,channel_type,commission_pct,settlement_days,is_active
+1,MMT,MakeMyTrip,ota,20.00,15,True
+2,BDC,Booking.com,ota,17.00,9,True
+3,AGODA,Agoda,ota,18.00,30,True
+4,AIRBNB,Airbnb,ota,15.00,1,True
+5,DIRECT,Direct,direct,0.00,2,True
+6,CORP,Corporate,corporate,0.00,30,True
+7,B2B-HR,Bag2Bag,hourly,12.00,7,True
+8,WALKIN,Walk-in,walk_in,0.00,0,True

@@ -1,0 +1,16 @@
+{
+  "occupancy_pct": 75.8,
+  "adr_inr": 4415,
+  "revpar_inr": 3347,
+  "revenue_inr": 60081893,
+  "rooms_sold": 13610,
+  "rooms_available": 17949,
+  "bookings": 5228,
+  "service_requests": 1900,
+  "aspects": 1116,
+  "properties": 3,
+  "units": 40,
+  "metrics": 16,
+  "dq_rules": 29,
+  "total_rows_exported": 24043
+}
