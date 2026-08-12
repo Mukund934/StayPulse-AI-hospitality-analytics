@@ -21,6 +21,7 @@ import numpy as np
 import pandas as pd
 
 from staypulse.generate import spec
+from staypulse.generate.reviews import generate_review_text
 
 # Deterministic name pools. Faker is seeded too, but a fixed pool keeps guest
 # identity stable across runs so duplicate-detection results are reproducible.
@@ -72,6 +73,7 @@ class GeneratedData:
     service_requests: pd.DataFrame
     reviews: pd.DataFrame
     inventory: pd.DataFrame
+    review_truth: pd.DataFrame
 
     def summary(self) -> dict[str, int]:
         return {
@@ -757,12 +759,16 @@ class Generator:
         payments = self.build_payments(bookings)
         requests = self.build_service_requests(unit_nights, bookings)
         reviews = self.build_reviews(bookings, requests)
+        # Text is composed from aspect fragments so the labels that went in are
+        # known exactly; that known set is the evaluation gold standard.
+        reviews, review_truth = generate_review_text(reviews, self.rng)
         inventory = self.build_inventory(unit_nights)
         return GeneratedData(
             properties=properties, units=units, channels=channels,
             request_types=request_types, staff=staff, guests=guests,
             bookings=bookings, unit_nights=unit_nights, payments=payments,
             service_requests=requests, reviews=reviews, inventory=inventory,
+            review_truth=review_truth,
         )
 
 

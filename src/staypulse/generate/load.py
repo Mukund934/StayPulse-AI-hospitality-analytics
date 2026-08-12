@@ -213,6 +213,15 @@ def load(data: GeneratedData) -> dict[str, int]:
                 "reviewed_at", "review_date", "rating", "review_text", "language",
                 "is_synthetic_text"]])
 
+        # ---- review ground truth (evaluation gold set) -------------------
+        conn.execute(text("TRUNCATE TABLE meta.review_aspect_truth RESTART IDENTITY"))
+        if not data.review_truth.empty:
+            truth = data.review_truth.drop_duplicates(
+                subset=["review_id", "category", "polarity"])
+            written["review_aspect_truth"] = _copy_frame(
+                conn, "meta.review_aspect_truth",
+                truth[["review_id", "category", "polarity", "severity", "actionable_by"]])
+
         # ---- inventory --------------------------------------------------
         inv = data.inventory.copy()
         inv["property_key"] = inv["property_code"].map(prop_map)
