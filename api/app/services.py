@@ -14,9 +14,14 @@ the batch pipeline already validated them.
 from __future__ import annotations
 
 import datetime as dt
+import json
+from pathlib import Path
 from typing import Any
 
 from staypulse import db
+from staypulse.analytics import forecast as _fc
+from staypulse.analytics import revenue as _rv
+from staypulse.analytics import rootcause as _rc
 
 # Supabase free tier sleeps and the pooler recycles connections, so keep result
 # sets small and queries cheap. These caps are deliberate, not arbitrary.
@@ -406,3 +411,258 @@ def health_readiness() -> dict[str, Any]:
     except Exception as exc:  # noqa: BLE001
         # Type name only. A driver message can contain the host and user.
         return {"database": "unreachable", "error_type": type(exc).__name__}
+
+
+# ---------------------------------------------------------------------------
+# Revenue management.
+#
+# These wrap `staypulse.analytics.revenue`, `.forecast` and `.rootcause` rather than
+# re-implementing any of it, for the same reason the rest of this module reads the
+# semantic layer: a second implementation of pickup living inside a route handler
+# would be a second definition of pickup.
+#
+# The forecast backtest is NOT run on the request path. Five models over forty
+# origins is about twelve seconds of work -- fine for a scheduled job, unacceptable
+# for a page load -- so accuracy is read from the stored evaluation.
+# ---------------------------------------------------------------------------
+_FORECAST_EVAL = Path(__file__).resolve().parents[2] / "reports" / "forecast_accuracy.json"
+
+
+def data_bounds() -> dict[str, dt.date]:
+    r = db.fetch_all(
+        "SELECT min(stay_date) a, max(stay_date) b FROM mart.fact_unit_night"
+    )[0]
+    return {"first": r["a"], "last": r["b"]}
+
+
+def default_as_of() -> dt.date:
+    """Last date at which a full 30-day forward book exists in this dataset.
+
+    No reservations exist for arrivals beyond the inventory horizon, so an as-of date
+    at the horizon itself would show only continuing stays. Anchored to the data
+    rather than to the wall clock, so the endpoint cannot silently go empty with time.
+    """
+    return data_bounds()["last"] - dt.timedelta(days=30)
+
+
+def rm_overview(as_of: dt.date) -> dict[str, Any]:
+    return _rv.summary(as_of)
+
+
+def rm_on_the_books(as_of: dt.date, horizon_days: int) -> dict[str, Any]:
+    rows = _rv.on_the_books(as_of, horizon_days)
+    return {
+        "as_of": as_of.isoformat(),
+        "horizon_days": horizon_days,
+        "total_nights_on_books": sum(int(r["nights_on_books"]) for r in rows),
+        "total_revenue_on_books_inr": round(
+            sum(float(r["revenue_otb_inr"] or 0) for r in rows), 2
+        ),
+        "by_stay_date": [
+            {
+                "stay_date": r["stay_date"].isoformat(),
+                "property": r["property_name"],
+                "days_out": int(r["days_out"]),
+                "nights_on_books": int(r["nights_on_books"]),
+                "revenue_on_books_inr": float(r["revenue_otb_inr"] or 0),
+            }
+            for r in rows[:MAX_ROWS]
+        ],
+    }
+
+
+def rm_pickup(as_of: dt.date, lookback_days: int) -> list[dict[str, Any]]:
+    return [
+        {
+            "activity_date": r["activity_date"].isoformat(),
+            "nights_added": int(r["nights_added"] or 0),
+            "nights_cancelled": int(r["nights_cancelled"] or 0),
+            "nights_net": int(r["nights_net"] or 0),
+            "revenue_added_inr": float(r["revenue_added_inr"] or 0),
+            "revenue_cancelled_inr": float(r["revenue_cancelled_inr"] or 0),
+        }
+        for r in _rv.pickup(as_of, lookback_days)
+    ]
+
+
+def _pace_row(p: _rv.PaceRow) -> dict[str, Any]:
+    return {
+        "stay_date": p.stay_date.isoformat(),
+        "property": p.property_name,
+        "days_out": p.days_out,
+        "nights_on_books": p.nights_on_books,
+        "expected_nights": p.expected_nights,
+        "usual_range": [p.p25_nights, p.p75_nights],
+        "gap_nights": p.gap_nights,
+        "pace_pct": p.pace_pct,
+        "status": p.status,
+        "support": p.support,
+        "revenue_on_books_inr": round(p.revenue_otb_inr, 2),
+    }
+
+
+def rm_pace(as_of: dt.date) -> dict[str, Any]:
+    rows = _rv.pace(as_of)
+    return {
+        "as_of": as_of.isoformat(),
+        "method": (
+            "Absolute nights on the books against the median for the same property, "
+            "same weekday and same days-out horizon, from the last "
+            f"{_rv.BENCHMARK_WINDOW} comparable dates before the snapshot. A date is "
+            "flagged only if it is BOTH outside the p25-p75 band AND at least "
+            f"{_rv.MATERIAL_NIGHTS:.0f} room-nights from the median."
+        ),
+        "counts": {
+            "scored": len(rows),
+            "behind": sum(1 for r in rows if r.status == "behind"),
+            "on_track": sum(1 for r in rows if r.status == "on_track"),
+            "ahead": sum(1 for r in rows if r.status == "ahead"),
+        },
+        "stay_dates": [_pace_row(p) for p in rows[:MAX_ROWS]],
+    }
+
+
+def rm_signals(as_of: dt.date, limit: int) -> list[dict[str, Any]]:
+    return [s.as_dict() for s in _rv.opportunity_signals(as_of, limit)]
+
+
+def rm_booking_curve() -> dict[str, Any]:
+    rows = db.fetch_all("""
+        SELECT c.days_out, p.property_name, c.stay_dates,
+               c.avg_nights_on_books, c.median_pct_sold, c.p25_pct_sold, c.p75_pct_sold
+        FROM mart.v_booking_curve c
+        JOIN mart.dim_property p USING (property_key)
+        WHERE c.days_out <= 45
+        ORDER BY p.property_name, c.days_out
+    """)
+    return {
+        "note": ("Built from completed stay dates only. A stay date still in the "
+                 "future has an incomplete final total and would drag the curve down "
+                 "at every horizon."),
+        "curve": [
+            {
+                "property": r["property_name"],
+                "days_out": int(r["days_out"]),
+                "stay_dates": int(r["stay_dates"]),
+                "avg_nights_on_books": float(r["avg_nights_on_books"]),
+                "median_pct_sold": float(r["median_pct_sold"] or 0),
+                "p25_pct_sold": float(r["p25_pct_sold"] or 0),
+                "p75_pct_sold": float(r["p75_pct_sold"] or 0),
+            }
+            for r in rows
+        ],
+    }
+
+
+def rm_lead_time() -> list[dict[str, Any]]:
+    return [
+        {
+            "channel": r["channel_name"],
+            "channel_type": r["channel_type"],
+            "bookings": int(r["bookings"]),
+            "mean_days": float(r["mean_days"]),
+            "median_days": float(r["median_days"]),
+            "p25_days": float(r["p25_days"]),
+            "p75_days": float(r["p75_days"]),
+            "p90_days": float(r["p90_days"]),
+            "pct_same_day": float(r["pct_same_day"]),
+            "pct_30d_plus": float(r["pct_30d_plus"]),
+            "cancel_rate_pct": float(r["cancel_rate_pct"]),
+        }
+        for r in db.fetch_all(
+            "SELECT * FROM mart.v_lead_time_profile ORDER BY bookings DESC"
+        )
+    ]
+
+
+def rm_wash() -> dict[str, Any]:
+    rows = db.fetch_all("""
+        SELECT c.channel_name,
+               sum(f.bookings_made)      AS made,
+               sum(f.bookings_cancelled) AS cancelled,
+               sum(f.bookings_no_show)   AS no_show,
+               sum(f.bookings_stayed)    AS stayed,
+               round(100.0 * sum(f.bookings_cancelled)
+                     / NULLIF(sum(f.bookings_made), 0), 2) AS cancel_rate_pct,
+               round(100.0 * sum(f.bookings_no_show)
+                     / NULLIF(sum(f.bookings_made), 0), 2) AS no_show_rate_pct,
+               round(100.0 * (sum(f.bookings_cancelled) + sum(f.bookings_no_show))
+                     / NULLIF(sum(f.bookings_made), 0), 2) AS wash_rate_pct
+        FROM mart.v_cancellation_funnel f
+        JOIN mart.dim_channel c USING (channel_key)
+        GROUP BY 1 ORDER BY wash_rate_pct DESC
+    """)
+    return {
+        "note": ("Cohorted on stay month, not booking month, so the denominator is "
+                 "demand for that month. This is the number an overbooking policy "
+                 "would rest on; it is not a forecast of future wash."),
+        "by_channel": [
+            {
+                "channel": r["channel_name"],
+                "bookings_made": int(r["made"]),
+                "cancelled": int(r["cancelled"]),
+                "no_show": int(r["no_show"]),
+                "stayed": int(r["stayed"]),
+                "cancel_rate_pct": float(r["cancel_rate_pct"]),
+                "no_show_rate_pct": float(r["no_show_rate_pct"]),
+                "wash_rate_pct": float(r["wash_rate_pct"]),
+            }
+            for r in rows
+        ],
+    }
+
+
+def rm_grain_reconciliation() -> dict[str, Any]:
+    r = db.fetch_all("SELECT * FROM mart.v_grain_reconciliation")[0]
+    exploded = int(r["exploded_booking_nights"])
+    unalloc = int(r["unallocated_nights"])
+    hourly = int(r["hourly_unit_nights"])
+    occupied = int(r["occupied_unit_nights"])
+    return {
+        "explanation": (
+            "The demand grain (booking-nights) and the inventory grain (unit-nights) "
+            "do not trivially agree. Two structural differences explain the gap "
+            "exactly, and both are asserted by the test suite."
+        ),
+        "exploded_booking_nights": exploded,
+        "less_unallocated_nights": unalloc,
+        "plus_hourly_unit_nights": hourly,
+        "equals_occupied_unit_nights": occupied,
+        "identity_holds": exploded - unalloc + hourly == occupied,
+        "unallocated_pct": round(100.0 * unalloc / exploded, 2) if exploded else None,
+        "notes": [
+            f"{unalloc} booked nights were never allocated a specific unit - denied "
+            "demand, the allocation gap.",
+            f"{hourly} hourly bookings occupy a unit-night while selling no "
+            "room-night, because nights are half-open [check_in, check_out) and these "
+            "check out on the day they check in.",
+        ],
+    }
+
+
+def rm_forecast(horizon_days: int, model: str) -> dict[str, Any]:
+    return {
+        "model": model,
+        "horizon_days": horizon_days,
+        "target": "daily occupied room-nights, portfolio total",
+        "caveat": (
+            "The pickup model is the default because it wins the backtest at 1, 7 and "
+            "14 days. It LOSES at 30 days to a day-of-week moving average - see "
+            "/forecast/accuracy before relying on a long horizon."
+        ),
+        "forecast": _fc.forward(horizon=horizon_days, model=model),
+    }
+
+
+def rm_forecast_accuracy() -> dict[str, Any]:
+    """Served from the stored evaluation, not recomputed per request."""
+    if not _FORECAST_EVAL.exists():
+        raise RuntimeError("Forecast evaluation has not been generated yet.")
+    stored = json.loads(_FORECAST_EVAL.read_text(encoding="utf-8"))
+    stored["source"] = "stored evaluation, regenerated by scripts/run_forecast_eval.py"
+    return stored
+
+
+def rm_why(end: dt.date, days: int) -> dict[str, Any]:
+    start = end - dt.timedelta(days=days - 1)
+    return _rc.explain_revpar(start, end).as_dict()

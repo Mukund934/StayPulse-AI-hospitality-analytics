@@ -56,6 +56,18 @@ READ_ONLY_ENDPOINTS = [
     "/api/data-quality/rules",
     "/api/metrics",
     "/api/pipeline-runs",
+    "/api/revenue-management/overview",
+    "/api/revenue-management/on-the-books",
+    "/api/revenue-management/pickup",
+    "/api/revenue-management/pace",
+    "/api/revenue-management/signals",
+    "/api/revenue-management/booking-curve",
+    "/api/revenue-management/lead-time",
+    "/api/revenue-management/wash",
+    "/api/revenue-management/grain-reconciliation",
+    "/api/revenue-management/forecast",
+    "/api/revenue-management/forecast/accuracy",
+    "/api/revenue-management/why",
 ]
 
 
@@ -229,6 +241,58 @@ class TestObservability:
     def test_docs_are_served(self):
         assert client.get("/docs").status_code == 200
         assert client.get("/redoc").status_code == 200
+
+
+class TestRevenueManagementEndpoints:
+    def test_as_of_defaults_inside_the_dataset(self):
+        """Anchored to the data, not the wall clock, or the book goes empty."""
+        d = client.get("/api/revenue-management/overview").json()
+        assert d["nights_on_books_30d"] > 0
+        assert d["stay_dates_scored"] > 0
+
+    def test_bad_as_of_is_rejected_not_ignored(self):
+        assert client.get("/api/revenue-management/pace?as_of=not-a-date").status_code == 422
+        assert client.get("/api/revenue-management/pace?as_of=2019-01-01").status_code == 422
+
+    def test_unknown_forecast_model_is_rejected(self):
+        assert client.get(
+            "/api/revenue-management/forecast?model=magic"
+        ).status_code == 422
+
+    def test_grain_identity_is_served_and_holds(self):
+        d = client.get("/api/revenue-management/grain-reconciliation").json()
+        assert d["identity_holds"] is True
+        assert (
+            d["exploded_booking_nights"]
+            - d["less_unallocated_nights"]
+            + d["plus_hourly_unit_nights"]
+            == d["equals_occupied_unit_nights"]
+        )
+
+    def test_pace_counts_add_up(self):
+        d = client.get("/api/revenue-management/pace").json()
+        c = d["counts"]
+        assert c["scored"] == c["behind"] + c["on_track"] + c["ahead"]
+
+    def test_forecast_accuracy_discloses_where_the_model_loses(self):
+        """The default model is beaten at 30 days and the API must say so."""
+        d = client.get("/api/revenue-management/forecast/accuracy").json()
+        assert d["best_by_horizon"]["30"] != "pickup" or d["best_by_horizon"][30] != "pickup"
+        assert client.get("/api/revenue-management/forecast").json()["caveat"]
+
+    def test_why_decomposition_sums_to_the_movement(self):
+        d = client.get("/api/revenue-management/why?days=30").json()
+        total = sum(c["revpar_contribution_inr"] for c in d["components"])
+        assert abs(total - d["change"]) < 0.05
+
+    def test_why_states_no_llm_is_involved(self):
+        d = client.get("/api/revenue-management/why").json()
+        assert "no language model" in d["method"].lower()
+
+    def test_signals_never_recommend_a_price(self):
+        body = client.get("/api/revenue-management/signals").text.lower()
+        for phrase in ("increase rate", "lower rate", "reprice", "raise price"):
+            assert phrase not in body
 
 
 class TestHonesty:

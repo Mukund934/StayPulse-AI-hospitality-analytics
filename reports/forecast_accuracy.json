@@ -1,0 +1,199 @@
+{
+  "generated_at_utc": "2026-08-15 10:23 UTC",
+  "target": "daily occupied room-nights, portfolio total",
+  "mean_daily_room_nights": 24.4,
+  "backtest": {
+    "method": "rolling origin; every forecast uses only data at or before its origin",
+    "test_window_days": 120,
+    "origins": 40,
+    "forecasts_evaluated": 5325
+  },
+  "accuracy": [
+    {
+      "model": "naive",
+      "horizon_days": 1,
+      "observations": 40,
+      "mae_nights": 2.33,
+      "rmse_nights": 3.09,
+      "mape_pct": 7.71,
+      "bias_nights": -0.33
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 1,
+      "observations": 40,
+      "mae_nights": 4.05,
+      "rmse_nights": 5.11,
+      "mape_pct": 13.96,
+      "bias_nights": -0.5
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 1,
+      "observations": 40,
+      "mae_nights": 3.75,
+      "rmse_nights": 4.67,
+      "mape_pct": 12.93,
+      "bias_nights": -0.63
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 1,
+      "observations": 40,
+      "mae_nights": 3.9,
+      "rmse_nights": 5.11,
+      "mape_pct": 13.33,
+      "bias_nights": -0.74
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 1,
+      "observations": 40,
+      "mae_nights": 1.25,
+      "rmse_nights": 1.64,
+      "mape_pct": 4.05,
+      "bias_nights": 0.28
+    },
+    {
+      "model": "naive",
+      "horizon_days": 7,
+      "observations": 38,
+      "mae_nights": 4.08,
+      "rmse_nights": 5.17,
+      "mape_pct": 14.13,
+      "bias_nights": -0.34
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 7,
+      "observations": 38,
+      "mae_nights": 4.08,
+      "rmse_nights": 5.17,
+      "mape_pct": 14.13,
+      "bias_nights": -0.34
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 7,
+      "observations": 38,
+      "mae_nights": 3.88,
+      "rmse_nights": 4.92,
+      "mape_pct": 13.34,
+      "bias_nights": -0.65
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 7,
+      "observations": 38,
+      "mae_nights": 3.88,
+      "rmse_nights": 5.07,
+      "mape_pct": 13.37,
+      "bias_nights": -0.57
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 7,
+      "observations": 38,
+      "mae_nights": 2.82,
+      "rmse_nights": 3.35,
+      "mape_pct": 9.24,
+      "bias_nights": -0.32
+    },
+    {
+      "model": "naive",
+      "horizon_days": 14,
+      "observations": 36,
+      "mae_nights": 6.14,
+      "rmse_nights": 7.01,
+      "mape_pct": 20.73,
+      "bias_nights": -0.19
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 14,
+      "observations": 36,
+      "mae_nights": 6.14,
+      "rmse_nights": 7.01,
+      "mape_pct": 20.73,
+      "bias_nights": -0.19
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 14,
+      "observations": 36,
+      "mae_nights": 4.81,
+      "rmse_nights": 5.58,
+      "mape_pct": 16.1,
+      "bias_nights": -0.74
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 14,
+      "observations": 36,
+      "mae_nights": 5.03,
+      "rmse_nights": 6.0,
+      "mape_pct": 16.99,
+      "bias_nights": -0.62
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 14,
+      "observations": 36,
+      "mae_nights": 3.58,
+      "rmse_nights": 4.54,
+      "mape_pct": 11.62,
+      "bias_nights": -0.42
+    },
+    {
+      "model": "naive",
+      "horizon_days": 30,
+      "observations": 31,
+      "mae_nights": 4.55,
+      "rmse_nights": 5.81,
+      "mape_pct": 14.94,
+      "bias_nights": -0.23
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 30,
+      "observations": 31,
+      "mae_nights": 4.68,
+      "rmse_nights": 5.5,
+      "mape_pct": 15.6,
+      "bias_nights": -0.61
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 30,
+      "observations": 31,
+      "mae_nights": 3.61,
+      "rmse_nights": 4.32,
+      "mape_pct": 11.95,
+      "bias_nights": -0.9
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 30,
+      "observations": 31,
+      "mae_nights": 3.57,
+      "rmse_nights": 4.31,
+      "mape_pct": 11.77,
+      "bias_nights": -0.98
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 30,
+      "observations": 31,
+      "mae_nights": 4.39,
+      "rmse_nights": 5.06,
+      "mape_pct": 14.41,
+      "bias_nights": -1.55
+    }
+  ],
+  "best_by_horizon": {
+    "1": "pickup",
+    "7": "pickup",
+    "14": "pickup",
+    "30": "dow_moving_average"
+  }
+}

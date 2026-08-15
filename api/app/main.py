@@ -29,7 +29,14 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from api.app.routers import analytics, health, intelligence, operations, trust
+from api.app.routers import (
+    analytics,
+    health,
+    intelligence,
+    operations,
+    revenue,
+    trust,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -135,9 +142,28 @@ async def unhandled(request: Request, exc: Exception):
 
 app.include_router(health.router)
 app.include_router(analytics.router)
+app.include_router(revenue.router)
 app.include_router(operations.router)
 app.include_router(intelligence.router)
 app.include_router(trust.router)
+
+
+def _public_endpoints() -> list[str]:
+    """Derive the index from the app's own routes.
+
+    Previously a hand-maintained list, which drifted the moment a router was added:
+    twelve live endpoints were missing from it. A generated index cannot go stale,
+    and the existing test that GETs every advertised path now covers everything
+    rather than only what someone remembered to type.
+    """
+    paths = {
+        route.path
+        for route in app.routes
+        if getattr(route, "methods", None)
+        and "GET" in route.methods
+        and (route.path.startswith("/api") or route.path.startswith("/health"))
+    }
+    return sorted(paths)
 
 
 @app.get("/", tags=["health"], summary="Service index")
@@ -148,18 +174,7 @@ def index() -> dict:
         "docs": "/docs",
         "data": "synthetic — see the repository README",
         "repository": "https://github.com/Mukund934/StayPulse-AI-hospitality-analytics",
-        "endpoints": [
-            "/health", "/health/readiness",
-            "/api/kpis/overview", "/api/revenue/trends", "/api/revenue/channels",
-            "/api/properties", "/api/properties/{property_key}/performance",
-            "/api/operations/overview", "/api/operations/sla",
-            "/api/operations/service-requests",
-            "/api/guest-intelligence/overview", "/api/guest-intelligence/aspects",
-            "/api/guest-intelligence/issues", "/api/guest-intelligence/benchmark",
-            "/api/anomalies", "/api/decisions", "/api/daily-brief/latest",
-            "/api/data-quality/overview", "/api/data-quality/rules",
-            "/api/metrics", "/api/pipeline-runs",
-        ],
+        "endpoints": _public_endpoints(),
     }
 
 
