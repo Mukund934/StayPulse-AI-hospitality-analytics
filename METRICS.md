@@ -9,7 +9,7 @@ computes.
 registered without declaring which date it is measured on — the single most
 common cause of two dashboards disagreeing.
 
-**16 active metrics.** All figures derive from clearly-labelled
+**22 active metrics.** All figures derive from clearly-labelled
 synthetic data.
 
 ---
@@ -134,6 +134,36 @@ round(sum(room_revenue_net_inr) / NULLIF(count(*) FILTER (WHERE is_sellable), 0)
 
 ---
 
+## RevPOR  ·  `revpor_inr`
+
+Room revenue per occupied room-night. Unlike ADR this is not diluted by how many rooms were available.
+
+| | |
+|---|---|
+| **Formula** | `Room Revenue (net) / Rooms Sold` |
+| **Grain** | property x stay_date |
+| **Date basis** | `stay_date` |
+| **Unit** | inr |
+| **Revenue basis** | net_of_tax |
+| **Source tables** | `mart.fact_unit_night` |
+| **Owner** | Revenue |
+
+**Includes** — Every occupied unit-night.
+
+**Excludes** — Room revenue only. This is NOT TRevPOR: there is no food, beverage or ancillary revenue in this warehouse, so total-revenue metrics are deliberately not published.
+
+> **Caveat.** On a room-only dataset RevPOR and ADR coincide. It is registered separately so that adding ancillary revenue later does not silently change what ADR means.
+
+<details><summary>SQL</summary>
+
+```sql
+round(sum(room_revenue_net_inr) / NULLIF(count(*) FILTER (WHERE is_occupied), 0), 2)
+```
+
+</details>
+
+---
+
 ## Gross Room Revenue (incl GST)  ·  `room_revenue_gross_inr`
 
 What the guest actually paid, including GST at the rate applicable to that stay date and nightly rate.
@@ -188,6 +218,36 @@ Room revenue net of GST and net of discount, before OTA commission.
 
 ```sql
 sum(room_revenue_net_inr)
+```
+
+</details>
+
+---
+
+## Booking pace vs curve  ·  `booking_pace_pct`
+
+Nights on the books for a stay date, as a percentage of what is normally on the books at the same number of days out.
+
+| | |
+|---|---|
+| **Formula** | `Nights on Books / Median Nights on Books at same days_out x 100` |
+| **Grain** | stay_date x property x as_of_date |
+| **Date basis** | `as_of_date` |
+| **Unit** | percent |
+| **Revenue basis** | not_applicable |
+| **Source tables** | `mart.v_booking_night`, `mart.v_booking_curve` |
+| **Owner** | Revenue |
+
+**Includes** — Compared against the median curve for the same property and the same days-out horizon.
+
+**Excludes** — Stay dates with fewer than 6 comparable historical observations are not scored.
+
+> **Caveat.** A pace below 100 is not automatically bad: it can mean the same demand arriving later. Read with lead-time mix, not alone.
+
+<details><summary>SQL</summary>
+
+```sql
+round(100.0 * nights_on_books / NULLIF(expected_nights_at_horizon, 0), 1)
 ```
 
 </details>
@@ -374,6 +434,36 @@ round(100.0 * count(*) FILTER (WHERE is_sla_breached) / NULLIF(count(*) FILTER (
 
 ---
 
+## Wash rate  ·  `wash_rate_pct`
+
+Share of bookings made for a stay month that did not convert into a stay, through cancellation or no-show.
+
+| | |
+|---|---|
+| **Formula** | `(Cancelled + No-show) / Bookings Made x 100` |
+| **Grain** | stay_month x property x channel |
+| **Date basis** | `stay_date` |
+| **Unit** | percent |
+| **Revenue basis** | not_applicable |
+| **Source tables** | `mart.fact_booking` |
+| **Owner** | Revenue |
+
+**Includes** — Cohorted on stay month so the denominator is demand for that month.
+
+**Excludes** — Bookings amended rather than cancelled are not tracked; the source has no amendment history.
+
+> **Caveat.** This is the number an overbooking policy would rest on. It is NOT a forecast of future wash.
+
+<details><summary>SQL</summary>
+
+```sql
+round(100.0 * count(*) FILTER (WHERE status IN ('cancelled','no_show')) / count(*), 2)
+```
+
+</details>
+
+---
+
 ## Average Length of Stay  ·  `alos_nights`
 
 Mean nights per nightly reservation.
@@ -434,6 +524,36 @@ round(avg(lead_time_days)::numeric, 1)
 
 ---
 
+## Cancellation notice  ·  `cancel_notice_days`
+
+Days between a cancellation and the stay date it was cancelled from.
+
+| | |
+|---|---|
+| **Formula** | `median(check_in_date - cancel_date)` |
+| **Grain** | stay_month x channel |
+| **Date basis** | `cancel_date` |
+| **Unit** | days |
+| **Revenue basis** | not_applicable |
+| **Source tables** | `mart.fact_booking` |
+| **Owner** | Revenue |
+
+**Includes** — Cancelled bookings with a recorded cancellation date.
+
+**Excludes** — No-shows are excluded: they gave no notice at all, and folding them in as zero would understate the notice actually given by people who did cancel.
+
+> **Caveat.** Separates resellable cancellations from lost inventory. A 20-day notice is recoverable; a same-day one is not.
+
+<details><summary>SQL</summary>
+
+```sql
+percentile_cont(0.5) WITHIN GROUP (ORDER BY (check_in_date - cancel_date))
+```
+
+</details>
+
+---
+
 ## CSAT  ·  `csat_avg`
 
 Mean guest satisfaction score on resolved service requests, 1-5.
@@ -458,6 +578,66 @@ Mean guest satisfaction score on resolved service requests, 1-5.
 
 ```sql
 round(avg(csat_score)::numeric, 2)
+```
+
+</details>
+
+---
+
+## Nights on the books  ·  `nights_on_books`
+
+Room-nights sold for a future stay date, as the book stood on a given snapshot date.
+
+| | |
+|---|---|
+| **Formula** | `count(booking-nights where entered_on <= as_of and not cancelled by as_of)` |
+| **Grain** | stay_date x property x as_of_date |
+| **Date basis** | `as_of_date` |
+| **Unit** | nights |
+| **Revenue basis** | not_applicable |
+| **Source tables** | `mart.v_booking_night` |
+| **Owner** | Revenue |
+
+**Includes** — Every booking-night on the books at the snapshot, including ones later cancelled.
+
+**Excludes** — Zero-night hourly bookings contribute nothing. Stays on or before the snapshot date are excluded as occupancy, not pickup.
+
+> **Caveat.** Bi-temporal. Meaningless without stating the snapshot date. Reconstructed from booking and cancellation dates, not from stored nightly snapshots, so it assumes a booking never silently changed its dates.
+
+<details><summary>SQL</summary>
+
+```sql
+count(*) FILTER (WHERE entered_on <= :as_of AND (left_on IS NULL OR left_on > :as_of))
+```
+
+</details>
+
+---
+
+## Pickup (nights)  ·  `pickup_nights`
+
+Room-nights added to the book on a given activity date for a given stay date.
+
+| | |
+|---|---|
+| **Formula** | `nights added on activity_date` |
+| **Grain** | stay_date x activity_date |
+| **Date basis** | `as_of_date` |
+| **Unit** | nights |
+| **Revenue basis** | not_applicable |
+| **Source tables** | `mart.v_pickup_daily` |
+| **Owner** | Revenue |
+
+**Includes** — Gross additions to the book.
+
+**Excludes** — Cancellations are reported separately as pickup_cancellations, not netted here.
+
+> **Caveat.** Gross by design. A day that added 20 and lost 18 reads identically to one that added 2 and lost 0 if only net pickup is published.
+
+<details><summary>SQL</summary>
+
+```sql
+sum(nights_added)
 ```
 
 </details>

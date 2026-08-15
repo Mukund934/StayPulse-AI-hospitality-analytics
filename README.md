@@ -12,7 +12,7 @@ This project builds that view end to end: **18 months, 3 properties, 40 units, 4
 
 | | |
 |---|---|
-| [METRICS.md](METRICS.md) | 16 metrics, generated from the executable registry |
+| [METRICS.md](METRICS.md) | 22 metrics, generated from the executable registry |
 | [DECISION_LOG.md](DECISION_LOG.md) | 7 decisions from live queries — incl. one no-action and one reversed |
 | [reports/ai_evaluation.md](reports/ai_evaluation.md) | Gemini vs deterministic baseline |
 | [reports/anomalies.md](reports/anomalies.md) | Detection + ground-truth verification |
@@ -32,9 +32,20 @@ This project builds that view end to end: **18 months, 3 properties, 40 units, 4
 | RevPAR | **₹3,347** |
 | Net room revenue (18 months) | **₹6.01 crore** |
 | Data-quality score | **69.1 / 100** — low *by design*, the data carries deliberate defects |
-| Tests | **51 passing** |
+| Forecast accuracy, 7 days out | **MAE 2.82 room-nights** (9.2% MAPE) against a 24.4/night series |
+| Tests | **199 passing** |
 
 `RevPAR = ADR × Occupancy` reconciles to a residual of **0.000000**, which is only possible because all three read one table with one denominator.
+
+Two grains also reconcile **exactly**, which is the harder claim. Demand (booking-nights) and inventory (unit-nights) disagree by construction, and the difference is fully accounted for rather than rounded away:
+
+```
+  13,640   booking-nights from stayed bookings
+   -  410   never allocated a unit — denied demand (3.0%)
+   +  380   hourly bookings holding a room but selling no night
+  -------
+  13,610   occupied unit-nights          ✓ asserted by test, not by comment
+```
 
 ---
 
@@ -59,11 +70,14 @@ Full write-ups with evidence, confidence and owners: **[DECISION_LOG.md](DECISIO
 
 | What the role asks for | Where it is evidenced |
 |---|---|
-| Consolidate PMS / CRM / payments / WhatsApp into one reliable base | [`migrations/`](migrations/) — 4 layered schemas, 14 fact & dimension tables |
-| “One number means one thing” | [METRICS.md](METRICS.md) — 16 metrics, each with grain, date basis, inclusions, exclusions, caveats |
-| Occupancy, ADR, RevPAR, channel mix, cancellations, TAT, SLA, CSAT, repeat rate, cost per booking | All 16 registered in `meta.metric_definition` and executed by the semantic layer |
+| Consolidate PMS / CRM / payments / WhatsApp into one reliable base | [`migrations/`](migrations/) — 6 migrations, 14 fact & dimension tables, 12 semantic views |
+| “One number means one thing” | [METRICS.md](METRICS.md) — 22 metrics, each with grain, date basis, inclusions, exclusions, caveats |
+| Occupancy, ADR, RevPAR, channel mix, cancellations, TAT, SLA, CSAT, repeat rate, cost per booking | All 22 registered in `meta.metric_definition` and executed by the semantic layer |
 | SQL with joins, CTEs, window functions | [`sql/analysis/`](sql/analysis/) — 6 analyses, each answering one business question |
-| Investigate anomalies, establish root cause with data | [reports/anomalies.md](reports/anomalies.md) — detection, attribution, ground-truth verification |
+| Investigate anomalies, establish root cause with data | [reports/anomalies.md](reports/anomalies.md) — detection, attribution, ground-truth verification; and [WHY_REVPAR_CHANGED.md](reports/WHY_REVPAR_CHANGED.md) — Shapley decomposition with **no LLM in the causal path** |
+| Forward-looking revenue analysis | [REVENUE_MANAGEMENT.md](reports/REVENUE_MANAGEMENT.md) — on the books, pickup, booking pace, lead time, wash funnel, need dates |
+| Forecasting with validation | [FORECAST.md](reports/FORECAST.md) — 5 models, rolling-origin backtest, 5,325 forecasts scored; the default model's losing horizon is published |
+| Data lineage and cataloguing | [DATA_CATALOG.md](reports/DATA_CATALOG.md) — 83 lineage edges, mostly extracted from `pg_depend`; 469 columns classified, PII exposure enforced by test |
 | Alerts and exception reports | 29 quality rules + a scheduled brief + a staleness watchdog |
 | LLMs on unstructured data at scale | [`src/staypulse/ai/`](src/staypulse/ai/) — aspect-based extraction, closed taxonomy |
 | **“Validate AI output against source data”** | Every aspect carries a verbatim evidence span asserted to be a literal substring of its source. [reports/ai_evaluation.md](reports/ai_evaluation.md) |
@@ -80,17 +94,19 @@ Full write-ups with evidence, confidence and owners: **[DECISION_LOG.md](DECISIO
 ```
   SOURCE SIMULATION            WAREHOUSE (PostgreSQL 17.6)          CONSUMERS
   ┌──────────────────┐        ┌──────────────────────────┐        ┌──────────────┐
-  │ seeded generator │───────▶│  raw → staging → mart    │───────▶│ SQL analyses │
-  │  · bookings      │  COPY  │                          │        │ daily brief  │
-  │  · payments      │        │  fact_unit_night ◀── the │        │ decision log │
-  │  · tickets       │        │  atomic grain            │        │ Power BI     │
-  │  · reviews       │        │                          │        └──────────────┘
-  │  · inventory     │        │  meta.metric_definition  │
-  └──────────────────┘        │  meta.dq_rule / dq_result│        ┌──────────────┐
-                              │  meta.business_date()    │───────▶│ Gemini ABSA  │
-                              │  meta.gst_rate           │        │  ↓ validate  │
-                              └──────────────────────────┘        │  ↓ quarantine│
-                                                                  └──────────────┘
+  │ seeded generator │───────▶│  mart  (star schema)     │───────▶│ FastAPI (34) │
+  │  · bookings      │  COPY  │                          │        │ SQL analyses │
+  │  · payments      │        │  fact_unit_night ◀── the │        │ daily brief  │
+  │  · tickets       │        │  atomic grain            │        │ decision log │
+  │  · reviews       │        │  v_booking_night ◀── the │        │ Power BI     │
+  │  · inventory     │        │  demand grain            │        └──────────────┘
+  └──────────────────┘        │                          │
+                              │  meta.metric_definition  │        ┌──────────────┐
+                              │  meta.dq_rule / dq_result│───────▶│ Gemini ABSA  │
+                              │  meta.lineage_edge  (83) │        │  ↓ validate  │
+                              │  meta.business_date()    │        │  ↓ quarantine│
+                              │  meta.gst_rate           │        └──────────────┘
+                              └──────────────────────────┘
 ```
 
 **The load-bearing decision** is `fact_unit_night`: one row per unit per night, occupied or not. Occupancy's denominator and ADR's numerator come from the same table, so `RevPAR = ADR × Occupancy` is an identity a test can assert rather than a coincidence to hope for. The half-open interval `[check_in, check_out)` is applied *once*, here — re-deriving it per query is how the departure night gets counted and room-nights inflate by roughly 1/ALOS (~33% at a 3-night stay).
@@ -164,6 +180,82 @@ Cost: **113,632 tokens** measured from `usage_metadata` and stored in `meta.llm_
 
 ---
 
+## Revenue management — the forward half
+
+Occupancy, ADR and RevPAR describe nights that have already been sold or lost. Nothing can be done about them. This layer answers the only question a revenue manager can still act on: for a night that has **not** happened yet, how much of it is already sold, and is that ahead of or behind where it normally is by now.
+
+It needed a second time axis. Every other metric here is measured on one date. A pickup metric is **bi-temporal** — measured on a stay date *as of* a snapshot date. "12 room-nights sold for 14 August" is meaningless without saying when you looked, so `date_basis` gained an `as_of_date` value rather than quietly reusing `booking_date`.
+
+**The booking curve is short.** Median lead time is 7 days and two channels book same-day:
+
+| Days out | 30 | 21 | 14 | 7 | 3 | 0 |
+|---|---:|---:|---:|---:|---:|---:|
+| Median % of the book sold | 8% | 20% | 38% | 75% | 100% | 100% |
+
+**Pace is measured against absolute nights, never a share of the final book.** For a future stay date the final book is precisely the unknown; a metric that appears to compute it has substituted a forecast for the truth and then measured itself against its own forecast.
+
+Two defects were found building this, and both are worth more than the feature:
+
+- Pooling all 18 months into the baseline reported **24 stay dates ahead of pace and zero behind**. Sellable inventory grew from ~900 to ~1,200 unit-nights per month in March 2026, so the baseline was comparing a 40-unit portfolio against the period when it had about 30. Fixed with a trailing 8-date same-weekday window.
+- Fixed percentage thresholds then flagged nearly everything, because nights on the books for one property nine days out range from **3 to 15** across comparable Tuesdays. A median of 6 against an observation of 14 is 233% and completely ordinary. Replaced with a dual gate — outside the p25–p75 band **and** at least 4 room-nights from the median.
+
+No signal names a price. There is no competitor rate feed and no elasticity in this warehouse, so a rate recommendation would be an opinion wearing a number. A test enforces it.
+
+Full write-up: **[reports/REVENUE_MANAGEMENT.md](reports/REVENUE_MANAGEMENT.md)**
+
+---
+
+## Forecasting — five models, and the honest result
+
+A single forecast with an error attached proves nothing. Without a baseline there is no way to know whether 12% error is good, bad, or worse than repeating last Tuesday. So five models run over the same rolling-origin backtest — 40 origins, 5,325 forecasts, every one using only data at or before its own origin.
+
+| Horizon | Winner | MAE (room-nights) | MAPE |
+|---|---|---:|---:|
+| 1 day | `pickup` | 1.25 | 4.1% |
+| 7 days | `pickup` | 2.82 | 9.2% |
+| 14 days | `pickup` | 3.58 | 11.6% |
+| 30 days | **`dow_moving_average`** | 3.57 | 11.8% |
+
+**The pickup model loses at 30 days**, and that is reported rather than buried. At that horizon the median stay date is 8% sold, so a model built on the book has almost nothing to read. A pickup model that appeared to win at every horizon would be evidence of leakage, not of skill — and a test checks its inputs against an independent as-of reconstruction to make sure it has none.
+
+**[reports/FORECAST.md](reports/FORECAST.md)**
+
+---
+
+## "Why did this KPI change?"
+
+The signature feature, and the one deliberately built **without** a language model. A test asserts the module imports none. An LLM may phrase findings that deterministic code produced; it may not discover, rank or invent a cause.
+
+`RevPAR = Occupancy × ADR` is multiplicative, so splitting a movement into volume and rate is genuinely ambiguous — there is an interaction term and it has to go somewhere. This uses the symmetric (Shapley) split so it distributes evenly, and the parts sum to the whole with **no residual**.
+
+The instructive part is what went wrong first. The engine attributed the *revenue* change and narrated it as a RevPAR story. On March 2026 it named HSR Layout as the driver of an 18% RevPAR **decline** while HSR's revenue had **risen** by ₹341,858 — and gave it a 134% share. One cause behind both absurdities: the portfolio added 31.5% more inventory that month, so revenue rose while RevPAR fell. **Attributing the numerator cannot explain a ratio.**
+
+Portfolio RevPAR is now written as a capacity-weighted average of each member's own RevPAR and split exactly into a **capacity-mix effect** and a **performance effect**. Channels keep a revenue attribution, clearly labelled, because no rooms are allocated to Booking.com and inventing a per-channel denominator to print a tidier number would be a fabrication. A material capacity change is detected, surfaced in the headline, and **caps the engine's own confidence** — opening rooms faster than demand fills them is a capital story, not a commercial one.
+
+**[reports/WHY_REVPAR_CHANGED.md](reports/WHY_REVPAR_CHANGED.md)**
+
+---
+
+## Lineage, catalog and PII
+
+`meta.lineage_edge` existed from the first migration and held **zero rows** — a schema advertising a capability the warehouse did not have. It now holds 83, and most are *extracted rather than declared*, which is the difference between lineage that stays true and lineage that rots:
+
+| Edge class | Source | Can it drift? |
+|---|---|---|
+| view → view, view → table | `pg_depend` / `pg_rewrite` | No — it is PostgreSQL's own dependency graph |
+| metric → source object | `meta.metric_definition.source_tables` | No — mandatory and constrained |
+| generator → mart, mart → BI | declared | Yes — they run outside the database |
+
+Declared edges are labelled `declared:` and a test enforces the label, so extracted fact stays separable from authored claim.
+
+The catalog classifies 469 columns, 29 of them personal, **by published regex rule rather than by judgement** — conservatively, whether or not this synthetic dataset holds anything sensitive. Classifying realistic columns as safe because the values are fake is the habit that leaks a production extract later.
+
+The catalog claims no API route returns a raw guest record. Prose is not a control, so it is a test: every endpoint is scanned for the column *names* of every direct identifier, and separately for 40 real identifier *values* pulled live from `dim_guest` — because a route could rename `email` to `contact` and still leak it.
+
+**[reports/DATA_CATALOG.md](reports/DATA_CATALOG.md)**
+
+---
+
 ## Anomaly detection
 
 Day-of-week aware trailing baseline, robust scale via **MAD** (one outlier inflates σ and hides the next; MAD is unaffected), **dual thresholds** — statistically unusual *and* materially large — and a **published false-alert budget**.
@@ -191,7 +283,7 @@ Latest output: **[reports/LATEST_BRIEF.md](reports/LATEST_BRIEF.md)**
 ## Repository map
 
 ```
-migrations/          5 numbered SQL migrations, checksum-tracked
+migrations/          6 numbered SQL migrations, checksum-tracked
 src/staypulse/
   config.py          env loading; builds the DSN via URL.create so a password
                      containing ? or # is escaped correctly, not by hand
@@ -199,15 +291,23 @@ src/staypulse/
   generate/          seeded generator — spec.py holds every assumption
   quality/           29 declarative rules + execution + recall scoring
   ai/                taxonomy, Gemini client, keyword baseline, evaluation
-  analytics/         anomaly detection with attribution
+  analytics/
+    anomaly.py       day-of-week aware detection with attribution
+    revenue.py       on the books, pickup, pace, need dates, signals
+    forecast.py      five models, rolling-origin backtest, scoring
+    rootcause.py     Shapley decomposition of a RevPAR movement
+api/                 FastAPI — 34 read-only endpoints over the semantic layer
 sql/analysis/        6 curated business analyses
 scripts/             verify_env · migrate · generate_data · validate_dataset
                      validate_metrics · run_quality · run_analyses
                      run_ai_pipeline · run_ai_eval · run_anomaly_detection
+                     run_revenue_analysis · build_lineage_catalog
                      build_decision_log · daily_brief
-tests/               51 tests
-reports/             generated: analyses, AI evaluation, anomalies, briefings
-METRICS.md           generated from the metric registry
+tests/               199 tests
+reports/             generated: analyses, AI evaluation, anomalies, briefings,
+                     FORECAST · REVENUE_MANAGEMENT · WHY_REVPAR_CHANGED ·
+                     DATA_CATALOG
+METRICS.md           generated from the metric registry (22 metrics)
 DECISION_LOG.md      generated from live warehouse queries
 ```
 
@@ -244,6 +344,9 @@ Paste the password into `PGPASSWORD` **verbatim** — do not percent-encode it. 
 
 ## Known gaps — stated, not hidden
 
+- **There is no raw or staging layer, and this README used to imply there was.** The `raw` and `staging` schemas exist and are **empty**; the loader writes typed frames straight into `mart`. A self-audit caught the architecture diagram claiming `raw → staging → mart`, and the diagram has been corrected rather than the schemas quietly backfilled. The honest position: the generator *is* the source system and it emits typed, validated frames, so there is no untyped external feed to land and no schema drift to absorb. A real ingestion of a PMS export would need both layers, and building empty ones to match a picture would have been decoration.
+- **Forecasting is portfolio-level only.** Per-property forecasts across 3 properties would be far noisier, and no event or holiday regressor exists yet — a festival week is invisible to every model in the comparison.
+- **The pace baseline needs 6 comparable observations** before it scores a stay date, so newly opened inventory is unscored for roughly two months. That is deliberate; the alternative is a median computed from noise.
 - **Power BI — model prepared, report not authored.** `powerbi/data/` holds the full star schema as CSV (12 tables, 24,043 rows) and [powerbi/README.md](powerbi/README.md) specifies the relationships, all ~35 measures as DAX mirroring the SQL definitions, and the three-page layout. The `.pbix` itself is a binary only Power BI Desktop can write, so it cannot be scripted; `Publish to web` also needs a tenant setting a student account does not control. Assembly is ~30 minutes of clicking and **it is not done**.
 - **Excel / Power Query — workflow specified, workbook not committed.** `python scripts/export_excel_feed.py` writes 45 day-partitioned CSVs to `excel/feed/`, and [excel/README.md](excel/README.md) gives the folder-connector transform step by step, including a step that *independently recomputes RevPAR and compares it to the exported value*. The `.xlsx` is deliberately not committed — a binary workbook is undiffable and grows the repo on every save; the reproducible method is the artifact.
 - **Zoho Analytics — extract prepared, not published.** `powerbi/zoho_extract/` is row-budgeted to **130 rows** against the free tier's 10,000-row account-wide cap, which stops loading *silently* at the ceiling. Not published; blocked on confirming "Make Public" yields a working zero-login URL.
