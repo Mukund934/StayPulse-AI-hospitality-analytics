@@ -149,19 +149,27 @@ app.include_router(trust.router)
 
 
 def _public_endpoints() -> list[str]:
-    """Derive the index from the app's own routes.
+    """Derive the index from the OpenAPI schema.
 
     Previously a hand-maintained list, which drifted the moment a router was added:
-    twelve live endpoints were missing from it. A generated index cannot go stale,
-    and the existing test that GETs every advertised path now covers everything
-    rather than only what someone remembered to type.
+    twelve live endpoints were missing from it.
+
+    The obvious replacement -- walk `app.routes` -- is WRONG on FastAPI 0.141 /
+    Starlette 1.6, and wrong in the worst way. Included routers are held as opaque
+    `_IncludedRouter` entries rather than flattened into `APIRoute` objects, so
+    `app.routes` exposes only the four default docs routes plus `/`. Filtering it
+    returned an EMPTY list, and the test that GETs every advertised path passed
+    because iterating nothing raises nothing.
+
+    `app.openapi()` resolves every mounted router and reports all 35 paths. It is
+    also the schema clients actually read, so the index cannot disagree with the
+    contract. The result is cached by FastAPI after the first call.
     """
     paths = {
-        route.path
-        for route in app.routes
-        if getattr(route, "methods", None)
-        and "GET" in route.methods
-        and (route.path.startswith("/api") or route.path.startswith("/health"))
+        path
+        for path, operations in app.openapi()["paths"].items()
+        if "get" in operations
+        and (path.startswith("/api") or path.startswith("/health"))
     }
     return sorted(paths)
 
