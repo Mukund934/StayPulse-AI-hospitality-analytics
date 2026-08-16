@@ -1,0 +1,45 @@
+{
+  "_about": {
+    "purpose": "Curated Indian public-holiday calendar covering the StayPulse dataset window (2025-02-01 to 2026-08-11), plus a margin either side.",
+    "why_not_an_api": [
+      "Nager.Date, the obvious free zero-auth choice, does NOT cover India. Verified 2026-08-15: GET /api/v3/PublicHolidays/2025/IN returns HTTP 204 with an empty body, the same for 2024 and 2026, and 'IN' is absent from /AvailableCountries (204 countries listed). A US control call returns HTTP 200 with data, so the service is healthy - India is simply not in it.",
+      "The dataset is frozen. Stay dates run 2025-02-01 to 2026-08-11 and will never advance, so there is no 'next year's holidays' requirement for a live API to serve.",
+      "A committed table works offline and in CI: no key, no rate limit, no network flake, no vendor outage.",
+      "A live API here would be architecture for a requirement that does not exist."
+    ],
+    "scope": "National gazetted holidays plus Karnataka-relevant regional observances. The portfolio is three serviced-apartment properties in Bengaluru, Karnataka.",
+    "confidence_field": "Every entry carries a confidence. 'fixed' means the date is defined by statute and cannot move. 'lunar' means it is set by the Hindu or Islamic calendar and must be confirmed against an official source before being relied on.",
+    "human_review": "Entries with confidence 'lunar' REQUIRE a one-time human check. See docs/ROADMAP.md PART R item 7.",
+    "sources": [
+      "Government of India, Ministry of Personnel - Gazetted holiday lists (fixed-date entries)",
+      "Government of Karnataka - State general holidays (regional entries)",
+      "Dates cross-checked against the demand windows independently encoded in src/staypulse/generate/spec.py"
+    ],
+    "independence_note": "This file records HOLIDAY DATES ONLY. It deliberately does NOT encode demand windows. Effect windows are derived from the data by measuring an offset profile around each date, so that validation against the generator's planted windows stays non-circular."
+  },
+
+  "holidays": [
+    {"date": "2025-01-01", "name": "New Year's Day", "scope": "national", "kind": "public_holiday", "confidence": "fixed"},
+    {"date": "2025-01-26", "name": "Republic Day", "scope": "national", "kind": "gazetted", "confidence": "fixed"},
+    {"date": "2025-03-14", "name": "Holi", "scope": "national", "kind": "gazetted", "confidence": "lunar"},
+    {"date": "2025-03-30", "name": "Ugadi", "scope": "karnataka", "kind": "regional", "confidence": "lunar"},
+    {"date": "2025-03-31", "name": "Id-ul-Fitr", "scope": "national", "kind": "gazetted", "confidence": "lunar"},
+    {"date": "2025-04-18", "name": "Good Friday", "scope": "national", "kind": "gazetted", "confidence": "lunar"},
+    {"date": "2025-08-15", "name": "Independence Day", "scope": "national", "kind": "gazetted", "confidence": "fixed"},
+    {"date": "2025-10-02", "name": "Gandhi Jayanti", "scope": "national", "kind": "gazetted", "confidence": "fixed"},
+    {"date": "2025-10-20", "name": "Diwali", "scope": "national", "kind": "gazetted", "confidence": "lunar"},
+    {"date": "2025-11-01", "name": "Kannada Rajyotsava", "scope": "karnataka", "kind": "regional", "confidence": "fixed"},
+    {"date": "2025-12-25", "name": "Christmas Day", "scope": "national", "kind": "gazetted", "confidence": "fixed"},
+
+    {"date": "2026-01-01", "name": "New Year's Day", "scope": "national", "kind": "public_holiday", "confidence": "fixed"},
+    {"date": "2026-01-26", "name": "Republic Day", "scope": "national", "kind": "gazetted", "confidence": "fixed"},
+    {"date": "2026-03-04", "name": "Holi", "scope": "national", "kind": "gazetted", "confidence": "lunar"},
+    {"date": "2026-03-19", "name": "Ugadi", "scope": "karnataka", "kind": "regional", "confidence": "lunar"},
+    {"date": "2026-04-03", "name": "Good Friday", "scope": "national", "kind": "gazetted", "confidence": "lunar"},
+    {"date": "2026-08-15", "name": "Independence Day", "scope": "national", "kind": "gazetted", "confidence": "fixed"},
+    {"date": "2026-10-02", "name": "Gandhi Jayanti", "scope": "national", "kind": "gazetted", "confidence": "fixed"},
+    {"date": "2026-11-01", "name": "Kannada Rajyotsava", "scope": "karnataka", "kind": "regional", "confidence": "fixed"},
+    {"date": "2026-11-08", "name": "Diwali", "scope": "national", "kind": "gazetted", "confidence": "lunar"},
+    {"date": "2026-12-25", "name": "Christmas Day", "scope": "national", "kind": "gazetted", "confidence": "fixed"}
+  ]
+}
