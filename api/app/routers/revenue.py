@@ -134,6 +134,24 @@ def forecast_accuracy() -> dict:
     return services.rm_forecast_accuracy()
 
 
+@router.get("/holiday-effect",
+            summary="Measured public-holiday demand effect, by holiday and offset")
+def holiday_effect() -> dict:
+    return services.rm_holiday_effect()
+
+
+@router.get("/holiday-effect/validation",
+            summary="Measured effect against the generator's planted windows")
+def holiday_validation() -> dict:
+    return services.rm_holiday_validation()
+
+
+@router.get("/forecast/holiday-evaluation",
+            summary="Forecast accuracy on holiday-adjacent dates specifically")
+def holiday_forecast_evaluation() -> dict:
+    return services.rm_holiday_forecast_evaluation()
+
+
 @router.get("/why", summary="Why did RevPAR change? Deterministic decomposition")
 def why(
     days: int = Query(30, ge=7, le=120,

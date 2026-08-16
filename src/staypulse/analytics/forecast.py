@@ -207,16 +207,92 @@ def _pickup(hist: pd.Series, origin: pd.Timestamp, target: pd.Timestamp,
     return float(on_books) + float(np.median(remaining))
 
 
+def _seasonal_holiday(hist: pd.Series, origin: pd.Timestamp, target: pd.Timestamp,
+                      calendar: dict[str, Any] | None = None, **_: Any) -> float:
+    """Day-of-week baseline scaled by a measured holiday multiplier.
+
+    The multiplier comes from `signals.calendar`, estimated ONLY from holidays that
+    had already completed before the backtest began -- so a forecast for Diwali can
+    never be scaled by Diwali's own realised effect.
+
+    Falls back in three steps: the specific holiday's multiplier at that offset,
+    then the pooled cross-holiday multiplier at that offset, then no adjustment at
+    all. A date with no holiday nearby is therefore identical to
+    `dow_moving_average`, which is the intended behaviour -- this model claims to
+    help near holidays and nowhere else.
+    """
+    base = _dow_moving_average(hist, origin, target)
+    if not calendar:
+        return base
+
+    context = calendar.get("context", {}).get(target.date())
+    if not context:
+        return base
+
+    holiday, offset = context
+    specific = calendar.get("specific", {}).get((holiday, offset))
+    if specific is not None:
+        return base * specific
+
+    # NO POOLED FALLBACK. This was tried and it made the model the worst of the
+    # six, so it is worth recording why rather than just deleting it.
+    #
+    # Pooling a multiplier across all holidays assumes holidays are interchangeable.
+    # They are not. Measured on this portfolio, Christmas runs -20.4pp and New Year
+    # -11.5pp, while Id-ul-Fitr runs +10.9pp and Independence Day +4.9pp. Averaging
+    # those produced pooled multipliers of 1.02 to 1.19 -- above 1, i.e. push the
+    # forecast UP -- which were then applied to Christmas and New Year, the two
+    # dates that collapse hardest. MAE on holiday-adjacent dates went from 4.19 to
+    # 5.11 and bias flipped from -0.84 to +0.98.
+    #
+    # A holiday with no prior occurrence of its OWN gets no adjustment. The model
+    # then degrades to its baseline, which is the correct behaviour for a model
+    # that does not know the answer.
+    return base
+
+
 MODELS: dict[str, Callable[..., float]] = {
     "naive": _naive,
     "seasonal_naive": _seasonal_naive,
     "moving_average": _moving_average,
     "dow_moving_average": _dow_moving_average,
     "pickup": _pickup,
+    "seasonal_holiday": _seasonal_holiday,
 }
 
 
 # ---------------------------------------------------------------------------
+def calendar_context(before: dt.date) -> dict[str, Any]:
+    """Holiday multipliers and per-date context for the `seasonal_holiday` model.
+
+    NO-LEAKAGE DESIGN. The multipliers are estimated once, from data strictly
+    before `before` -- normally the earliest origin in the backtest. Estimating
+    them per origin would be marginally sharper and far slower; estimating them
+    once at the START of the test period is strictly more conservative, because
+    every origin then uses a multiplier fitted on less information than it could
+    legitimately have had.
+
+    That direction matters: a leak makes a model look better than it is, and this
+    errs the other way.
+    """
+    from staypulse.signals import calendar as cal
+
+    rows = db.fetch_all("""
+        SELECT full_date, nearest_holiday, days_to_holiday
+        FROM mart.dim_date
+        WHERE is_holiday_adjacent AND nearest_holiday IS NOT NULL
+    """)
+    return {
+        "estimated_before": before.isoformat(),
+        "specific": cal.holiday_multiplier(before),
+        "pooled": cal.generic_multiplier(before),
+        "context": {
+            r["full_date"]: (str(r["nearest_holiday"]), int(r["days_to_holiday"]))
+            for r in rows
+        },
+    }
+
+
 def backtest(
     test_days: int = 120,
     origin_step: int = 3,
@@ -237,6 +313,8 @@ def backtest(
         if first_origin <= d <= last - pd.Timedelta(days=1)
     ][::origin_step]
 
+    calendar = calendar_context(first_origin.date()) if origins else None
+
     records: list[dict[str, Any]] = []
     for origin in origins:
         # The only line that enforces the no-peeking rule. Everything downstream
@@ -256,12 +334,22 @@ def backtest(
                     "origin": origin,
                     "target": target,
                     "horizon": h,
-                    "prediction": fn(hist, origin, target, otb=otb),
+                    "prediction": fn(hist, origin, target, otb=otb,
+                                     calendar=calendar),
                     "actual": truth,
                 })
 
     df = pd.DataFrame(records)
     df["error"] = df["prediction"] - df["actual"]
+
+    # Mark which targets are holiday-adjacent, so accuracy can be scored where the
+    # holiday model actually claims to help.
+    adjacent = {
+        r["full_date"] for r in db.fetch_all(
+            "SELECT full_date FROM mart.dim_date WHERE is_holiday_adjacent"
+        )
+    }
+    df["holiday_adjacent"] = df["target"].dt.date.isin(adjacent)
     return df
 
 
@@ -295,6 +383,59 @@ def score(results: pd.DataFrame, horizons: tuple[int, ...] = REPORTED_HORIZONS
                 bias=float(np.mean(err)),
             ))
     return out
+
+
+def holiday_evaluation(test_days: int = 260) -> dict[str, Any]:
+    """Score every model on holiday-adjacent dates specifically.
+
+    WHY THIS EXISTS AS A SEPARATE EVALUATION
+
+    The standard 120-day backtest window contains ZERO festival windows -- the
+    three that fall inside the dataset are all earlier than mid-April 2026. Scored
+    there, `seasonal_holiday` is identical to `dow_moving_average` by construction,
+    because it applies no adjustment to a date with no holiday nearby.
+
+    Reporting only that would be misleading in both directions: it would hide any
+    real benefit, and it would hide any real harm. So the window is widened to
+    reach the holidays, and accuracy is reported BOTH overall and on
+    holiday-adjacent targets alone -- the only dates this model claims to improve.
+    """
+    results = backtest(test_days=test_days, origin_step=3)
+    adjacent = results[results["holiday_adjacent"]]
+    ordinary = results[~results["holiday_adjacent"]]
+
+    def _score(df: pd.DataFrame) -> list[dict[str, Any]]:
+        out = []
+        for model in MODELS:
+            rows = df[df["model"] == model]
+            if rows.empty:
+                continue
+            err = rows["error"].to_numpy(dtype=float)
+            out.append({
+                "model": model,
+                "observations": len(rows),
+                "mae_nights": round(float(np.mean(np.abs(err))), 2),
+                "rmse_nights": round(float(np.sqrt(np.mean(err ** 2))), 2),
+                "bias_nights": round(float(np.mean(err)), 2),
+            })
+        return sorted(out, key=lambda d: d["mae_nights"])
+
+    on_holidays = _score(adjacent)
+    on_ordinary = _score(ordinary)
+
+    return {
+        "test_window_days": test_days,
+        "holiday_adjacent_forecasts": int(len(adjacent)),
+        "ordinary_forecasts": int(len(ordinary)),
+        "accuracy_on_holiday_dates": on_holidays,
+        "accuracy_on_ordinary_dates": on_ordinary,
+        "best_on_holiday_dates": on_holidays[0]["model"] if on_holidays else None,
+        "note": (
+            "The 120-day window used for the headline backtest contains no festival "
+            "window, so this evaluation widens it to reach them. A model that only "
+            "adjusts holiday-adjacent dates cannot be judged on dates without one."
+        ),
+    }
 
 
 def winners(scores: list[Accuracy]) -> dict[int, str]:

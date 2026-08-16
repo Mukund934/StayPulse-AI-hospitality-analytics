@@ -1,0 +1,96 @@
+{
+  "test_window_days": 260,
+  "holiday_adjacent_forecasts": 5130,
+  "ordinary_forecasts": 9660,
+  "accuracy_on_holiday_dates": [
+    {
+      "model": "pickup",
+      "observations": 855,
+      "mae_nights": 3.32,
+      "rmse_nights": 4.18,
+      "bias_nights": -0.55
+    },
+    {
+      "model": "moving_average",
+      "observations": 855,
+      "mae_nights": 4.04,
+      "rmse_nights": 4.98,
+      "bias_nights": -0.8
+    },
+    {
+      "model": "dow_moving_average",
+      "observations": 855,
+      "mae_nights": 4.19,
+      "rmse_nights": 5.09,
+      "bias_nights": -0.84
+    },
+    {
+      "model": "seasonal_holiday",
+      "observations": 855,
+      "mae_nights": 4.9,
+      "rmse_nights": 5.8,
+      "bias_nights": 0.37
+    },
+    {
+      "model": "seasonal_naive",
+      "observations": 855,
+      "mae_nights": 4.98,
+      "rmse_nights": 6.42,
+      "bias_nights": -0.56
+    },
+    {
+      "model": "naive",
+      "observations": 855,
+      "mae_nights": 5.04,
+      "rmse_nights": 6.35,
+      "bias_nights": -0.6
+    }
+  ],
+  "accuracy_on_ordinary_dates": [
+    {
+      "model": "pickup",
+      "observations": 1610,
+      "mae_nights": 3.13,
+      "rmse_nights": 3.99,
+      "bias_nights": -0.78
+    },
+    {
+      "model": "moving_average",
+      "observations": 1610,
+      "mae_nights": 3.87,
+      "rmse_nights": 4.74,
+      "bias_nights": -1.07
+    },
+    {
+      "model": "dow_moving_average",
+      "observations": 1610,
+      "mae_nights": 3.92,
+      "rmse_nights": 4.83,
+      "bias_nights": -1.07
+    },
+    {
+      "model": "seasonal_holiday",
+      "observations": 1610,
+      "mae_nights": 3.92,
+      "rmse_nights": 4.83,
+      "bias_nights": -1.07
+    },
+    {
+      "model": "naive",
+      "observations": 1610,
+      "mae_nights": 4.72,
+      "rmse_nights": 5.84,
+      "bias_nights": -0.77
+    },
+    {
+      "model": "seasonal_naive",
+      "observations": 1610,
+      "mae_nights": 4.84,
+      "rmse_nights": 5.99,
+      "bias_nights": -0.68
+    }
+  ],
+  "best_on_holiday_dates": "pickup",
+  "note": "The 120-day window used for the headline backtest contains no festival window, so this evaluation widens it to reach them. A model that only adjusts holiday-adjacent dates cannot be judged on dates without one.",
+  "generated_at_utc": "2026-08-16 13:28 UTC"
+}
