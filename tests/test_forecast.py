@@ -13,6 +13,7 @@ Run:  python -m pytest tests/test_forecast.py -v
 
 from __future__ import annotations
 
+import datetime as dt
 import sys
 from pathlib import Path
 
@@ -179,3 +180,80 @@ class TestReporting:
         assert len(rows) == 14
         assert [r["horizon_days"] for r in rows] == list(range(1, 15))
         assert all(r["predicted_room_nights"] >= 0 for r in rows)
+
+
+class TestForwardCapacityIsNotBorrowedFromTheFuture:
+    """Regression test for a leak found while building the decision replay.
+
+    `forward` divided its room-night forecast by the mean sellable inventory of
+    the last 28 rows of the WHOLE series rather than the last 28 before the
+    origin. Sellable inventory is not constant here -- units open on dated
+    schedules and the portfolio went from ~29 to ~39 sellable unit-nights a day
+    in March 2026 -- so every origin before the expansion was divided by capacity
+    that did not exist yet, and reported an occupancy percentage a quarter too
+    low. The room-night forecast was never affected.
+    """
+
+    def test_capacity_comes_from_inventory_the_origin_had_seen(self):
+        early = dt.date(2025, 10, 1)
+        rows = fc.forward(as_of=early, horizon=7, model="dow_moving_average")
+        assert rows, "no forecast produced; the assertion below would be vacuous"
+
+        implied = [
+            r["predicted_room_nights"] / r["predicted_occupancy_pct"] * 100
+            for r in rows
+            if r["predicted_occupancy_pct"]
+        ]
+        assert implied, "occupancy percentage was not produced"
+
+        final = db.scalar(
+            """
+            SELECT avg(c)::float FROM (
+                SELECT count(*) FILTER (WHERE is_sellable) AS c
+                FROM mart.fact_unit_night
+                WHERE stay_date > (SELECT max(stay_date) - 28 FROM mart.fact_unit_night)
+                GROUP BY stay_date
+            ) x
+            """
+        )
+        contemporary = db.scalar(
+            """
+            SELECT avg(c)::float FROM (
+                SELECT count(*) FILTER (WHERE is_sellable) AS c
+                FROM mart.fact_unit_night
+                WHERE stay_date BETWEEN CAST(:d AS date) - 27 AND :d
+                GROUP BY stay_date
+            ) x
+            """,
+            d=early,
+        )
+        assert final > contemporary * 1.2, (
+            "the portfolio expansion this test depends on is not in the data, so "
+            "the assertion below could not distinguish the two capacities"
+        )
+        assert max(implied) < final * 0.95, (
+            f"capacity {max(implied):.1f} is drawn from the expanded portfolio "
+            f"({final:.1f}), which did not exist on {early}"
+        )
+
+    def test_windowed_otb_matrix_matches_the_full_one(self):
+        """`forward` materialises only the slice of the book it reads. The
+        predictions must be identical to those from the full matrix, or the
+        window is cutting off something the pickup model needed."""
+        origin = pd.Timestamp(db.scalar(
+            "SELECT max(stay_date) - 40 FROM mart.fact_unit_night"
+        ))
+        series = fc.daily_actuals()["occupied"].astype(float)
+        hist = series.loc[:origin]
+        full = fc.otb_matrix(30)
+
+        from_full = [
+            round(fc.MODELS["pickup"](
+                hist, origin, origin + pd.Timedelta(days=h), otb=full), 1)
+            for h in range(1, 31)
+        ]
+        from_windowed = [
+            r["predicted_room_nights"]
+            for r in fc.forward(as_of=origin.date(), horizon=30, model="pickup")
+        ]
+        assert from_full == from_windowed

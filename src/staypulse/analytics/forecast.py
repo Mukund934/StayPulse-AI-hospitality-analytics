@@ -78,6 +78,24 @@ MA_WINDOW = 28
 # Comparable same-weekday dates used to estimate remaining pickup.
 PICKUP_WINDOW = 8
 
+# Trailing days of REALISED inventory used to convert a room-night forecast into an
+# occupancy percentage.
+#
+# THIS WINDOW ENDS AT THE ORIGIN, AND THAT IS THE WHOLE POINT. It read the last 28
+# rows of the entire series until 2026-08-17, which meant a forecast made in October
+# 2025 was divided by the capacity the portfolio had in August 2026. Sellable
+# inventory here is not a constant: units open on dated schedules and the portfolio
+# went from ~29.4 to ~38.9 sellable unit-nights per day in March 2026, so the bug
+# understated capacity by a quarter for every origin before the expansion and
+# overstated the resulting occupancy percentage by the same factor.
+#
+# Future capacity is not knowable at the origin even in principle. Out-of-order
+# nights are drawn per unit-night in the generator, so any date's sellable count is
+# settled only once that date has passed. Occupancy percentage is therefore derived
+# from inventory the origin had actually seen, and the room-night forecast -- which
+# is the primary output and unaffected by this -- is reported alongside it.
+CAPACITY_WINDOW = 28
+
 
 @dataclass
 class Accuracy:
@@ -116,15 +134,26 @@ def daily_actuals() -> pd.DataFrame:
     return df.set_index("stay_date").astype({"occupied": int, "sellable": int})
 
 
-def otb_matrix(max_horizon: int = MAX_HORIZON) -> pd.DataFrame:
+def otb_matrix(max_horizon: int = MAX_HORIZON,
+               first: dt.date | None = None,
+               last: dt.date | None = None) -> pd.DataFrame:
     """(stay_date, days_out) -> nights on the books at that horizon.
 
     Computed once. Every pickup-model forecast is then a lookup rather than another
     reconstruction, which is what keeps the backtest tractable.
+
+    `first`/`last` bound the stay dates materialised. A rolling backtest wants the
+    whole matrix and leaves them unset; a single forecast from one origin needs
+    only its targets and the comparable dates behind it, and building the other
+    eighteen months is most of the cost of that call.
     """
     rows = db.fetch_all(
         """
-        WITH cal AS (SELECT DISTINCT stay_date FROM mart.fact_unit_night),
+        WITH cal AS (
+            SELECT DISTINCT stay_date FROM mart.fact_unit_night
+            WHERE (CAST(:first AS date) IS NULL OR stay_date >= CAST(:first AS date))
+              AND (CAST(:last  AS date) IS NULL OR stay_date <= CAST(:last  AS date))
+        ),
              h   AS (SELECT generate_series(0, :maxh) AS days_out)
         SELECT c.stay_date, h.days_out, count(n.booking_key) AS nights_on_books
         FROM cal c
@@ -136,6 +165,8 @@ def otb_matrix(max_horizon: int = MAX_HORIZON) -> pd.DataFrame:
         GROUP BY 1, 2
         """,
         maxh=max_horizon,
+        first=first,
+        last=last,
     )
     df = pd.DataFrame(rows)
     df["stay_date"] = pd.to_datetime(df["stay_date"])
@@ -456,15 +487,23 @@ def forward(as_of: dt.date | None = None, horizon: int = MAX_HORIZON,
     """
     actuals = daily_actuals()
     series = actuals["occupied"].astype(float)
-    otb = otb_matrix(horizon)
 
     origin = pd.Timestamp(as_of) if as_of else series.index.max()
+    # The pickup model reads the book for its targets and for the last
+    # PICKUP_WINDOW comparable same-weekday dates behind the origin. Eight weeks
+    # of lookback covers that with room to spare; the rest of the matrix is never
+    # touched by a single-origin forecast.
+    otb = otb_matrix(
+        horizon,
+        first=(origin - pd.Timedelta(days=7 * PICKUP_WINDOW + 14)).date(),
+        last=(origin + pd.Timedelta(days=horizon)).date(),
+    )
     hist = series.loc[:origin]
     fn = MODELS[model]
 
-    sellable_by_dow = (
-        actuals["sellable"].tail(28).groupby(actuals.tail(28).index.dayofweek).mean()
-    )
+    # Capacity from inventory the origin had already seen. See CAPACITY_WINDOW.
+    known_capacity = actuals["sellable"].loc[:origin].tail(CAPACITY_WINDOW)
+    sellable_by_dow = known_capacity.groupby(known_capacity.index.dayofweek).mean()
 
     rows: list[dict[str, Any]] = []
     for h in range(1, horizon + 1):
