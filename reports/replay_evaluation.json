@@ -1,0 +1,239 @@
+{
+  "generated_at": "2026-08-17T16:11:08+00:00",
+  "as_of_dates": 14,
+  "horizon_days": 35,
+  "replays": [
+    {
+      "as_of": "2025-06-02",
+      "fingerprint": "cac516ce5201cec4294a9bda9edd0538c72078356fcf09f16efc4942e948ed90",
+      "nights_on_books": 205,
+      "dates_scored": 33,
+      "flagged_behind": 5,
+      "flagged_ahead": 0,
+      "holidays_in_window": 0,
+      "holidays_with_prior_measurement": 5,
+      "forecast_mae": 3.286,
+      "pace_calls_resolved": 33
+    },
+    {
+      "as_of": "2025-07-02",
+      "fingerprint": "8a978ad4b16e3027c41947a4b767d8e650d17ae746f2d83acf53d1eee4871158",
+      "nights_on_books": 289,
+      "dates_scored": 46,
+      "flagged_behind": 4,
+      "flagged_ahead": 4,
+      "holidays_in_window": 0,
+      "holidays_with_prior_measurement": 5,
+      "forecast_mae": 2.3,
+      "pace_calls_resolved": 46
+    },
+    {
+      "as_of": "2025-08-01",
+      "fingerprint": "fe1599abe53381aa25ab68749345d0bcdd1c34c11f34fc32d56a27a971fd05fb",
+      "nights_on_books": 290,
+      "dates_scored": 41,
+      "flagged_behind": 1,
+      "flagged_ahead": 2,
+      "holidays_in_window": 1,
+      "holidays_with_prior_measurement": 5,
+      "forecast_mae": 2.171,
+      "pace_calls_resolved": 41
+    },
+    {
+      "as_of": "2025-08-31",
+      "fingerprint": "cd0bce83f1ea987647daf10e12203562d28f4ca2e1ebea577ff9bdbe2fc96a7a",
+      "nights_on_books": 353,
+      "dates_scored": 47,
+      "flagged_behind": 1,
+      "flagged_ahead": 5,
+      "holidays_in_window": 1,
+      "holidays_with_prior_measurement": 6,
+      "forecast_mae": 2.4,
+      "pace_calls_resolved": 47
+    },
+    {
+      "as_of": "2025-09-30",
+      "fingerprint": "b6a65d05bbd7bf9fee7333580c149dd279dac6ceaaf74b33677ff6fd7989f8c1",
+      "nights_on_books": 303,
+      "dates_scored": 36,
+      "flagged_behind": 0,
+      "flagged_ahead": 0,
+      "holidays_in_window": 3,
+      "holidays_with_prior_measurement": 7,
+      "forecast_mae": 2.671,
+      "pace_calls_resolved": 36
+    },
+    {
+      "as_of": "2025-10-30",
+      "fingerprint": "14f4feb4894d4238ea64eaf294659fa5ad7136c6feb446164bacdec80f777820",
+      "nights_on_books": 331,
+      "dates_scored": 43,
+      "flagged_behind": 3,
+      "flagged_ahead": 7,
+      "holidays_in_window": 1,
+      "holidays_with_prior_measurement": 9,
+      "forecast_mae": 3.086,
+      "pace_calls_resolved": 43
+    },
+    {
+      "as_of": "2025-11-29",
+      "fingerprint": "408193a39bd3e68ae447458c57c513c8e2d7fa83e2a5856ebb82f4eb8a1746c8",
+      "nights_on_books": 387,
+      "dates_scored": 45,
+      "flagged_behind": 0,
+      "flagged_ahead": 7,
+      "holidays_in_window": 2,
+      "holidays_with_prior_measurement": 9,
+      "forecast_mae": 3.5,
+      "pace_calls_resolved": 45
+    },
+    {
+      "as_of": "2025-12-29",
+      "fingerprint": "78227ab48cc744c7e83968de7375938615c1c03aef64c33e27ac422e9f04368a",
+      "nights_on_books": 264,
+      "dates_scored": 41,
+      "flagged_behind": 6,
+      "flagged_ahead": 0,
+      "holidays_in_window": 2,
+      "holidays_with_prior_measurement": 10,
+      "forecast_mae": 3.586,
+      "pace_calls_resolved": 41
+    },
+    {
+      "as_of": "2026-01-28",
+      "fingerprint": "48b06cd3dcfc872516f41ca295ef888174ae4d29597de63cf15c17ee8e5b2fa9",
+      "nights_on_books": 313,
+      "dates_scored": 41,
+      "flagged_behind": 1,
+      "flagged_ahead": 4,
+      "holidays_in_window": 1,
+      "holidays_with_prior_measurement": 11,
+      "forecast_mae": 3.329,
+      "pace_calls_resolved": 41
+    },
+    {
+      "as_of": "2026-02-27",
+      "fingerprint": "3b1733f9a5fa16d6112c0a0ccb61072a9a84afd78454566732ef136ffb609d89",
+      "nights_on_books": 340,
+      "dates_scored": 34,
+      "flagged_behind": 1,
+      "flagged_ahead": 1,
+      "holidays_in_window": 3,
+      "holidays_with_prior_measurement": 11,
+      "forecast_mae": 3.157,
+      "pace_calls_resolved": 34
+    },
+    {
+      "as_of": "2026-03-29",
+      "fingerprint": "a27a6a238e63943b3ae7b6055577a8fbf396cf79c22109402fbd0c45c0443aa2",
+      "nights_on_books": 412,
+      "dates_scored": 50,
+      "flagged_behind": 0,
+      "flagged_ahead": 4,
+      "holidays_in_window": 1,
+      "holidays_with_prior_measurement": 11,
+      "forecast_mae": 3.886,
+      "pace_calls_resolved": 50
+    },
+    {
+      "as_of": "2026-04-28",
+      "fingerprint": "c1888e19865fac848f04af3b3cd140a5c3dd64da86e833f878286c18fc9d1e64",
+      "nights_on_books": 355,
+      "dates_scored": 44,
+      "flagged_behind": 2,
+      "flagged_ahead": 2,
+      "holidays_in_window": 0,
+      "holidays_with_prior_measurement": 11,
+      "forecast_mae": 3.471,
+      "pace_calls_resolved": 44
+    },
+    {
+      "as_of": "2026-05-28",
+      "fingerprint": "35b32d362deeff563cdcd1a3b130aee881272d04fba74b71b144a5622adf0200",
+      "nights_on_books": 417,
+      "dates_scored": 48,
+      "flagged_behind": 0,
+      "flagged_ahead": 5,
+      "holidays_in_window": 0,
+      "holidays_with_prior_measurement": 11,
+      "forecast_mae": 3.671,
+      "pace_calls_resolved": 48
+    },
+    {
+      "as_of": "2026-06-27",
+      "fingerprint": "29f3328b5f8b48c51c1ff1c7025423b6dca196aa267ff9cd08617dc474e6024e",
+      "nights_on_books": 414,
+      "dates_scored": 56,
+      "flagged_behind": 2,
+      "flagged_ahead": 5,
+      "holidays_in_window": 0,
+      "holidays_with_prior_measurement": 11,
+      "forecast_mae": 3.5,
+      "pace_calls_resolved": 56
+    }
+  ],
+  "forecast": {
+    "note": "MAE in occupied room-nights, pooled across every replayed origin. Scored on the inventory grain, which is what the forecast targets.",
+    "by_horizon": [
+      {
+        "horizon_days": "1-3",
+        "forecasts": 42,
+        "mae_room_nights": 1.167,
+        "median_abs_error": 1.0
+      },
+      {
+        "horizon_days": "4-7",
+        "forecasts": 56,
+        "mae_room_nights": 2.464,
+        "median_abs_error": 2.0
+      },
+      {
+        "horizon_days": "8-14",
+        "forecasts": 98,
+        "mae_room_nights": 3.286,
+        "median_abs_error": 2.5
+      },
+      {
+        "horizon_days": "15-30",
+        "forecasts": 224,
+        "mae_room_nights": 3.462,
+        "median_abs_error": 3.0
+      }
+    ]
+  },
+  "pace": {
+    "note": "A call is scored against the median FINAL book of the same benchmark set -- the last 8 same-weekday dates at the same property, all completed before the as-of date. The base rate is the same measurement over every scored date, flagged or not, and a flag is only informative to the extent it beats it.",
+    "resolved": 605,
+    "base_rate_below_expectation_pct": 36.0,
+    "behind": {
+      "calls": 26,
+      "precision_pct": 100.0,
+      "recall_pct": 11.9,
+      "lift_over_base_rate_pp": 64.0,
+      "max_miss_rate_95pct": 11.5
+    },
+    "ahead": {
+      "calls": 46,
+      "precision_pct": 95.7,
+      "recall_pct": 11.4,
+      "lift_over_base_rate_pp": 31.7,
+      "max_miss_rate_95pct": null
+    },
+    "on_track": {
+      "calls": 533,
+      "finished_below_expectation_pct": 35.6
+    },
+    "naive_sign_of_gap": {
+      "note": "The same prediction from the sign of the gap alone: no p25 band, no materiality gate. The dual gate has to beat this to have earned its complexity.",
+      "below_median_at_as_of": {
+        "calls": 197,
+        "finished_below_expectation_pct": 65.0
+      },
+      "above_median_at_as_of": {
+        "calls": 353,
+        "finished_above_expectation_pct": 79.6
+      }
+    },
+    "median_nights_picked_up_after_as_of": 5
+  }
+}
