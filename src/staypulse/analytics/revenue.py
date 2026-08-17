@@ -136,6 +136,11 @@ class PaceRow:
             return "ahead"
         return "on_track"
 
+    @property
+    def confidence(self) -> str:
+        """How much weight this score carries. See `_confidence`."""
+        return _confidence(self)
+
 
 @dataclass
 class Signal:
@@ -318,33 +323,36 @@ def pace(as_of: dt.date, horizon_days: int = MAX_USEFUL_HORIZON) -> list[PaceRow
     return out
 
 
-def need_dates(as_of: dt.date, horizon_days: int = MAX_USEFUL_HORIZON) -> list[PaceRow]:
+def need_dates(as_of: dt.date, horizon_days: int = MAX_USEFUL_HORIZON,
+               scored: list[PaceRow] | None = None) -> list[PaceRow]:
     """Future stay dates running behind their own weekday's curve, worst first.
 
     Ranked by absolute room-night shortfall rather than by percentage: eight nights
     missing from a large property matters more than a 50% gap on a date carrying
     four nights, and a percentage ranking inverts that.
+
+    `scored` lets a caller that has already run `pace` for this as-of date reuse
+    the result. The benchmark query behind it is the most expensive in the module
+    and it was previously being run three times to answer one request.
     """
-    return sorted(
-        (p for p in pace(as_of, horizon_days) if p.status == "behind"),
-        key=lambda p: p.gap_nights,
-    )
+    rows = pace(as_of, horizon_days) if scored is None else scored
+    return sorted((p for p in rows if p.status == "behind"), key=lambda p: p.gap_nights)
 
 
-def constrained_dates(as_of: dt.date, horizon_days: int = MAX_USEFUL_HORIZON) -> list[PaceRow]:
+def constrained_dates(as_of: dt.date, horizon_days: int = MAX_USEFUL_HORIZON,
+                      scored: list[PaceRow] | None = None) -> list[PaceRow]:
     """Future stay dates running ahead of curve -- the other half of the job.
 
     Pace analysis that only surfaces weak dates is half an instrument. A date filling
     unusually early is the one where inventory is about to run out at a rate that was
     set before anyone knew demand would be strong.
     """
-    return sorted(
-        (p for p in pace(as_of, horizon_days) if p.status == "ahead"),
-        key=lambda p: -p.gap_nights,
-    )
+    rows = pace(as_of, horizon_days) if scored is None else scored
+    return sorted((p for p in rows if p.status == "ahead"), key=lambda p: -p.gap_nights)
 
 
-def opportunity_signals(as_of: dt.date, limit: int = 12) -> list[Signal]:
+def opportunity_signals(as_of: dt.date, limit: int = 12,
+                        scored: list[PaceRow] | None = None) -> list[Signal]:
     """Evidence-backed forward signals.
 
     Every signal states what was measured, against what baseline, with how much
@@ -353,8 +361,9 @@ def opportunity_signals(as_of: dt.date, limit: int = 12) -> list[Signal]:
     price elasticity and no booking-level rate history to fit one on.
     """
     signals: list[Signal] = []
-    behind = need_dates(as_of)
-    ahead = constrained_dates(as_of)
+    scored = pace(as_of) if scored is None else scored
+    behind = need_dates(as_of, scored=scored)
+    ahead = constrained_dates(as_of, scored=scored)
 
     for row in behind[: limit // 2]:
         signals.append(
