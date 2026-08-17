@@ -152,6 +152,40 @@ def holiday_forecast_evaluation() -> dict:
     return services.rm_holiday_forecast_evaluation()
 
 
+@router.get("/replay",
+            summary="What StayPulse knew at a past date, and what it would have said")
+def replay(
+    as_of: str | None = Query(None, description="ISO date to replay"),
+    horizon_days: int = Query(35, ge=1, le=35),
+    with_outcome: bool = Query(True, description="Include what actually happened"),
+) -> dict:
+    """Reconstruct a past decision point without hindsight.
+
+    The `decision` block is built only from what was knowable on the as-of date;
+    each input names the rule that bounds it in `information_set`. The `outcome`
+    block is the future, and it is produced by a separate call that takes the
+    decision as its input rather than the other way round.
+
+    Takes a few seconds: this reconstructs the book, the pace benchmark and a
+    forecast from scratch at the requested date.
+    """
+    return services.rm_replay(_resolve_as_of(as_of), horizon_days, with_outcome)
+
+
+@router.get("/replay/summary", summary="One replay, condensed to knew / said / happened")
+def replay_summary(
+    as_of: str | None = Query(None),
+    horizon_days: int = Query(35, ge=1, le=35),
+) -> dict:
+    return services.rm_replay_summary(_resolve_as_of(as_of), horizon_days)
+
+
+@router.get("/replay/evaluation",
+            summary="Pooled replay accuracy across many historical origins")
+def replay_evaluation() -> dict:
+    return services.rm_replay_evaluation()
+
+
 @router.get("/why", summary="Why did RevPAR change? Deterministic decomposition")
 def why(
     days: int = Query(30, ge=7, le=120,

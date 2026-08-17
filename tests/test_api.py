@@ -67,6 +67,9 @@ READ_ONLY_ENDPOINTS = [
     "/api/revenue-management/grain-reconciliation",
     "/api/revenue-management/forecast",
     "/api/revenue-management/forecast/accuracy",
+    "/api/revenue-management/replay",
+    "/api/revenue-management/replay/summary",
+    "/api/revenue-management/replay/evaluation",
     "/api/revenue-management/why",
 ]
 
@@ -324,6 +327,51 @@ class TestRevenueManagementEndpoints:
         body = client.get("/api/revenue-management/signals").text.lower()
         for phrase in ("increase rate", "lower rate", "reprice", "raise price"):
             assert phrase not in body
+
+
+class TestDecisionReplayEndpoint:
+    """The replay endpoint has to keep the decision and the outcome apart."""
+
+    def test_decision_declares_the_rule_bounding_every_input(self):
+        d = client.get(
+            "/api/revenue-management/replay?as_of=2026-06-01&with_outcome=false"
+        ).json()
+        sources = d["decision"]["information_set"]
+        assert len(sources) >= 6, (
+            "an empty information set would make the loop below inspect nothing"
+        )
+        for source in sources:
+            assert source["temporal_rule"]
+            assert source["basis"] in {"realised", "as_booked", "ex_ante"}
+
+    def test_withholding_the_outcome_actually_withholds_it(self):
+        body = client.get(
+            "/api/revenue-management/replay?as_of=2026-06-01&with_outcome=false"
+        )
+        assert "outcome" not in body.json()
+        assert "actual_room_nights" not in body.text
+
+    def test_outcome_is_served_separately_and_is_populated(self):
+        d = client.get(
+            "/api/revenue-management/replay?as_of=2026-06-01&horizon_days=30"
+        ).json()
+        assert d["outcome"]["forecast_accuracy"], "outcome present but empty"
+        assert d["outcome"]["coverage"]["resolvable_days"] > 0
+
+    def test_the_same_as_of_date_replays_identically(self):
+        url = "/api/revenue-management/replay?as_of=2026-06-01&with_outcome=false"
+        assert client.get(url).json()["fingerprint"] == client.get(url).json()["fingerprint"]
+
+    def test_evaluation_publishes_the_base_rate_next_to_the_hit_rate(self):
+        d = client.get("/api/revenue-management/replay/evaluation").json()
+        pace = d["pace"]
+        assert pace["base_rate_below_expectation_pct"] is not None, (
+            "a precision figure without its base rate is not a result"
+        )
+        assert pace["behind"]["recall_pct"] is not None, (
+            "precision without recall reports only the flattering half"
+        )
+        assert pace["naive_sign_of_gap"]["below_median_at_as_of"]["calls"] > 0
 
 
 class TestHonesty:
