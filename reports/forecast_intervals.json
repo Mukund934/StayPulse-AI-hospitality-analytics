@@ -1,0 +1,2121 @@
+{
+  "generated_at": "2026-08-18T10:04:55+00:00",
+  "target": "daily occupied room-nights, portfolio total",
+  "window": {
+    "test_days": 365,
+    "origins": 122,
+    "forecasts_evaluated": 21090
+  },
+  "default_method": "scaled_conformal",
+  "coverage": [
+    {
+      "level": 0.5,
+      "method": "absolute_plain",
+      "out_of_sample_pct": 47.2,
+      "in_sample_pct": 53.8,
+      "deviation_pp": -2.8,
+      "median_width_nights": 6.0,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 47.2,
+          "deviation_pp": -2.8,
+          "median_width_nights": 5.7,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 41.7,
+          "deviation_pp": -8.3,
+          "median_width_nights": 5.75,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 44.5,
+          "deviation_pp": -5.5,
+          "median_width_nights": 6.5,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 52.4,
+          "deviation_pp": 2.4,
+          "median_width_nights": 5.5,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 44.5,
+        "moving_average": 44.1,
+        "naive": 52.4,
+        "pickup": 49.9,
+        "seasonal_holiday": 42.8,
+        "seasonal_naive": 49.5
+      }
+    },
+    {
+      "level": 0.5,
+      "method": "absolute_conformal",
+      "out_of_sample_pct": 50.1,
+      "in_sample_pct": 55.7,
+      "deviation_pp": 0.1,
+      "median_width_nights": 6.75,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 50.7,
+          "deviation_pp": 0.7,
+          "median_width_nights": 6.0,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 44.4,
+          "deviation_pp": -5.6,
+          "median_width_nights": 6.0,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 49.5,
+          "deviation_pp": -0.5,
+          "median_width_nights": 7.0,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 54.6,
+          "deviation_pp": 4.6,
+          "median_width_nights": 6.0,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 47.7,
+        "moving_average": 47.7,
+        "naive": 55.9,
+        "pickup": 51.8,
+        "seasonal_holiday": 45.3,
+        "seasonal_naive": 52.2
+      }
+    },
+    {
+      "level": 0.5,
+      "method": "scaled_plain",
+      "out_of_sample_pct": 49.5,
+      "in_sample_pct": 51.0,
+      "deviation_pp": -0.5,
+      "median_width_nights": 6.96,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 48.2,
+          "deviation_pp": -1.8,
+          "median_width_nights": 6.1,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 43.0,
+          "deviation_pp": -7.0,
+          "median_width_nights": 6.22,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 48.2,
+          "deviation_pp": -1.8,
+          "median_width_nights": 7.15,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 54.8,
+          "deviation_pp": 4.8,
+          "median_width_nights": 6.04,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 48.1,
+        "moving_average": 49.1,
+        "naive": 52.8,
+        "pickup": 50.7,
+        "seasonal_holiday": 45.6,
+        "seasonal_naive": 50.6
+      }
+    },
+    {
+      "level": 0.5,
+      "method": "scaled_conformal",
+      "out_of_sample_pct": 52.6,
+      "in_sample_pct": 52.8,
+      "deviation_pp": 2.6,
+      "median_width_nights": 7.55,
+      "forecasts_scored": 16680,
+      "is_default": true,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 51.8,
+          "deviation_pp": 1.8,
+          "median_width_nights": 6.51,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 46.8,
+          "deviation_pp": -3.2,
+          "median_width_nights": 6.75,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 52.0,
+          "deviation_pp": 2.0,
+          "median_width_nights": 7.94,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 57.6,
+          "deviation_pp": 7.6,
+          "median_width_nights": 6.74,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 51.3,
+        "moving_average": 52.2,
+        "naive": 56.5,
+        "pickup": 53.2,
+        "seasonal_holiday": 49.2,
+        "seasonal_naive": 53.1
+      }
+    },
+    {
+      "level": 0.8,
+      "method": "absolute_plain",
+      "out_of_sample_pct": 74.1,
+      "in_sample_pct": 82.7,
+      "deviation_pp": -5.9,
+      "median_width_nights": 11.46,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 71.2,
+          "deviation_pp": -8.8,
+          "median_width_nights": 10.25,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 66.3,
+          "deviation_pp": -13.7,
+          "median_width_nights": 11.0,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 76.2,
+          "deviation_pp": -3.8,
+          "median_width_nights": 11.87,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 78.5,
+          "deviation_pp": -1.5,
+          "median_width_nights": 11.0,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 71.6,
+        "moving_average": 71.7,
+        "naive": 79.7,
+        "pickup": 76.4,
+        "seasonal_holiday": 69.8,
+        "seasonal_naive": 75.5
+      }
+    },
+    {
+      "level": 0.8,
+      "method": "absolute_conformal",
+      "out_of_sample_pct": 78.6,
+      "in_sample_pct": 84.6,
+      "deviation_pp": -1.4,
+      "median_width_nights": 12.66,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 76.3,
+          "deviation_pp": -3.7,
+          "median_width_nights": 11.0,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 71.3,
+          "deviation_pp": -8.7,
+          "median_width_nights": 12.32,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 81.0,
+          "deviation_pp": 1.0,
+          "median_width_nights": 13.0,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 82.5,
+          "deviation_pp": 2.5,
+          "median_width_nights": 12.63,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 76.2,
+        "moving_average": 76.2,
+        "naive": 83.7,
+        "pickup": 80.4,
+        "seasonal_holiday": 74.7,
+        "seasonal_naive": 80.4
+      }
+    },
+    {
+      "level": 0.8,
+      "method": "scaled_plain",
+      "out_of_sample_pct": 77.7,
+      "in_sample_pct": 81.0,
+      "deviation_pp": -2.3,
+      "median_width_nights": 12.98,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 75.5,
+          "deviation_pp": -4.5,
+          "median_width_nights": 10.79,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 71.6,
+          "deviation_pp": -8.4,
+          "median_width_nights": 11.59,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 80.0,
+          "deviation_pp": 0.0,
+          "median_width_nights": 14.36,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 80.9,
+          "deviation_pp": 0.9,
+          "median_width_nights": 12.32,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 75.6,
+        "moving_average": 77.3,
+        "naive": 82.0,
+        "pickup": 79.5,
+        "seasonal_holiday": 73.6,
+        "seasonal_naive": 78.2
+      }
+    },
+    {
+      "level": 0.8,
+      "method": "scaled_conformal",
+      "out_of_sample_pct": 82.6,
+      "in_sample_pct": 83.3,
+      "deviation_pp": 2.6,
+      "median_width_nights": 14.52,
+      "forecasts_scored": 16680,
+      "is_default": true,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 80.7,
+          "deviation_pp": 0.7,
+          "median_width_nights": 11.68,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 75.9,
+          "deviation_pp": -4.1,
+          "median_width_nights": 12.99,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 84.0,
+          "deviation_pp": 4.0,
+          "median_width_nights": 15.22,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 86.1,
+          "deviation_pp": 6.1,
+          "median_width_nights": 14.36,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 80.3,
+        "moving_average": 82.2,
+        "naive": 86.8,
+        "pickup": 83.6,
+        "seasonal_holiday": 79.6,
+        "seasonal_naive": 83.2
+      }
+    },
+    {
+      "level": 0.95,
+      "method": "absolute_plain",
+      "out_of_sample_pct": 90.9,
+      "in_sample_pct": 96.7,
+      "deviation_pp": -4.1,
+      "median_width_nights": 17.5,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 90.5,
+          "deviation_pp": -4.5,
+          "median_width_nights": 14.0,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 89.1,
+          "deviation_pp": -5.9,
+          "median_width_nights": 18.25,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 91.1,
+          "deviation_pp": -3.9,
+          "median_width_nights": 18.56,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 92.6,
+          "deviation_pp": -2.4,
+          "median_width_nights": 16.07,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 88.9,
+        "moving_average": 89.5,
+        "naive": 93.5,
+        "pickup": 92.1,
+        "seasonal_holiday": 89.8,
+        "seasonal_naive": 91.5
+      }
+    },
+    {
+      "level": 0.95,
+      "method": "absolute_conformal",
+      "out_of_sample_pct": 93.9,
+      "in_sample_pct": 98.7,
+      "deviation_pp": -1.1,
+      "median_width_nights": 20.18,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 93.6,
+          "deviation_pp": -1.4,
+          "median_width_nights": 17.41,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 91.8,
+          "deviation_pp": -3.2,
+          "median_width_nights": 20.0,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 93.4,
+          "deviation_pp": -1.6,
+          "median_width_nights": 22.5,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 94.2,
+          "deviation_pp": -0.8,
+          "median_width_nights": 18.5,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 92.8,
+        "moving_average": 92.5,
+        "naive": 95.6,
+        "pickup": 94.7,
+        "seasonal_holiday": 93.2,
+        "seasonal_naive": 94.3
+      }
+    },
+    {
+      "level": 0.95,
+      "method": "scaled_plain",
+      "out_of_sample_pct": 93.2,
+      "in_sample_pct": 96.3,
+      "deviation_pp": -1.8,
+      "median_width_nights": 19.97,
+      "forecasts_scored": 16680,
+      "is_default": false,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 92.8,
+          "deviation_pp": -2.2,
+          "median_width_nights": 16.05,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 90.6,
+          "deviation_pp": -4.4,
+          "median_width_nights": 19.42,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 92.7,
+          "deviation_pp": -2.3,
+          "median_width_nights": 20.93,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 94.2,
+          "deviation_pp": -0.8,
+          "median_width_nights": 19.08,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 92.1,
+        "moving_average": 92.9,
+        "naive": 95.0,
+        "pickup": 93.8,
+        "seasonal_holiday": 92.3,
+        "seasonal_naive": 93.4
+      }
+    },
+    {
+      "level": 0.95,
+      "method": "scaled_conformal",
+      "out_of_sample_pct": 95.1,
+      "in_sample_pct": 98.5,
+      "deviation_pp": 0.1,
+      "median_width_nights": 22.99,
+      "forecasts_scored": 16680,
+      "is_default": true,
+      "by_horizon": {
+        "1": {
+          "forecasts": 612,
+          "coverage_pct": 94.6,
+          "deviation_pp": -0.4,
+          "median_width_nights": 18.8,
+          "median_calibration_residuals": 70
+        },
+        "7": {
+          "forecasts": 588,
+          "coverage_pct": 92.2,
+          "deviation_pp": -2.8,
+          "median_width_nights": 21.53,
+          "median_calibration_residuals": 68
+        },
+        "14": {
+          "forecasts": 564,
+          "coverage_pct": 95.4,
+          "deviation_pp": 0.4,
+          "median_width_nights": 25.05,
+          "median_calibration_residuals": 66
+        },
+        "30": {
+          "forecasts": 498,
+          "coverage_pct": 95.8,
+          "deviation_pp": 0.8,
+          "median_width_nights": 21.16,
+          "median_calibration_residuals": 61
+        }
+      },
+      "by_model": {
+        "dow_moving_average": 94.6,
+        "moving_average": 94.6,
+        "naive": 96.4,
+        "pickup": 95.8,
+        "seasonal_holiday": 94.2,
+        "seasonal_naive": 94.8
+      }
+    }
+  ],
+  "headline_accuracy": [
+    {
+      "model": "naive",
+      "horizon_days": 1,
+      "observations": 122,
+      "mae_nights": 2.96,
+      "rmse_nights": 3.64,
+      "mape_pct": 11.77,
+      "bias_nights": -0.5
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 1,
+      "observations": 122,
+      "mae_nights": 3.98,
+      "rmse_nights": 4.91,
+      "mape_pct": 15.85,
+      "bias_nights": -0.7
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 1,
+      "observations": 122,
+      "mae_nights": 3.81,
+      "rmse_nights": 4.6,
+      "mape_pct": 15.35,
+      "bias_nights": -0.73
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 1,
+      "observations": 122,
+      "mae_nights": 4.04,
+      "rmse_nights": 4.92,
+      "mape_pct": 16.22,
+      "bias_nights": -0.82
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 1,
+      "observations": 122,
+      "mae_nights": 1.17,
+      "rmse_nights": 1.5,
+      "mape_pct": 4.52,
+      "bias_nights": 0.09
+    },
+    {
+      "model": "seasonal_holiday",
+      "horizon_days": 1,
+      "observations": 122,
+      "mae_nights": 4.22,
+      "rmse_nights": 5.11,
+      "mape_pct": 16.96,
+      "bias_nights": -0.56
+    },
+    {
+      "model": "naive",
+      "horizon_days": 7,
+      "observations": 120,
+      "mae_nights": 3.97,
+      "rmse_nights": 4.91,
+      "mape_pct": 15.74,
+      "bias_nights": -0.72
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 7,
+      "observations": 120,
+      "mae_nights": 3.97,
+      "rmse_nights": 4.91,
+      "mape_pct": 15.74,
+      "bias_nights": -0.72
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 7,
+      "observations": 120,
+      "mae_nights": 3.99,
+      "rmse_nights": 4.88,
+      "mape_pct": 15.97,
+      "bias_nights": -0.88
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 7,
+      "observations": 120,
+      "mae_nights": 4.04,
+      "rmse_nights": 4.92,
+      "mape_pct": 16.16,
+      "bias_nights": -0.86
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 7,
+      "observations": 120,
+      "mae_nights": 2.66,
+      "rmse_nights": 3.23,
+      "mape_pct": 10.4,
+      "bias_nights": -0.55
+    },
+    {
+      "model": "seasonal_holiday",
+      "horizon_days": 7,
+      "observations": 120,
+      "mae_nights": 4.22,
+      "rmse_nights": 5.12,
+      "mape_pct": 16.91,
+      "bias_nights": -0.6
+    },
+    {
+      "model": "naive",
+      "horizon_days": 14,
+      "observations": 118,
+      "mae_nights": 4.77,
+      "rmse_nights": 5.82,
+      "mape_pct": 20.12,
+      "bias_nights": -0.33
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 14,
+      "observations": 118,
+      "mae_nights": 4.77,
+      "rmse_nights": 5.82,
+      "mape_pct": 20.12,
+      "bias_nights": -0.33
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 14,
+      "observations": 118,
+      "mae_nights": 3.66,
+      "rmse_nights": 4.61,
+      "mape_pct": 15.75,
+      "bias_nights": -0.49
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 14,
+      "observations": 118,
+      "mae_nights": 3.79,
+      "rmse_nights": 4.71,
+      "mape_pct": 16.1,
+      "bias_nights": -0.47
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 14,
+      "observations": 118,
+      "mae_nights": 3.6,
+      "rmse_nights": 4.44,
+      "mape_pct": 14.97,
+      "bias_nights": -0.29
+    },
+    {
+      "model": "seasonal_holiday",
+      "horizon_days": 14,
+      "observations": 118,
+      "mae_nights": 3.91,
+      "rmse_nights": 4.89,
+      "mape_pct": 16.64,
+      "bias_nights": -0.04
+    },
+    {
+      "model": "naive",
+      "horizon_days": 30,
+      "observations": 112,
+      "mae_nights": 4.51,
+      "rmse_nights": 5.79,
+      "mape_pct": 18.23,
+      "bias_nights": -0.81
+    },
+    {
+      "model": "seasonal_naive",
+      "horizon_days": 30,
+      "observations": 112,
+      "mae_nights": 4.19,
+      "rmse_nights": 5.18,
+      "mape_pct": 16.78,
+      "bias_nights": -0.6
+    },
+    {
+      "model": "moving_average",
+      "horizon_days": 30,
+      "observations": 112,
+      "mae_nights": 3.28,
+      "rmse_nights": 4.03,
+      "mape_pct": 13.41,
+      "bias_nights": -1.04
+    },
+    {
+      "model": "dow_moving_average",
+      "horizon_days": 30,
+      "observations": 112,
+      "mae_nights": 2.99,
+      "rmse_nights": 3.91,
+      "mape_pct": 12.09,
+      "bias_nights": -1.0
+    },
+    {
+      "model": "pickup",
+      "horizon_days": 30,
+      "observations": 112,
+      "mae_nights": 3.38,
+      "rmse_nights": 4.25,
+      "mape_pct": 13.43,
+      "bias_nights": -1.17
+    },
+    {
+      "model": "seasonal_holiday",
+      "horizon_days": 30,
+      "observations": 112,
+      "mae_nights": 3.18,
+      "rmse_nights": 4.15,
+      "mape_pct": 12.97,
+      "bias_nights": -0.82
+    }
+  ],
+  "slices": {
+    "min_observations_per_cell": 30,
+    "by_horizon": [
+      {
+        "slice": 1,
+        "forecasts": 732,
+        "best_model": "pickup",
+        "best_mae_nights": 1.172,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 122,
+            "mae_nights": 1.172,
+            "rmse_nights": 1.504,
+            "bias_nights": 0.09
+          },
+          {
+            "model": "naive",
+            "observations": 122,
+            "mae_nights": 2.959,
+            "rmse_nights": 3.636,
+            "bias_nights": -0.5
+          },
+          {
+            "model": "moving_average",
+            "observations": 122,
+            "mae_nights": 3.813,
+            "rmse_nights": 4.605,
+            "bias_nights": -0.731
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 122,
+            "mae_nights": 3.984,
+            "rmse_nights": 4.914,
+            "bias_nights": -0.705
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 122,
+            "mae_nights": 4.037,
+            "rmse_nights": 4.916,
+            "bias_nights": -0.82
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 122,
+            "mae_nights": 4.222,
+            "rmse_nights": 5.107,
+            "bias_nights": -0.561
+          }
+        ]
+      },
+      {
+        "slice": 7,
+        "forecasts": 720,
+        "best_model": "pickup",
+        "best_mae_nights": 2.663,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 120,
+            "mae_nights": 2.663,
+            "rmse_nights": 3.233,
+            "bias_nights": -0.554
+          },
+          {
+            "model": "naive",
+            "observations": 120,
+            "mae_nights": 3.967,
+            "rmse_nights": 4.913,
+            "bias_nights": -0.717
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 120,
+            "mae_nights": 3.967,
+            "rmse_nights": 4.913,
+            "bias_nights": -0.717
+          },
+          {
+            "model": "moving_average",
+            "observations": 120,
+            "mae_nights": 3.986,
+            "rmse_nights": 4.884,
+            "bias_nights": -0.884
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 120,
+            "mae_nights": 4.035,
+            "rmse_nights": 4.922,
+            "bias_nights": -0.865
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 120,
+            "mae_nights": 4.224,
+            "rmse_nights": 5.117,
+            "bias_nights": -0.601
+          }
+        ]
+      },
+      {
+        "slice": 14,
+        "forecasts": 708,
+        "best_model": "pickup",
+        "best_mae_nights": 3.602,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 118,
+            "mae_nights": 3.602,
+            "rmse_nights": 4.443,
+            "bias_nights": -0.288
+          },
+          {
+            "model": "moving_average",
+            "observations": 118,
+            "mae_nights": 3.66,
+            "rmse_nights": 4.608,
+            "bias_nights": -0.492
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 118,
+            "mae_nights": 3.79,
+            "rmse_nights": 4.706,
+            "bias_nights": -0.468
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 118,
+            "mae_nights": 3.914,
+            "rmse_nights": 4.891,
+            "bias_nights": -0.037
+          },
+          {
+            "model": "naive",
+            "observations": 118,
+            "mae_nights": 4.771,
+            "rmse_nights": 5.819,
+            "bias_nights": -0.331
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 118,
+            "mae_nights": 4.771,
+            "rmse_nights": 5.819,
+            "bias_nights": -0.331
+          }
+        ]
+      },
+      {
+        "slice": 30,
+        "forecasts": 672,
+        "best_model": "dow_moving_average",
+        "best_mae_nights": 2.993,
+        "models": [
+          {
+            "model": "dow_moving_average",
+            "observations": 112,
+            "mae_nights": 2.993,
+            "rmse_nights": 3.906,
+            "bias_nights": -0.998
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 112,
+            "mae_nights": 3.181,
+            "rmse_nights": 4.153,
+            "bias_nights": -0.816
+          },
+          {
+            "model": "moving_average",
+            "observations": 112,
+            "mae_nights": 3.283,
+            "rmse_nights": 4.034,
+            "bias_nights": -1.036
+          },
+          {
+            "model": "pickup",
+            "observations": 112,
+            "mae_nights": 3.379,
+            "rmse_nights": 4.246,
+            "bias_nights": -1.165
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 112,
+            "mae_nights": 4.188,
+            "rmse_nights": 5.185,
+            "bias_nights": -0.598
+          },
+          {
+            "model": "naive",
+            "observations": 112,
+            "mae_nights": 4.509,
+            "rmse_nights": 5.792,
+            "bias_nights": -0.812
+          }
+        ]
+      }
+    ],
+    "by_month": [
+      {
+        "slice": "2025-08",
+        "forecasts": 462,
+        "best_model": "moving_average",
+        "best_mae_nights": 2.227,
+        "models": [
+          {
+            "model": "moving_average",
+            "observations": 77,
+            "mae_nights": 2.227,
+            "rmse_nights": 2.788,
+            "bias_nights": 0.168
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 77,
+            "mae_nights": 2.364,
+            "rmse_nights": 3.145,
+            "bias_nights": 0.026
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 77,
+            "mae_nights": 2.364,
+            "rmse_nights": 3.145,
+            "bias_nights": 0.026
+          },
+          {
+            "model": "pickup",
+            "observations": 77,
+            "mae_nights": 2.409,
+            "rmse_nights": 3.146,
+            "bias_nights": 1.019
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 77,
+            "mae_nights": 3.273,
+            "rmse_nights": 4.187,
+            "bias_nights": -0.182
+          },
+          {
+            "model": "naive",
+            "observations": 77,
+            "mae_nights": 3.597,
+            "rmse_nights": 4.442,
+            "bias_nights": 0.61
+          }
+        ]
+      },
+      {
+        "slice": "2025-09",
+        "forecasts": 1728,
+        "best_model": "pickup",
+        "best_mae_nights": 2.686,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 288,
+            "mae_nights": 2.686,
+            "rmse_nights": 3.326,
+            "bias_nights": 0.946
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 288,
+            "mae_nights": 2.812,
+            "rmse_nights": 3.378,
+            "bias_nights": -0.076
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 288,
+            "mae_nights": 2.812,
+            "rmse_nights": 3.378,
+            "bias_nights": -0.076
+          },
+          {
+            "model": "moving_average",
+            "observations": 288,
+            "mae_nights": 2.931,
+            "rmse_nights": 3.468,
+            "bias_nights": -0.086
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 288,
+            "mae_nights": 3.493,
+            "rmse_nights": 4.172,
+            "bias_nights": 0.153
+          },
+          {
+            "model": "naive",
+            "observations": 288,
+            "mae_nights": 3.851,
+            "rmse_nights": 4.777,
+            "bias_nights": 0.434
+          }
+        ]
+      },
+      {
+        "slice": "2025-10",
+        "forecasts": 1860,
+        "best_model": "pickup",
+        "best_mae_nights": 2.298,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 310,
+            "mae_nights": 2.298,
+            "rmse_nights": 2.841,
+            "bias_nights": -0.521
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 310,
+            "mae_nights": 2.878,
+            "rmse_nights": 3.456,
+            "bias_nights": -0.162
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 310,
+            "mae_nights": 2.878,
+            "rmse_nights": 3.456,
+            "bias_nights": -0.162
+          },
+          {
+            "model": "moving_average",
+            "observations": 310,
+            "mae_nights": 3.383,
+            "rmse_nights": 3.967,
+            "bias_nights": -0.315
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 310,
+            "mae_nights": 3.784,
+            "rmse_nights": 4.72,
+            "bias_nights": -0.352
+          },
+          {
+            "model": "naive",
+            "observations": 310,
+            "mae_nights": 4.545,
+            "rmse_nights": 5.615,
+            "bias_nights": -0.539
+          }
+        ]
+      },
+      {
+        "slice": "2025-11",
+        "forecasts": 1800,
+        "best_model": "pickup",
+        "best_mae_nights": 2.742,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 300,
+            "mae_nights": 2.742,
+            "rmse_nights": 3.599,
+            "bias_nights": -0.795
+          },
+          {
+            "model": "moving_average",
+            "observations": 300,
+            "mae_nights": 2.922,
+            "rmse_nights": 3.859,
+            "bias_nights": -0.083
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 300,
+            "mae_nights": 3.398,
+            "rmse_nights": 4.101,
+            "bias_nights": -0.168
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 300,
+            "mae_nights": 3.398,
+            "rmse_nights": 4.101,
+            "bias_nights": -0.168
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 300,
+            "mae_nights": 4.343,
+            "rmse_nights": 5.329,
+            "bias_nights": 0.177
+          },
+          {
+            "model": "naive",
+            "observations": 300,
+            "mae_nights": 4.527,
+            "rmse_nights": 5.592,
+            "bias_nights": 0.213
+          }
+        ]
+      },
+      {
+        "slice": "2025-12",
+        "forecasts": 1860,
+        "best_model": "pickup",
+        "best_mae_nights": 3.848,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 310,
+            "mae_nights": 3.848,
+            "rmse_nights": 4.766,
+            "bias_nights": 1.326
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 310,
+            "mae_nights": 4.8,
+            "rmse_nights": 5.854,
+            "bias_nights": 1.335
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 310,
+            "mae_nights": 4.8,
+            "rmse_nights": 5.854,
+            "bias_nights": 1.335
+          },
+          {
+            "model": "moving_average",
+            "observations": 310,
+            "mae_nights": 4.874,
+            "rmse_nights": 5.824,
+            "bias_nights": 1.35
+          },
+          {
+            "model": "naive",
+            "observations": 310,
+            "mae_nights": 5.561,
+            "rmse_nights": 6.942,
+            "bias_nights": 1.665
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 310,
+            "mae_nights": 5.645,
+            "rmse_nights": 7.051,
+            "bias_nights": 1.632
+          }
+        ]
+      },
+      {
+        "slice": "2026-01",
+        "forecasts": 1860,
+        "best_model": "pickup",
+        "best_mae_nights": 2.597,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 310,
+            "mae_nights": 2.597,
+            "rmse_nights": 3.328,
+            "bias_nights": -1.313
+          },
+          {
+            "model": "moving_average",
+            "observations": 310,
+            "mae_nights": 3.642,
+            "rmse_nights": 4.382,
+            "bias_nights": -2.674
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 310,
+            "mae_nights": 3.754,
+            "rmse_nights": 4.57,
+            "bias_nights": -2.657
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 310,
+            "mae_nights": 3.754,
+            "rmse_nights": 4.57,
+            "bias_nights": -2.657
+          },
+          {
+            "model": "naive",
+            "observations": 310,
+            "mae_nights": 4.61,
+            "rmse_nights": 5.944,
+            "bias_nights": -2.7
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 310,
+            "mae_nights": 5.203,
+            "rmse_nights": 6.817,
+            "bias_nights": -3.274
+          }
+        ]
+      },
+      {
+        "slice": "2026-02",
+        "forecasts": 1680,
+        "best_model": "pickup",
+        "best_mae_nights": 2.864,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 280,
+            "mae_nights": 2.864,
+            "rmse_nights": 3.629,
+            "bias_nights": -0.354
+          },
+          {
+            "model": "moving_average",
+            "observations": 280,
+            "mae_nights": 3.06,
+            "rmse_nights": 3.805,
+            "bias_nights": 0.287
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 280,
+            "mae_nights": 3.165,
+            "rmse_nights": 3.84,
+            "bias_nights": 0.31
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 280,
+            "mae_nights": 3.629,
+            "rmse_nights": 4.38,
+            "bias_nights": 1.157
+          },
+          {
+            "model": "naive",
+            "observations": 280,
+            "mae_nights": 3.836,
+            "rmse_nights": 4.674,
+            "bias_nights": -0.15
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 280,
+            "mae_nights": 3.952,
+            "rmse_nights": 4.924,
+            "bias_nights": -0.827
+          }
+        ]
+      },
+      {
+        "slice": "2026-03",
+        "forecasts": 1860,
+        "best_model": "pickup",
+        "best_mae_nights": 3.189,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 310,
+            "mae_nights": 3.189,
+            "rmse_nights": 3.922,
+            "bias_nights": -1.518
+          },
+          {
+            "model": "moving_average",
+            "observations": 310,
+            "mae_nights": 3.282,
+            "rmse_nights": 4.178,
+            "bias_nights": -2.261
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 310,
+            "mae_nights": 3.51,
+            "rmse_nights": 4.398,
+            "bias_nights": -2.338
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 310,
+            "mae_nights": 4.257,
+            "rmse_nights": 5.119,
+            "bias_nights": 1.148
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 310,
+            "mae_nights": 4.468,
+            "rmse_nights": 5.654,
+            "bias_nights": -1.913
+          },
+          {
+            "model": "naive",
+            "observations": 310,
+            "mae_nights": 4.823,
+            "rmse_nights": 5.957,
+            "bias_nights": -2.068
+          }
+        ]
+      },
+      {
+        "slice": "2026-04",
+        "forecasts": 1800,
+        "best_model": "pickup",
+        "best_mae_nights": 3.432,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 300,
+            "mae_nights": 3.432,
+            "rmse_nights": 4.373,
+            "bias_nights": -2.602
+          },
+          {
+            "model": "moving_average",
+            "observations": 300,
+            "mae_nights": 4.641,
+            "rmse_nights": 5.44,
+            "bias_nights": -4.017
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 300,
+            "mae_nights": 4.778,
+            "rmse_nights": 5.448,
+            "bias_nights": -3.95
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 300,
+            "mae_nights": 4.807,
+            "rmse_nights": 5.955,
+            "bias_nights": -3.42
+          },
+          {
+            "model": "naive",
+            "observations": 300,
+            "mae_nights": 5.163,
+            "rmse_nights": 6.197,
+            "bias_nights": -3.39
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 300,
+            "mae_nights": 5.278,
+            "rmse_nights": 5.97,
+            "bias_nights": -3.045
+          }
+        ]
+      },
+      {
+        "slice": "2026-05",
+        "forecasts": 1860,
+        "best_model": "pickup",
+        "best_mae_nights": 2.969,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 310,
+            "mae_nights": 2.969,
+            "rmse_nights": 3.658,
+            "bias_nights": -0.273
+          },
+          {
+            "model": "moving_average",
+            "observations": 310,
+            "mae_nights": 3.549,
+            "rmse_nights": 4.489,
+            "bias_nights": 1.795
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 310,
+            "mae_nights": 3.879,
+            "rmse_nights": 4.874,
+            "bias_nights": 1.648
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 310,
+            "mae_nights": 3.879,
+            "rmse_nights": 4.874,
+            "bias_nights": 1.648
+          },
+          {
+            "model": "naive",
+            "observations": 310,
+            "mae_nights": 4.794,
+            "rmse_nights": 5.896,
+            "bias_nights": 2.277
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 310,
+            "mae_nights": 4.89,
+            "rmse_nights": 6.034,
+            "bias_nights": 2.284
+          }
+        ]
+      },
+      {
+        "slice": "2026-06",
+        "forecasts": 1800,
+        "best_model": "pickup",
+        "best_mae_nights": 3.893,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 300,
+            "mae_nights": 3.893,
+            "rmse_nights": 4.805,
+            "bias_nights": -2.333
+          },
+          {
+            "model": "moving_average",
+            "observations": 300,
+            "mae_nights": 4.927,
+            "rmse_nights": 5.73,
+            "bias_nights": -2.436
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 300,
+            "mae_nights": 4.947,
+            "rmse_nights": 5.788,
+            "bias_nights": -2.377
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 300,
+            "mae_nights": 4.947,
+            "rmse_nights": 5.788,
+            "bias_nights": -2.377
+          },
+          {
+            "model": "naive",
+            "observations": 300,
+            "mae_nights": 5.07,
+            "rmse_nights": 6.188,
+            "bias_nights": -0.97
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 300,
+            "mae_nights": 5.897,
+            "rmse_nights": 7.088,
+            "bias_nights": -1.557
+          }
+        ]
+      },
+      {
+        "slice": "2026-07",
+        "forecasts": 1860,
+        "best_model": "moving_average",
+        "best_mae_nights": 3.153,
+        "models": [
+          {
+            "model": "moving_average",
+            "observations": 310,
+            "mae_nights": 3.153,
+            "rmse_nights": 3.902,
+            "bias_nights": -0.067
+          },
+          {
+            "model": "pickup",
+            "observations": 310,
+            "mae_nights": 3.223,
+            "rmse_nights": 4.132,
+            "bias_nights": 0.765
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 310,
+            "mae_nights": 3.227,
+            "rmse_nights": 4.209,
+            "bias_nights": 0.057
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 310,
+            "mae_nights": 3.227,
+            "rmse_nights": 4.209,
+            "bias_nights": 0.057
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 310,
+            "mae_nights": 4.429,
+            "rmse_nights": 5.569,
+            "bias_nights": -0.139
+          },
+          {
+            "model": "naive",
+            "observations": 310,
+            "mae_nights": 4.558,
+            "rmse_nights": 5.942,
+            "bias_nights": -0.874
+          }
+        ]
+      },
+      {
+        "slice": "2026-08",
+        "forecasts": 660,
+        "best_model": "pickup",
+        "best_mae_nights": 2.836,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 110,
+            "mae_nights": 2.836,
+            "rmse_nights": 3.662,
+            "bias_nights": -1.073
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 110,
+            "mae_nights": 3.666,
+            "rmse_nights": 4.295,
+            "bias_nights": -2.161
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 110,
+            "mae_nights": 3.666,
+            "rmse_nights": 4.295,
+            "bias_nights": -2.161
+          },
+          {
+            "model": "moving_average",
+            "observations": 110,
+            "mae_nights": 4.456,
+            "rmse_nights": 5.172,
+            "bias_nights": -1.685
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 110,
+            "mae_nights": 4.818,
+            "rmse_nights": 6.002,
+            "bias_nights": -2.182
+          },
+          {
+            "model": "naive",
+            "observations": 110,
+            "mae_nights": 5.245,
+            "rmse_nights": 6.429,
+            "bias_nights": -1.573
+          }
+        ]
+      }
+    ],
+    "by_weekday": [
+      {
+        "slice": "Monday",
+        "forecasts": 3030,
+        "best_model": "pickup",
+        "best_mae_nights": 3.189,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 505,
+            "mae_nights": 3.189,
+            "rmse_nights": 4.181,
+            "bias_nights": -0.662
+          },
+          {
+            "model": "moving_average",
+            "observations": 505,
+            "mae_nights": 4.406,
+            "rmse_nights": 5.377,
+            "bias_nights": -0.143
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 505,
+            "mae_nights": 4.826,
+            "rmse_nights": 5.82,
+            "bias_nights": -0.767
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 505,
+            "mae_nights": 4.872,
+            "rmse_nights": 5.901,
+            "bias_nights": -0.583
+          },
+          {
+            "model": "naive",
+            "observations": 505,
+            "mae_nights": 5.206,
+            "rmse_nights": 6.422,
+            "bias_nights": -0.053
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 505,
+            "mae_nights": 5.802,
+            "rmse_nights": 7.16,
+            "bias_nights": -0.467
+          }
+        ]
+      },
+      {
+        "slice": "Tuesday",
+        "forecasts": 3042,
+        "best_model": "pickup",
+        "best_mae_nights": 2.929,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 507,
+            "mae_nights": 2.929,
+            "rmse_nights": 3.715,
+            "bias_nights": -0.625
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 507,
+            "mae_nights": 3.642,
+            "rmse_nights": 4.437,
+            "bias_nights": -0.797
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 507,
+            "mae_nights": 3.76,
+            "rmse_nights": 4.598,
+            "bias_nights": -0.406
+          },
+          {
+            "model": "moving_average",
+            "observations": 507,
+            "mae_nights": 3.79,
+            "rmse_nights": 4.563,
+            "bias_nights": -1.533
+          },
+          {
+            "model": "naive",
+            "observations": 507,
+            "mae_nights": 4.688,
+            "rmse_nights": 5.882,
+            "bias_nights": -1.41
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 507,
+            "mae_nights": 4.787,
+            "rmse_nights": 5.946,
+            "bias_nights": -0.684
+          }
+        ]
+      },
+      {
+        "slice": "Wednesday",
+        "forecasts": 2988,
+        "best_model": "pickup",
+        "best_mae_nights": 3.037,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 498,
+            "mae_nights": 3.037,
+            "rmse_nights": 3.884,
+            "bias_nights": -0.67
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 498,
+            "mae_nights": 3.947,
+            "rmse_nights": 4.878,
+            "bias_nights": -0.946
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 498,
+            "mae_nights": 4.038,
+            "rmse_nights": 4.965,
+            "bias_nights": -0.456
+          },
+          {
+            "model": "moving_average",
+            "observations": 498,
+            "mae_nights": 4.157,
+            "rmse_nights": 4.982,
+            "bias_nights": -2.138
+          },
+          {
+            "model": "naive",
+            "observations": 498,
+            "mae_nights": 4.787,
+            "rmse_nights": 5.995,
+            "bias_nights": -1.944
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 498,
+            "mae_nights": 4.857,
+            "rmse_nights": 6.057,
+            "bias_nights": -0.629
+          }
+        ]
+      },
+      {
+        "slice": "Thursday",
+        "forecasts": 2994,
+        "best_model": "pickup",
+        "best_mae_nights": 3.097,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 499,
+            "mae_nights": 3.097,
+            "rmse_nights": 3.826,
+            "bias_nights": -0.508
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 499,
+            "mae_nights": 3.375,
+            "rmse_nights": 4.237,
+            "bias_nights": -0.764
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 499,
+            "mae_nights": 3.398,
+            "rmse_nights": 4.262,
+            "bias_nights": -0.635
+          },
+          {
+            "model": "moving_average",
+            "observations": 499,
+            "mae_nights": 3.721,
+            "rmse_nights": 4.406,
+            "bias_nights": -2.063
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 499,
+            "mae_nights": 3.938,
+            "rmse_nights": 5.131,
+            "bias_nights": -0.407
+          },
+          {
+            "model": "naive",
+            "observations": 499,
+            "mae_nights": 4.331,
+            "rmse_nights": 5.483,
+            "bias_nights": -1.814
+          }
+        ]
+      },
+      {
+        "slice": "Friday",
+        "forecasts": 3006,
+        "best_model": "dow_moving_average",
+        "best_mae_nights": 2.716,
+        "models": [
+          {
+            "model": "dow_moving_average",
+            "observations": 501,
+            "mae_nights": 2.716,
+            "rmse_nights": 3.369,
+            "bias_nights": -0.748
+          },
+          {
+            "model": "moving_average",
+            "observations": 501,
+            "mae_nights": 2.789,
+            "rmse_nights": 3.531,
+            "bias_nights": -1.589
+          },
+          {
+            "model": "pickup",
+            "observations": 501,
+            "mae_nights": 2.899,
+            "rmse_nights": 3.709,
+            "bias_nights": -0.65
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 501,
+            "mae_nights": 2.982,
+            "rmse_nights": 3.77,
+            "bias_nights": -0.473
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 501,
+            "mae_nights": 3.435,
+            "rmse_nights": 4.216,
+            "bias_nights": -0.453
+          },
+          {
+            "model": "naive",
+            "observations": 501,
+            "mae_nights": 4.09,
+            "rmse_nights": 5.094,
+            "bias_nights": -1.271
+          }
+        ]
+      },
+      {
+        "slice": "Saturday",
+        "forecasts": 3012,
+        "best_model": "pickup",
+        "best_mae_nights": 3.061,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 502,
+            "mae_nights": 3.061,
+            "rmse_nights": 3.87,
+            "bias_nights": -0.132
+          },
+          {
+            "model": "moving_average",
+            "observations": 502,
+            "mae_nights": 3.175,
+            "rmse_nights": 4.028,
+            "bias_nights": 0.81
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 502,
+            "mae_nights": 3.474,
+            "rmse_nights": 4.161,
+            "bias_nights": -0.486
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 502,
+            "mae_nights": 3.89,
+            "rmse_nights": 4.623,
+            "bias_nights": 0.045
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 502,
+            "mae_nights": 4.114,
+            "rmse_nights": 5.119,
+            "bias_nights": -0.313
+          },
+          {
+            "model": "naive",
+            "observations": 502,
+            "mae_nights": 4.707,
+            "rmse_nights": 5.765,
+            "bias_nights": 1.149
+          }
+        ]
+      },
+      {
+        "slice": "Sunday",
+        "forecasts": 3018,
+        "best_model": "pickup",
+        "best_mae_nights": 3.119,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 503,
+            "mae_nights": 3.119,
+            "rmse_nights": 3.936,
+            "bias_nights": -0.855
+          },
+          {
+            "model": "moving_average",
+            "observations": 503,
+            "mae_nights": 3.636,
+            "rmse_nights": 4.543,
+            "bias_nights": 1.155
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 503,
+            "mae_nights": 4.008,
+            "rmse_nights": 4.8,
+            "bias_nights": -1.022
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 503,
+            "mae_nights": 4.245,
+            "rmse_nights": 5.073,
+            "bias_nights": -0.96
+          },
+          {
+            "model": "naive",
+            "observations": 503,
+            "mae_nights": 4.887,
+            "rmse_nights": 6.078,
+            "bias_nights": 1.38
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 503,
+            "mae_nights": 5.171,
+            "rmse_nights": 6.334,
+            "bias_nights": -0.773
+          }
+        ]
+      }
+    ],
+    "by_holiday_adjacency": [
+      {
+        "slice": "ordinary",
+        "forecasts": 13254,
+        "best_model": "pickup",
+        "best_mae_nights": 3.101,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 2209,
+            "mae_nights": 3.101,
+            "rmse_nights": 3.947,
+            "bias_nights": -0.716
+          },
+          {
+            "model": "moving_average",
+            "observations": 2209,
+            "mae_nights": 3.659,
+            "rmse_nights": 4.495,
+            "bias_nights": -0.972
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 2209,
+            "mae_nights": 3.75,
+            "rmse_nights": 4.616,
+            "bias_nights": -1.011
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 2209,
+            "mae_nights": 3.75,
+            "rmse_nights": 4.616,
+            "bias_nights": -1.011
+          },
+          {
+            "model": "naive",
+            "observations": 2209,
+            "mae_nights": 4.565,
+            "rmse_nights": 5.684,
+            "bias_nights": -0.706
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 2209,
+            "mae_nights": 4.632,
+            "rmse_nights": 5.756,
+            "bias_nights": -0.696
+          }
+        ]
+      },
+      {
+        "slice": "holiday_adjacent",
+        "forecasts": 7836,
+        "best_model": "pickup",
+        "best_mae_nights": 2.956,
+        "models": [
+          {
+            "model": "pickup",
+            "observations": 1306,
+            "mae_nights": 2.956,
+            "rmse_nights": 3.757,
+            "bias_nights": -0.367
+          },
+          {
+            "model": "dow_moving_average",
+            "observations": 1306,
+            "mae_nights": 3.652,
+            "rmse_nights": 4.53,
+            "bias_nights": -0.415
+          },
+          {
+            "model": "moving_average",
+            "observations": 1306,
+            "mae_nights": 3.683,
+            "rmse_nights": 4.576,
+            "bias_nights": -0.463
+          },
+          {
+            "model": "seasonal_holiday",
+            "observations": 1306,
+            "mae_nights": 4.112,
+            "rmse_nights": 5.055,
+            "bias_nights": 0.376
+          },
+          {
+            "model": "seasonal_naive",
+            "observations": 1306,
+            "mae_nights": 4.514,
+            "rmse_nights": 5.822,
+            "bias_nights": -0.257
+          },
+          {
+            "model": "naive",
+            "observations": 1306,
+            "mae_nights": 4.853,
+            "rmse_nights": 6.072,
+            "bias_nights": -0.323
+          }
+        ]
+      }
+    ],
+    "not_sliced": {
+      "by_property": "Requires a per-property forecast target. The backtest forecasts portfolio-total occupied room-nights, so no per-property prediction exists to score. See slice_accuracy.__doc__.",
+      "by_channel": "Same reason, and channel is a booking attribute rather than an inventory one -- it does not partition unit-nights."
+    }
+  }
+}
