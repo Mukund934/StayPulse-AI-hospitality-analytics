@@ -547,3 +547,140 @@ def summary(test_days: int = 120) -> dict[str, Any]:
             "anything."
         ),
     }
+
+
+# ---------------------------------------------------------------------------
+# Backtesting lab (F-801): the same backtest, cut along the dimensions that
+# change the answer.
+#
+# A single headline MAE hides where a model actually fails. The pickup model
+# should be strong at three days and weak at thirty; a corporate portfolio should
+# be harder to forecast at the weekend than midweek. Those are claims, and the
+# point of slicing is that they become checkable instead of plausible.
+# ---------------------------------------------------------------------------
+
+# Observations required before a slice is scored. A cell with nine forecasts in
+# it produces an MAE that reorders the model table on noise, and a lab that
+# reports it is worse than one that omits it, because it invites a conclusion.
+MIN_SLICE_OBSERVATIONS = 30
+
+WEEKDAY_NAMES = ("Monday", "Tuesday", "Wednesday", "Thursday",
+                 "Friday", "Saturday", "Sunday")
+
+
+def _slice_scores(df: pd.DataFrame, min_observations: int) -> list[dict[str, Any]]:
+    """MAE, RMSE and bias per model over one slice of the backtest."""
+    out: list[dict[str, Any]] = []
+    for model in MODELS:
+        rows = df[df["model"] == model]
+        if len(rows) < min_observations:
+            continue
+        err = rows["error"].to_numpy(dtype=float)
+        out.append({
+            "model": model,
+            "observations": int(len(rows)),
+            "mae_nights": round(float(np.mean(np.abs(err))), 3),
+            "rmse_nights": round(float(np.sqrt(np.mean(err ** 2))), 3),
+            "bias_nights": round(float(np.mean(err)), 3),
+        })
+    return sorted(out, key=lambda d: d["mae_nights"])
+
+
+def slice_accuracy(results: pd.DataFrame,
+                   min_observations: int = MIN_SLICE_OBSERVATIONS
+                   ) -> dict[str, Any]:
+    """Model accuracy cut by horizon, month, weekday and holiday adjacency.
+
+    WHAT IS NOT SLICED HERE, AND WHY IT IS NOT AN OVERSIGHT
+
+    There is no cut by property or by channel. The forecast target is portfolio
+    total occupied room-nights -- one series -- so there is no per-property
+    prediction to score, and slicing the ACTUALS by property while the forecast
+    stays portfolio-wide would produce a number that looks like per-property
+    accuracy and is not.
+
+    Making that cut real needs a per-property forecast target: `daily_actuals`
+    grouped by `property_key`, the pickup model's on-the-books matrix likewise,
+    and a separate backtest per property. That is a different feature, and it
+    would be forecasting a series of roughly ten room-nights a day per property,
+    where the models behave differently enough that the portfolio results would
+    not carry over. Named rather than approximated, per the standing rule.
+    """
+    frame = results.copy()
+    frame["month"] = frame["target"].dt.to_period("M").astype(str)
+    frame["weekday"] = frame["target"].dt.dayofweek
+
+    def _grouped(column: str, label: Any = None) -> list[dict[str, Any]]:
+        blocks = []
+        for key, group in frame.groupby(column):
+            scores = _slice_scores(group, min_observations)
+            if not scores:
+                continue
+            blocks.append({
+                "slice": label(key) if label else key,
+                "forecasts": int(len(group)),
+                "best_model": scores[0]["model"],
+                "best_mae_nights": scores[0]["mae_nights"],
+                "models": scores,
+            })
+        return blocks
+
+    return {
+        "min_observations_per_cell": min_observations,
+        "by_horizon": [
+            block for block in _grouped("horizon", label=lambda h: int(h))
+            if int(block["slice"]) in REPORTED_HORIZONS
+        ],
+        "by_month": _grouped("month"),
+        "by_weekday": _grouped("weekday", label=lambda d: WEEKDAY_NAMES[int(d)]),
+        "by_holiday_adjacency": _grouped(
+            "holiday_adjacent",
+            label=lambda flag: "holiday_adjacent" if flag else "ordinary",
+        ),
+        "not_sliced": {
+            "by_property": (
+                "Requires a per-property forecast target. The backtest forecasts "
+                "portfolio-total occupied room-nights, so no per-property "
+                "prediction exists to score. See slice_accuracy.__doc__."
+            ),
+            "by_channel": (
+                "Same reason, and channel is a booking attribute rather than an "
+                "inventory one -- it does not partition unit-nights."
+            ),
+        },
+    }
+
+
+def lab(test_days: int = 365, origin_step: int = 3) -> dict[str, Any]:
+    """The Backtesting Lab artifact: one backtest, reported from every angle.
+
+    A wider window than the headline backtest, because the interesting slices --
+    month, holiday adjacency -- need to reach dates the 120-day window never
+    touches.
+    """
+    results = backtest(test_days=test_days, origin_step=origin_step)
+    scores = score(results)
+    sliced = slice_accuracy(results)
+
+    disagreement = {
+        str(block["slice"]): block["best_model"]
+        for block in sliced["by_horizon"]
+    }
+    return {
+        "target": "daily occupied room-nights, portfolio total",
+        "window": {
+            "test_days": test_days,
+            "origins": int(results["origin"].nunique()),
+            "forecasts_evaluated": int(len(results)),
+            "models": list(MODELS),
+        },
+        "headline_accuracy": [s.as_dict() for s in scores],
+        "best_by_horizon": disagreement,
+        "slices": sliced,
+        "note": (
+            "One rolling-origin backtest, cut four ways. Every forecast in it uses "
+            "only data at or before its own origin. Cells with fewer than "
+            f"{MIN_SLICE_OBSERVATIONS} forecasts are omitted rather than reported, "
+            "because an MAE over nine observations reorders the table on noise."
+        ),
+    }
