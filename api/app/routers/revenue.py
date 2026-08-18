@@ -195,3 +195,31 @@ def why(
 ) -> dict:
     end_date = _resolve_as_of(end) if end else services.data_bounds()["last"]
     return services.rm_why(end_date, days)
+
+
+@router.get("/forecast/intervals", summary="Forward forecast with prediction intervals")
+def forecast_intervals(
+    horizon_days: int = Query(14, ge=1, le=30),
+    model: str = Query("pickup",
+                       pattern="^(pickup|seasonal_naive|naive|moving_average|dow_moving_average)$"),
+    level: float = Query(0.8, ge=0.5, le=0.95),
+) -> dict:
+    """A point forecast with an empirical interval around it.
+
+    Calibrated on the model's own backtest residuals, using only residuals whose
+    target had already been realised by the as-of date. A horizon without enough
+    observed residuals returns null bounds rather than a fabricated number.
+    """
+    return services.rm_forecast_intervals(horizon_days, model, level)
+
+
+@router.get("/forecast/intervals/coverage",
+            summary="Did the intervals actually contain the truth?")
+def forecast_interval_coverage() -> dict:
+    return services.rm_interval_coverage()
+
+
+@router.get("/backtest-lab",
+            summary="Forecast accuracy sliced by horizon, month, weekday and holiday")
+def backtest_lab() -> dict:
+    return services.rm_backtest_lab()

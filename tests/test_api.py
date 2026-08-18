@@ -70,6 +70,9 @@ READ_ONLY_ENDPOINTS = [
     "/api/revenue-management/replay",
     "/api/revenue-management/replay/summary",
     "/api/revenue-management/replay/evaluation",
+    "/api/revenue-management/forecast/intervals",
+    "/api/revenue-management/forecast/intervals/coverage",
+    "/api/revenue-management/backtest-lab",
     "/api/revenue-management/why",
 ]
 
@@ -388,3 +391,66 @@ class TestHonesty:
         d = client.get("/api/data-quality/overview").json()
         assert d["quality_score"] < 100
         assert "deliberate" in d["note"] or "planted" in d["note"]
+
+
+class TestForecastIntervalEndpoints:
+    """An interval endpoint that does not publish its coverage is a shaded band."""
+
+    def test_every_point_carries_bounds_that_bracket_it(self):
+        d = client.get(
+            "/api/revenue-management/forecast/intervals?horizon_days=14"
+        ).json()
+        rows = d["forecast"]
+        assert len(rows) == 14
+        priced = [r for r in rows if r["lower_room_nights"] is not None]
+        assert priced, "no row carried an interval; the loop below is vacuous"
+        for row in priced:
+            assert row["lower_room_nights"] <= row["predicted_room_nights"]
+            assert row["predicted_room_nights"] <= row["upper_room_nights"]
+            assert row["lower_room_nights"] >= 0
+
+    def test_a_wider_level_gives_a_wider_band(self):
+        def width(level):
+            rows = client.get(
+                f"/api/revenue-management/forecast/intervals?horizon_days=7&level={level}"
+            ).json()["forecast"]
+            spans = [r["upper_room_nights"] - r["lower_room_nights"]
+                     for r in rows if r["lower_room_nights"] is not None]
+            assert spans, f"no bounds produced at level {level}"
+            return sum(spans) / len(spans)
+        assert width(0.5) < width(0.8) < width(0.95)
+
+    def test_coverage_publishes_out_of_sample_beside_in_sample(self):
+        d = client.get(
+            "/api/revenue-management/forecast/intervals/coverage"
+        ).json()
+        rows = d["coverage"]
+        assert len(rows) >= 6, "coverage table is empty or truncated"
+        for row in rows:
+            assert row["out_of_sample_pct"] is not None
+            assert row["in_sample_pct"] is not None
+
+    def test_the_published_method_meets_its_nominal_level(self):
+        d = client.get(
+            "/api/revenue-management/forecast/intervals/coverage"
+        ).json()
+        default = [r for r in d["coverage"] if r["is_default"]]
+        assert default, "no method is marked as published"
+        for row in default:
+            assert abs(row["deviation_pp"]) <= 6.0, (
+                f"{row['method']} at {row['level']:.0%} covered "
+                f"{row['out_of_sample_pct']}% out of sample"
+            )
+
+    def test_an_unknown_level_is_rejected(self):
+        assert client.get(
+            "/api/revenue-management/forecast/intervals?level=0.99"
+        ).status_code == 422
+
+    def test_lab_slices_are_served_and_name_what_they_cannot_slice(self):
+        d = client.get("/api/revenue-management/backtest-lab").json()
+        slices = d["slices"]
+        for dimension in ("by_horizon", "by_month", "by_weekday",
+                          "by_holiday_adjacency"):
+            assert slices[dimension], f"{dimension} is empty"
+        assert "per-property forecast target" in slices["not_sliced"]["by_property"]
