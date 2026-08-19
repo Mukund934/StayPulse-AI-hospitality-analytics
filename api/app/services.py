@@ -855,3 +855,31 @@ def rm_overbooking_default(cost_ratio: float | None) -> dict[str, Any]:
 
 def rm_overbooking_wash() -> dict[str, Any]:
     return _ob.measured_wash_rate()
+
+
+# ---------------------------------------------------------------------------
+# Scenario engine.
+#
+# Computed live: it is arithmetic on an aggregate the database returns in one
+# query, and the whole point is answering an arbitrary combination of levers.
+# ---------------------------------------------------------------------------
+from staypulse.analytics import scenario as _sc  # noqa: E402
+
+
+def rm_scenario(occupancy_pp: float, adr_pct: float,
+                capacity_units_pct: float) -> dict[str, Any]:
+    return _sc.apply_levers(
+        _sc.baseline(),
+        occupancy_pp=occupancy_pp,
+        adr_pct=adr_pct,
+        capacity_units_pct=capacity_units_pct,
+    ).as_dict()
+
+
+def rm_scenario_sensitivity() -> dict[str, Any]:
+    return _sc.sensitivity()
+
+
+def rm_scenario_channel_mix(from_channel: str, to_channel: str,
+                            share_pct: float) -> dict[str, Any]:
+    return _sc.shift_channel_mix(from_channel, to_channel, share_pct)

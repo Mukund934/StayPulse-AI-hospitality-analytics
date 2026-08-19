@@ -79,6 +79,9 @@ READ_ONLY_ENDPOINTS = [
     "/api/revenue-management/cancellation-risk",
     "/api/revenue-management/overbooking",
     "/api/revenue-management/overbooking/wash",
+    "/api/revenue-management/scenario",
+    "/api/revenue-management/scenario/sensitivity",
+    "/api/revenue-management/scenario/channel-mix",
     "/api/revenue-management/why",
 ]
 
@@ -572,3 +575,47 @@ class TestRiskEndpoints:
         d = client.get("/api/revenue-management/overbooking/wash").json()
         assert d["bookings"] > 5000
         assert len(d["by_channel"]) >= 6
+
+
+class TestScenarioEndpoints:
+    """A scenario endpoint must never let arithmetic read as a projection."""
+
+    def test_every_scenario_payload_declares_itself_one(self):
+        for path in ("scenario", "scenario/sensitivity", "scenario/channel-mix"):
+            d = client.get(f"/api/revenue-management/{path}").json()
+            assert d["result_type"] == "scenario", f"{path} is unlabelled"
+            assert d["is_forecast"] is False
+
+    def test_the_identity_holds_in_the_returned_scenario(self):
+        d = client.get(
+            "/api/revenue-management/scenario?occupancy_pp=5&adr_pct=5"
+        ).json()
+        result = d["scenario"]
+        implied = result["adr_inr"] * result["occupancy_pct"] / 100.0
+        assert implied == pytest.approx(result["revpar_inr"], rel=1e-4)
+
+    def test_the_decomposition_leaves_no_residual(self):
+        d = client.get(
+            "/api/revenue-management/scenario?occupancy_pp=4&adr_pct=6"
+        ).json()
+        assert d["decomposition"]["residual_inr"] == pytest.approx(0.0, abs=1e-6)
+
+    def test_a_null_scenario_is_a_no_op(self):
+        d = client.get("/api/revenue-management/scenario").json()
+        assert d["change"]["revpar_inr"] == pytest.approx(0.0, abs=1e-6)
+
+    def test_assumptions_are_always_returned(self):
+        d = client.get("/api/revenue-management/scenario?adr_pct=5").json()
+        assert d["assumptions_held_constant"]
+        assert "elasticity" in " ".join(d["assumptions_held_constant"]).lower()
+
+    def test_channel_mix_rejects_an_unknown_channel(self):
+        r = client.get(
+            "/api/revenue-management/scenario/channel-mix?from_channel=NOPE"
+        )
+        assert r.status_code == 422
+
+    def test_out_of_range_levers_are_rejected(self):
+        assert client.get(
+            "/api/revenue-management/scenario?occupancy_pp=500"
+        ).status_code == 422

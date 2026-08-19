@@ -299,3 +299,49 @@ def overbooking(
 @router.get("/overbooking/wash", summary="Measured wash rate, overall and by channel")
 def overbooking_wash() -> dict:
     return services.rm_overbooking_wash()
+
+
+@router.get("/scenario", summary="What the identity gives if a lever moves")
+def scenario(
+    occupancy_pp: float = Query(0.0, ge=-100, le=100,
+                                description="Change occupancy by N percentage "
+                                            "POINTS, not percent."),
+    adr_pct: float = Query(0.0, ge=-100, le=100,
+                           description="Change ADR by N percent."),
+    capacity_units_pct: float = Query(0.0, ge=-100, le=100,
+                                      description="Change sellable inventory by "
+                                                  "N percent."),
+) -> dict:
+    """A scenario, not a forecast.
+
+    Returns the arithmetic consequence of the stated change with everything else
+    held fixed, the exact Shapley decomposition of the RevPAR movement, and the
+    assumptions the result depends on. It predicts nothing and does not claim
+    the change is achievable: there is no price elasticity in this warehouse, so
+    the engine cannot say what a rate move would cost in volume.
+    """
+    return services.rm_scenario(occupancy_pp, adr_pct, capacity_units_pct)
+
+
+@router.get("/scenario/sensitivity", summary="RevPAR across a sweep of each lever")
+def scenario_sensitivity() -> dict:
+    return services.rm_scenario_sensitivity()
+
+
+@router.get("/scenario/channel-mix",
+            summary="Move share between channels and price the difference")
+def scenario_channel_mix(
+    from_channel: str = Query("MMT", description="Channel code to move nights from"),
+    to_channel: str = Query("DIRECT", description="Channel code to move nights to"),
+    share_pct: float = Query(25.0, ge=0, le=100),
+) -> dict:
+    """The one scenario lever with measured economics behind it.
+
+    Commission per night is measured, not assumed. The arithmetic is exact; its
+    premise -- that the demand would transfer to the receiving channel -- is an
+    assumption this warehouse cannot support, and is stated in the response.
+    """
+    try:
+        return services.rm_scenario_channel_mix(from_channel, to_channel, share_pct)
+    except KeyError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
