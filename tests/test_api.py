@@ -76,6 +76,9 @@ READ_ONLY_ENDPOINTS = [
     "/api/revenue-management/alerts",
     "/api/revenue-management/alerts/summary",
     "/api/revenue-management/opportunities",
+    "/api/revenue-management/cancellation-risk",
+    "/api/revenue-management/overbooking",
+    "/api/revenue-management/overbooking/wash",
     "/api/revenue-management/why",
 ]
 
@@ -504,3 +507,68 @@ class TestAlertCenterEndpoints:
         for path in ("alerts", "alerts/summary", "opportunities"):
             r = client.get(f"/api/revenue-management/{path}?as_of=not-a-date")
             assert r.status_code == 422, f"{path} accepted a malformed as_of"
+
+
+class TestRiskEndpoints:
+    """A model endpoint must publish its base rate; a simulator must not invent
+    a cost."""
+
+    def test_cancellation_reports_base_rate_and_calibration_not_just_auc(self):
+        d = client.get("/api/revenue-management/cancellation-risk").json()
+        ev = d["evaluation"]
+        assert ev["base_rate_pct"] > 0
+        assert ev["discrimination"]["auc"] > 0.6
+        assert ev["calibration"]["bins"], "calibration table is empty"
+        assert ev["calibration"]["weighted_mean_absolute_error_pp"] is not None
+
+    def test_accuracy_is_not_reported(self):
+        """On a ~12% base rate, 'never cancels' scores ~88% and is useless."""
+        d = client.get("/api/revenue-management/cancellation-risk").json()
+        assert "accuracy" not in d["evaluation"]["classification_at_threshold"]
+
+    def test_ground_truth_recovery_is_published(self):
+        d = client.get("/api/revenue-management/cancellation-risk").json()
+        truth = d["ground_truth"]
+        assert truth["lead_time"]["recovered"] is True
+        assert truth["channel_ranking"]["spearman"] > 0.7
+
+    def test_no_show_is_published_as_unlearnable(self):
+        d = client.get("/api/revenue-management/cancellation-risk").json()
+        assert d["no_show"]["verdict"] == "unlearnable"
+
+    def test_overbooking_defaults_to_a_date_where_the_decision_binds(self):
+        """Bare, it must answer rather than 422 -- and about a date that shows
+        something. Most dates here are undersold and walk-free at every level."""
+        d = client.get("/api/revenue-management/overbooking").json()
+        assert d["on_books"] / d["capacity"] > 0.8
+        assert "recommendation" not in d
+
+    def test_overbooking_gives_no_recommendation_without_a_cost_ratio(self):
+        """The warehouse prices neither a walked guest nor an empty room."""
+        d = client.get(
+            "/api/revenue-management/overbooking?stay_date=2025-12-11&as_of=2025-12-04"
+        ).json()
+        assert "recommendation" not in d
+        assert d["levels"], "no outcome levels returned"
+        assert d["no_optimum_note"]
+
+    def test_a_supplied_cost_ratio_produces_one_with_its_caveat(self):
+        d = client.get(
+            "/api/revenue-management/overbooking"
+            "?stay_date=2025-12-11&as_of=2025-12-04&cost_ratio=10"
+        ).json()
+        assert d["recommendation"]["recommended_overbook"] is not None
+        assert "cost ratio supplied" in d["recommendation"]["caveat"]
+
+    def test_a_zero_or_negative_cost_ratio_is_rejected(self):
+        for ratio in (0, -5):
+            r = client.get(
+                f"/api/revenue-management/overbooking"
+                f"?stay_date=2025-12-11&cost_ratio={ratio}"
+            )
+            assert r.status_code == 422, f"cost_ratio={ratio} was accepted"
+
+    def test_wash_rate_is_served_with_its_channel_breakdown(self):
+        d = client.get("/api/revenue-management/overbooking/wash").json()
+        assert d["bookings"] > 5000
+        assert len(d["by_channel"]) >= 6

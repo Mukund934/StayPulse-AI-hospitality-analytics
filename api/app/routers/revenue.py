@@ -252,3 +252,50 @@ def opportunity_radar(as_of: str | None = Query(None)) -> dict:
     attached.
     """
     return services.rm_opportunity_radar(_resolve_as_of(as_of))
+
+
+@router.get("/cancellation-risk",
+            summary="Cancellation model: performance, calibration and ground truth")
+def cancellation_risk() -> dict:
+    """Out-of-sample performance against a temporal split.
+
+    Accuracy is not reported: on this base rate a model predicting 'never
+    cancels' scores about 88% and is useless. Precision against the base rate,
+    recall and the calibration curve are.
+    """
+    return services.rm_cancellation_model()
+
+
+@router.get("/overbooking", summary="Overbooking outcomes for one stay date")
+def overbooking(
+    stay_date: str | None = Query(
+        None, description="ISO stay date to simulate. Defaults to the date whose "
+                          "book came closest to capacity, because on an undersold "
+                          "date every overbooking level is walk-free."),
+    as_of: str | None = Query(None),
+    cost_ratio: float | None = Query(
+        None, gt=0, le=200,
+        description="Cost of walking a guest in units of one empty room. "
+                    "Required for a recommendation; this warehouse prices "
+                    "neither side, so there is deliberately no default."),
+) -> dict:
+    """Outcome distribution at each overbooking level.
+
+    No level is recommended unless a cost ratio is supplied, because the optimum
+    depends on the cost of walking a guest relative to an empty room and nothing
+    in this warehouse prices either.
+    """
+    if stay_date is None:
+        return services.rm_overbooking_default(cost_ratio)
+    try:
+        stay = dt.date.fromisoformat(stay_date)
+    except ValueError:
+        raise HTTPException(
+            status_code=422, detail="stay_date must be an ISO date."
+        ) from None
+    return services.rm_overbooking(_resolve_as_of(as_of), stay, cost_ratio)
+
+
+@router.get("/overbooking/wash", summary="Measured wash rate, overall and by channel")
+def overbooking_wash() -> dict:
+    return services.rm_overbooking_wash()
