@@ -883,3 +883,30 @@ def rm_scenario_sensitivity() -> dict[str, Any]:
 def rm_scenario_channel_mix(from_channel: str, to_channel: str,
                             share_pct: float) -> dict[str, Any]:
     return _sc.shift_channel_mix(from_channel, to_channel, share_pct)
+
+
+# ---------------------------------------------------------------------------
+# Ask StayPulse.
+#
+# THIS IS THE ONE PLACE THE API CALLS A LANGUAGE MODEL ON THE REQUEST PATH, and
+# it is worth being explicit that it breaks the rule stated at the top of the
+# revenue router. Everything else here reads a stored result because a page load
+# must not cost quota; a copilot cannot work that way, because the question is
+# the input.
+#
+# The mitigations are that it is user-initiated rather than a page load, the
+# tool budget is bounded, and a missing key degrades to a clear 503 rather than
+# a stack trace.
+# ---------------------------------------------------------------------------
+from staypulse.ai import copilot as _copilot  # noqa: E402
+
+
+def copilot_capabilities() -> dict[str, Any]:
+    """What the copilot can and cannot be asked. Needs no model, no key."""
+    return _copilot.capabilities()
+
+
+def copilot_ask(question: str) -> dict[str, Any]:
+    """Answer one question through the deterministic tool layer."""
+    client = _copilot.GeminiClient()
+    return _copilot.ask(question, client).as_dict()

@@ -156,3 +156,43 @@ def brief_history() -> dict:
     d = ROOT / "reports" / "briefings"
     files = sorted((p.stem for p in d.glob("*.md")), reverse=True) if d.exists() else []
     return {"count": len(files), "dates": files[:60]}
+
+
+@router.get("/copilot/capabilities",
+            summary="What Ask StayPulse can and cannot be asked")
+def copilot_capabilities() -> dict:
+    """The tool list and the refusal contract. Calls no model.
+
+    The refusals are part of the contract, not gaps in it: pricing, overbooking
+    levels and revenue-uplift claims cannot be settled from this warehouse, and
+    the copilot is built to say so rather than produce a plausible number.
+    """
+    return services.copilot_capabilities()
+
+
+@router.get("/copilot/ask", summary="Ask a question over the deterministic layer")
+def copilot_ask(
+    question: str = Query(..., min_length=3, max_length=500,
+                          description="A question about this portfolio"),
+) -> dict:
+    """Answer a question by calling deterministic tools, then phrasing the result.
+
+    The model selects tools and writes the explanation; it never computes. Every
+    figure in the answer comes from the tool results, which are returned
+    alongside the prose so a caller can render numbers from structured output
+    rather than from a sentence. Each answer also carries a numeric-fidelity
+    report checking the prose against the tool output.
+
+    This endpoint calls Gemini and therefore costs quota. It is the only one in
+    this API that does.
+    """
+    try:
+        return services.copilot_ask(question)
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "The copilot is unavailable. It requires GEMINI_API_KEY to be "
+                "configured; every other endpoint in this API works without it."
+            ),
+        ) from exc

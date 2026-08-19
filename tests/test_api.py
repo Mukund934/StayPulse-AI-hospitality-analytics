@@ -83,6 +83,11 @@ READ_ONLY_ENDPOINTS = [
     "/api/revenue-management/scenario/sensitivity",
     "/api/revenue-management/scenario/channel-mix",
     "/api/revenue-management/why",
+    # NOTE: /api/copilot/ask is deliberately absent. It calls Gemini live, so
+    # including it here would put a quota-consuming, non-deterministic network
+    # call in every suite run. Its orchestration is tested with a double in
+    # tests/test_copilot.py; only its capabilities endpoint is exercised here.
+    "/api/copilot/capabilities",
 ]
 
 
@@ -127,10 +132,24 @@ class TestEndpointsRespond:
         )
         # Every advertised endpoint must actually resolve. A stale index is a
         # broken promise a reviewer will click on.
+        #
+        # A 422 counts as resolving: it means the route exists and validated its
+        # input. That matters for /api/copilot/ask, which requires a question and
+        # must NOT be given a default -- a default would make this very test call
+        # Gemini on every suite run, costing quota and making the result depend
+        # on today's sampling. A 404 is what a stale index actually looks like.
+        answered = 0
         for path in listed:
             if "{" in path:
                 continue
-            assert client.get(path).status_code == 200, f"advertised but broken: {path}"
+            status = client.get(path).status_code
+            assert status in (200, 422), f"advertised but broken: {path} -> {status}"
+            answered += int(status == 200)
+        assert answered >= len(listed) - 3, (
+            f"only {answered} of {len(listed)} advertised endpoints returned 200; "
+            "the 422 allowance is for endpoints with required input, not a "
+            "licence for the index to fill up with broken routes"
+        )
 
     def test_index_advertises_every_public_endpoint(self):
         """The index and the OpenAPI contract must not disagree."""
@@ -619,3 +638,30 @@ class TestScenarioEndpoints:
         assert client.get(
             "/api/revenue-management/scenario?occupancy_pp=500"
         ).status_code == 422
+
+
+class TestCopilotEndpoint:
+    """The copilot's contract, without calling the model."""
+
+    def test_capabilities_needs_no_model_and_lists_real_tools(self):
+        d = client.get("/api/copilot/capabilities").json()
+        assert len(d["tools"]) >= 10
+        assert all(t["name"] and t["description"] for t in d["tools"])
+
+    def test_the_refusals_are_advertised_as_part_of_the_contract(self):
+        d = client.get("/api/copilot/capabilities").json()
+        assert d["refusals"], "no refusals advertised"
+        blob = str(d["refusals"]).lower()
+        assert "elasticity" in blob
+        assert "competitor" in blob
+
+    def test_the_architecture_boundary_is_stated(self):
+        d = client.get("/api/copilot/capabilities").json()
+        assert "never computes" in d["architecture"].lower()
+        assert len(d["enforcement"]) >= 3
+
+    def test_a_too_short_question_is_rejected_before_any_model_call(self):
+        assert client.get("/api/copilot/ask?question=hi").status_code == 422
+
+    def test_a_missing_question_is_rejected(self):
+        assert client.get("/api/copilot/ask").status_code == 422
