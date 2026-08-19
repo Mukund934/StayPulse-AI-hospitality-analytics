@@ -1,0 +1,1101 @@
+{
+  "generated_at": "2026-08-19T05:28:09+00:00",
+  "as_of": "2026-08-11",
+  "holiday_bias": {
+    "origins_measured": 8,
+    "stay_dates_scored": 177,
+    "holiday_adjacent_dates": 69,
+    "base_rate_holiday_adjacent_pct": 39.0,
+    "behind_pace_alerts": 19,
+    "behind_pace_on_holiday_dates": 14,
+    "alert_rate_holiday_adjacent_pct": 73.7,
+    "pooled_over_representation_ratio": 1.89,
+    "pooled_ratio_is_reliable": false,
+    "dominant_origin": {
+      "as_of": "2026-08-11",
+      "alerts": 11,
+      "share_of_all_alerts_pct": 57.9,
+      "base_rate_pct": 100.0
+    },
+    "excluding_dominant_origin": {
+      "behind_pace_alerts": 8,
+      "alert_rate_holiday_adjacent_pct": 37.5,
+      "base_rate_holiday_adjacent_pct": 34.9
+    },
+    "ahead_of_pace_total": 33,
+    "per_origin": [
+      {
+        "as_of": "2026-08-11",
+        "stay_dates_scored": 11,
+        "holiday_adjacent_dates": 11,
+        "behind_pace_alerts": 11,
+        "behind_pace_on_holiday_dates": 11,
+        "ahead_of_pace": 0
+      },
+      {
+        "as_of": "2026-07-02",
+        "stay_dates_scored": 24,
+        "holiday_adjacent_dates": 0,
+        "behind_pace_alerts": 1,
+        "behind_pace_on_holiday_dates": 0,
+        "ahead_of_pace": 13
+      },
+      {
+        "as_of": "2026-05-23",
+        "stay_dates_scored": 22,
+        "holiday_adjacent_dates": 0,
+        "behind_pace_alerts": 1,
+        "behind_pace_on_holiday_dates": 0,
+        "ahead_of_pace": 5
+      },
+      {
+        "as_of": "2026-04-13",
+        "stay_dates_scored": 21,
+        "holiday_adjacent_dates": 0,
+        "behind_pace_alerts": 0,
+        "behind_pace_on_holiday_dates": 0,
+        "ahead_of_pace": 12
+      },
+      {
+        "as_of": "2026-03-04",
+        "stay_dates_scored": 24,
+        "holiday_adjacent_dates": 24,
+        "behind_pace_alerts": 2,
+        "behind_pace_on_holiday_dates": 2,
+        "ahead_of_pace": 0
+      },
+      {
+        "as_of": "2026-01-23",
+        "stay_dates_scored": 24,
+        "holiday_adjacent_dates": 10,
+        "behind_pace_alerts": 0,
+        "behind_pace_on_holiday_dates": 0,
+        "ahead_of_pace": 0
+      },
+      {
+        "as_of": "2025-12-14",
+        "stay_dates_scored": 28,
+        "holiday_adjacent_dates": 20,
+        "behind_pace_alerts": 3,
+        "behind_pace_on_holiday_dates": 0,
+        "ahead_of_pace": 1
+      },
+      {
+        "as_of": "2025-11-04",
+        "stay_dates_scored": 23,
+        "holiday_adjacent_dates": 4,
+        "behind_pace_alerts": 1,
+        "behind_pace_on_holiday_dates": 1,
+        "ahead_of_pace": 2
+      }
+    ]
+  },
+  "queue": {
+    "total": 26,
+    "by_source": {
+      "pace": 11,
+      "anomaly": 5,
+      "service_sla": 1,
+      "data_quality": 9
+    },
+    "by_actionability": {
+      "act_now": 11,
+      "investigate": 5,
+      "standing": 10
+    },
+    "qualified": 11
+  },
+  "radar": {
+    "as_of": "2026-07-02",
+    "total": 13
+  },
+  "alerts": [
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-12 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Wed 12 Aug is 8 room-nights behind its usual position with 1 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 7.5,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "7 nights on the books",
+        "typically 14.5 by this point on a Wednesday (usual range 14-15)",
+        "baseline from the last 8 comparable Wednesdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-12",
+      "days_to_act": 1,
+      "calendar_context": "3 day(s) before Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-13 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Thu 13 Aug is 8 room-nights behind its usual position with 2 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 8.5,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "5 nights on the books",
+        "typically 13.5 by this point on a Thursday (usual range 13-14)",
+        "baseline from the last 8 comparable Thursdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-13",
+      "days_to_act": 2,
+      "calendar_context": "2 day(s) before Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-13 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Thu 13 Aug is 5 room-nights behind its usual position with 2 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 5.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "9 nights on the books",
+        "typically 14.0 by this point on a Thursday (usual range 11-15)",
+        "baseline from the last 8 comparable Thursdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-13",
+      "days_to_act": 2,
+      "calendar_context": "2 day(s) before Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-14 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Fri 14 Aug is 11 room-nights behind its usual position with 3 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 11.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "3 nights on the books",
+        "typically 14.0 by this point on a Friday (usual range 12-15)",
+        "baseline from the last 8 comparable Fridays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-14",
+      "days_to_act": 3,
+      "calendar_context": "1 day(s) before Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-14 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Fri 14 Aug is 5 room-nights behind its usual position with 3 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 5.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "8 nights on the books",
+        "typically 13.0 by this point on a Friday (usual range 12-14)",
+        "baseline from the last 8 comparable Fridays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-14",
+      "days_to_act": 3,
+      "calendar_context": "1 day(s) before Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-15 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Sat 15 Aug is 10 room-nights behind its usual position with 4 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 9.5,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "3 nights on the books",
+        "typically 12.5 by this point on a Saturday (usual range 10-14)",
+        "baseline from the last 8 comparable Saturdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-15",
+      "days_to_act": 4,
+      "calendar_context": "Independence Day (the day itself)",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-16 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Sun 16 Aug is 6 room-nights behind its usual position with 5 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 6.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "6 nights on the books",
+        "typically 12.0 by this point on a Sunday (usual range 8-14)",
+        "baseline from the last 8 comparable Sundays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-16",
+      "days_to_act": 5,
+      "calendar_context": "1 day(s) after Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-17 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Mon 17 Aug is 6 room-nights behind its usual position with 6 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 6.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "6 nights on the books",
+        "typically 12.0 by this point on a Monday (usual range 11-13)",
+        "baseline from the last 8 comparable Mondays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-17",
+      "days_to_act": 6,
+      "calendar_context": "2 day(s) after Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-18 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Tue 18 Aug is 5 room-nights behind its usual position with 7 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 5.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "4 nights on the books",
+        "typically 9.0 by this point on a Tuesday (usual range 8-12)",
+        "baseline from the last 8 comparable Tuesdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-18",
+      "days_to_act": 7,
+      "calendar_context": "3 day(s) after Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-19 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Wed 19 Aug is 7 room-nights behind its usual position with 8 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 7.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "3 nights on the books",
+        "typically 10.0 by this point on a Wednesday (usual range 8-12)",
+        "baseline from the last 8 comparable Wednesdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-19",
+      "days_to_act": 8,
+      "calendar_context": "4 day(s) after Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "pace",
+      "kind": "behind_pace",
+      "subject": "2026-08-20 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Thu 20 Aug is 6 room-nights behind its usual position with 9 days to go",
+      "measure": {
+        "name": "room-night shortfall against the same-weekday median",
+        "value": 6.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "3 nights on the books",
+        "typically 9.0 by this point on a Thursday (usual range 8-10)",
+        "baseline from the last 8 comparable Thursdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Compare channel pickup for this date against the same weekday, and confirm no rate or availability restriction is suppressing it.",
+      "raised_for": "2026-08-20",
+      "days_to_act": 9,
+      "calendar_context": "5 day(s) after Independence Day",
+      "qualifier": "This date is holiday-adjacent and the pace benchmark is holiday-blind -- its baseline is the last 8 comparable weekdays, which exclude the holiday. F-101 measured real suppression on holiday-adjacent dates, so part of this gap is plausibly the holiday rather than a demand problem. Not suppressed: a holiday explains part of a shortfall, not all of it. No over-representation ratio is quoted -- the pooled figure that suggested one did not survive a per-origin breakdown."
+    },
+    {
+      "source": "anomaly",
+      "kind": "revenue_below",
+      "subject": "2026-07-30 \u00b7 revenue",
+      "subject_type": "stay_date",
+      "actionability": "investigate",
+      "headline": "revenue on Thu 30 Jul came in -31.7% against its same-weekday baseline",
+      "measure": {
+        "name": "robust z against the trailing same-weekday median",
+        "value": 7.5,
+        "units": "robust standard deviations",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "actual 104,338.7 against a baseline of 152,696.1",
+        "deviation -48,357.5 INR",
+        "materiality gate 16,054.7 INR",
+        "confidence high"
+      ],
+      "suggested_check": "Already realised, so this is an explanation rather than an action. Check the property split and whether a known event or holiday covers the date.",
+      "raised_for": "2026-07-30",
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "anomaly",
+      "kind": "occupancy_pct_below",
+      "subject": "2026-07-30 \u00b7 occupancy_pct",
+      "subject_type": "stay_date",
+      "actionability": "investigate",
+      "headline": "occupancy_pct on Thu 30 Jul came in -22.6% against its same-weekday baseline",
+      "measure": {
+        "name": "robust z against the trailing same-weekday median",
+        "value": 5.18,
+        "units": "robust standard deviations",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "actual 66.7 against a baseline of 86.1",
+        "deviation -19.4 percentage points",
+        "materiality gate 8.0 percentage points",
+        "confidence medium"
+      ],
+      "suggested_check": "Already realised, so this is an explanation rather than an action. Check the property split and whether a known event or holiday covers the date.",
+      "raised_for": "2026-07-30",
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "anomaly",
+      "kind": "occupancy_pct_below",
+      "subject": "2026-07-29 \u00b7 occupancy_pct",
+      "subject_type": "stay_date",
+      "actionability": "investigate",
+      "headline": "occupancy_pct on Wed 29 Jul came in -26.7% against its same-weekday baseline",
+      "measure": {
+        "name": "robust z against the trailing same-weekday median",
+        "value": 8.93,
+        "units": "robust standard deviations",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "actual 65.0 against a baseline of 88.6",
+        "deviation -23.6 percentage points",
+        "materiality gate 8.0 percentage points",
+        "confidence high"
+      ],
+      "suggested_check": "Already realised, so this is an explanation rather than an action. Check the property split and whether a known event or holiday covers the date.",
+      "raised_for": "2026-07-29",
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "anomaly",
+      "kind": "revenue_below",
+      "subject": "2026-07-29 \u00b7 revenue",
+      "subject_type": "stay_date",
+      "actionability": "investigate",
+      "headline": "revenue on Wed 29 Jul came in -24.7% against its same-weekday baseline",
+      "measure": {
+        "name": "robust z against the trailing same-weekday median",
+        "value": 8.49,
+        "units": "robust standard deviations",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "actual 116,784.3 against a baseline of 155,056.2",
+        "deviation -38,271.8 INR",
+        "materiality gate 16,054.7 INR",
+        "confidence high"
+      ],
+      "suggested_check": "Already realised, so this is an explanation rather than an action. Check the property split and whether a known event or holiday covers the date.",
+      "raised_for": "2026-07-29",
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "anomaly",
+      "kind": "revenue_below",
+      "subject": "2026-07-25 \u00b7 revenue",
+      "subject_type": "stay_date",
+      "actionability": "investigate",
+      "headline": "revenue on Sat 25 Jul came in -17.2% against its same-weekday baseline",
+      "measure": {
+        "name": "robust z against the trailing same-weekday median",
+        "value": 3.98,
+        "units": "robust standard deviations",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "actual 117,956.6 against a baseline of 142,384.0",
+        "deviation -24,427.5 INR",
+        "materiality gate 16,054.7 INR",
+        "confidence medium"
+      ],
+      "suggested_check": "Already realised, so this is an explanation rather than an action. Check the property split and whether a known event or holiday covers the date.",
+      "raised_for": "2026-07-25",
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "service_sla",
+      "kind": "sla_breach_rate",
+      "subject": "BLR-KOR \u00b7 afternoon",
+      "subject_type": "property_day_part",
+      "actionability": "standing",
+      "headline": "BLR-KOR breaches SLA on 22.0% of afternoon requests, against a peer p75 of 20.8%",
+      "measure": {
+        "name": "requests breaching SLA",
+        "value": 22.0,
+        "units": "percent of requests",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "28 breaches in 127 requests",
+        "average turnaround 68 minutes",
+        "owning team front_office",
+        "peer p75 across 24 comparable cells is 20.8%; range 0.0-34.5%",
+        "materiality gate 20 breaches"
+      ],
+      "suggested_check": "This warehouse defines no target breach rate, so 'bad' here means worse than comparable cells, not worse than a contract. Aggregated over the whole record, so it is staffing or process rather than one bad shift.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_warning",
+      "subject": "DQ001_guest_contact_present \u00b7 mart.dim_guest",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ001_guest_contact_present is failing on 6.09% of 9,360 rows in mart.dim_guest",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 6.09,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "Every guest should be reachable on at least one channel.",
+        "dimension completeness, severity warning",
+        "570 of 9,360 rows",
+        "threshold 2.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_warning",
+      "subject": "DQ011_duplicate_guest_identity \u00b7 mart.dim_guest",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ011_duplicate_guest_identity is failing on 3.60% of 9,360 rows in mart.dim_guest",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 3.6,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "Two guest records sharing a normalised phone number are the same person. Repeat-guest rate is understated until they are resolved.",
+        "dimension uniqueness, severity warning",
+        "337 of 9,360 rows",
+        "threshold 1.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_error",
+      "subject": "DQ031_payment_amount_matches_folio \u00b7 mart.fact_payment",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ031_payment_amount_matches_folio is failing on 2.06% of 4,461 rows in mart.fact_payment",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 2.06,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "Gateway gross should equal the folio net room amount. A mismatch is either a partial payment or a reconciliation break.",
+        "dimension accuracy, severity error",
+        "92 of 4,461 rows",
+        "threshold 1.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_error",
+      "subject": "DQ010_duplicate_bookings \u00b7 mart.fact_booking",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ010_duplicate_bookings is failing on 1.07% of 5,228 rows in mart.fact_booking",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 1.07,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "The same guest, unit and arrival date appearing more than once is an OTA sync double-submit, not two reservations.",
+        "dimension uniqueness, severity error",
+        "56 of 5,228 rows",
+        "threshold 0.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_error",
+      "subject": "DQ025_inventory_balance \u00b7 mart.fact_inventory_movement",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ025_inventory_balance is failing on 0.89% of 6,385 rows in mart.fact_inventory_movement",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 0.89,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "Closing stock must equal opening + received - consumed - wastage.",
+        "dimension validity, severity error",
+        "57 of 6,385 rows",
+        "threshold 0.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_error",
+      "subject": "DQ030_orphan_payment_reference \u00b7 mart.fact_payment",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ030_orphan_payment_reference is failing on 0.82% of 4,498 rows in mart.fact_payment",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 0.82,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "A gateway payment whose booking reference does not resolve. Left joined rather than dropped so the money is visible, not silently lost.",
+        "dimension consistency, severity error",
+        "37 of 4,498 rows",
+        "threshold 0.50%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_error",
+      "subject": "DQ040_booking_business_date_agrees \u00b7 mart.fact_booking",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ040_booking_business_date_agrees is failing on 0.80% of 5,228 rows in mart.fact_booking",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 0.8,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "The stored reporting date must equal the IST business date derived from the event timestamp. Disagreement means a feed wrote a UTC date, which silently moves late-night activity to the previous day.",
+        "dimension accuracy, severity error",
+        "42 of 5,228 rows",
+        "threshold 0.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_error",
+      "subject": "DQ051_no_silent_channel_gap \u00b7 mart.fact_service_request",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ051_no_silent_channel_gap is failing on 0.68% of 2,785 rows in mart.fact_service_request",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 0.68,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "A source channel that normally delivers volume and suddenly delivers nothing is a broken integration. The table is not wrong, it is EMPTY -- so a null check passes and only a volume band catches it.",
+        "dimension timeliness, severity error",
+        "19 of 2,785 rows",
+        "threshold 0.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "data_quality",
+      "kind": "rule_failed_error",
+      "subject": "DQ020_impossible_stay_dates \u00b7 mart.fact_booking",
+      "subject_type": "data_quality_rule",
+      "actionability": "standing",
+      "headline": "DQ020_impossible_stay_dates is failing on 0.27% of 4,784 rows in mart.fact_booking",
+      "measure": {
+        "name": "rows failing the rule",
+        "value": 0.27,
+        "units": "percent of rows checked",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "A nightly stay must depart after it arrives.",
+        "dimension validity, severity error",
+        "13 of 4,784 rows",
+        "threshold 0.00%",
+        "last checked 2026-08-12 16:50:02.944353+00:00"
+      ],
+      "suggested_check": "Some defect classes in this dataset are planted on purpose so the rules have something to catch. Check reports/analyses.md before treating this as a regression.",
+      "raised_for": null,
+      "days_to_act": null,
+      "calendar_context": null,
+      "qualifier": null
+    }
+  ],
+  "opportunities": [
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-06 \u00b7 StayPulse Residences HSR Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Mon 06 Jul is 4 room-nights ahead of its usual position with 4 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "8 nights on the books",
+        "typically 4.0 by this point on a Monday (usual range 4-4)",
+        "baseline from the last 8 comparable Mondays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-06",
+      "days_to_act": 4,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-07 \u00b7 StayPulse Residences HSR Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Tue 07 Jul is 6 room-nights ahead of its usual position with 5 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 5.5,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "9 nights on the books",
+        "typically 3.5 by this point on a Tuesday (usual range 3-5)",
+        "baseline from the last 8 comparable Tuesdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-07",
+      "days_to_act": 5,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-08 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Wed 08 Jul is 5 room-nights ahead of its usual position with 6 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 5.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "16 nights on the books",
+        "typically 11.0 by this point on a Wednesday (usual range 10-11)",
+        "baseline from the last 8 comparable Wednesdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-08",
+      "days_to_act": 6,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-09 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Thu 09 Jul is 6 room-nights ahead of its usual position with 7 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 6.5,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "15 nights on the books",
+        "typically 8.5 by this point on a Thursday (usual range 8-11)",
+        "baseline from the last 8 comparable Thursdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-09",
+      "days_to_act": 7,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-10 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Fri 10 Jul is 7 room-nights ahead of its usual position with 8 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 7.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "15 nights on the books",
+        "typically 8.0 by this point on a Friday (usual range 7-11)",
+        "baseline from the last 8 comparable Fridays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-10",
+      "days_to_act": 8,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-11 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Sat 11 Jul is 5 room-nights ahead of its usual position with 9 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 5.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "14 nights on the books",
+        "typically 9.0 by this point on a Saturday (usual range 7-11)",
+        "baseline from the last 8 comparable Saturdays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-11",
+      "days_to_act": 9,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-12 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Sun 12 Jul is 4 room-nights ahead of its usual position with 10 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "10 nights on the books",
+        "typically 6.0 by this point on a Sunday (usual range 6-8)",
+        "baseline from the last 8 comparable Sundays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-12",
+      "days_to_act": 10,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-12 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Sun 12 Jul is 4 room-nights ahead of its usual position with 10 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "11 nights on the books",
+        "typically 7.0 by this point on a Sunday (usual range 7-8)",
+        "baseline from the last 8 comparable Sundays at this property",
+        "confidence high"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-12",
+      "days_to_act": 10,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-14 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Tue 14 Jul is 4 room-nights ahead of its usual position with 12 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.5,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "9 nights on the books",
+        "typically 4.5 by this point on a Tuesday (usual range 4-6)",
+        "baseline from the last 8 comparable Tuesdays at this property",
+        "confidence medium"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-14",
+      "days_to_act": 12,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-16 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Thu 16 Jul is 4 room-nights ahead of its usual position with 14 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "8 nights on the books",
+        "typically 4.0 by this point on a Thursday (usual range 4-6)",
+        "baseline from the last 8 comparable Thursdays at this property",
+        "confidence medium"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-16",
+      "days_to_act": 14,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-21 \u00b7 StayPulse Residences BTM Layout",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Tue 21 Jul is 4 room-nights ahead of its usual position with 19 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "6 nights on the books",
+        "typically 2.0 by this point on a Tuesday (usual range 2-3)",
+        "baseline from the last 8 comparable Tuesdays at this property",
+        "confidence medium"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-21",
+      "days_to_act": 19,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-23 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Thu 23 Jul is 4 room-nights ahead of its usual position with 21 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "6 nights on the books",
+        "typically 2.0 by this point on a Thursday (usual range 2-2)",
+        "baseline from the last 8 comparable Thursdays at this property",
+        "confidence medium"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-23",
+      "days_to_act": 21,
+      "calendar_context": null,
+      "qualifier": null
+    },
+    {
+      "source": "pace",
+      "kind": "ahead_of_pace",
+      "subject": "2026-07-24 \u00b7 StayPulse Residences Koramangala",
+      "subject_type": "stay_date",
+      "actionability": "act_now",
+      "headline": "Fri 24 Jul is 4 room-nights ahead of its usual position with 22 days to go",
+      "measure": {
+        "name": "room-night surplus against the same-weekday median",
+        "value": 4.0,
+        "units": "room-nights",
+        "comparable_across_sources": false
+      },
+      "evidence": [
+        "6 nights on the books",
+        "typically 2.0 by this point on a Friday (usual range 2-2)",
+        "baseline from the last 8 comparable Fridays at this property",
+        "confidence low"
+      ],
+      "suggested_check": "Filling early. Verify remaining inventory and check whether the rate on the remaining units was set before this demand appeared.",
+      "raised_for": "2026-07-24",
+      "days_to_act": 22,
+      "calendar_context": null,
+      "qualifier": null
+    }
+  ]
+}
