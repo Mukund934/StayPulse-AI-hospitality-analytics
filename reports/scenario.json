@@ -1,0 +1,281 @@
+{
+  "result_type": "scenario",
+  "is_forecast": false,
+  "separation_note": "A scenario is not a forecast. `analytics.forecast` predicts what will happen and is scored against reality; this computes what the identity gives if something changed, predicts nothing, and cannot be right or wrong. Nothing here should be presented as a projection.",
+  "baseline": {
+    "rooms_available": 17949,
+    "rooms_sold": 13610,
+    "occupancy_pct": 75.826,
+    "adr_inr": 4414.54,
+    "revpar_inr": 3347.37,
+    "room_revenue_inr": 60081892.69,
+    "commission_inr": 4264511.59,
+    "net_revenue_inr": 55049769.01
+  },
+  "identity": "RevPAR = ADR x Occupancy, and revenue = ADR x rooms sold. Every figure below follows from those two and nothing else.",
+  "examples": [
+    {
+      "result_type": "scenario",
+      "is_forecast": false,
+      "what_this_is": "The arithmetic consequence of the stated change, holding everything else fixed. It predicts nothing and cannot be right or wrong. It is not a projection and nobody has claimed the change will happen or that it is achievable.",
+      "levers": {
+        "occupancy_pp": 5.0,
+        "adr_pct": 0.0,
+        "capacity_units_pct": 0.0
+      },
+      "baseline": {
+        "rooms_available": 17949,
+        "rooms_sold": 13610,
+        "occupancy_pct": 75.826,
+        "adr_inr": 4414.54,
+        "revpar_inr": 3347.37,
+        "room_revenue_inr": 60081892.69,
+        "commission_inr": 4264511.59,
+        "net_revenue_inr": 55049769.01
+      },
+      "scenario": {
+        "rooms_available": 17949,
+        "rooms_sold": 14507,
+        "occupancy_pct": 80.823,
+        "adr_inr": 4414.54,
+        "revpar_inr": 3567.98,
+        "room_revenue_inr": 64041735.29,
+        "commission_inr": 4545574.55,
+        "net_revenue_inr": 58677957.32
+      },
+      "change": {
+        "occupancy_pp": 4.997,
+        "adr_inr": 0.0,
+        "revpar_inr": 220.62,
+        "room_revenue_inr": 3959842.6,
+        "net_revenue_inr": 3628188.3
+      },
+      "decomposition": {
+        "method": "symmetric (Shapley) split, identical to analytics.rootcause: occupancy contribution = d(Occ) x mean(ADR), rate contribution = d(ADR) x mean(Occ). The two sum to the movement exactly.",
+        "occupancy_contribution_inr": 220.6163,
+        "rate_contribution_inr": 0.0,
+        "total_revpar_change_inr": 220.6163,
+        "residual_inr": 0.0
+      },
+      "assumptions_held_constant": [
+        "ADR is held constant while occupancy moves. This warehouse contains no price elasticity, so the engine cannot say what rate change would be needed to shift occupancy, nor what selling more nights would do to the achieved rate."
+      ]
+    },
+    {
+      "result_type": "scenario",
+      "is_forecast": false,
+      "what_this_is": "The arithmetic consequence of the stated change, holding everything else fixed. It predicts nothing and cannot be right or wrong. It is not a projection and nobody has claimed the change will happen or that it is achievable.",
+      "levers": {
+        "occupancy_pp": 0.0,
+        "adr_pct": 5.0,
+        "capacity_units_pct": 0.0
+      },
+      "baseline": {
+        "rooms_available": 17949,
+        "rooms_sold": 13610,
+        "occupancy_pct": 75.826,
+        "adr_inr": 4414.54,
+        "revpar_inr": 3347.37,
+        "room_revenue_inr": 60081892.69,
+        "commission_inr": 4264511.59,
+        "net_revenue_inr": 55049769.01
+      },
+      "scenario": {
+        "rooms_available": 17949,
+        "rooms_sold": 13610,
+        "occupancy_pct": 75.826,
+        "adr_inr": 4635.27,
+        "revpar_inr": 3514.74,
+        "room_revenue_inr": 63085987.32,
+        "commission_inr": 4477737.17,
+        "net_revenue_inr": 57802257.46
+      },
+      "change": {
+        "occupancy_pp": 0.0,
+        "adr_inr": 220.73,
+        "revpar_inr": 167.37,
+        "room_revenue_inr": 3004094.63,
+        "net_revenue_inr": 2752488.45
+      },
+      "decomposition": {
+        "method": "symmetric (Shapley) split, identical to analytics.rootcause: occupancy contribution = d(Occ) x mean(ADR), rate contribution = d(ADR) x mean(Occ). The two sum to the movement exactly.",
+        "occupancy_contribution_inr": 0.0,
+        "rate_contribution_inr": 167.3684,
+        "total_revpar_change_inr": 167.3684,
+        "residual_inr": 0.0
+      },
+      "assumptions_held_constant": [
+        "Occupancy is held constant while ADR moves. In a real market a rate rise costs volume; with no elasticity in this warehouse that trade-off cannot be quantified, so it is excluded rather than guessed."
+      ]
+    },
+    {
+      "result_type": "scenario",
+      "is_forecast": false,
+      "what_this_is": "The arithmetic consequence of the stated change, holding everything else fixed. It predicts nothing and cannot be right or wrong. It is not a projection and nobody has claimed the change will happen or that it is achievable.",
+      "levers": {
+        "occupancy_pp": 5.0,
+        "adr_pct": 5.0,
+        "capacity_units_pct": 0.0
+      },
+      "baseline": {
+        "rooms_available": 17949,
+        "rooms_sold": 13610,
+        "occupancy_pct": 75.826,
+        "adr_inr": 4414.54,
+        "revpar_inr": 3347.37,
+        "room_revenue_inr": 60081892.69,
+        "commission_inr": 4264511.59,
+        "net_revenue_inr": 55049769.01
+      },
+      "scenario": {
+        "rooms_available": 17949,
+        "rooms_sold": 14507,
+        "occupancy_pct": 80.823,
+        "adr_inr": 4635.27,
+        "revpar_inr": 3746.38,
+        "room_revenue_inr": 67243822.05,
+        "commission_inr": 4772853.28,
+        "net_revenue_inr": 61611855.18
+      },
+      "change": {
+        "occupancy_pp": 4.997,
+        "adr_inr": 220.73,
+        "revpar_inr": 399.02,
+        "room_revenue_inr": 7161929.36,
+        "net_revenue_inr": 6562086.17
+      },
+      "decomposition": {
+        "method": "symmetric (Shapley) split, identical to analytics.rootcause: occupancy contribution = d(Occ) x mean(ADR), rate contribution = d(ADR) x mean(Occ). The two sum to the movement exactly.",
+        "occupancy_contribution_inr": 226.1317,
+        "rate_contribution_inr": 172.8838,
+        "total_revpar_change_inr": 399.0155,
+        "residual_inr": 0.0
+      },
+      "assumptions_held_constant": [
+        "ADR is held constant while occupancy moves. This warehouse contains no price elasticity, so the engine cannot say what rate change would be needed to shift occupancy, nor what selling more nights would do to the achieved rate.",
+        "Occupancy is held constant while ADR moves. In a real market a rate rise costs volume; with no elasticity in this warehouse that trade-off cannot be quantified, so it is excluded rather than guessed."
+      ]
+    }
+  ],
+  "sensitivity": {
+    "result_type": "scenario",
+    "is_forecast": false,
+    "baseline": {
+      "rooms_available": 17949,
+      "rooms_sold": 13610,
+      "occupancy_pct": 75.826,
+      "adr_inr": 4414.54,
+      "revpar_inr": 3347.37,
+      "room_revenue_inr": 60081892.69,
+      "commission_inr": 4264511.59,
+      "net_revenue_inr": 55049769.01
+    },
+    "occupancy_pp": [
+      {
+        "lever_pp": -10.0,
+        "revpar_inr": 2905.89,
+        "revpar_change_inr": -441.48
+      },
+      {
+        "lever_pp": -5.0,
+        "revpar_inr": 3126.75,
+        "revpar_change_inr": -220.62
+      },
+      {
+        "lever_pp": -2.0,
+        "revpar_inr": 3259.07,
+        "revpar_change_inr": -88.3
+      },
+      {
+        "lever_pp": 2.0,
+        "revpar_inr": 3435.66,
+        "revpar_change_inr": 88.3
+      },
+      {
+        "lever_pp": 5.0,
+        "revpar_inr": 3567.98,
+        "revpar_change_inr": 220.62
+      },
+      {
+        "lever_pp": 10.0,
+        "revpar_inr": 3788.85,
+        "revpar_change_inr": 441.48
+      }
+    ],
+    "adr_pct": [
+      {
+        "lever_pct": -10.0,
+        "revpar_inr": 3012.63,
+        "revpar_change_inr": -334.74
+      },
+      {
+        "lever_pct": -5.0,
+        "revpar_inr": 3180.0,
+        "revpar_change_inr": -167.37
+      },
+      {
+        "lever_pct": -2.0,
+        "revpar_inr": 3280.42,
+        "revpar_change_inr": -66.95
+      },
+      {
+        "lever_pct": 2.0,
+        "revpar_inr": 3414.31,
+        "revpar_change_inr": 66.95
+      },
+      {
+        "lever_pct": 5.0,
+        "revpar_inr": 3514.74,
+        "revpar_change_inr": 167.37
+      },
+      {
+        "lever_pct": 10.0,
+        "revpar_inr": 3682.1,
+        "revpar_change_inr": 334.74
+      }
+    ],
+    "note": "One lever at a time, each holding the other constant. Combining them is multiplicative rather than additive, which `apply_levers` handles and a naive reading of this table would not."
+  },
+  "channel_mix_example": {
+    "result_type": "scenario",
+    "is_forecast": false,
+    "lever": {
+      "from_channel": "MMT",
+      "to_channel": "DIRECT",
+      "share_pct": 25.0,
+      "nights_moved": 454
+    },
+    "from_economics": {
+      "channel": "MMT",
+      "nights": 1817,
+      "adr_inr": 4501.31,
+      "commission_per_night_inr": 900.26,
+      "net_per_night_inr": 3439.0
+    },
+    "to_economics": {
+      "channel": "DIRECT",
+      "nights": 2259,
+      "adr_inr": 4555.69,
+      "commission_per_night_inr": 0.0,
+      "net_per_night_inr": 4555.69
+    },
+    "change": {
+      "room_revenue_inr": 24688.52,
+      "commission_inr": -408718.04,
+      "net_revenue_inr": 506977.26,
+      "net_per_night_inr": 1116.69
+    },
+    "assumptions_held_constant": [
+      "Demand transfers in full: every night moved would still have been sold through the receiving channel. Nothing in this warehouse supports that, and for walk-in and corporate it is plainly false.",
+      "Rate per night in each channel is the measured average and does not change with volume.",
+      "No acquisition cost. Commission is recorded; the marketing spend needed to move a booking direct is not, so the saving shown here is gross of whatever it would cost to achieve."
+    ],
+    "note": "Commission is netted at 1.18x to include the GST charged on it, matching the channel economics endpoint."
+  },
+  "what_this_cannot_do": [
+    "Say how to achieve any of these changes.",
+    "Say what a rate change would cost in volume, or what selling more nights would do to the achieved rate. That needs price elasticity, which this warehouse does not contain.",
+    "Claim any of the revenue shown is capturable."
+  ],
+  "generated_at": "2026-08-19T15:45:12+00:00"
+}
