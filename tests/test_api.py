@@ -73,6 +73,9 @@ READ_ONLY_ENDPOINTS = [
     "/api/revenue-management/forecast/intervals",
     "/api/revenue-management/forecast/intervals/coverage",
     "/api/revenue-management/backtest-lab",
+    "/api/revenue-management/alerts",
+    "/api/revenue-management/alerts/summary",
+    "/api/revenue-management/opportunities",
     "/api/revenue-management/why",
 ]
 
@@ -454,3 +457,50 @@ class TestForecastIntervalEndpoints:
                           "by_holiday_adjacency"):
             assert slices[dimension], f"{dimension} is empty"
         assert "per-property forecast target" in slices["not_sliced"]["by_property"]
+
+
+class TestAlertCenterEndpoints:
+    """The queue must not acquire a shared severity score on its way out."""
+
+    def test_no_alert_exposes_a_cross_source_severity(self):
+        d = client.get("/api/revenue-management/alerts").json()
+        assert d["alerts"], "empty queue; the loop below would prove nothing"
+        for alert in d["alerts"]:
+            assert not ({"severity", "priority", "score"} & set(alert))
+            assert alert["measure"]["comparable_across_sources"] is False
+
+    def test_all_four_feeds_arrive_in_one_queue(self):
+        d = client.get("/api/revenue-management/alerts").json()
+        assert {"pace", "anomaly", "data_quality", "service_sla"} <= set(d["by_source"])
+
+    def test_the_queue_is_ordered_by_actionability(self):
+        d = client.get("/api/revenue-management/alerts").json()
+        order = ["act_now", "investigate", "standing"]
+        bands = [order.index(a["actionability"]) for a in d["alerts"]]
+        assert bands == sorted(bands)
+
+    def test_the_known_pace_bias_is_published(self):
+        """Behind-pace alerts cluster on holiday-adjacent dates because the pace
+        benchmark is holiday-blind. The endpoint must disclose that rather than
+        let a reader assume the cluster is a demand collapse."""
+        d = client.get("/api/revenue-management/alerts").json()
+        bias = d["known_bias"]
+        assert bias["feed"] == "pace"
+        assert "not suppressed" in bias["handling"].lower()
+
+    def test_summary_agrees_with_the_full_queue(self):
+        full = client.get("/api/revenue-management/alerts").json()
+        brief = client.get("/api/revenue-management/alerts/summary").json()
+        assert brief["alerts_total"] == full["total"]
+        assert brief["alerts_by_source"] == full["by_source"]
+
+    def test_opportunity_radar_never_names_a_price(self):
+        body = client.get("/api/revenue-management/opportunities").text.lower()
+        for phrase in ("increase rate", "lower rate", "reprice", "raise price",
+                       "recommended rate"):
+            assert phrase not in body
+
+    def test_bad_as_of_is_rejected_on_the_alert_endpoints(self):
+        for path in ("alerts", "alerts/summary", "opportunities"):
+            r = client.get(f"/api/revenue-management/{path}?as_of=not-a-date")
+            assert r.status_code == 422, f"{path} accepted a malformed as_of"

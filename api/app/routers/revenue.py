@@ -223,3 +223,32 @@ def forecast_interval_coverage() -> dict:
             summary="Forecast accuracy sliced by horizon, month, weekday and holiday")
 def backtest_lab() -> dict:
     return services.rm_backtest_lab()
+
+
+@router.get("/alerts", summary="Every open alert from all four feeds, one queue")
+def alert_center(as_of: str | None = Query(None)) -> dict:
+    """Anomalies, data-quality failures, SLA breaches and pace need-dates.
+
+    There is deliberately no severity score shared across sources: a robust z, a
+    percentage of failing rows and a room-night shortfall are incommensurable.
+    Each alert reports its own feed's measure with units named. The queue is
+    ordered by actionability -- what you can still do about it -- which is the
+    one axis that genuinely is comparable.
+    """
+    return services.rm_alert_center(_resolve_as_of(as_of))
+
+
+@router.get("/alerts/summary", summary="Alert counts by source and actionability")
+def alert_summary(as_of: str | None = Query(None)) -> dict:
+    return services.rm_alert_summary(_resolve_as_of(as_of))
+
+
+@router.get("/opportunities", summary="Stay dates filling ahead of their own curve")
+def opportunity_radar(as_of: str | None = Query(None)) -> dict:
+    """The upside half of pace analysis.
+
+    Names no price: there is no competitor rate feed and no price elasticity in
+    this warehouse, so a rate recommendation would be an opinion with a number
+    attached.
+    """
+    return services.rm_opportunity_radar(_resolve_as_of(as_of))
