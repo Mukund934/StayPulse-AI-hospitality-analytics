@@ -1,0 +1,546 @@
+{
+  "generated_at": "2026-08-19T06:30:49+00:00",
+  "cancellation": {
+    "target": "booking cancelled before arrival",
+    "why_not_wash": "No-show is drawn as a flat 1.4% independent of every feature, so it carries no learnable signal. Pooling it with cancellation would dilute a real mechanism with a constant.",
+    "model": {
+      "family": "logistic regression, L2, full-batch gradient descent",
+      "implementation": "numpy. scikit-learn is not a dependency of this project and the metrics that matter here had to be written either way.",
+      "features": 18,
+      "converged": true,
+      "iterations": 1053,
+      "coefficients": [
+        {
+          "feature": "channel_CORP",
+          "coefficient": -0.4705,
+          "odds_ratio_per_sd": 0.625
+        },
+        {
+          "feature": "channel_DIRECT",
+          "coefficient": -0.4367,
+          "odds_ratio_per_sd": 0.646
+        },
+        {
+          "feature": "lead_time_saturating",
+          "coefficient": 0.3063,
+          "odds_ratio_per_sd": 1.358
+        },
+        {
+          "feature": "channel_WALKIN",
+          "coefficient": -0.2081,
+          "odds_ratio_per_sd": 0.812
+        },
+        {
+          "feature": "channel_AIRBNB",
+          "coefficient": -0.202,
+          "odds_ratio_per_sd": 0.817
+        },
+        {
+          "feature": "nights",
+          "coefficient": 0.1207,
+          "odds_ratio_per_sd": 1.128
+        },
+        {
+          "feature": "property_BLR-KOR",
+          "coefficient": 0.1068,
+          "odds_ratio_per_sd": 1.113
+        },
+        {
+          "feature": "channel_MMT",
+          "coefficient": -0.0769,
+          "odds_ratio_per_sd": 0.926
+        },
+        {
+          "feature": "channel_B2B-HR",
+          "coefficient": -0.0674,
+          "odds_ratio_per_sd": 0.935
+        },
+        {
+          "feature": "stay_nightly",
+          "coefficient": 0.0674,
+          "odds_ratio_per_sd": 1.07
+        },
+        {
+          "feature": "is_weekend_arrival",
+          "coefficient": -0.0601,
+          "odds_ratio_per_sd": 0.942
+        },
+        {
+          "feature": "lead_time_log",
+          "coefficient": 0.0514,
+          "odds_ratio_per_sd": 1.053
+        },
+        {
+          "feature": "has_discount",
+          "coefficient": -0.0454,
+          "odds_ratio_per_sd": 0.956
+        },
+        {
+          "feature": "adults",
+          "coefficient": -0.0369,
+          "odds_ratio_per_sd": 0.964
+        },
+        {
+          "feature": "property_BLR-HSR",
+          "coefficient": 0.0333,
+          "odds_ratio_per_sd": 1.034
+        },
+        {
+          "feature": "lead_time_days",
+          "coefficient": -0.0284,
+          "odds_ratio_per_sd": 0.972
+        },
+        {
+          "feature": "channel_BDC",
+          "coefficient": 0.0274,
+          "odds_ratio_per_sd": 1.028
+        },
+        {
+          "feature": "price_per_night",
+          "coefficient": 0.0018,
+          "odds_ratio_per_sd": 1.002
+        }
+      ]
+    },
+    "evaluation": {
+      "split": {
+        "method": "temporal -- train on bookings made before the split date",
+        "split_date": "2026-03-31",
+        "train_bookings": 3917,
+        "test_bookings": 1311
+      },
+      "base_rate_pct": 12.36,
+      "threshold": 0.145,
+      "discrimination": {
+        "auc": 0.6737,
+        "note": "AUC 0.5 is a coin toss. Reported first because it is asked for, but it says nothing about whether the probabilities themselves are usable -- see calibration."
+      },
+      "classification_at_threshold": {
+        "precision_pct": 20.6,
+        "recall_pct": 65.4,
+        "f1": 0.313,
+        "lift_over_base_rate": 1.67,
+        "confusion": {
+          "true_positive": 106,
+          "false_positive": 409,
+          "false_negative": 56,
+          "true_negative": 740
+        },
+        "note": "Precision against the base rate is the number that matters. A model predicting 'never cancels' scores 87.6% accuracy here and is worthless, which is why accuracy is not reported."
+      },
+      "calibration": {
+        "bins": [
+          {
+            "bin": "2.7-6.8%",
+            "bookings": 344,
+            "mean_predicted_pct": 5.32,
+            "observed_pct": 4.36,
+            "gap_pp": -0.96
+          },
+          {
+            "bin": "6.8-10.9%",
+            "bookings": 345,
+            "mean_predicted_pct": 8.52,
+            "observed_pct": 8.12,
+            "gap_pp": -0.4
+          },
+          {
+            "bin": "10.9-15.0%",
+            "bookings": 124,
+            "mean_predicted_pct": 12.97,
+            "observed_pct": 12.9,
+            "gap_pp": -0.07
+          },
+          {
+            "bin": "15.0-19.1%",
+            "bookings": 172,
+            "mean_predicted_pct": 16.99,
+            "observed_pct": 17.44,
+            "gap_pp": 0.45
+          },
+          {
+            "bin": "19.1-23.3%",
+            "bookings": 137,
+            "mean_predicted_pct": 20.95,
+            "observed_pct": 23.36,
+            "gap_pp": 2.41
+          },
+          {
+            "bin": "23.3-27.4%",
+            "bookings": 93,
+            "mean_predicted_pct": 25.25,
+            "observed_pct": 27.96,
+            "gap_pp": 2.71
+          },
+          {
+            "bin": "27.4-31.5%",
+            "bookings": 67,
+            "mean_predicted_pct": 29.26,
+            "observed_pct": 13.43,
+            "gap_pp": -15.83
+          },
+          {
+            "bin": "31.5-35.6%",
+            "bookings": 18,
+            "mean_predicted_pct": 33.22,
+            "observed_pct": 11.11,
+            "gap_pp": -22.11
+          },
+          {
+            "bin": "35.6-39.7%",
+            "bookings": 10,
+            "mean_predicted_pct": 37.46,
+            "observed_pct": 40.0,
+            "gap_pp": 2.54
+          },
+          {
+            "bin": "39.7-43.9%",
+            "bookings": 1,
+            "mean_predicted_pct": 43.87,
+            "observed_pct": 0.0,
+            "gap_pp": -43.87
+          }
+        ],
+        "weighted_mean_absolute_error_pp": 2.03,
+        "note": "A calibrated model that says 30% is right 30% of the time. Without this a ranking model can look excellent and still produce probabilities nobody should act on. The error is weighted by bin population: unweighted, a bin holding one booking would count as much as one holding 344, which on this model inflated the figure fivefold."
+      },
+      "brier_score": 0.1048
+    },
+    "ground_truth": {
+      "planted_mechanism": "p_cancel = clip(channel.cancel_rate * (1 + 0.55*tanh((lead_days-10)/14)), 0.01, 0.62)",
+      "lead_time": {
+        "coefficients": {
+          "lead_time_days": -0.0284,
+          "lead_time_log": 0.0514,
+          "lead_time_saturating": 0.3063
+        },
+        "net_direction": "increasing",
+        "expected": "increasing",
+        "recovered": true
+      },
+      "channel_ranking": {
+        "planted": [
+          "BDC",
+          "AGODA",
+          "MMT",
+          "B2B-HR",
+          "AIRBNB",
+          "DIRECT",
+          "CORP",
+          "WALKIN"
+        ],
+        "recovered": [
+          "BDC",
+          "AGODA",
+          "B2B-HR",
+          "MMT",
+          "AIRBNB",
+          "WALKIN",
+          "DIRECT",
+          "CORP"
+        ],
+        "spearman": 0.905,
+        "coefficients": {
+          "BDC": 0.0274,
+          "AGODA": 0.0,
+          "MMT": -0.0769,
+          "B2B-HR": -0.0674,
+          "AIRBNB": -0.202,
+          "DIRECT": -0.4367,
+          "CORP": -0.4705,
+          "WALKIN": -0.2081
+        }
+      },
+      "note": "The channel coefficients are relative to the dropped dummy level, which is absorbed into the intercept, so their absolute values are not the planted rates. The ORDERING is the testable claim."
+    },
+    "temporal_drift": {
+      "quarters": [
+        {
+          "quarter": "2025Q1",
+          "bookings": 599,
+          "cancel_rate_pct": 16.36
+        },
+        {
+          "quarter": "2025Q2",
+          "bookings": 753,
+          "cancel_rate_pct": 15.41
+        },
+        {
+          "quarter": "2025Q3",
+          "bookings": 859,
+          "cancel_rate_pct": 13.97
+        },
+        {
+          "quarter": "2025Q4",
+          "bookings": 809,
+          "cancel_rate_pct": 14.59
+        },
+        {
+          "quarter": "2026Q1",
+          "bookings": 900,
+          "cancel_rate_pct": 12.89
+        },
+        {
+          "quarter": "2026Q2",
+          "bookings": 919,
+          "cancel_rate_pct": 12.08
+        },
+        {
+          "quarter": "2026Q3",
+          "bookings": 380,
+          "cancel_rate_pct": 12.89
+        }
+      ],
+      "first_quarter_pct": 16.36,
+      "last_quarter_pct": 12.89,
+      "change_pp": -3.47,
+      "note": "The cancellation rate declines across the record. A model trained on earlier bookings therefore over-predicts on later ones, which is visible in the upper calibration bins. This is the drift a temporal split exposes and a random split conceals."
+    },
+    "no_show": {
+      "target": "no_show",
+      "eligible_bookings": 4498,
+      "no_show_rate_pct": 1.67,
+      "generator_constant_pct": 1.4,
+      "auc": 0.5269,
+      "verdict": "unlearnable",
+      "note": "The generator draws no-show as a flat 1.4% over every booking that survived the cancellation draw, independent of channel, lead time, price and length of stay. An AUC near 0.5 is therefore the correct result and not a modelling failure. This is why the risk model targets cancellation rather than wash: pooling the two would dilute a learnable signal with a constant."
+    },
+    "limitations": [
+      "One synthetic portfolio. The mechanism is known because it was planted, which is exactly the luxury real booking data does not offer.",
+      "No censoring. Every booking in this warehouse has a settled outcome; real data contains reservations whose fate is not yet known, and a survival model would be the right tool there.",
+      "No cost asymmetry. The threshold is the base rate because nothing in this warehouse prices a missed cancellation against a false alarm."
+    ]
+  },
+  "overbooking": {
+    "wash": {
+      "bookings": 5228,
+      "washed": 805,
+      "wash_rate_pct": 15.4,
+      "survival_rate_pct": 84.6,
+      "by_channel": [
+        {
+          "channel": "BDC",
+          "bookings": 943,
+          "washed": 227,
+          "wash_rate_pct": 24.07
+        },
+        {
+          "channel": "AGODA",
+          "bookings": 422,
+          "washed": 99,
+          "wash_rate_pct": 23.46
+        },
+        {
+          "channel": "MMT",
+          "bookings": 1050,
+          "washed": 218,
+          "wash_rate_pct": 20.76
+        },
+        {
+          "channel": "AIRBNB",
+          "bookings": 366,
+          "washed": 60,
+          "wash_rate_pct": 16.39
+        },
+        {
+          "channel": "DIRECT",
+          "bookings": 868,
+          "washed": 83,
+          "wash_rate_pct": 9.56
+        },
+        {
+          "channel": "B2B-HR",
+          "bookings": 444,
+          "washed": 39,
+          "wash_rate_pct": 8.78
+        },
+        {
+          "channel": "CORP",
+          "bookings": 1016,
+          "washed": 75,
+          "wash_rate_pct": 7.38
+        },
+        {
+          "channel": "WALKIN",
+          "bookings": 119,
+          "washed": 4,
+          "wash_rate_pct": 3.36
+        }
+      ]
+    },
+    "example": {
+      "as_of": "2025-12-04",
+      "stay_date": "2025-12-11",
+      "on_books": 28,
+      "capacity": 29,
+      "survival_rate_pct": 84.6,
+      "source": "measured portfolio wash rate",
+      "levels": [
+        {
+          "overbook_by": 0,
+          "bookings_accepted": 28,
+          "physical_capacity": 29,
+          "expected_arrivals": 23.69,
+          "probability_of_walking_anyone_pct": 0.0,
+          "expected_walks": 0.0,
+          "expected_empty_rooms": 5.312,
+          "breakeven_cost_ratio": null
+        },
+        {
+          "overbook_by": 1,
+          "bookings_accepted": 29,
+          "physical_capacity": 29,
+          "expected_arrivals": 24.53,
+          "probability_of_walking_anyone_pct": 0.0,
+          "expected_walks": 0.0,
+          "expected_empty_rooms": 4.466,
+          "breakeven_cost_ratio": null
+        },
+        {
+          "overbook_by": 2,
+          "bookings_accepted": 30,
+          "physical_capacity": 29,
+          "expected_arrivals": 25.38,
+          "probability_of_walking_anyone_pct": 0.66,
+          "expected_walks": 0.007,
+          "expected_empty_rooms": 3.627,
+          "breakeven_cost_ratio": 126.72
+        },
+        {
+          "overbook_by": 3,
+          "bookings_accepted": 31,
+          "physical_capacity": 29,
+          "expected_arrivals": 26.23,
+          "probability_of_walking_anyone_pct": 3.72,
+          "expected_walks": 0.043,
+          "expected_empty_rooms": 2.817,
+          "breakeven_cost_ratio": 22.37
+        },
+        {
+          "overbook_by": 4,
+          "bookings_accepted": 32,
+          "physical_capacity": 29,
+          "expected_arrivals": 27.07,
+          "probability_of_walking_anyone_pct": 11.03,
+          "expected_walks": 0.147,
+          "expected_empty_rooms": 2.075,
+          "breakeven_cost_ratio": 7.09
+        },
+        {
+          "overbook_by": 5,
+          "bookings_accepted": 33,
+          "physical_capacity": 29,
+          "expected_arrivals": 27.92,
+          "probability_of_walking_anyone_pct": 23.03,
+          "expected_walks": 0.361,
+          "expected_empty_rooms": 1.443,
+          "breakeven_cost_ratio": 2.97
+        },
+        {
+          "overbook_by": 6,
+          "bookings_accepted": 34,
+          "physical_capacity": 29,
+          "expected_arrivals": 28.76,
+          "probability_of_walking_anyone_pct": 38.27,
+          "expected_walks": 0.708,
+          "expected_empty_rooms": 0.944,
+          "breakeven_cost_ratio": 1.44
+        },
+        {
+          "overbook_by": 7,
+          "bookings_accepted": 35,
+          "physical_capacity": 29,
+          "expected_arrivals": 29.61,
+          "probability_of_walking_anyone_pct": 54.24,
+          "expected_walks": 1.191,
+          "expected_empty_rooms": 0.581,
+          "breakeven_cost_ratio": 0.75
+        },
+        {
+          "overbook_by": 8,
+          "bookings_accepted": 36,
+          "physical_capacity": 29,
+          "expected_arrivals": 30.46,
+          "probability_of_walking_anyone_pct": 68.58,
+          "expected_walks": 1.794,
+          "expected_empty_rooms": 0.338,
+          "breakeven_cost_ratio": 0.4
+        },
+        {
+          "overbook_by": 9,
+          "bookings_accepted": 37,
+          "physical_capacity": 29,
+          "expected_arrivals": 31.3,
+          "probability_of_walking_anyone_pct": 79.94,
+          "expected_walks": 2.487,
+          "expected_empty_rooms": 0.185,
+          "breakeven_cost_ratio": 0.22
+        },
+        {
+          "overbook_by": 10,
+          "bookings_accepted": 38,
+          "physical_capacity": 29,
+          "expected_arrivals": 32.15,
+          "probability_of_walking_anyone_pct": 88.03,
+          "expected_walks": 3.245,
+          "expected_empty_rooms": 0.097,
+          "breakeven_cost_ratio": 0.12
+        }
+      ],
+      "sensitivity": [
+        {
+          "cost_ratio": 1.0,
+          "recommended_overbook": 6,
+          "expected_walks": 0.708
+        },
+        {
+          "cost_ratio": 2.0,
+          "recommended_overbook": 5,
+          "expected_walks": 0.361
+        },
+        {
+          "cost_ratio": 5.0,
+          "recommended_overbook": 4,
+          "expected_walks": 0.147
+        },
+        {
+          "cost_ratio": 10.0,
+          "recommended_overbook": 3,
+          "expected_walks": 0.043
+        },
+        {
+          "cost_ratio": 20.0,
+          "recommended_overbook": 3,
+          "expected_walks": 0.043
+        },
+        {
+          "cost_ratio": 50.0,
+          "recommended_overbook": 2,
+          "expected_walks": 0.007
+        }
+      ],
+      "no_optimum_note": "No single recommended level is given. The optimum depends on the cost of walking a guest relative to an empty room, and this warehouse prices neither. The breakeven column states the ratio at which each level begins to pay; supplying the ratio is the operator's decision, not this module's."
+    },
+    "example_selection": "The stay date whose book came closest to capacity at 7 days out. Chosen rather than fixed: most dates in this portfolio are undersold, and on an undersold date every overbooking level is walk-free, which shows nothing.",
+    "variance_effect": {
+      "capacity": 30,
+      "bookings_on_hand": 32,
+      "mean_survival_pct": 84.6,
+      "homogeneous": {
+        "expected_arrivals": 27.072000000000003,
+        "p_walk_at_zero_overbook_pct": 3.24,
+        "sd_of_arrivals": 2.042
+      },
+      "heterogeneous": {
+        "expected_arrivals": 27.072000000000003,
+        "p_walk_at_zero_overbook_pct": 2.98,
+        "sd_of_arrivals": 1.998
+      },
+      "note": "Same mean survival, different spread. A tighter arrival distribution justifies more aggressive overbooking, and that narrowing is a property of heterogeneity itself rather than evidence that the per-booking model predicts well. Its predictive quality is measured separately, in the cancellation model's calibration table."
+    },
+    "what_is_missing": {
+      "cost_of_walking_a_guest": "Not present in this warehouse. No relocation cost, compensation field or goodwill model exists. Without it the optimal overbooking level is not computable, and any figure presented as one would be an assumption wearing a decimal point.",
+      "what_would_unblock_it": "A relocation cost per walked guest -- typically the rate paid at the receiving property plus transport plus any goodwill credit -- recorded per incident. Then the breakeven column here becomes a decision rather than a table."
+    }
+  }
+}
