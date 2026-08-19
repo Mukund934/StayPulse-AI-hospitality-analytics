@@ -116,9 +116,13 @@ def main() -> int:
     print(f"\nPORTFOLIO-LEVEL ALERTS\n{'-' * 88}")
     all_alerts: list[dict] = []
     median_rev = float(portfolio["revenue"].median())
-    for metric, min_abs in (("revenue", median_rev * 0.15),
-                            ("occupancy_pct", 8.0),
-                            ("adr_inr", 350.0)):
+    # Gates live in the analytics module so the Alert Center reuses them rather
+    # than restating them. Same values as before.
+    for metric, min_abs in (
+        ("revenue", median_rev * an.REVENUE_GATE_FRACTION_OF_MEDIAN),
+        ("occupancy_pct", an.PORTFOLIO_GATES["occupancy_pct"]),
+        ("adr_inr", an.PORTFOLIO_GATES["adr_inr"]),
+    ):
         found = an.detect(portfolio, metric=metric, segment="PORTFOLIO",
                           min_abs_change=min_abs)
         for a in found:

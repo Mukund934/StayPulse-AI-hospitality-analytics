@@ -51,6 +51,19 @@ Z_THRESHOLD = 3.5
 # Minimum trailing same-weekday observations before a baseline is trusted at all.
 MIN_HISTORY = 6
 
+# Materiality gates for the portfolio-level metrics, in each metric's own units.
+#
+# These were inline in scripts/run_anomaly_detection.py, which meant the Alert
+# Center had a choice between importing a script or restating them -- and a
+# restated gate is a second definition of "anomaly", which is exactly what the
+# semantic layer exists to prevent. Revenue's gate is a fraction of the median
+# rather than an absolute, because a rupee threshold ages with the portfolio.
+PORTFOLIO_GATES: dict[str, float] = {
+    "occupancy_pct": 8.0,
+    "adr_inr": 350.0,
+}
+REVENUE_GATE_FRACTION_OF_MEDIAN = 0.15
+
 
 @dataclass
 class Anomaly:
