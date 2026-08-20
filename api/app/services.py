@@ -910,3 +910,45 @@ def copilot_ask(question: str) -> dict[str, Any]:
     """Answer one question through the deterministic tool layer."""
     client = _copilot.GeminiClient()
     return _copilot.ask(question, client).as_dict()
+
+
+def rm_calendar(days: int) -> dict[str, Any]:
+    """Per-date calendar context for the trailing window.
+
+    Added for the Command Center heatmap. The holiday flags already existed on
+    `dim_date` from F-101 but were only reachable through the effect endpoints,
+    which report by holiday rather than by date -- so a per-date overlay had no
+    way to ask "is this cell holiday-adjacent".
+    """
+    rows = db.fetch_all(
+        """
+        SELECT d.full_date, d.is_public_holiday, d.holiday_name,
+               d.nearest_holiday, d.days_to_holiday, d.is_holiday_adjacent,
+               d.is_long_weekend, d.is_bridge_day
+        FROM mart.dim_date d
+        WHERE d.full_date >= (SELECT max(stay_date) - :d FROM mart.fact_unit_night)
+          AND d.full_date <= (SELECT max(stay_date) FROM mart.fact_unit_night)
+        ORDER BY d.full_date
+        """,
+        d=days,
+    )
+    return {
+        "note": ("Holiday context per stay date. In this corporate portfolio "
+                 "holidays SUPPRESS demand rather than lift it -- see the "
+                 "holiday-effect endpoint for the measured size."),
+        "days": len(rows),
+        "dates": [
+            {
+                "date": r["full_date"].isoformat(),
+                "is_public_holiday": bool(r["is_public_holiday"]),
+                "holiday_name": r["holiday_name"],
+                "nearest_holiday": r["nearest_holiday"],
+                "days_to_holiday": (None if r["days_to_holiday"] is None
+                                    else int(r["days_to_holiday"])),
+                "is_holiday_adjacent": bool(r["is_holiday_adjacent"]),
+                "is_long_weekend": bool(r["is_long_weekend"]),
+                "is_bridge_day": bool(r["is_bridge_day"]),
+            }
+            for r in rows
+        ],
+    }

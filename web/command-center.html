@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StayPulse — Revenue Command Center</title>
+<meta name="description" content="Live revenue-management command center over the StayPulse analytics API.">
+<!--
+  DESIGN NOTE, and the reason there is no build step here.
+
+  web/README.md records a deliberate decision: this directory ships no
+  dependencies, no build and no environment variables, so there is nothing in it
+  that can leak and nothing that can rot. That decision is kept.
+
+  This page is therefore vanilla HTML/CSS/JS that fetches the live API at
+  runtime. A React build would need node_modules, a build command, a bundler and
+  an env var for the API base -- four new failure modes for a page that renders
+  fifteen fetches.
+
+  The API base is resolved at runtime instead of baked in at build time:
+    1. ?api=<url> in the query string wins
+    2. then localStorage
+    3. then localhost when served from localhost
+    4. otherwise unset -- and the page says so, clearly, with the exact fix
+
+  That last state matters. At the time of writing the API has never been
+  deployed and no Render URL exists anywhere in the repository, so "not
+  configured" is the honest default rather than a placeholder URL that 404s.
+-->
+<style>
+:root{
+  --paper:#FBFBFC; --surface:#F1F2F5; --surface2:#E7E9EE;
+  --rule:#DCDEE5; --rule-strong:#C0C4CE;
+  --ink:#15171C; --ink2:#3B404C; --ink3:#666C7A;
+  --accent:#8A2E3C; --accent-wash:#F8EDEF;
+  --ok:#2C6247; --ok-wash:#EAF2ED; --warn:#7E5F14; --warn-wash:#F8F1DE;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#101216; --surface:#171A20; --surface2:#1F232B;
+    --rule:#292E38; --rule-strong:#3B4250;
+    --ink:#ECEEF2; --ink2:#C0C5D0; --ink3:#8A91A0;
+    --accent:#E08795; --accent-wash:#2A1A1E;
+    --ok:#7EC4A0; --ok-wash:#15231C; --warn:#D9B865; --warn-wash:#231F12;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+code,.num{font-family:var(--mono)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+
+/* ---- header ---- */
+header{border-bottom:1px solid var(--rule);background:var(--surface);
+  position:sticky;top:0;z-index:20}
+.hd{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;
+  align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:650;letter-spacing:-.01em;font-size:16px}
+.brand span{color:var(--ink3);font-weight:400}
+.spacer{flex:1}
+.apibox{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3)}
+.apibox input{font-family:var(--mono);font-size:12px;padding:4px 7px;width:230px;
+  border:1px solid var(--rule-strong);border-radius:5px;background:var(--paper);
+  color:var(--ink)}
+button{font:inherit;font-size:13px;padding:5px 11px;border-radius:6px;
+  border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink);
+  cursor:pointer}
+button:hover{background:var(--surface2)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.primary:hover{filter:brightness(1.08)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ink3);flex:none}
+.dot.ok{background:var(--ok)} .dot.bad{background:var(--accent)}
+
+nav{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--rule);
+  background:var(--paper);position:sticky;top:49px;z-index:19}
+nav .inner{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:2px}
+nav button{border:0;border-bottom:2px solid transparent;border-radius:0;
+  background:none;padding:9px 13px;color:var(--ink3);white-space:nowrap}
+nav button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent);
+  font-weight:600}
+
+/* ---- layout ---- */
+h2{font-size:15px;margin:26px 0 3px;letter-spacing:-.01em}
+.sub{color:var(--ink3);font-size:12.5px;margin:0 0 12px}
+.grid{display:grid;gap:12px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.card{border:1px solid var(--rule);border-radius:9px;background:var(--surface);
+  padding:14px 15px}
+.kpi .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--ink3)}
+.kpi .value{font-family:var(--mono);font-size:25px;font-weight:600;
+  margin:4px 0 1px;letter-spacing:-.02em}
+.kpi .delta{font-size:12px;color:var(--ink3)}
+.up{color:var(--ok)} .down{color:var(--accent)}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--rule)}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);
+  font-weight:600}
+td.n,th.n{text-align:right;font-family:var(--mono)}
+.scroll{overflow-x:auto}
+
+.tag{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:20px;
+  border:1px solid var(--rule-strong);color:var(--ink2);white-space:nowrap}
+.tag.now{background:var(--accent-wash);border-color:var(--accent);color:var(--accent)}
+.tag.inv{background:var(--warn-wash);border-color:var(--warn);color:var(--warn)}
+.tag.std{background:var(--surface2)}
+.tag.ok{background:var(--ok-wash);border-color:var(--ok);color:var(--ok)}
+
+.note{font-size:12px;color:var(--ink3);border-left:2px solid var(--rule-strong);
+  padding-left:10px;margin:10px 0}
+.banner{border:1px solid var(--warn);background:var(--warn-wash);color:var(--warn);
+  padding:10px 13px;border-radius:8px;font-size:13px;margin:12px 0}
+
+/* ---- states ---- */
+.state{padding:26px 16px;text-align:center;color:var(--ink3);font-size:13px}
+.state h3{color:var(--ink);font-size:14px;margin:0 0 6px}
+.skel{height:11px;border-radius:4px;background:linear-gradient(90deg,
+  var(--surface2) 25%,var(--rule) 37%,var(--surface2) 63%);
+  background-size:400% 100%;animation:sh 1.3s ease infinite;margin:7px 0}
+@keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}}
+
+/* ---- scenario ---- */
+.lev{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13px}
+.lev label{width:130px;color:var(--ink2)}
+.lev input[type=range]{flex:1}
+.lev output{width:62px;text-align:right;font-family:var(--mono);font-weight:600}
+
+/* ---- copilot ---- */
+.chat{max-height:420px;overflow-y:auto;padding-right:4px}
+.msg{margin:9px 0;padding:9px 12px;border-radius:9px;font-size:13.5px}
+.msg.me{background:var(--surface2);margin-left:15%}
+.msg.sp{background:var(--surface);border:1px solid var(--rule)}
+.ev{margin-top:8px;padding-top:7px;border-top:1px dashed var(--rule)}
+.ev summary{cursor:pointer;font-size:11.5px;color:var(--ink3)}
+.ev pre{font-size:11px;max-height:200px;overflow:auto;background:var(--paper);
+  border:1px solid var(--rule);border-radius:6px;padding:8px;margin:7px 0 0}
+.ask{display:flex;gap:7px;margin-top:11px}
+.ask input{flex:1;font:inherit;font-size:13.5px;padding:8px 11px;
+  border:1px solid var(--rule-strong);border-radius:7px;background:var(--paper);
+  color:var(--ink)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.chips button{font-size:12px;color:var(--ink2)}
+
+/* ---- heatmap ---- */
+.hm{display:grid;grid-template-columns:repeat(auto-fill,minmax(13px,1fr));gap:2px}
+.hm i{aspect-ratio:1;border-radius:2px;background:var(--surface2);display:block}
+.legend{display:flex;align-items:center;gap:6px;font-size:11.5px;
+  color:var(--ink3);margin-top:8px}
+.legend i{width:13px;height:13px;border-radius:2px;display:block}
+.panel[hidden]{display:none}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--rule);
+  font-size:12px;color:var(--ink3)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <div class="brand">StayPulse <span>· Revenue Command Center</span></div>
+    <div class="spacer"></div>
+    <div class="apibox">
+      <span class="dot" id="dot"></span>
+      <label for="api" style="position:absolute;left:-9999px">API base URL</label>
+      <input id="api" placeholder="https://your-api.onrender.com" spellcheck="false">
+      <button id="connect">Connect</button>
+    </div>
+  </div>
+</header>
+
+<nav><div class="inner" role="tablist">
+  <button role="tab" data-p="today"    aria-selected="true">Today</button>
+  <button role="tab" data-p="why"      aria-selected="false">Why</button>
+  <button role="tab" data-p="attention" aria-selected="false">Attention</button>
+  <button role="tab" data-p="upside"   aria-selected="false">Upside</button>
+  <button role="tab" data-p="forecast" aria-selected="false">Forecast</button>
+  <button role="tab" data-p="risk"     aria-selected="false">Risk</button>
+  <button role="tab" data-p="scenario" aria-selected="false">Scenario</button>
+  <button role="tab" data-p="replay"   aria-selected="false">Replay</button>
+  <button role="tab" data-p="explore"  aria-selected="false">Explore</button>
+  <button role="tab" data-p="copilot"  aria-selected="false">Ask StayPulse</button>
+</div></nav>
+
+<div class="wrap">
+  <div id="offline" hidden></div>
+
+  <!-- TODAY -->
+  <section class="panel" id="p-today">
+    <h2>Trading position</h2>
+    <p class="sub">Trailing 30 days against the preceding 30. Stay-date basis.</p>
+    <div class="grid g4" id="kpis"></div>
+    <h2>Forward book</h2>
+    <p class="sub">What is already sold for nights that have not happened yet.</p>
+    <div class="grid g4" id="fwd"></div>
+  </section>
+
+  <!-- WHY -->
+  <section class="panel" id="p-why" hidden>
+    <h2>Why did RevPAR move?</h2>
+    <p class="sub">Deterministic decomposition. No language model is involved in
+      the attribution &mdash; the split is arithmetic and sums to the movement exactly.</p>
+    <div id="why"></div>
+  </section>
+
+  <!-- ATTENTION -->
+  <section class="panel" id="p-attention" hidden>
+    <h2>Alert queue</h2>
+    <p class="sub">Four feeds in one queue, ordered by <strong>actionability</strong>
+      &mdash; what you can still do about it.</p>
+    <div class="note" id="sevnote"></div>
+    <div id="alerts"></div>
+  </section>
+
+  <!-- UPSIDE -->
+  <section class="panel" id="p-upside" hidden>
+    <h2>Opportunity radar</h2>
+    <p class="sub">Dates filling ahead of their own curve. No signal names a price.</p>
+    <div id="opps"></div>
+  </section>
+
+  <!-- FORECAST -->
+  <section class="panel" id="p-forecast" hidden>
+    <h2>Occupancy forecast</h2>
+    <p class="sub">Room-nights with an empirical interval. The interval is
+      calibrated on the model&rsquo;s own backtest residuals, and its measured
+      out-of-sample coverage is shown below.</p>
+    <div id="fc"></div>
+    <h2>Does the interval mean anything?</h2>
+    <p class="sub">An 80% interval that contains the truth 80% of the time is a
+      claim worth making. This is the measurement.</p>
+    <div id="cov"></div>
+  </section>
+
+  <!-- RISK -->
+  <section class="panel" id="p-risk" hidden>
+    <h2>Cancellation risk</h2>
+    <p class="sub">Accuracy is deliberately not reported: on this base rate a model
+      predicting &ldquo;never cancels&rdquo; scores about 88% and is useless.</p>
+    <div id="cx"></div>
+    <h2>Overbooking</h2>
+    <p class="sub">No recommended level is published. That needs the cost of walking
+      a guest relative to an empty room, and this warehouse prices neither.</p>
+    <div id="ob"></div>
+  </section>
+
+  <!-- SCENARIO -->
+  <section class="panel" id="p-scenario" hidden>
+    <h2>Scenario &mdash; not a forecast</h2>
+    <p class="sub">Arithmetic on the RevPAR identity. It predicts nothing, cannot be
+      right or wrong, and does not claim the change is achievable.</p>
+    <div class="card">
+      <div class="lev">
+        <label for="s-occ">Occupancy</label>
+        <input type="range" id="s-occ" min="-15" max="15" step="1" value="5">
+        <output id="o-occ">+5pp</output>
+      </div>
+      <div class="lev">
+        <label for="s-adr">ADR</label>
+        <input type="range" id="s-adr" min="-15" max="15" step="1" value="0">
+        <output id="o-adr">0%</output>
+      </div>
+      <div class="lev">
+        <label for="s-cap">Capacity</label>
+        <input type="range" id="s-cap" min="-20" max="20" step="1" value="0">
+        <output id="o-cap">0%</output>
+      </div>
+    </div>
+    <div id="scn"></div>
+  </section>
+
+  <!-- REPLAY -->
+  <section class="panel" id="p-replay" hidden>
+    <h2>Decision replay</h2>
+    <p class="sub">What was knowable at a past date, with no hindsight &mdash; and,
+      separately, what actually happened.</p>
+    <div class="card" style="margin-bottom:12px">
+      <label for="r-date" style="font-size:13px;color:var(--ink2)">As of</label>
+      <input type="date" id="r-date" style="font:inherit;font-size:13px;padding:5px 8px;
+        border:1px solid var(--rule-strong);border-radius:5px;background:var(--paper);
+        color:var(--ink);margin-left:8px">
+      <button id="r-go" style="margin-left:6px">Replay</button>
+    </div>
+    <div id="rp"></div>
+  </section>
+
+  <!-- EXPLORE -->
+  <section class="panel" id="p-explore" hidden>
+    <h2>Occupancy by date</h2>
+    <p class="sub">One cell per stay date. Holiday-adjacent dates are outlined
+      &mdash; in this corporate portfolio, holidays <strong>suppress</strong> demand.</p>
+    <div id="hm"></div>
+    <h2>Channel economics</h2>
+    <p class="sub">Net per night is after commission and the 18% GST charged on it.
+      This is what makes a channel-mix scenario real rather than hypothetical.</p>
+    <div id="ch"></div>
+  </section>
+
+  <!-- COPILOT -->
+  <section class="panel" id="p-copilot" hidden>
+    <h2>Ask StayPulse</h2>
+    <p class="sub">The model picks tools and phrases the result. It never computes:
+      every figure comes from a deterministic function, and each answer shows the
+      tools it used.</p>
+    <div id="cap"></div>
+    <div class="card">
+      <div class="chat" id="chat"></div>
+      <div class="ask">
+        <label for="q" style="position:absolute;left:-9999px">Your question</label>
+        <input id="q" placeholder="Why are we behind pace?">
+        <button class="primary" id="send">Ask</button>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    Every figure on this page is fetched live from the StayPulse API and computed
+    by deterministic analytics. Synthetic data throughout &mdash; no real guest,
+    employee or booking is represented.
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- API base resolution -------------------------------------------
+   Runtime, not build time. See the comment at the top of this file. */
+const qs = new URLSearchParams(location.search);
+const LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+let API = qs.get("api") || localStorage.getItem("staypulse_api")
+        || (LOCAL ? "http://localhost:8000" : "");
+
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const el = (t, c, h) => { const n = document.createElement(t);
+  if (c) n.className = c; if (h !== undefined) n.innerHTML = h; return n; };
+
+const nf = (v, d) => (v === null || v === undefined || Number.isNaN(v)) ? "—"
+  : Number(v).toLocaleString("en-IN", {minimumFractionDigits: d ?? 0,
+                                       maximumFractionDigits: d ?? 0});
+const pct = v => v === null || v === undefined ? "—" : Number(v).toFixed(1) + "%";
+const esc = s => String(s ?? "").replace(/[&<>"]/g,
+  c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- fetch with honest states --------------------------------------- */
+const cache = new Map();
+async function api(path, {fresh = false} = {}) {
+  if (!API) throw new Error("NO_API");
+  if (!fresh && cache.has(path)) return cache.get(path);
+  const res = await fetch(API.replace(/\/$/, "") + path, {headers: {accept: "application/json"}});
+  if (!res.ok) {
+    let detail = res.status + " " + res.statusText;
+    try { const b = await res.json(); if (b.detail) detail = b.detail; } catch (_) {}
+    throw new Error(detail);
+  }
+  const body = await res.json();
+  cache.set(path, body);
+  return body;
+}
+
+function skeleton(rows) {
+  const d = el("div", "card");
+  for (let i = 0; i < (rows || 3); i++) {
+    const s = el("div", "skel");
+    s.style.width = (55 + Math.random() * 40) + "%";
+    d.appendChild(s);
+  }
+  return d;
+}
+
+/* Every panel renders through this, so loading, empty and error states are
+   uniform and none of them is a blank div. */
+async function render(node, path, fn, {rows, empty} = {}) {
+  node.replaceChildren(skeleton(rows));
+  if (!API) { node.replaceChildren(offlineCard()); return; }
+  try {
+    const data = await api(path);
+    const out = fn(data);
+    if (!out || (out.dataset && out.dataset.empty === "1")) {
+      node.replaceChildren(stateCard("Nothing to show",
+        empty || "The API answered, and there is nothing in this window."));
+    } else {
+      node.replaceChildren(out);
+    }
+  } catch (e) {
+    node.replaceChildren(e.message === "NO_API" ? offlineCard()
+      : stateCard("Could not load", esc(e.message) +
+          "<div style='margin-top:8px'><code>" + esc(path) + "</code></div>"));
+  }
+}
+
+function stateCard(title, body) {
+  return el("div", "card", "<div class='state'><h3>" + title + "</h3><div>" +
+    body + "</div></div>");
+}
+
+function offlineCard() {
+  return el("div", "card",
+    "<div class='state'><h3>API not connected</h3>" +
+    "<div>This page reads live data from the StayPulse API. Nothing is cached " +
+    "or hard-coded, so there is nothing to show until it can reach one.</div>" +
+    "<div style='margin-top:12px;text-align:left;max-width:520px;margin-inline:auto'>" +
+    "<strong style='color:var(--ink)'>Run it locally</strong>" +
+    "<div style='margin:5px 0 12px'><code>uvicorn api.app.main:app --port 8000</code>" +
+    " then enter <code>http://localhost:8000</code> above.</div>" +
+    "<strong style='color:var(--ink)'>Or point at a deployment</strong>" +
+    "<div style='margin-top:5px'>Paste the base URL above, or load this page with " +
+    "<code>?api=https://…</code>. It is remembered in this browser.</div>" +
+    "</div></div>");
+}
+
+/* ---------- connection ----------------------------------------------------- */
+async function connect() {
+  const dot = $("#dot");
+  dot.className = "dot";
+  if (!API) { paint(); return; }
+  try {
+    await api("/health", {fresh: true});
+    dot.className = "dot ok";
+    dot.title = "API reachable";
+    $("#offline").hidden = true;
+  } catch (e) {
+    dot.className = "dot bad";
+    dot.title = "API unreachable: " + e.message;
+    $("#offline").hidden = false;
+    $("#offline").replaceChildren(el("div", "banner",
+      "Cannot reach <code>" + esc(API) + "</code> — " + esc(e.message) +
+      ". Check the URL, and that the API allows this origin (CORS)."));
+  }
+  cache.clear();
+  paint();
+}
+
+$("#connect").addEventListener("click", () => {
+  API = $("#api").value.trim();
+  if (API) localStorage.setItem("staypulse_api", API);
+  else localStorage.removeItem("staypulse_api");
+  connect();
+});
+$("#api").addEventListener("keydown", e => { if (e.key === "Enter") $("#connect").click(); });
+
+/* ---------- navigation ----------------------------------------------------- */
+let panel = "today";
+$$("nav button").forEach(b => b.addEventListener("click", () => {
+  panel = b.dataset.p;
+  $$("nav button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  $$(".panel").forEach(p => { p.hidden = p.id !== "p-" + panel; });
+  paint();
+}));
+
+/* ---------- panels --------------------------------------------------------- */
+const painted = new Set();
+function paint() {
+  if (painted.has(panel) && API) return;
+  painted.add(panel);
+  ({today: pToday, why: pWhy, attention: pAttention, upside: pUpside,
+    forecast: pForecast, risk: pRisk, scenario: pScenario, replay: pReplay,
+    explore: pExplore, copilot: pCopilot}[panel] || (() => {}))();
+}
+
+function kpi(label, value, delta) {
+  return "<div class='card kpi'><div class='label'>" + label + "</div>" +
+    "<div class='value'>" + value + "</div>" +
+    "<div class='delta'>" + (delta || "&nbsp;") + "</div></div>";
+}
+/* Deltas share the locale formatting of the value they sit under. A rupee
+   figure rendered as 3959842.6 beside one rendered as ₹41,82,054 reads as a
+   different kind of number, which is a small thing that makes a dashboard look
+   unfinished. Large magnitudes drop the decimal; small ones keep it. */
+const arrow = v => {
+  if (v === null || v === undefined || Number.isNaN(v)) return "";
+  const m = Math.abs(v);
+  const txt = m >= 1000 ? nf(m) : m.toFixed(1);
+  return "<span class='" + (v >= 0 ? "up" : "down") + "'>" +
+    (v >= 0 ? "▲" : "▼") + " " + txt + "</span>";
+};
+
+function pToday() {
+  render($("#kpis"), "/api/kpis/overview?days=30", d => {
+    const c = d.comparison || {};
+    return el("div", "grid g4",
+      kpi("Occupancy", pct(d.occupancy_pct),
+          c.occupancy_delta_pp !== undefined ? arrow(c.occupancy_delta_pp) + " pp vs prior 30d" : "") +
+      kpi("ADR", "₹" + nf(d.adr_inr),
+          c.adr_delta_inr !== undefined ? arrow(c.adr_delta_inr) + " vs prior 30d" : "") +
+      kpi("RevPAR", "₹" + nf(d.revpar_inr), "occupancy × ADR") +
+      kpi("Revenue", "₹" + nf(d.revenue_inr),
+          c.revenue_delta_pct !== undefined ? arrow(c.revenue_delta_pct) + "% vs prior 30d" : "") +
+      kpi("Room nights sold", nf(d.rooms_sold), nf(d.rooms_available) + " available") +
+      kpi("Cancellation rate", pct(d.cancellation_rate_pct), nf(d.bookings) + " bookings") +
+      kpi("Avg lead time", nf(d.avg_lead_time_days, 1) + " d", "booking to arrival") +
+      kpi("Out of order", nf(d.rooms_out_of_order), "unit-nights"));
+  }, {rows: 4});
+
+  render($("#fwd"), "/api/revenue-management/overview", d =>
+    el("div", "grid g4",
+      kpi("On the books", nf(d.nights_on_books_30d), "next 30 days") +
+      kpi("Revenue on books", "₹" + nf(d.revenue_on_books_30d_inr), "next 30 days") +
+      kpi("Net pickup (14d)", nf(d.pickup_14d_nights_net),
+          nf(d.pickup_14d_nights_added) + " added · " +
+          nf(d.pickup_14d_nights_cancelled) + " cancelled") +
+      kpi("Behind pace", nf(d.behind_pace),
+          nf(d.ahead_of_pace) + " ahead · " + nf(d.stay_dates_scored) + " scored")),
+    {rows: 4});
+}
+
+function pWhy() {
+  render($("#why"), "/api/revenue-management/why?days=30", d => {
+    const rows = (d.components || []).map(c =>
+      "<tr><td>" + esc(c.driver || c.label || c.name) + "</td>" +
+      "<td class='n'>₹" + nf(c.revpar_contribution_inr, 2) + "</td>" +
+      "<td>" + esc(c.detail || c.note || "") + "</td></tr>").join("");
+    const w = el("div");
+    w.appendChild(el("div", "grid g4",
+      kpi("RevPAR before", "₹" + nf(d.baseline_revpar_inr ?? d.baseline, 2), "") +
+      kpi("RevPAR after", "₹" + nf(d.current_revpar_inr ?? d.current, 2), "") +
+      kpi("Movement", "₹" + nf(d.change, 2), "sums exactly from the parts below")));
+    if (rows) w.appendChild(el("div", "card scroll",
+      "<table><thead><tr><th>Driver</th><th class='n'>RevPAR contribution</th>" +
+      "<th>Detail</th></tr></thead><tbody>" + rows + "</tbody></table>"));
+    if (d.method) w.appendChild(el("div", "note", esc(d.method)));
+    return w;
+  }, {rows: 5});
+}
+
+function pAttention() {
+  render($("#alerts"), "/api/revenue-management/alerts", d => {
+    $("#sevnote").textContent = d.severity_note || "";
+    if (!d.alerts || !d.alerts.length)
+      return el("div", "card", "<div class='state'><h3>Queue is empty</h3>" +
+        "<div>No feed raised anything at this as-of date.</div></div>");
+    const cls = {act_now: "now", investigate: "inv", standing: "std"};
+    const rows = d.alerts.map(a =>
+      "<tr><td><span class='tag " + (cls[a.actionability] || "std") + "'>" +
+        esc(a.actionability.replace("_", " ")) + "</span></td>" +
+      "<td><code>" + esc(a.source) + "</code></td>" +
+      "<td>" + esc(a.headline) +
+        (a.calendar_context ? "<div style='font-size:11.5px;color:var(--ink3)'>" +
+          esc(a.calendar_context) + "</div>" : "") +
+        (a.qualifier ? "<details class='ev'><summary>Why this may be expected</summary>" +
+          "<div style='font-size:12px;margin-top:6px'>" + esc(a.qualifier) +
+          "</div></details>" : "") + "</td>" +
+      "<td class='n'>" + nf(a.measure.value, 2) + "<div style='font-size:10.5px;" +
+        "color:var(--ink3);font-family:var(--sans)'>" + esc(a.measure.units) +
+        "</div></td>" +
+      "<td class='n'>" + (a.days_to_act ?? "—") + "</td></tr>").join("");
+    const w = el("div");
+    w.appendChild(el("div", "grid g4",
+      kpi("Total", nf(d.total), "") +
+      Object.entries(d.by_source).map(([k, v]) => kpi(k.replace("_", " "), nf(v), "")).join("")));
+    w.appendChild(el("div", "card scroll",
+      "<table><thead><tr><th>Act</th><th>Feed</th><th>Alert</th>" +
+      "<th class='n'>Measure</th><th class='n'>Days</th></tr></thead><tbody>" +
+      rows + "</tbody></table>"));
+    if (d.known_bias) w.appendChild(el("div", "note",
+      "<strong>Known bias in the pace feed.</strong> " + esc(d.known_bias.mechanism) +
+      " " + esc(d.known_bias.handling)));
+    return w;
+  }, {rows: 6});
+}
+
+function pUpside() {
+  render($("#opps"), "/api/revenue-management/opportunities", d => {
+    if (!d.opportunities || !d.opportunities.length)
+      return el("div", "card", "<div class='state'><h3>Nothing ahead of curve</h3>" +
+        "<div>At this as-of date no stay date is filling unusually early. That is " +
+        "an ordinary result, not an error.</div></div>");
+    const rows = d.opportunities.map(o =>
+      "<tr><td>" + esc(o.raised_for) + "</td><td>" + esc(o.subject.split("·")[1] || "") +
+      "</td><td>" + esc(o.headline) + "</td><td class='n'>+" + nf(o.measure.value, 1) +
+      "</td><td class='n'>" + (o.days_to_act ?? "—") + "</td></tr>").join("");
+    const w = el("div", "card scroll",
+      "<table><thead><tr><th>Stay date</th><th>Property</th><th>Signal</th>" +
+      "<th class='n'>Surplus</th><th class='n'>Days out</th></tr></thead><tbody>" +
+      rows + "</tbody></table>");
+    const box = el("div"); box.appendChild(w);
+    box.appendChild(el("div", "note", esc(d.note)));
+    return box;
+  }, {rows: 5});
+}
+
+function pForecast() {
+  render($("#fc"), "/api/revenue-management/forecast/intervals?horizon_days=14&level=0.8", d => {
+    const rows = d.forecast.map(r =>
+      "<tr><td>" + esc(r.stay_date) + "</td><td class='n'>" + r.horizon_days + "</td>" +
+      "<td class='n'>" + nf(r.predicted_room_nights, 1) + "</td>" +
+      "<td class='n'>" + (r.lower_room_nights === null ? "—" :
+        nf(r.lower_room_nights, 1) + " – " + nf(r.upper_room_nights, 1)) + "</td>" +
+      "<td>" + (r.interval_note ? "<span class='tag'>" + esc(r.interval_note) +
+        "</span>" : "") + "</td></tr>").join("");
+    const w = el("div");
+    w.appendChild(el("div", "card scroll",
+      "<table><thead><tr><th>Stay date</th><th class='n'>h</th>" +
+      "<th class='n'>Forecast</th><th class='n'>80% interval</th><th></th>" +
+      "</tr></thead><tbody>" + rows + "</tbody></table>"));
+    w.appendChild(el("div", "note", esc(d.method_note) + " " + esc(d.caveat)));
+    return w;
+  }, {rows: 6});
+
+  render($("#cov"), "/api/revenue-management/forecast/intervals/coverage", d => {
+    const rows = d.coverage.map(c =>
+      "<tr" + (c.is_default ? " style='font-weight:600'" : "") + "><td>" +
+      esc(c.method) + (c.is_default ? " <span class='tag ok'>published</span>" : "") +
+      "</td><td class='n'>" + (c.level * 100).toFixed(0) + "%</td>" +
+      "<td class='n'>" + c.out_of_sample_pct + "%</td>" +
+      "<td class='n' style='color:var(--ink3)'>" + c.in_sample_pct + "%</td>" +
+      "<td class='n'>" + (c.deviation_pp > 0 ? "+" : "") + c.deviation_pp + "</td></tr>").join("");
+    const w = el("div");
+    w.appendChild(el("div", "card scroll",
+      "<table><thead><tr><th>Method</th><th class='n'>Nominal</th>" +
+      "<th class='n'>Out of sample</th><th class='n'>In sample</th>" +
+      "<th class='n'>Dev (pp)</th></tr></thead><tbody>" + rows + "</tbody></table>"));
+    w.appendChild(el("div", "note", esc(d.note)));
+    return w;
+  }, {rows: 6});
+}
+
+function pRisk() {
+  render($("#cx"), "/api/revenue-management/cancellation-risk", d => {
+    const e = d.evaluation, c = e.classification_at_threshold;
+    const w = el("div");
+    w.appendChild(el("div", "grid g4",
+      kpi("AUC", e.discrimination.auc, "0.5 is a coin toss") +
+      kpi("Precision", pct(c.precision_pct), "vs " + pct(e.base_rate_pct) + " base rate") +
+      kpi("Recall", pct(c.recall_pct), "of cancellations caught") +
+      kpi("Lift", c.lift_over_base_rate + "×", "over the base rate") +
+      kpi("Calibration", e.calibration.weighted_mean_absolute_error_pp + "pp",
+          "weighted mean abs error") +
+      kpi("Brier", e.brier_score, "lower is better")));
+    const g = d.ground_truth;
+    if (g) w.appendChild(el("div", "note",
+      "<strong>Recovery of the planted mechanism.</strong> Channel ordering " +
+      "correlates <strong>" + g.channel_ranking.spearman + "</strong> with the " +
+      "generator's rates; lead-time effect recovered as <strong>" +
+      esc(g.lead_time.net_direction) + "</strong>. " +
+      (d.no_show ? "No-show scores AUC " + d.no_show.auc +
+        " — unlearnable by construction, and that is the correct result." : "")));
+    const bins = (e.calibration.bins || []).map(b =>
+      "<tr><td>" + esc(b.bin) + "</td><td class='n'>" + nf(b.bookings) + "</td>" +
+      "<td class='n'>" + b.mean_predicted_pct + "%</td>" +
+      "<td class='n'>" + b.observed_pct + "%</td>" +
+      "<td class='n'>" + (b.gap_pp > 0 ? "+" : "") + b.gap_pp + "</td></tr>").join("");
+    w.appendChild(el("div", "card scroll",
+      "<table><thead><tr><th>Predicted band</th><th class='n'>Bookings</th>" +
+      "<th class='n'>Predicted</th><th class='n'>Observed</th><th class='n'>Gap</th>" +
+      "</tr></thead><tbody>" + bins + "</tbody></table>"));
+    return w;
+  }, {rows: 6});
+
+  render($("#ob"), "/api/revenue-management/overbooking", d => {
+    const rows = d.levels.map(l =>
+      "<tr><td class='n'>+" + l.overbook_by + "</td>" +
+      "<td class='n'>" + l.bookings_accepted + "</td>" +
+      "<td class='n'>" + l.expected_arrivals + "</td>" +
+      "<td class='n'>" + l.probability_of_walking_anyone_pct + "%</td>" +
+      "<td class='n'>" + l.expected_walks + "</td>" +
+      "<td class='n'>" + l.expected_empty_rooms + "</td>" +
+      "<td class='n'>" + (l.breakeven_cost_ratio ?? "—") + "</td></tr>").join("");
+    const w = el("div");
+    w.appendChild(el("div", "grid g4",
+      kpi("Stay date", esc(d.stay_date), "as of " + esc(d.as_of)) +
+      kpi("On the books", nf(d.on_books), nf(d.capacity) + " sellable") +
+      kpi("Survival rate", pct(d.survival_rate_pct), "measured wash")));
+    w.appendChild(el("div", "card scroll",
+      "<table><thead><tr><th class='n'>Overbook</th><th class='n'>Accepted</th>" +
+      "<th class='n'>E[arrivals]</th><th class='n'>P(walk)</th>" +
+      "<th class='n'>E[walks]</th><th class='n'>E[empty]</th>" +
+      "<th class='n'>Breakeven</th></tr></thead><tbody>" + rows + "</tbody></table>"));
+    w.appendChild(el("div", "note", "<strong>No level is recommended.</strong> " +
+      esc(d.no_optimum_note) + " Read the breakeven column as: overbooking by this " +
+      "much pays off only if walking a guest costs less than this many empty rooms."));
+    return w;
+  }, {rows: 6});
+}
+
+/* ---- scenario: live, debounced ---- */
+let scnTimer = null;
+function scnRun() {
+  const occ = +$("#s-occ").value, adr = +$("#s-adr").value, cap = +$("#s-cap").value;
+  $("#o-occ").textContent = (occ >= 0 ? "+" : "") + occ + "pp";
+  $("#o-adr").textContent = (adr >= 0 ? "+" : "") + adr + "%";
+  $("#o-cap").textContent = (cap >= 0 ? "+" : "") + cap + "%";
+  clearTimeout(scnTimer);
+  scnTimer = setTimeout(() => {
+    render($("#scn"),
+      "/api/revenue-management/scenario?occupancy_pp=" + occ +
+      "&adr_pct=" + adr + "&capacity_units_pct=" + cap, d => {
+      const b = d.baseline, s = d.scenario, c = d.change, k = d.decomposition;
+      const w = el("div");
+      w.appendChild(el("div", "banner",
+        "<strong>SCENARIO — NOT A FORECAST.</strong> " + esc(d.what_this_is)));
+      w.appendChild(el("div", "grid g4",
+        kpi("Occupancy", pct(s.occupancy_pct), "was " + pct(b.occupancy_pct) +
+            " · " + arrow(c.occupancy_pp) + " pp") +
+        kpi("ADR", "₹" + nf(s.adr_inr), "was ₹" + nf(b.adr_inr)) +
+        kpi("RevPAR", "₹" + nf(s.revpar_inr, 2), "was ₹" + nf(b.revpar_inr, 2) +
+            " · " + arrow(c.revpar_inr)) +
+        kpi("Room revenue", "₹" + nf(s.room_revenue_inr), arrow(c.room_revenue_inr))));
+      w.appendChild(el("div", "card scroll",
+        "<table><thead><tr><th>Component</th><th class='n'>RevPAR contribution</th>" +
+        "</tr></thead><tbody>" +
+        "<tr><td>Occupancy</td><td class='n'>₹" + nf(k.occupancy_contribution_inr, 2) + "</td></tr>" +
+        "<tr><td>Rate</td><td class='n'>₹" + nf(k.rate_contribution_inr, 2) + "</td></tr>" +
+        "<tr><td><strong>Residual</strong></td><td class='n'><strong>" +
+        k.residual_inr + "</strong></td></tr></tbody></table>"));
+      w.appendChild(el("div", "note", "<strong>Assumptions held constant.</strong><ul " +
+        "style='margin:6px 0 0;padding-left:18px'>" +
+        d.assumptions_held_constant.map(a => "<li>" + esc(a) + "</li>").join("") +
+        "</ul>"));
+      return w;
+    }, {rows: 4});
+  }, 220);
+}
+["s-occ", "s-adr", "s-cap"].forEach(id =>
+  $("#" + id).addEventListener("input", scnRun));
+function pScenario() { scnRun(); }
+
+function pReplay() {
+  const go = () => {
+    const d = $("#r-date").value;
+    render($("#rp"), "/api/revenue-management/replay/summary" + (d ? "?as_of=" + d : ""),
+      r => {
+        const w = el("div");
+        w.appendChild(el("div", "grid g4",
+          kpi("On the books", nf(r.knew.nights_on_books), "at " + esc(r.as_of)) +
+          kpi("Revenue on books", "₹" + nf(r.knew.revenue_on_books_inr), "") +
+          kpi("Trailing occupancy", pct(r.knew.trailing_occupancy_pct), "28 days to " + esc(r.as_of)) +
+          kpi("Holidays ahead", nf(r.knew.holidays_in_window),
+              nf(r.knew.holidays_with_prior_measurement) + " measurable")));
+        w.appendChild(el("h2", null, "What it would have said"));
+        w.appendChild(el("div", "grid g4",
+          kpi("Behind pace", nf(r.said.dates_behind_pace), "") +
+          kpi("Ahead of pace", nf(r.said.dates_ahead_of_pace), "") +
+          kpi("Dates scored", nf(r.said.dates_scored), "") +
+          kpi("Signals raised", nf(r.said.signals_raised), "")));
+        w.appendChild(el("h2", null, "What actually happened"));
+        const h = r.happened;
+        w.appendChild(el("div", "grid g4",
+          kpi("Forecast MAE", nf(h.forecast_mae_room_nights, 2),
+              nf(h.forecast_days_scored) + " days scored") +
+          kpi("Behind-pace precision", pct(h.behind_calls?.precision_pct),
+              nf(h.behind_calls?.calls) + " calls · recall " +
+              pct(h.behind_calls?.recall_pct)) +
+          kpi("Ahead precision", pct(h.ahead_calls?.precision_pct),
+              nf(h.ahead_calls?.calls) + " calls") +
+          kpi("Base rate", pct(h.pace_base_rate_below_expectation_pct),
+              "finished below expectation")));
+        w.appendChild(el("div", "note",
+          "The decision block is reconstructed from what was knowable at that date " +
+          "only. The outcome is produced by a separate call that takes the decision " +
+          "as input — never the other way round. Fingerprint <code>" +
+          esc(String(r.fingerprint).slice(0, 16)) + "…</code>"));
+        return w;
+      }, {rows: 5});
+  };
+  $("#r-go").onclick = go;
+  go();
+}
+
+function pExplore() {
+  /* Both of these endpoints wrap their rows in an envelope and return numerics
+     as strings. That is the API being consistent about attaching a `note` to
+     every payload, not a defect -- but it means the client must unwrap and
+     coerce rather than assume an array of numbers. Getting this wrong is what
+     produced "rows.map is not a function" the first time. */
+  const trends = api("/api/revenue/trends?grain=day");
+  const cal = api("/api/revenue-management/calendar?days=600").catch(() => null);
+
+  $("#hm").replaceChildren(skeleton(4));
+  Promise.all([trends, cal]).then(([t, c]) => {
+    const rows = (t && t.series ? t.series : []).map(r => ({
+      period: r.period,
+      occ: Number(r.occupancy_pct),
+      adr: Number(r.adr_inr),
+      revpar: Number(r.revpar_inr)
+    })).filter(r => Number.isFinite(r.occ));
+
+    if (!rows.length) {
+      $("#hm").replaceChildren(stateCard("Nothing to show",
+        "The trend endpoint answered with no usable daily rows."));
+      return;
+    }
+
+    const holiday = new Map();
+    if (c && c.dates) c.dates.forEach(d => holiday.set(d.date, d));
+
+    const vals = rows.map(r => r.occ);
+    const lo = Math.min(...vals), hi = Math.max(...vals);
+    const grid = el("div", "hm");
+    let adjacent = 0;
+    rows.forEach(r => {
+      const i = el("i");
+      const t2 = (r.occ - lo) / ((hi - lo) || 1);
+      i.style.background = "color-mix(in srgb, var(--accent) " +
+        Math.round(t2 * 82 + 8) + "%, var(--surface))";
+      const h = holiday.get(r.period);
+      let label = r.period + " — occupancy " + pct(r.occ) +
+        ", ADR ₹" + nf(r.adr) + ", RevPAR ₹" + nf(r.revpar);
+      if (h && h.is_holiday_adjacent) {
+        adjacent++;
+        i.style.outline = "1.5px solid var(--warn)";
+        i.style.outlineOffset = "-1.5px";
+        label += " · " + (h.is_public_holiday ? h.holiday_name
+          : (Math.abs(h.days_to_holiday) + "d from " + h.nearest_holiday));
+      }
+      i.title = label;
+      grid.appendChild(i);
+    });
+
+    const w = el("div", "card");
+    w.appendChild(grid);
+    w.appendChild(el("div", "legend",
+      "<span>" + pct(lo) + "</span>" +
+      [8, 30, 55, 90].map(v => "<i style='background:color-mix(in srgb," +
+        "var(--accent) " + v + "%,var(--surface))'></i>").join("") +
+      "<span>" + pct(hi) + "</span>" +
+      (adjacent
+        ? "<i style='outline:1.5px solid var(--warn);outline-offset:-1.5px;" +
+          "background:var(--surface2);margin-left:10px'></i>" +
+          "<span>holiday-adjacent (" + adjacent + " dates)</span>"
+        : "<span style='margin-left:10px'>no holiday flags available</span>") +
+      "<span style='margin-left:10px'>hover a cell for the date</span>"));
+    $("#hm").replaceChildren(w);
+  }).catch(e => {
+    $("#hm").replaceChildren(e.message === "NO_API" ? offlineCard()
+      : stateCard("Could not load", esc(e.message)));
+  });
+
+  render($("#ch"), "/api/revenue/channels", d => {
+    const rows = d.channels || [];
+    if (!rows.length) return null;
+    const body = rows.map(r =>
+      "<tr><td>" + esc(r.channel_name) + "</td>" +
+      "<td class='n'>" + nf(r.room_nights) + "</td>" +
+      "<td class='n'>" + pct(r.room_night_share_pct) + "</td>" +
+      "<td class='n'>₹" + nf(r.adr_inr) + "</td>" +
+      "<td class='n'>₹" + nf(r.commission_inr) + "</td>" +
+      "<td class='n'>₹" + nf(r.net_per_room_night_inr) + "</td></tr>").join("");
+    const w = el("div");
+    w.appendChild(el("div", "card scroll",
+      "<table><thead><tr><th>Channel</th><th class='n'>Nights</th>" +
+      "<th class='n'>Share</th><th class='n'>ADR</th>" +
+      "<th class='n'>Commission</th><th class='n'>Net / night</th>" +
+      "</tr></thead><tbody>" + body + "</tbody></table>"));
+    if (d.note) w.appendChild(el("div", "note", esc(d.note)));
+    return w;
+  }, {rows: 5});
+}
+
+/* ---- copilot ---- */
+const SUGGESTED = [
+  "What should I look at today?",
+  "Why are we behind pace?",
+  "What happens if occupancy increases by 5%?",
+  "How accurate is the forecast?",
+  "What rate should I charge?"
+];
+
+function pCopilot() {
+  render($("#cap"), "/api/copilot/capabilities", d => {
+    const w = el("div", "card");
+    w.appendChild(el("div", null,
+      "<div style='font-size:12px;color:var(--ink3)'>" + esc(d.architecture) + "</div>"));
+    w.appendChild(el("details", "ev",
+      "<summary>" + d.tools.length + " tools available · " + d.refusals.length +
+      " questions it will refuse</summary><div style='margin-top:8px;font-size:12px'>" +
+      "<strong>Tools</strong><div style='margin:4px 0 10px'>" +
+      d.tools.map(t => "<code>" + esc(t.name) + "</code>").join(" ") + "</div>" +
+      "<strong>Refusals</strong>" +
+      d.refusals.map(r => "<div style='margin-top:6px'><em>" + esc(r.question) +
+        "</em><br>" + esc(r.refuse_because) + "</div>").join("") + "</div>"));
+    return w;
+  }, {rows: 2});
+
+  const chips = $("#chips");
+  chips.replaceChildren();
+  SUGGESTED.forEach(q => {
+    const b = el("button", null, esc(q));
+    b.onclick = () => { $("#q").value = q; sendQ(); };
+    chips.appendChild(b);
+  });
+  if (!$("#chat").children.length)
+    $("#chat").replaceChildren(el("div", "msg sp",
+      "Ask about this portfolio. Every figure in an answer comes from a " +
+      "deterministic tool, and the tools used are shown with each reply. " +
+      "Questions the data cannot settle — like what rate to charge — are " +
+      "refused with the reason."));
+}
+
+async function sendQ() {
+  const q = $("#q").value.trim();
+  if (!q || q.length < 3) return;
+  $("#q").value = "";
+  $("#send").disabled = true;
+  const chat = $("#chat");
+  chat.appendChild(el("div", "msg me", esc(q)));
+  const wait = el("div", "msg sp", "<div class='skel' style='width:45%'></div>" +
+    "<div class='skel' style='width:70%'></div>");
+  chat.appendChild(wait);
+  chat.scrollTop = chat.scrollHeight;
+
+  try {
+    const d = await api("/api/copilot/ask?question=" + encodeURIComponent(q), {fresh: true});
+    const fid = d.numeric_fidelity || {};
+    const used = (d.tool_calls || []).map(c => "<code>" + esc(c.tool) + "</code>").join(" ");
+    wait.innerHTML = esc(d.answer).replace(/\n/g, "<br>") +
+      "<div class='ev'><details><summary>Evidence — " +
+        (d.tool_calls || []).length + " tool call(s)" +
+        (fid.all_numbers_supported === false
+          ? " · <span style='color:var(--accent)'>" + fid.unsupported.length +
+            " unverified number(s)</span>"
+          : (fid.numbers_in_answer ? " · all " + fid.numbers_in_answer +
+             " numbers verified" : "")) +
+        "</summary>" +
+        "<div style='margin-top:7px;font-size:12px'>" + used + "</div>" +
+        (d.tool_calls || []).map(c => "<pre>" + esc(JSON.stringify(c.result, null, 1)
+          .slice(0, 2400)) + "</pre>").join("") +
+      "</details></div>";
+  } catch (e) {
+    wait.innerHTML = "<strong>Could not answer.</strong> " + esc(e.message) +
+      "<div style='margin-top:6px;font-size:12px;color:var(--ink3)'>" +
+      "The copilot needs <code>GEMINI_API_KEY</code> configured on the API. " +
+      "Every other panel on this page works without it.</div>";
+  }
+  $("#send").disabled = false;
+  chat.scrollTop = chat.scrollHeight;
+}
+$("#send").addEventListener("click", sendQ);
+$("#q").addEventListener("keydown", e => { if (e.key === "Enter") sendQ(); });
+
+/* ---------- boot ----------------------------------------------------------- */
+$("#api").value = API;
+connect();
+</script>
+</body>
+</html>

@@ -345,3 +345,14 @@ def scenario_channel_mix(
         return services.rm_scenario_channel_mix(from_channel, to_channel, share_pct)
     except KeyError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None
+
+
+@router.get("/calendar", summary="Per-date holiday context for the stay-date window")
+def calendar(days: int = Query(600, ge=1, le=1000)) -> dict:
+    """Holiday flags per stay date, for overlaying on a date-grained view.
+
+    The flags come from `dim_date`, populated by F-101 from a committed,
+    source-cited holiday table. The effect endpoints report BY HOLIDAY; this
+    reports BY DATE, which is what a calendar or heatmap needs.
+    """
+    return services.rm_calendar(days)
