@@ -1,0 +1,515 @@
+{
+  "generated_at": "2026-08-20T12:53:25+00:00",
+  "models": 7,
+  "window_days": 365,
+  "what_this_is": "A record of what has been measured about every model this project ships. Not an MLOps platform: there is no model server, feature store or experiment tracker, because six baselines and one classifier on a five-thousand-row warehouse do not need any.",
+  "drift_summary": {
+    "degrading": [
+      "moving_average",
+      "dow_moving_average",
+      "seasonal_holiday"
+    ],
+    "improving": [],
+    "stable": [
+      "naive",
+      "seasonal_naive",
+      "pickup"
+    ],
+    "method": "Early half against late half, reported BOTH absolutely and relative to the level of the series. The verdict uses the scale-relative figure because MAE is in room-nights and the portfolio grew 25.8% across this window -- judging on absolute MAE alone calls two improving models degraded and overstates the production model's drift roughly sevenfold."
+  },
+  "registry": [
+    {
+      "model": "naive",
+      "family": "time series baseline",
+      "target": "daily occupied room-nights, portfolio total",
+      "version": "1eeb23a9e1dd",
+      "training_window": "rolling origin, 365 days, 122 origins",
+      "features": [
+        "realised occupancy history"
+      ],
+      "metrics_by_horizon": [
+        {
+          "model": "naive",
+          "horizon_days": 1,
+          "observations": 122,
+          "mae_nights": 2.96,
+          "rmse_nights": 3.64,
+          "mape_pct": 11.77,
+          "bias_nights": -0.5
+        },
+        {
+          "model": "naive",
+          "horizon_days": 7,
+          "observations": 120,
+          "mae_nights": 3.97,
+          "rmse_nights": 4.91,
+          "mape_pct": 15.74,
+          "bias_nights": -0.72
+        },
+        {
+          "model": "naive",
+          "horizon_days": 14,
+          "observations": 118,
+          "mae_nights": 4.77,
+          "rmse_nights": 5.82,
+          "mape_pct": 20.12,
+          "bias_nights": -0.33
+        },
+        {
+          "model": "naive",
+          "horizon_days": 30,
+          "observations": 112,
+          "mae_nights": 4.51,
+          "rmse_nights": 5.79,
+          "mape_pct": 18.23,
+          "bias_nights": -0.81
+        }
+      ],
+      "champion_at_horizons": [],
+      "drift": {
+        "measurable": true,
+        "split_at": "2026-02-07",
+        "series_level_change_pct": 25.7,
+        "absolute": {
+          "mae_early": 3.683,
+          "mae_late": 4.25,
+          "change_pct": 15.4
+        },
+        "scale_relative": {
+          "mae_early": 0.16241,
+          "mae_late": 0.15132,
+          "change_pct": -6.8
+        },
+        "verdict": "stable",
+        "note": "The verdict uses the SCALE-RELATIVE change. MAE is in room-nights and scales with the size of the portfolio, which grew 25.7% across this window. Judging on the absolute figure alone calls improving models degraded."
+      },
+      "calibration": null,
+      "status": "active",
+      "limitations": [
+        "tomorrow equals today"
+      ]
+    },
+    {
+      "model": "seasonal_naive",
+      "family": "time series baseline",
+      "target": "daily occupied room-nights, portfolio total",
+      "version": "acfa6dade031",
+      "training_window": "rolling origin, 365 days, 122 origins",
+      "features": [
+        "realised occupancy history"
+      ],
+      "metrics_by_horizon": [
+        {
+          "model": "seasonal_naive",
+          "horizon_days": 1,
+          "observations": 122,
+          "mae_nights": 3.98,
+          "rmse_nights": 4.91,
+          "mape_pct": 15.85,
+          "bias_nights": -0.7
+        },
+        {
+          "model": "seasonal_naive",
+          "horizon_days": 7,
+          "observations": 120,
+          "mae_nights": 3.97,
+          "rmse_nights": 4.91,
+          "mape_pct": 15.74,
+          "bias_nights": -0.72
+        },
+        {
+          "model": "seasonal_naive",
+          "horizon_days": 14,
+          "observations": 118,
+          "mae_nights": 4.77,
+          "rmse_nights": 5.82,
+          "mape_pct": 20.12,
+          "bias_nights": -0.33
+        },
+        {
+          "model": "seasonal_naive",
+          "horizon_days": 30,
+          "observations": 112,
+          "mae_nights": 4.19,
+          "rmse_nights": 5.18,
+          "mape_pct": 16.78,
+          "bias_nights": -0.6
+        }
+      ],
+      "champion_at_horizons": [],
+      "drift": {
+        "measurable": true,
+        "split_at": "2026-02-07",
+        "series_level_change_pct": 25.7,
+        "absolute": {
+          "mae_early": 3.683,
+          "mae_late": 4.25,
+          "change_pct": 15.4
+        },
+        "scale_relative": {
+          "mae_early": 0.16241,
+          "mae_late": 0.15132,
+          "change_pct": -6.8
+        },
+        "verdict": "stable",
+        "note": "The verdict uses the SCALE-RELATIVE change. MAE is in room-nights and scales with the size of the portfolio, which grew 25.7% across this window. Judging on the absolute figure alone calls improving models degraded."
+      },
+      "calibration": null,
+      "status": "active",
+      "limitations": [
+        "next Tuesday equals last Tuesday"
+      ]
+    },
+    {
+      "model": "moving_average",
+      "family": "time series baseline",
+      "target": "daily occupied room-nights, portfolio total",
+      "version": "0f5039c58b87",
+      "training_window": "rolling origin, 365 days, 122 origins",
+      "features": [
+        "realised occupancy history"
+      ],
+      "metrics_by_horizon": [
+        {
+          "model": "moving_average",
+          "horizon_days": 1,
+          "observations": 122,
+          "mae_nights": 3.81,
+          "rmse_nights": 4.6,
+          "mape_pct": 15.35,
+          "bias_nights": -0.73
+        },
+        {
+          "model": "moving_average",
+          "horizon_days": 7,
+          "observations": 120,
+          "mae_nights": 3.99,
+          "rmse_nights": 4.88,
+          "mape_pct": 15.97,
+          "bias_nights": -0.88
+        },
+        {
+          "model": "moving_average",
+          "horizon_days": 14,
+          "observations": 118,
+          "mae_nights": 3.66,
+          "rmse_nights": 4.61,
+          "mape_pct": 15.75,
+          "bias_nights": -0.49
+        },
+        {
+          "model": "moving_average",
+          "horizon_days": 30,
+          "observations": 112,
+          "mae_nights": 3.28,
+          "rmse_nights": 4.03,
+          "mape_pct": 13.41,
+          "bias_nights": -1.04
+        }
+      ],
+      "champion_at_horizons": [],
+      "drift": {
+        "measurable": true,
+        "split_at": "2026-02-07",
+        "series_level_change_pct": 25.7,
+        "absolute": {
+          "mae_early": 3.237,
+          "mae_late": 4.735,
+          "change_pct": 46.2
+        },
+        "scale_relative": {
+          "mae_early": 0.14334,
+          "mae_late": 0.16779,
+          "change_pct": 17.1
+        },
+        "verdict": "degrading",
+        "note": "The verdict uses the SCALE-RELATIVE change. MAE is in room-nights and scales with the size of the portfolio, which grew 25.7% across this window. Judging on the absolute figure alone calls improving models degraded."
+      },
+      "calibration": null,
+      "status": "active",
+      "limitations": [
+        "mean of the trailing 28 days"
+      ]
+    },
+    {
+      "model": "dow_moving_average",
+      "family": "time series baseline",
+      "target": "daily occupied room-nights, portfolio total",
+      "version": "32a77d8be1f4",
+      "training_window": "rolling origin, 365 days, 122 origins",
+      "features": [
+        "realised occupancy history"
+      ],
+      "metrics_by_horizon": [
+        {
+          "model": "dow_moving_average",
+          "horizon_days": 1,
+          "observations": 122,
+          "mae_nights": 4.04,
+          "rmse_nights": 4.92,
+          "mape_pct": 16.22,
+          "bias_nights": -0.82
+        },
+        {
+          "model": "dow_moving_average",
+          "horizon_days": 7,
+          "observations": 120,
+          "mae_nights": 4.04,
+          "rmse_nights": 4.92,
+          "mape_pct": 16.16,
+          "bias_nights": -0.86
+        },
+        {
+          "model": "dow_moving_average",
+          "horizon_days": 14,
+          "observations": 118,
+          "mae_nights": 3.79,
+          "rmse_nights": 4.71,
+          "mape_pct": 16.1,
+          "bias_nights": -0.47
+        },
+        {
+          "model": "dow_moving_average",
+          "horizon_days": 30,
+          "observations": 112,
+          "mae_nights": 2.99,
+          "rmse_nights": 3.91,
+          "mape_pct": 12.09,
+          "bias_nights": -1.0
+        }
+      ],
+      "champion_at_horizons": [
+        30
+      ],
+      "drift": {
+        "measurable": true,
+        "split_at": "2026-02-07",
+        "series_level_change_pct": 25.7,
+        "absolute": {
+          "mae_early": 3.308,
+          "mae_late": 4.763,
+          "change_pct": 44.0
+        },
+        "scale_relative": {
+          "mae_early": 0.14558,
+          "mae_late": 0.16909,
+          "change_pct": 16.1
+        },
+        "verdict": "degrading",
+        "note": "The verdict uses the SCALE-RELATIVE change. MAE is in room-nights and scales with the size of the portfolio, which grew 25.7% across this window. Judging on the absolute figure alone calls improving models degraded."
+      },
+      "calibration": null,
+      "status": "active",
+      "limitations": [
+        "mean of the last 4 same-weekday values"
+      ]
+    },
+    {
+      "model": "pickup",
+      "family": "booking-curve pickup",
+      "target": "daily occupied room-nights, portfolio total",
+      "version": "89ac2dc2ee56",
+      "training_window": "rolling origin, 365 days, 122 origins",
+      "features": [
+        "realised occupancy history",
+        "on-the-books at horizon"
+      ],
+      "metrics_by_horizon": [
+        {
+          "model": "pickup",
+          "horizon_days": 1,
+          "observations": 122,
+          "mae_nights": 1.17,
+          "rmse_nights": 1.5,
+          "mape_pct": 4.52,
+          "bias_nights": 0.09
+        },
+        {
+          "model": "pickup",
+          "horizon_days": 7,
+          "observations": 120,
+          "mae_nights": 2.66,
+          "rmse_nights": 3.23,
+          "mape_pct": 10.4,
+          "bias_nights": -0.55
+        },
+        {
+          "model": "pickup",
+          "horizon_days": 14,
+          "observations": 118,
+          "mae_nights": 3.6,
+          "rmse_nights": 4.44,
+          "mape_pct": 14.97,
+          "bias_nights": -0.29
+        },
+        {
+          "model": "pickup",
+          "horizon_days": 30,
+          "observations": 112,
+          "mae_nights": 3.38,
+          "rmse_nights": 4.25,
+          "mape_pct": 13.43,
+          "bias_nights": -1.17
+        }
+      ],
+      "champion_at_horizons": [
+        1,
+        7,
+        14
+      ],
+      "drift": {
+        "measurable": true,
+        "split_at": "2026-02-07",
+        "series_level_change_pct": 25.7,
+        "absolute": {
+          "mae_early": 2.292,
+          "mae_late": 3.033,
+          "change_pct": 32.4
+        },
+        "scale_relative": {
+          "mae_early": 0.10131,
+          "mae_late": 0.10897,
+          "change_pct": 7.6
+        },
+        "verdict": "stable",
+        "note": "The verdict uses the SCALE-RELATIVE change. MAE is in room-nights and scales with the size of the portfolio, which grew 25.7% across this window. Judging on the absolute figure alone calls improving models degraded."
+      },
+      "calibration": null,
+      "status": "active",
+      "limitations": [
+        "Uses information the other models cannot see -- what is already sold -- so its advantage at short horizons is structural.",
+        "on the books now, plus the pickup comparable dates still received"
+      ]
+    },
+    {
+      "model": "seasonal_holiday",
+      "family": "time series baseline",
+      "target": "daily occupied room-nights, portfolio total",
+      "version": "568bef3c8335",
+      "training_window": "rolling origin, 365 days, 122 origins",
+      "features": [
+        "realised occupancy history",
+        "measured holiday multiplier"
+      ],
+      "metrics_by_horizon": [
+        {
+          "model": "seasonal_holiday",
+          "horizon_days": 1,
+          "observations": 122,
+          "mae_nights": 4.22,
+          "rmse_nights": 5.11,
+          "mape_pct": 16.96,
+          "bias_nights": -0.56
+        },
+        {
+          "model": "seasonal_holiday",
+          "horizon_days": 7,
+          "observations": 120,
+          "mae_nights": 4.22,
+          "rmse_nights": 5.12,
+          "mape_pct": 16.91,
+          "bias_nights": -0.6
+        },
+        {
+          "model": "seasonal_holiday",
+          "horizon_days": 14,
+          "observations": 118,
+          "mae_nights": 3.91,
+          "rmse_nights": 4.89,
+          "mape_pct": 16.64,
+          "bias_nights": -0.04
+        },
+        {
+          "model": "seasonal_holiday",
+          "horizon_days": 30,
+          "observations": 112,
+          "mae_nights": 3.18,
+          "rmse_nights": 4.15,
+          "mape_pct": 12.97,
+          "bias_nights": -0.82
+        }
+      ],
+      "champion_at_horizons": [],
+      "drift": {
+        "measurable": true,
+        "split_at": "2026-02-07",
+        "series_level_change_pct": 25.7,
+        "absolute": {
+          "mae_early": 3.415,
+          "mae_late": 5.033,
+          "change_pct": 47.4
+        },
+        "scale_relative": {
+          "mae_early": 0.15002,
+          "mae_late": 0.1798,
+          "change_pct": 19.8
+        },
+        "verdict": "degrading",
+        "note": "The verdict uses the SCALE-RELATIVE change. MAE is in room-nights and scales with the size of the portfolio, which grew 25.7% across this window. Judging on the absolute figure alone calls improving models degraded."
+      },
+      "calibration": null,
+      "status": "active",
+      "limitations": [
+        "Published as a FAILURE. On holiday-adjacent dates it scored MAE 4.90 against a 4.19 baseline. Kept registered so its loss appears in the comparison rather than being quietly removed.",
+        "day-of-week baseline scaled by a measured holiday effect"
+      ]
+    },
+    {
+      "model": "cancellation_risk",
+      "family": "logistic regression, L2, numpy",
+      "target": "booking cancelled before arrival",
+      "version": "f3e5f283f501",
+      "training_window": "temporal split at 2026-03-31; 3917 train / 1311 test",
+      "features": [
+        "channel_CORP",
+        "channel_DIRECT",
+        "lead_time_saturating",
+        "channel_WALKIN",
+        "channel_AIRBNB",
+        "nights",
+        "property_BLR-KOR",
+        "channel_MMT",
+        "channel_B2B-HR",
+        "stay_nightly",
+        "is_weekend_arrival",
+        "lead_time_log",
+        "has_discount",
+        "adults",
+        "property_BLR-HSR",
+        "lead_time_days",
+        "channel_BDC",
+        "price_per_night"
+      ],
+      "metrics_by_horizon": [
+        {
+          "auc": 0.6737,
+          "precision_pct": 20.6,
+          "recall_pct": 65.4,
+          "lift_over_base_rate": 1.67,
+          "base_rate_pct": 12.36,
+          "brier": 0.1048
+        }
+      ],
+      "champion_at_horizons": [],
+      "drift": {
+        "measurable": true,
+        "measure": "cancellation base rate by booking quarter",
+        "first_quarter_pct": 16.36,
+        "last_quarter_pct": 12.89,
+        "change_pp": -3.47,
+        "verdict": "target rate declining",
+        "note": "The DATA drifts, not just the model: the cancellation rate falls across the record, so a model fitted on earlier bookings over-predicts on later ones. Visible in the upper calibration bins."
+      },
+      "calibration": {
+        "weighted_mean_absolute_error_pp": 2.03,
+        "bins": 10,
+        "note": "Weighted by bin population. Unweighted it reads 9.13pp because one bin holds a single booking -- the same error family as the drift measurement above."
+      },
+      "status": "active",
+      "limitations": [
+        "No-show is deliberately excluded: it is a flat 1.4% in the generator and unlearnable, measured at AUC 0.527.",
+        "No censoring in this data; a survival model would be correct on real bookings."
+      ]
+    }
+  ]
+}

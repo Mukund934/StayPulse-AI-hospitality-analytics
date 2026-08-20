@@ -44,3 +44,16 @@ def metrics() -> dict:
 @router.get("/pipeline-runs", summary="ETL, quality and AI run history")
 def runs(limit: int = Query(20, ge=1, le=100)) -> dict:
     return {"runs": services.pipeline_runs(limit)}
+
+
+@router.get("/model-registry",
+            summary="Model cards, champion selection and drift")
+def model_registry() -> dict:
+    """What has been measured about every model this project ships.
+
+    Drift is reported both absolutely and relative to the level of the series,
+    and the verdict uses the scale-relative figure. MAE is in room-nights and
+    this portfolio grew about 26% mid-window, so an absolute-MAE monitor calls
+    two improving models degraded.
+    """
+    return services.model_registry()

@@ -88,6 +88,7 @@ READ_ONLY_ENDPOINTS = [
     # call in every suite run. Its orchestration is tested with a double in
     # tests/test_copilot.py; only its capabilities endpoint is exercised here.
     "/api/copilot/capabilities",
+    "/api/model-registry",
 ]
 
 
@@ -665,3 +666,60 @@ class TestCopilotEndpoint:
 
     def test_a_missing_question_is_rejected(self):
         assert client.get("/api/copilot/ask").status_code == 422
+
+
+class TestModelRegistry:
+    """Drift must be judged on the scale-relative figure, not the absolute one."""
+
+    def test_every_model_has_a_card(self):
+        d = client.get("/api/model-registry").json()
+        assert d["models"] >= 6
+        for card in d["registry"]:
+            assert card["model"] and card["target"] and card["version"]
+            assert card["training_window"]
+
+    def test_drift_reports_both_absolute_and_scale_relative(self):
+        d = client.get("/api/model-registry").json()
+        measured = [c for c in d["registry"]
+                    if c["drift"].get("measurable") and "scale_relative" in c["drift"]]
+        assert measured, "no model reported a measurable drift"
+        for card in measured:
+            assert "absolute" in card["drift"]
+            assert "scale_relative" in card["drift"]
+
+    def test_the_verdict_follows_the_scale_relative_figure(self):
+        """The whole point. MAE is in room-nights and this portfolio grew ~26%
+        mid-window, so absolute drift calls improving models degraded."""
+        d = client.get("/api/model-registry").json()
+        for card in d["registry"]:
+            drift = card["drift"]
+            if not (drift.get("measurable") and "scale_relative" in drift):
+                continue
+            relative = drift["scale_relative"]["change_pct"]
+            expected = ("degrading" if relative > 10.0
+                        else "improving" if relative < -10.0 else "stable")
+            assert drift["verdict"] == expected, (
+                f"{card['model']} verdict {drift['verdict']} does not follow the "
+                f"scale-relative change {relative}"
+            )
+
+    def test_absolute_and_relative_actually_disagree_somewhere(self):
+        """If they always agreed, the normalisation would be doing nothing and
+        this whole distinction would be decoration."""
+        d = client.get("/api/model-registry").json()
+        gaps = [abs(c["drift"]["absolute"]["change_pct"]
+                    - c["drift"]["scale_relative"]["change_pct"])
+                for c in d["registry"]
+                if c["drift"].get("measurable") and "scale_relative" in c["drift"]]
+        assert gaps and max(gaps) > 10.0, (
+            "absolute and scale-relative drift agree everywhere, so scaling is "
+            "not changing any conclusion"
+        )
+
+    def test_the_failed_holiday_model_is_still_registered(self):
+        """Hiding a losing model is the same failure as hiding a losing horizon."""
+        d = client.get("/api/model-registry").json()
+        names = [c["model"] for c in d["registry"]]
+        assert "seasonal_holiday" in names
+        card = next(c for c in d["registry"] if c["model"] == "seasonal_holiday")
+        assert any("FAILURE" in lim for lim in card["limitations"])
