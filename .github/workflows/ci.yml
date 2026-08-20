@@ -1,0 +1,181 @@
+# Continuous integration.
+#
+# WHY THIS IS SPLIT IN TWO, AND HOW THE SPLIT WAS CHOSEN.
+#
+# Almost every test in this project talks to a live PostgreSQL warehouse. That is
+# deliberate -- the analytics assertions are about real query results, and a
+# mocked database would let a broken definition pass -- but it makes the full
+# suite unrunnable without credentials and slow enough (~27 minutes, 468 tests)
+# that gating every push on it would be hostile.
+#
+# So the split is measured rather than guessed:
+#
+#   FAST     Runs on every push and pull request. Needs no secrets at all.
+#            Measured: all 468 tests COLLECT in ~4s without a database, which
+#            catches import errors, syntax errors and broken fixtures; 14 of
+#            them also EXECUTE without one. Plus compile, a secret scan, and a
+#            check that the OpenAPI schema builds and exposes no write methods.
+#
+#   FULL     Runs on push to main and on demand. Needs the database secrets.
+#            Skips with an explicit message when they are absent rather than
+#            failing red, because a fork or a first-time contributor has no way
+#            to supply them and a permanently red badge teaches people to ignore
+#            the badge.
+#
+# NEITHER JOB CALLS GEMINI. The copilot's orchestration is tested against a
+# scripted double precisely so that CI stays deterministic and free. A workflow
+# that spent quota per push would be switched off within a month.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: {}
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  fast:
+    name: Fast checks (no secrets)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Compile every module
+        # Catches syntax errors in files no test imports.
+        run: python -m compileall -q src api scripts tests
+
+      - name: Collect the whole suite
+        # Proves all 468 tests import and their fixtures resolve. This is the
+        # single most valuable check that needs no database: a broken import in
+        # any module fails here in seconds rather than 27 minutes later.
+        run: python -m pytest --collect-only -q
+        env:
+          PYTHONPATH: src
+
+      - name: Run the database-free tests
+        # The subset that genuinely needs no warehouse: the hand-rolled AUC, the
+        # Poisson-binomial arrival distribution, and the copilot's numeric
+        # fidelity checker. Named explicitly rather than selected by a marker,
+        # so adding a marker to a DB-bound test cannot silently widen this.
+        run: |
+          python -m pytest -q \
+            "tests/test_risk.py::TestAucImplementation" \
+            "tests/test_risk.py::TestArrivalDistribution" \
+            "tests/test_copilot.py::TestNumericFidelity"
+        env:
+          PYTHONPATH: src
+
+      - name: API contract is read-only
+        # The security property that matters most for a public analytics API.
+        # Read from the OpenAPI schema, not app.routes: routers mounted with
+        # include_router appear there as opaque entries, and a scan over them
+        # inspects nothing while looking green.
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path[:0] = ["src", "."]
+          from api.app.main import app
+          schema = app.openapi()
+          paths = schema["paths"]
+          assert len(paths) >= 50, f"only {len(paths)} paths; the scan below would be near-vacuous"
+          mutating = {
+              path: sorted({m.upper() for m in ops} & {"POST", "PUT", "PATCH", "DELETE"})
+              for path, ops in paths.items()
+              if {m.upper() for m in ops} & {"POST", "PUT", "PATCH", "DELETE"}
+          }
+          assert not mutating, f"write methods exposed: {mutating}"
+          missing = [f"{m} {p}" for p, ops in paths.items()
+                     for m, op in ops.items() if not op.get("summary")]
+          assert not missing, f"endpoints without a summary: {missing[:5]}"
+          print(f"OK: {len(paths)} paths, all read-only, all documented")
+          PY
+
+      - name: No secrets committed
+        run: |
+          python - <<'PY'
+          import re, subprocess, sys
+          tracked = subprocess.run(["git", "ls-files"], capture_output=True,
+                                   text=True, check=True).stdout.split()
+          # .env must never be tracked, whatever it contains.
+          assert not [f for f in tracked if f == ".env" or f.endswith("/.env")], \
+              ".env is tracked"
+          patterns = {
+              "google api key": r"AIza[0-9A-Za-z_\-]{30,}",
+              "openai key": r"\bsk-[A-Za-z0-9]{32,}",
+              "postgres url with password": r"postgres(?:ql)?://[^\s:@/]+:[^\s@/]+@",
+              "aws key": r"\bAKIA[0-9A-Z]{16}\b",
+          }
+          hits = []
+          for path in tracked:
+              if not re.search(r"\.(py|md|json|ya?ml|html|sql|txt|toml|cfg)$", path):
+                  continue
+              try:
+                  body = open(path, encoding="utf-8", errors="ignore").read()
+              except OSError:
+                  continue
+              for label, pattern in patterns.items():
+                  if re.search(pattern, body):
+                      hits.append(f"{path}: {label}")
+          assert not hits, "possible secrets:\n" + "\n".join(hits)
+          print(f"OK: scanned {len(tracked)} tracked files, no secrets found")
+          PY
+
+  full:
+    name: Full suite (needs database)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    needs: fast
+    if: github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Check for database credentials
+        id: creds
+        # Explicit skip rather than a red badge. A fork cannot supply these, and
+        # a permanently failing check trains people to stop reading the result.
+        run: |
+          if [ -z "${{ secrets.PGHOST }}" ]; then
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Database secrets are not configured, so the full suite is skipped."
+            echo "::notice::Set PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD in repository secrets to enable it."
+          else
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run the full suite
+        if: steps.creds.outputs.available == 'true'
+        # No GEMINI_API_KEY is passed, deliberately: the copilot is tested with a
+        # double and nothing in the suite may reach a paid API.
+        run: python -m pytest -q --tb=short
+        env:
+          PYTHONPATH: src
+          PGHOST: ${{ secrets.PGHOST }}
+          PGPORT: ${{ secrets.PGPORT }}
+          PGDATABASE: ${{ secrets.PGDATABASE }}
+          PGUSER: ${{ secrets.PGUSER }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD }}
